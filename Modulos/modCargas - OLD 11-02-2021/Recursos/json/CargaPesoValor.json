@@ -1,0 +1,50 @@
+[
+    {
+      "NUMCARGA": 1,
+      "QUANT": 4,
+      "VALOR": 1967.95,
+      "PESO": 344.27
+    },
+    {
+      "NUMCARGA": 5,
+      "QUANT": 13,
+      "VALOR": 33163.01,
+      "PESO": 12589.58
+    },
+    {
+      "NUMCARGA": 4,
+      "QUANT": 3,
+      "VALOR": 4092.85,
+      "PESO": 1011.28
+    },
+    {
+      "NUMCARGA": 8,
+      "QUANT": 26,
+      "VALOR": 83593.99,
+      "PESO": 21711.87
+    },
+    {
+      "NUMCARGA": 7,
+      "QUANT": 1,
+      "VALOR": 3050.46,
+      "PESO": 216.24
+    },
+    {
+      "NUMCARGA": 9,
+      "QUANT": 10,
+      "VALOR": 24367.81,
+      "PESO": 16343.61
+    },
+    {
+      "NUMCARGA": 10,
+      "QUANT": 8,
+      "VALOR": 44677.97,
+      "PESO": 17502.48
+    },
+    {
+      "NUMCARGA": 12,
+      "QUANT": 2,
+      "VALOR": 4602.8,
+      "PESO": 3035.79
+    }
+   ]

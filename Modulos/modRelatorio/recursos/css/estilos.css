@@ -1,0 +1,59 @@
+html,body {height:100%; width: 100%; font-size: small; font-family: Arial, Helvetica, sans-serif;}
+.header {
+    width: 95%;
+    height: 70px;
+    background-color: teal;
+    margin: 0 auto;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 100;
+}
+
+.titulo {
+    text-align: center;
+    font-size: 18px;
+    border-style: solid;
+    border-width: 1px;
+    border-collapse: collapse;
+    width: 797px
+} 
+
+table {
+    border-collapse: collapse;
+}
+
+table, tr, td {
+    border: 1px solid darkgray;
+    padding-left: 10px; 
+    padding-right: 10px;
+}
+
+
+#marca{
+    visibility: hidden;
+}
+
+
+
+.content {
+    max-width: 800px;
+    margin: auto;
+}
+
+#container{
+    position:relative;
+}
+
+#topic{
+    font-weight: 700;
+    background-color: rgba(216, 224, 213, 0.897);
+
+}
+
+#secao{
+    background-color: teal;
+    font-weight: 700;
+    color: white;
+    text-align: center;
+    font-size: 18px;
+}
+

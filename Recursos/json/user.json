@@ -1,0 +1,25 @@
+{
+    "user": [
+        {
+            "coduser": 1,
+            "login": "PEDRO",
+            "codsetor": 0,
+            "setor": "TI",
+            "senha": "123"
+        },
+        {
+            "coduser": 2,
+            "login": "JOCIEL",
+            "codsetor": 1,
+            "setor": "TECNICO",
+            "senha": "123"
+        },
+        {
+            "coduser": 3,
+            "login": "PAULO",
+            "codsetor": 1,
+            "setor": "LABORATORIO",
+            "senha": "123"
+        }
+    ]
+}

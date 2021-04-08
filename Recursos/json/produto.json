@@ -1,0 +1,3970 @@
+[
+    {
+        "CODPROD": 1,
+        "DESCRICAO": "MASSA CORRIDA PVA KOKAR 15 KG"
+      },
+      {
+        "CODPROD": 2,
+        "DESCRICAO": "MASSA CORRIDA PVA KOKAR 5,5 KG"
+      },
+      {
+        "CODPROD": 3,
+        "DESCRICAO": "MASSA CORRIDA PVA KOKAR 27 KG"
+      },
+      {
+        "CODPROD": 4,
+        "DESCRICAO": "MASSA ACRILICA KOKAR 15 KG"
+      },
+      {
+        "CODPROD": 5,
+        "DESCRICAO": "MASSA ACRILICA KOKAR 5,5 KG"
+      },
+      {
+        "CODPROD": 6,
+        "DESCRICAO": "MASSA ACRILICA KOKAR 27 KG"
+      },
+      {
+        "CODPROD": 7,
+        "DESCRICAO": "SELADOR ACRILICO KOKAR 18LT "
+      },
+      {
+        "CODPROD": 8,
+        "DESCRICAO": "SELADOR ACRILICO KOKAR 3,6L"
+      },
+      {
+        "CODPROD": 9,
+        "DESCRICAO": "FUNDO PREPARADOR DE PAREDES KOKAR 18LT"
+      },
+      {
+        "CODPROD": 10,
+        "DESCRICAO": "FUNDO PREPARADOR DE PAREDES KOKAR 3,6L"
+      },
+      {
+        "CODPROD": 11,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 18L BRANCO NEVE"
+      },
+      {
+        "CODPROD": 12,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L BRANCO NEVE"
+      },
+      {
+        "CODPROD": 13,
+        "DESCRICAO": "STANDARD FS RENDE+ 3,6L BRANCO NEVE"
+      },
+      {
+        "CODPROD": 14,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 3,6L BRANCO NEVE"
+      },
+      {
+        "CODPROD": 16,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 18L AMARELO CANAR"
+      },
+      {
+        "CODPROD": 17,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 18L AREIA"
+      },
+      {
+        "CODPROD": 18,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 18L CAMURCA"
+      },
+      {
+        "CODPROD": 19,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 18L ORQUIDEA LILA"
+      },
+      {
+        "CODPROD": 20,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 18L AZUL CEU"
+      },
+      {
+        "CODPROD": 21,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 18L PESSEGO"
+      },
+      {
+        "CODPROD": 22,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 18L BRANCO GELO"
+      },
+      {
+        "CODPROD": 23,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 18L PEROLA"
+      },
+      {
+        "CODPROD": 24,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 18L ROSA CAPRICHO"
+      },
+      {
+        "CODPROD": 25,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 18L ERVA DOCE"
+      },
+      {
+        "CODPROD": 26,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 18L VERDE KIWI"
+      },
+      {
+        "CODPROD": 27,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 18L LILAS"
+      },
+      {
+        "CODPROD": 28,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 18L MARFIM"
+      },
+      {
+        "CODPROD": 29,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 18L AMARELO SOL"
+      },
+      {
+        "CODPROD": 30,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 18L VERMELHO ARAR"
+      },
+      {
+        "CODPROD": 31,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 18L PALHA"
+      },
+      {
+        "CODPROD": 32,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 18L AZUL SANHACO"
+      },
+      {
+        "CODPROD": 33,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 18L ROSA CHA"
+      },
+      {
+        "CODPROD": 34,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 18L FLAMINGO"
+      },
+      {
+        "CODPROD": 35,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 18L VERDE LIMAO"
+      },
+      {
+        "CODPROD": 36,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 3,6L AMARELO CANA"
+      },
+      {
+        "CODPROD": 37,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 3,6L AREIA"
+      },
+      {
+        "CODPROD": 38,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 3,6L CAMURCA"
+      },
+      {
+        "CODPROD": 39,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 3,6L ORQUIDEA LIL"
+      },
+      {
+        "CODPROD": 40,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 3,6L AZUL CEU"
+      },
+      {
+        "CODPROD": 41,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 3,6L PESSEGO"
+      },
+      {
+        "CODPROD": 42,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 3,6L BRANCO GELO"
+      },
+      {
+        "CODPROD": 43,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 3,6L PEROLA"
+      },
+      {
+        "CODPROD": 44,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 3,6L ROSA CAPRICH"
+      },
+      {
+        "CODPROD": 45,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 3,6L ERVA DOCE"
+      },
+      {
+        "CODPROD": 46,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 3,6L VERDE KIWI"
+      },
+      {
+        "CODPROD": 47,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 3,6L LILAS"
+      },
+      {
+        "CODPROD": 48,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 3,6L MARFIM"
+      },
+      {
+        "CODPROD": 49,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 3,6L AMARELO SOL"
+      },
+      {
+        "CODPROD": 50,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 3,6L VERMELHO ARA"
+      },
+      {
+        "CODPROD": 51,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 3,6L PALHA"
+      },
+      {
+        "CODPROD": 52,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 3,6L AZUL SANHACO"
+      },
+      {
+        "CODPROD": 53,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 3,6L ROSA CHA"
+      },
+      {
+        "CODPROD": 54,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 3,6L FLAMINGO"
+      },
+      {
+        "CODPROD": 55,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 3,6L VERDE LIMAO"
+      },
+      {
+        "CODPROD": 56,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L AMARELO CANARI"
+      },
+      {
+        "CODPROD": 57,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L AREIA"
+      },
+      {
+        "CODPROD": 58,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L CAMURCA"
+      },
+      {
+        "CODPROD": 59,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L ORQUIDEA LILAS"
+      },
+      {
+        "CODPROD": 60,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L AZUL CEU"
+      },
+      {
+        "CODPROD": 61,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L PESSEGO"
+      },
+      {
+        "CODPROD": 62,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L BRANCO GELO"
+      },
+      {
+        "CODPROD": 63,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L CAFE COM LEITE"
+      },
+      {
+        "CODPROD": 64,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L PEROLA"
+      },
+      {
+        "CODPROD": 65,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L ROSA CAPRICHO"
+      },
+      {
+        "CODPROD": 66,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L CINZA AVELUDAD"
+      },
+      {
+        "CODPROD": 67,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L AZUL OCEANO"
+      },
+      {
+        "CODPROD": 68,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L ERVA DOCE"
+      },
+      {
+        "CODPROD": 69,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L VERDE KIWI"
+      },
+      {
+        "CODPROD": 70,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L LARANJA"
+      },
+      {
+        "CODPROD": 71,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L MARFIM"
+      },
+      {
+        "CODPROD": 72,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L AMARELO SOL"
+      },
+      {
+        "CODPROD": 73,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L VERMELHO ARARA"
+      },
+      {
+        "CODPROD": 74,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L PALHA"
+      },
+      {
+        "CODPROD": 75,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L VERDE ESPERANC"
+      },
+      {
+        "CODPROD": 76,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L AZUL SANHACO"
+      },
+      {
+        "CODPROD": 77,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L VERDE LIMAO"
+      },
+      {
+        "CODPROD": 78,
+        "DESCRICAO": "STANDARD FS RENDE+ 3,6L AMARELO CANAR"
+      },
+      {
+        "CODPROD": 79,
+        "DESCRICAO": "STANDARD FS RENDE+ 3,6L AREIA"
+      },
+      {
+        "CODPROD": 80,
+        "DESCRICAO": "STANDARD FS RENDE+ 3,6L CAMURCA"
+      },
+      {
+        "CODPROD": 81,
+        "DESCRICAO": "STANDARD FS RENDE+ 3,6L ORQUIDEA LILA"
+      },
+      {
+        "CODPROD": 82,
+        "DESCRICAO": "STANDARD FS RENDE+ 3,6L AZUL CEU"
+      },
+      {
+        "CODPROD": 83,
+        "DESCRICAO": "STANDARD FS RENDE+ 3,6L PESSEGO"
+      },
+      {
+        "CODPROD": 84,
+        "DESCRICAO": "STANDARD FS RENDE+ 3,6L BRANCO GELO"
+      },
+      {
+        "CODPROD": 85,
+        "DESCRICAO": "STANDARD FS RENDE+ 3,6L CAFE COM LEIT"
+      },
+      {
+        "CODPROD": 86,
+        "DESCRICAO": "STANDARD FS RENDE+ 3,6L PEROLA"
+      },
+      {
+        "CODPROD": 87,
+        "DESCRICAO": "STANDARD FS RENDE+ 3,6L ROSA CAPRICHO"
+      },
+      {
+        "CODPROD": 88,
+        "DESCRICAO": "STANDARD FS RENDE+ 3,6L CINZA AVELUDA"
+      },
+      {
+        "CODPROD": 89,
+        "DESCRICAO": "STANDARD FS RENDE+ 3,6L AZUL OCEANO"
+      },
+      {
+        "CODPROD": 90,
+        "DESCRICAO": "STANDARD FS RENDE+ 3,6L ERVA DOCE"
+      },
+      {
+        "CODPROD": 91,
+        "DESCRICAO": "STANDARD FS RENDE+ 3,6L VERDE KIWI"
+      },
+      {
+        "CODPROD": 92,
+        "DESCRICAO": "STANDARD FS RENDE+ 3,6L LARANJA"
+      },
+      {
+        "CODPROD": 93,
+        "DESCRICAO": "STANDARD FS RENDE+ 3,6L MARFIM"
+      },
+      {
+        "CODPROD": 94,
+        "DESCRICAO": "STANDARD FS RENDE+ 3,6L AMARELO SOL"
+      },
+      {
+        "CODPROD": 95,
+        "DESCRICAO": "STANDARD FS RENDE+ 3,6L VERMELHO ARAR"
+      },
+      {
+        "CODPROD": 96,
+        "DESCRICAO": "STANDARD FS RENDE+ 3,6L PALHA"
+      },
+      {
+        "CODPROD": 97,
+        "DESCRICAO": "STANDARD FS RENDE+ 3,6L VERDE ESPERAN"
+      },
+      {
+        "CODPROD": 98,
+        "DESCRICAO": "STANDARD FS RENDE+ 3,6L AZUL SANHACO"
+      },
+      {
+        "CODPROD": 99,
+        "DESCRICAO": "STANDARD FS RENDE+ 3,6L ROSA CHA"
+      },
+      {
+        "CODPROD": 100,
+        "DESCRICAO": "STANDARD FS RENDE+ 3,6L VERDE LIMAO"
+      },
+      {
+        "CODPROD": 101,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 18L BRANCO NEVE"
+      },
+      {
+        "CODPROD": 102,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 3,6L BRANCO NEVE"
+      },
+      {
+        "CODPROD": 103,
+        "DESCRICAO": "KOKAR ACR AC PREMIUM 18L BRANCO NEVE"
+      },
+      {
+        "CODPROD": 104,
+        "DESCRICAO": "KOKAR ACR AC PREMIUM 3,6L BRANCO NEVE"
+      },
+      {
+        "CODPROD": 105,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 3,6L BRANCO NEVE"
+      },
+      {
+        "CODPROD": 106,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 18L BRANCO NEVE"
+      },
+      {
+        "CODPROD": 107,
+        "DESCRICAO": "STANDARD SB 18L BRANCO NEVE"
+      },
+      {
+        "CODPROD": 108,
+        "DESCRICAO": "STANDARD SB 3,6L BRANCO NEVE"
+      },
+      {
+        "CODPROD": 109,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 18L ACAI"
+      },
+      {
+        "CODPROD": 110,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 18L ALGODAO DA TERR"
+      },
+      {
+        "CODPROD": 111,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 18L AMARELO CANARIO"
+      },
+      {
+        "CODPROD": 112,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 18L DUNAS DO JALAPA"
+      },
+      {
+        "CODPROD": 113,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 18L AREIA"
+      },
+      {
+        "CODPROD": 114,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 18L CAMURCA"
+      },
+      {
+        "CODPROD": 116,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 18L PESSEGO"
+      },
+      {
+        "CODPROD": 117,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 18L BRANCO GELO"
+      },
+      {
+        "CODPROD": 118,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 18L CHOCOLATE"
+      },
+      {
+        "CODPROD": 119,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 18L PEROLA"
+      },
+      {
+        "CODPROD": 120,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 18L IPE AMARELO"
+      },
+      {
+        "CODPROD": 121,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 18L VERDE ESPERANCA"
+      },
+      {
+        "CODPROD": 122,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 18L AZUL OCEANO"
+      },
+      {
+        "CODPROD": 123,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 18L ERVA DOCE"
+      },
+      {
+        "CODPROD": 125,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 18L LARANJA"
+      },
+      {
+        "CODPROD": 126,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 18L LILAS"
+      },
+      {
+        "CODPROD": 127,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 18L AZUL ARARA"
+      },
+      {
+        "CODPROD": 128,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 18L MARFIM"
+      },
+      {
+        "CODPROD": 129,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 18L OCRE COLONIAL"
+      },
+      {
+        "CODPROD": 130,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 18L VERMELHO ARARA"
+      },
+      {
+        "CODPROD": 131,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 18L PALHA"
+      },
+      {
+        "CODPROD": 132,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 18L CREME REAL"
+      },
+      {
+        "CODPROD": 134,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 18L ROXO PAVAO"
+      },
+      {
+        "CODPROD": 136,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 18L VERMELHO HIBISC"
+      },
+      {
+        "CODPROD": 137,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 18L VERDE LIMAO"
+      },
+      {
+        "CODPROD": 138,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 3,6L ACAI"
+      },
+      {
+        "CODPROD": 139,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 3,6L ALGODAO DA TER"
+      },
+      {
+        "CODPROD": 140,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 3,6L AMARELO CANARI"
+      },
+      {
+        "CODPROD": 141,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 3,6L DUNAS DO JALAP"
+      },
+      {
+        "CODPROD": 143,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 3,6L CAMURCA"
+      },
+      {
+        "CODPROD": 145,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 3,6L PESSEGO"
+      },
+      {
+        "CODPROD": 146,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 3,6L BRANCO GELO"
+      },
+      {
+        "CODPROD": 147,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 3,6L CHOCOLATE"
+      },
+      {
+        "CODPROD": 149,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 3,6L IPE AMARELO"
+      },
+      {
+        "CODPROD": 150,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 3,6L VERDE ESPER."
+      },
+      {
+        "CODPROD": 152,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 3,6L ERVA DOCE"
+      },
+      {
+        "CODPROD": 153,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 3,6L VERDE KIWI"
+      },
+      {
+        "CODPROD": 154,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 3,6L LARANJA"
+      },
+      {
+        "CODPROD": 155,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 3,6L LILAS"
+      },
+      {
+        "CODPROD": 156,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 3,6L AZUL ARARA"
+      },
+      {
+        "CODPROD": 158,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 3,6L OCRE COLONIAL"
+      },
+      {
+        "CODPROD": 160,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 3,6L PALHA"
+      },
+      {
+        "CODPROD": 163,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 3,6L ROXO PAVAO"
+      },
+      {
+        "CODPROD": 164,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 3,6L TERRACOTA"
+      },
+      {
+        "CODPROD": 165,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 3,6L VERMELHO HIBIS"
+      },
+      {
+        "CODPROD": 167,
+        "DESCRICAO": "KOKAR ACR AC PREMIUM 18L ALGODAO TERRA"
+      },
+      {
+        "CODPROD": 168,
+        "DESCRICAO": "KOKAR ACR AC PREMIUM 18L CREME DE LEITE"
+      },
+      {
+        "CODPROD": 169,
+        "DESCRICAO": "KOKAR ACR AC PREMIUM 18L SEIXO BRANCO"
+      },
+      {
+        "CODPROD": 170,
+        "DESCRICAO": "KOKAR ACR AC PREMIUM 18L BRANCO GELO"
+      },
+      {
+        "CODPROD": 171,
+        "DESCRICAO": "KOKAR ACR AC PREMIUM 18L PALHA"
+      },
+      {
+        "CODPROD": 172,
+        "DESCRICAO": "KOKAR ACR AC PREMIUM 3,6L ALGODAO TERRA"
+      },
+      {
+        "CODPROD": 173,
+        "DESCRICAO": "KOKAR ACR AC PREMIUM 3,6L CREME DE LEITE"
+      },
+      {
+        "CODPROD": 174,
+        "DESCRICAO": "KOKAR ACR AC PREMIUM 3,6L SEIXO BRANCO"
+      },
+      {
+        "CODPROD": 175,
+        "DESCRICAO": "KOKAR ACR AC PREMIUM 3,6L BRANCO GELO"
+      },
+      {
+        "CODPROD": 176,
+        "DESCRICAO": "KOKAR ACR AC PREMIUM 3,6L PALHA"
+      },
+      {
+        "CODPROD": 177,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 18L ACAFRAO"
+      },
+      {
+        "CODPROD": 178,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 18L ALGODAO TERRA"
+      },
+      {
+        "CODPROD": 179,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 18L AREIA"
+      },
+      {
+        "CODPROD": 180,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 18L CAMURCA"
+      },
+      {
+        "CODPROD": 181,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 18L AZUL CEU"
+      },
+      {
+        "CODPROD": 182,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 18L PESSEGO"
+      },
+      {
+        "CODPROD": 183,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 18L CREME DE LEITE"
+      },
+      {
+        "CODPROD": 184,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 18L BRANCO GELO"
+      },
+      {
+        "CODPROD": 185,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 18L CAPUCCINO"
+      },
+      {
+        "CODPROD": 186,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 18L PEROLA"
+      },
+      {
+        "CODPROD": 187,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 18L VERDE KIWI"
+      },
+      {
+        "CODPROD": 188,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 18L LARANJA"
+      },
+      {
+        "CODPROD": 189,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 18L LILAS"
+      },
+      {
+        "CODPROD": 190,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 18L CREME EQUATORIA"
+      },
+      {
+        "CODPROD": 191,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 18L MARFIM"
+      },
+      {
+        "CODPROD": 192,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 18L OCRE COLONIAL"
+      },
+      {
+        "CODPROD": 193,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 18L VERMELHO ARARA"
+      },
+      {
+        "CODPROD": 194,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 18L PALHA"
+      },
+      {
+        "CODPROD": 195,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 18L VERDE ESPERANCA"
+      },
+      {
+        "CODPROD": 196,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 18L VERDE LIMAO"
+      },
+      {
+        "CODPROD": 197,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 3,6L ACAFRAO"
+      },
+      {
+        "CODPROD": 198,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 3,6L ALGODAO TERRA"
+      },
+      {
+        "CODPROD": 199,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 3,6L AREIA"
+      },
+      {
+        "CODPROD": 200,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 3,6L CAMURCA"
+      },
+      {
+        "CODPROD": 201,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 3,6L AZUL CEU"
+      },
+      {
+        "CODPROD": 202,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 3,6L PESSEGO"
+      },
+      {
+        "CODPROD": 203,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 3,6L CREME DE LEITE"
+      },
+      {
+        "CODPROD": 204,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 3,6L BRANCO GELO"
+      },
+      {
+        "CODPROD": 205,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 3,6L CAPUCCINO"
+      },
+      {
+        "CODPROD": 206,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 3,6L PEROLA"
+      },
+      {
+        "CODPROD": 208,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 3,6L VERDE KIWI"
+      },
+      {
+        "CODPROD": 209,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 3,6L LARANJA"
+      },
+      {
+        "CODPROD": 210,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 3,6L LILAS"
+      },
+      {
+        "CODPROD": 211,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 3,6L CREME EQUATORI"
+      },
+      {
+        "CODPROD": 212,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 3,6L MARFIM"
+      },
+      {
+        "CODPROD": 213,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 3,6L OCRE COLONIAL"
+      },
+      {
+        "CODPROD": 214,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 3,6L VERMELHO ARARA"
+      },
+      {
+        "CODPROD": 215,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 3,6L PALHA"
+      },
+      {
+        "CODPROD": 216,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 3,6L VERDE ESPERANC"
+      },
+      {
+        "CODPROD": 217,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 3,6L VERDE LIMAO"
+      },
+      {
+        "CODPROD": 218,
+        "DESCRICAO": "STANDARD SB 18L AMARELO CANARIO"
+      },
+      {
+        "CODPROD": 220,
+        "DESCRICAO": "STANDARD SB 18L AREIA"
+      },
+      {
+        "CODPROD": 221,
+        "DESCRICAO": "STANDARD SB 18L CAMURCA"
+      },
+      {
+        "CODPROD": 222,
+        "DESCRICAO": "STANDARD SB 18L ORQUIDEA LILAS"
+      },
+      {
+        "CODPROD": 223,
+        "DESCRICAO": "STANDARD SB 18L AZUL CEU"
+      },
+      {
+        "CODPROD": 224,
+        "DESCRICAO": "STANDARD SB 18L PESSEGO"
+      },
+      {
+        "CODPROD": 225,
+        "DESCRICAO": "STANDARD SB 18L BRANCO GELO"
+      },
+      {
+        "CODPROD": 226,
+        "DESCRICAO": "STANDARD SB 18L PEROLA"
+      },
+      {
+        "CODPROD": 227,
+        "DESCRICAO": "STANDARD SB 18L ROSA CAPRICHO"
+      },
+      {
+        "CODPROD": 228,
+        "DESCRICAO": "STANDARD SB 18L CINZA AVELUDADO"
+      },
+      {
+        "CODPROD": 230,
+        "DESCRICAO": "STANDARD SB 18L AZUL OCEANO"
+      },
+      {
+        "CODPROD": 231,
+        "DESCRICAO": "STANDARD SB 18L ERVA DOCE"
+      },
+      {
+        "CODPROD": 232,
+        "DESCRICAO": "STANDARD SB 18L VERDE KIWI"
+      },
+      {
+        "CODPROD": 233,
+        "DESCRICAO": "STANDARD SB 18L LARANJA"
+      },
+      {
+        "CODPROD": 234,
+        "DESCRICAO": "STANDARD SB 18L MARFIM"
+      },
+      {
+        "CODPROD": 235,
+        "DESCRICAO": "STANDARD SB 18L AMARELO SOL"
+      },
+      {
+        "CODPROD": 236,
+        "DESCRICAO": "STANDARD SB 18L VERMELHO ARARA"
+      },
+      {
+        "CODPROD": 237,
+        "DESCRICAO": "STANDARD SB 18L PALHA"
+      },
+      {
+        "CODPROD": 238,
+        "DESCRICAO": "STANDARD SB 18L VERDE ESPERANCA"
+      },
+      {
+        "CODPROD": 239,
+        "DESCRICAO": "STANDARD SB 18L AZUL SANHACO"
+      },
+      {
+        "CODPROD": 240,
+        "DESCRICAO": "STANDARD SB 18L ROSA CHA"
+      },
+      {
+        "CODPROD": 241,
+        "DESCRICAO": "STANDARD SB 18L VERDE LIMAO"
+      },
+      {
+        "CODPROD": 242,
+        "DESCRICAO": "STANDARD SB 3,6L AMARELO CANARIO"
+      },
+      {
+        "CODPROD": 243,
+        "DESCRICAO": "STANDARD SB 3,6L AREIA"
+      },
+      {
+        "CODPROD": 244,
+        "DESCRICAO": "STANDARD SB 3,6L CAMURCA"
+      },
+      {
+        "CODPROD": 245,
+        "DESCRICAO": "STANDARD SB 3,6L ORQUIDEA LILA"
+      },
+      {
+        "CODPROD": 246,
+        "DESCRICAO": "STANDARD SB 3,6L AZUL CEU"
+      },
+      {
+        "CODPROD": 247,
+        "DESCRICAO": "STANDARD SB 3,6L PESSEGO"
+      },
+      {
+        "CODPROD": 248,
+        "DESCRICAO": "STANDARD SB 3,6L BRANCO GELO"
+      },
+      {
+        "CODPROD": 249,
+        "DESCRICAO": "STANDARD SB 3,6L PEROLA"
+      },
+      {
+        "CODPROD": 250,
+        "DESCRICAO": "STANDARD SB 3,6L ROSA CAPRICHO"
+      },
+      {
+        "CODPROD": 251,
+        "DESCRICAO": "STANDARD SB 3,6L CINZA AVELUDA"
+      },
+      {
+        "CODPROD": 252,
+        "DESCRICAO": "STANDARD SB 3,6L AZUL OCEANO"
+      },
+      {
+        "CODPROD": 253,
+        "DESCRICAO": "STANDARD SB 3,6L ERVA DOCE"
+      },
+      {
+        "CODPROD": 254,
+        "DESCRICAO": "STANDARD SB 3,6L VERDE KIWI"
+      },
+      {
+        "CODPROD": 255,
+        "DESCRICAO": "STANDARD SB 3,6L LARANJA"
+      },
+      {
+        "CODPROD": 256,
+        "DESCRICAO": "STANDARD SB 3,6L MARFIM"
+      },
+      {
+        "CODPROD": 257,
+        "DESCRICAO": "STANDARD SB 3,6L AMARELO SOL"
+      },
+      {
+        "CODPROD": 258,
+        "DESCRICAO": "STANDARD SB 3,6L VERMELHO ARARA"
+      },
+      {
+        "CODPROD": 259,
+        "DESCRICAO": "STANDARD SB 3,6L PALHA"
+      },
+      {
+        "CODPROD": 260,
+        "DESCRICAO": "STANDARD SB 3,6L VERDE ESPERANCA"
+      },
+      {
+        "CODPROD": 261,
+        "DESCRICAO": "STANDARD SB 3,6L AZUL SANHACO"
+      },
+      {
+        "CODPROD": 262,
+        "DESCRICAO": "STANDARD SB 3,6L ROSA CHA"
+      },
+      {
+        "CODPROD": 263,
+        "DESCRICAO": "STANDARD SB 3,6L VERDE LIMAO"
+      },
+      {
+        "CODPROD": 269,
+        "DESCRICAO": "RESINA ACR BA KOKAR 18L CERAMICA ONIX"
+      },
+      {
+        "CODPROD": 270,
+        "DESCRICAO": "RESINA ACR BA KOKAR 18L CERAMICA TELHA"
+      },
+      {
+        "CODPROD": 271,
+        "DESCRICAO": "RESINA ACR BA KOKAR 18L CINZA"
+      },
+      {
+        "CODPROD": 272,
+        "DESCRICAO": "RESINA ACR BA KOKAR 18L CONCRETO"
+      },
+      {
+        "CODPROD": 273,
+        "DESCRICAO": "RESINA ACR BA KOKAR 18L INCOLOR"
+      },
+      {
+        "CODPROD": 274,
+        "DESCRICAO": "RESINA ACR BA KOKAR 18L VERMELHO OXIDO"
+      },
+      {
+        "CODPROD": 275,
+        "DESCRICAO": "RESINA ACR BA KOKAR 3,6L BRANCO NEVE"
+      },
+      {
+        "CODPROD": 276,
+        "DESCRICAO": "RESINA ACR BA KOKAR 3,6L CERAMICA ONIX"
+      },
+      {
+        "CODPROD": 277,
+        "DESCRICAO": "RESINA ACR BA KOKAR 3,6L CERAMICA TELHA"
+      },
+      {
+        "CODPROD": 278,
+        "DESCRICAO": "RESINA ACR BA KOKAR 3,6L CINZA"
+      },
+      {
+        "CODPROD": 279,
+        "DESCRICAO": "RESINA ACR BA KOKAR 3,6L CONCRETO"
+      },
+      {
+        "CODPROD": 280,
+        "DESCRICAO": "RESINA ACR BA KOKAR 3,6L INCOLOR"
+      },
+      {
+        "CODPROD": 281,
+        "DESCRICAO": "RESINA ACR BA KOKAR 3,6L VERMELHO OXIDO"
+      },
+      {
+        "CODPROD": 293,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG BRANCO NEVE"
+      },
+      {
+        "CODPROD": 294,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 5,5KG BRANCO NEVE"
+      },
+      {
+        "CODPROD": 295,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG AREIA"
+      },
+      {
+        "CODPROD": 296,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG CHOCOLATE"
+      },
+      {
+        "CODPROD": 297,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG ERVA DOCE"
+      },
+      {
+        "CODPROD": 298,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG LARANJA"
+      },
+      {
+        "CODPROD": 299,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG MARFIM"
+      },
+      {
+        "CODPROD": 300,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG BRANCO SERENO"
+      },
+      {
+        "CODPROD": 301,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG OCRE COLONIAL"
+      },
+      {
+        "CODPROD": 302,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG PALHA"
+      },
+      {
+        "CODPROD": 303,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG PRETO"
+      },
+      {
+        "CODPROD": 304,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG VERDE AMAZONAS"
+      },
+      {
+        "CODPROD": 305,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG VERDE LIMAO"
+      },
+      {
+        "CODPROD": 306,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG VERMELHO "
+      },
+      {
+        "CODPROD": 307,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 5,5KG AREIA"
+      },
+      {
+        "CODPROD": 308,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 5,5KG CHOCOLAT"
+      },
+      {
+        "CODPROD": 309,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 5,5KG ERVA DOC"
+      },
+      {
+        "CODPROD": 310,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 5,5KG LARANJA"
+      },
+      {
+        "CODPROD": 311,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 5,5KG MARFIM"
+      },
+      {
+        "CODPROD": 312,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 5,5KG BRANCO SERENO"
+      },
+      {
+        "CODPROD": 313,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 5,5KG OCRE COL"
+      },
+      {
+        "CODPROD": 314,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 5,5KG PALHA"
+      },
+      {
+        "CODPROD": 315,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 5,5KG PRETO"
+      },
+      {
+        "CODPROD": 316,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 5,5KG VERDE AM"
+      },
+      {
+        "CODPROD": 317,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 5,5KG VERDE LI"
+      },
+      {
+        "CODPROD": 318,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 5,5KG VERMELHO"
+      },
+      {
+        "CODPROD": 319,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 5,5KG BRANCO NEVE"
+      },
+      {
+        "CODPROD": 320,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 5,5KG AMARELO CANA"
+      },
+      {
+        "CODPROD": 321,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 5,5KG DUNAS DO JAL"
+      },
+      {
+        "CODPROD": 322,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 5,5KG AREIA"
+      },
+      {
+        "CODPROD": 323,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 5,5KG AZUL CEU"
+      },
+      {
+        "CODPROD": 324,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 5,5KG BRANCO GELO"
+      },
+      {
+        "CODPROD": 325,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 5,5KG CAFE COM LEIT"
+      },
+      {
+        "CODPROD": 326,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 5,5KG CAPUCCINO"
+      },
+      {
+        "CODPROD": 327,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 5,5KG CHOCOLATE"
+      },
+      {
+        "CODPROD": 328,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 5,5KG ERVA DOCE"
+      },
+      {
+        "CODPROD": 329,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 5,5KG LARANJA"
+      },
+      {
+        "CODPROD": 330,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 5,5KG LILAS"
+      },
+      {
+        "CODPROD": 331,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 5,5KG MARFIM"
+      },
+      {
+        "CODPROD": 332,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 5,5KG BRANCO SEREN"
+      },
+      {
+        "CODPROD": 333,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 5,5KG OCRE COLONIA"
+      },
+      {
+        "CODPROD": 334,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 5,5KG PALHA"
+      },
+      {
+        "CODPROD": 335,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 5,5KG PEROLA"
+      },
+      {
+        "CODPROD": 336,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 5,5KG PRETO"
+      },
+      {
+        "CODPROD": 337,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 5,5KG TERRACOTA"
+      },
+      {
+        "CODPROD": 338,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 5,5KG VERDE AMAZON"
+      },
+      {
+        "CODPROD": 339,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 5,5KG VERDE LIMAO"
+      },
+      {
+        "CODPROD": 340,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 5,5KG VERMELHO "
+      },
+      {
+        "CODPROD": 341,
+        "DESCRICAO": "TEXTURA LISO KOKAR 5,5KG BRANCO NEVE"
+      },
+      {
+        "CODPROD": 342,
+        "DESCRICAO": "TEXTURA LISO KOKAR 5,5KG ERVA DOCE"
+      },
+      {
+        "CODPROD": 343,
+        "DESCRICAO": "TEXTURA LISO KOKAR 5,5KG MARFIM"
+      },
+      {
+        "CODPROD": 344,
+        "DESCRICAO": "TEXTURA LISO KOKAR 5,5KG BRANCO SERENO"
+      },
+      {
+        "CODPROD": 345,
+        "DESCRICAO": "TEXTURA LISO KOKAR 5,5KG OCRE COLONIAL"
+      },
+      {
+        "CODPROD": 346,
+        "DESCRICAO": "TEXTURA LISO KOKAR 5,5KG VERDE AMAZONAS"
+      },
+      {
+        "CODPROD": 347,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 25KG BRANCO NEVE"
+      },
+      {
+        "CODPROD": 348,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 25KG AMARELO CANA"
+      },
+      {
+        "CODPROD": 349,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 25KG DUNAS DO JALAP"
+      },
+      {
+        "CODPROD": 350,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 25KG AREIA"
+      },
+      {
+        "CODPROD": 351,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 25KG AZUL CEU"
+      },
+      {
+        "CODPROD": 352,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 25KG BRANCO GELO"
+      },
+      {
+        "CODPROD": 353,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 25KG CAFE COM LEITE"
+      },
+      {
+        "CODPROD": 354,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 25KG CAPUCCINO"
+      },
+      {
+        "CODPROD": 355,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 25KG CHOCOLATE"
+      },
+      {
+        "CODPROD": 356,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 25KG ERVA DOCE"
+      },
+      {
+        "CODPROD": 357,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 25KG LARANJA"
+      },
+      {
+        "CODPROD": 358,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 25KG LILAS"
+      },
+      {
+        "CODPROD": 359,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 25KG MARFIM"
+      },
+      {
+        "CODPROD": 360,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 25KG BRANCO SERENO"
+      },
+      {
+        "CODPROD": 361,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 25KG OCRE COLONIAL"
+      },
+      {
+        "CODPROD": 362,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 25KG PALHA"
+      },
+      {
+        "CODPROD": 363,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 25KG PEROLA"
+      },
+      {
+        "CODPROD": 364,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 25KG PRETO"
+      },
+      {
+        "CODPROD": 365,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 25KG TERRACOTA"
+      },
+      {
+        "CODPROD": 366,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 25KG VERDE AMAZONA"
+      },
+      {
+        "CODPROD": 367,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 25KG VERDE LIMAO"
+      },
+      {
+        "CODPROD": 368,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 25KG VERMELHO "
+      },
+      {
+        "CODPROD": 369,
+        "DESCRICAO": "TEXTURA LISO FOSCO 25KG BRANCO NEVE"
+      },
+      {
+        "CODPROD": 370,
+        "DESCRICAO": "TEXTURA LISO FOSCO 25KG ERVA DOCE"
+      },
+      {
+        "CODPROD": 371,
+        "DESCRICAO": "TEXTURA LISO FOSCO 25KG MARFIM"
+      },
+      {
+        "CODPROD": 372,
+        "DESCRICAO": "TEXTURA LISO KOKAR 25KG BRANCO SERENO"
+      },
+      {
+        "CODPROD": 373,
+        "DESCRICAO": "TEXTURA LISO KOKAR 25KG OCRE COLONIAL"
+      },
+      {
+        "CODPROD": 374,
+        "DESCRICAO": "TEXTURA LISO KOKAR 25KG VERDE AMAZONAS"
+      },
+      {
+        "CODPROD": 375,
+        "DESCRICAO": "TINTA PISO KOKAR 18L AMARELO DEMARCACÃO"
+      },
+      {
+        "CODPROD": 376,
+        "DESCRICAO": "TINTA PISO KOKAR 18L AZUL"
+      },
+      {
+        "CODPROD": 377,
+        "DESCRICAO": "TINTA PISO KOKAR 18L BRANCO NEVE"
+      },
+      {
+        "CODPROD": 378,
+        "DESCRICAO": "TINTA PISO KOKAR 18L CINZA"
+      },
+      {
+        "CODPROD": 379,
+        "DESCRICAO": "TINTA PISO KOKAR 18L CONCRETO"
+      },
+      {
+        "CODPROD": 380,
+        "DESCRICAO": "TINTA PISO KOKAR 18L GRAFITE"
+      },
+      {
+        "CODPROD": 381,
+        "DESCRICAO": "TINTA PISO KOKAR 18L LARANJA"
+      },
+      {
+        "CODPROD": 382,
+        "DESCRICAO": "TINTA PISO KOKAR 18L PRETO"
+      },
+      {
+        "CODPROD": 383,
+        "DESCRICAO": "TINTA PISO KOKAR 18L VERDE QUADRA"
+      },
+      {
+        "CODPROD": 384,
+        "DESCRICAO": "TINTA PISO KOKAR 18L VERMELHO "
+      },
+      {
+        "CODPROD": 386,
+        "DESCRICAO": "TINTA PISO KOKAR 3,6L AMARELO DEMARCACA"
+      },
+      {
+        "CODPROD": 388,
+        "DESCRICAO": "TINTA PISO KOKAR 3,6L AZUL"
+      },
+      {
+        "CODPROD": 389,
+        "DESCRICAO": "TINTA PISO KOKAR 3,6L BRANCO NEVE"
+      },
+      {
+        "CODPROD": 390,
+        "DESCRICAO": "TINTA PISO KOKAR 3,6L CINZA"
+      },
+      {
+        "CODPROD": 391,
+        "DESCRICAO": "TINTA PISO KOKAR 3,6L CONCRETO"
+      },
+      {
+        "CODPROD": 392,
+        "DESCRICAO": "TINTA PISO KOKAR 3,6L GRAFITE"
+      },
+      {
+        "CODPROD": 393,
+        "DESCRICAO": "TINTA PISO KOKAR 3,6L LARANJA"
+      },
+      {
+        "CODPROD": 394,
+        "DESCRICAO": "TINTA PISO KOKAR 3,6L PRETO"
+      },
+      {
+        "CODPROD": 395,
+        "DESCRICAO": "TINTA PISO KOKAR 3,6L VERDE QUADRA"
+      },
+      {
+        "CODPROD": 396,
+        "DESCRICAO": "TINTA PISO KOKAR 3,6L VERMELHO "
+      },
+      {
+        "CODPROD": 397,
+        "DESCRICAO": "IMPERM. PAREDE KOKAR 18L BRANCO"
+      },
+      {
+        "CODPROD": 398,
+        "DESCRICAO": "IMPERM. PAREDE KOKAR 3,6L BRANCO"
+      },
+      {
+        "CODPROD": 399,
+        "DESCRICAO": "ESMALTE BA KOKAR ACET 3,6L AREIA"
+      },
+      {
+        "CODPROD": 400,
+        "DESCRICAO": "ESMALTE BA KOKAR ACET 3,6L BRANCO GELO"
+      },
+      {
+        "CODPROD": 401,
+        "DESCRICAO": "ESMALTE BA KOKAR ACET 3,6L BRANCO NEVE"
+      },
+      {
+        "CODPROD": 402,
+        "DESCRICAO": "ESMALTE BA KOKAR ACET 3,6L MARFIM"
+      },
+      {
+        "CODPROD": 403,
+        "DESCRICAO": "ESMALTE BA KOKAR ACET 3,6L PALHA"
+      },
+      {
+        "CODPROD": 404,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 3,6L AMAR. TRATOR"
+      },
+      {
+        "CODPROD": 405,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 3,6L AMARELO OURO"
+      },
+      {
+        "CODPROD": 406,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 3,6L AREIA"
+      },
+      {
+        "CODPROD": 407,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 3,6L AZUL CELESTE"
+      },
+      {
+        "CODPROD": 408,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 3,6L AZUL DEL REY"
+      },
+      {
+        "CODPROD": 409,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 3,6L AZUL FRANCA"
+      },
+      {
+        "CODPROD": 410,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 3,6L BRANCO NEVE"
+      },
+      {
+        "CODPROD": 411,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 3,6L CAMURCA"
+      },
+      {
+        "CODPROD": 412,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 3,6L CINZA ESCURO"
+      },
+      {
+        "CODPROD": 413,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 3,6L CINZA MEDIO"
+      },
+      {
+        "CODPROD": 414,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 3,6L CONHAQUE"
+      },
+      {
+        "CODPROD": 415,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 3,6L BRANCO GELO"
+      },
+      {
+        "CODPROD": 416,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 3,6L LARANJA"
+      },
+      {
+        "CODPROD": 417,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 3,6L MARFIM"
+      },
+      {
+        "CODPROD": 418,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 3,6L MARROM"
+      },
+      {
+        "CODPROD": 420,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 3,6L VENTO NATURAL"
+      },
+      {
+        "CODPROD": 422,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 3,6L PALHA"
+      },
+      {
+        "CODPROD": 423,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 3,6L PLATINA"
+      },
+      {
+        "CODPROD": 424,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 3,6L PRETO"
+      },
+      {
+        "CODPROD": 426,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 3,6L TABACO"
+      },
+      {
+        "CODPROD": 427,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 3,6L VERDE AMAZONA"
+      },
+      {
+        "CODPROD": 428,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 3,6L VERDE COLONIA"
+      },
+      {
+        "CODPROD": 429,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 3,6L VERDE FOLHA"
+      },
+      {
+        "CODPROD": 430,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 3,6L VERMELHO"
+      },
+      {
+        "CODPROD": 431,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 3,6L COLORADO"
+      },
+      {
+        "CODPROD": 432,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 3,6L VERMELHO GOYA"
+      },
+      {
+        "CODPROD": 433,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 0,9L AMAR. TRATOR"
+      },
+      {
+        "CODPROD": 434,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 0,9L AMARELO OURO"
+      },
+      {
+        "CODPROD": 435,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 0,9L AREIA"
+      },
+      {
+        "CODPROD": 436,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 0,9L AZUL CELLESTE"
+      },
+      {
+        "CODPROD": 437,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 0,9L AZUL DEL REY"
+      },
+      {
+        "CODPROD": 438,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 0,9L AZUL FRANCA"
+      },
+      {
+        "CODPROD": 439,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 0,9L BRANCO NEVE"
+      },
+      {
+        "CODPROD": 440,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 0,9L CAMURCA"
+      },
+      {
+        "CODPROD": 441,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 0,9L CINZA ESCURO"
+      },
+      {
+        "CODPROD": 442,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 0,9L CINZA MEDIO"
+      },
+      {
+        "CODPROD": 444,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 0,9L BRANCO GELO"
+      },
+      {
+        "CODPROD": 445,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 0,9L LARANJA"
+      },
+      {
+        "CODPROD": 446,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 0,9L MARFIM"
+      },
+      {
+        "CODPROD": 447,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 0,9L MARROM"
+      },
+      {
+        "CODPROD": 448,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 0,9L CONHAQUE"
+      },
+      {
+        "CODPROD": 449,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 0,9L VENTO NATURAL"
+      },
+      {
+        "CODPROD": 451,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 0,9L PALHA"
+      },
+      {
+        "CODPROD": 452,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 0,9L PLATINA"
+      },
+      {
+        "CODPROD": 453,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 0,9L PRETO"
+      },
+      {
+        "CODPROD": 454,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 0,9L TABACO"
+      },
+      {
+        "CODPROD": 455,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 0,9L VERDE AMAZONA"
+      },
+      {
+        "CODPROD": 456,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 0,9L VERDE COLONIA"
+      },
+      {
+        "CODPROD": 457,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 0,9L VERDE FOLHA"
+      },
+      {
+        "CODPROD": 458,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 0,9L VERMELHO"
+      },
+      {
+        "CODPROD": 459,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 0,9L COLORADO"
+      },
+      {
+        "CODPROD": 460,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 0,9L VERMELHO GOYA"
+      },
+      {
+        "CODPROD": 461,
+        "DESCRICAO": "ESMALTE BA KOKAR ACET 0,9L AREIA"
+      },
+      {
+        "CODPROD": 462,
+        "DESCRICAO": "ESMALTE BA KOKAR ACET 0,9L BRANCO GELO"
+      },
+      {
+        "CODPROD": 463,
+        "DESCRICAO": "ESMALTE BA KOKAR ACET 0,9L BRANCO NEVE"
+      },
+      {
+        "CODPROD": 464,
+        "DESCRICAO": "ESMALTE BA KOKAR ACET 0,9L MARFIM"
+      },
+      {
+        "CODPROD": 465,
+        "DESCRICAO": "ESMALTE BA KOKAR ACET 0,9L PALHA"
+      },
+      {
+        "CODPROD": 485,
+        "DESCRICAO": "TEXTURA ROLADA LISA KOKAR 15 KG"
+      },
+      {
+        "CODPROD": 491,
+        "DESCRICAO": "RESINA ACR BA KOKAR 18L BRANCO NEVE"
+      },
+      {
+        "CODPROD": 492,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L ROSA CHA"
+      },
+      {
+        "CODPROD": 754,
+        "DESCRICAO": "GESSO & DRYWALL KOKAR 18 L"
+      },
+      {
+        "CODPROD": 755,
+        "DESCRICAO": "GESSO & DRYWALL KOKAR 3,6L"
+      },
+      {
+        "CODPROD": 779,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 25KG QUARTZO BRANCO"
+      },
+      {
+        "CODPROD": 780,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 25KG GOIABA"
+      },
+      {
+        "CODPROD": 781,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 5,5KG QUARTZO BRANC"
+      },
+      {
+        "CODPROD": 782,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 5,5KG GOIABA"
+      },
+      {
+        "CODPROD": 783,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG AM CANARIO"
+      },
+      {
+        "CODPROD": 784,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG AZUL CEU"
+      },
+      {
+        "CODPROD": 785,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG BRANCO GELO"
+      },
+      {
+        "CODPROD": 786,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG CAFE LEITE"
+      },
+      {
+        "CODPROD": 787,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG CAPUCCINO"
+      },
+      {
+        "CODPROD": 788,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG DUNAS JALAPAO"
+      },
+      {
+        "CODPROD": 789,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG LILAS"
+      },
+      {
+        "CODPROD": 790,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG PEROLA"
+      },
+      {
+        "CODPROD": 791,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG TERRACOTA"
+      },
+      {
+        "CODPROD": 792,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG QUARTZO BRANCO"
+      },
+      {
+        "CODPROD": 793,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG GOIABA"
+      },
+      {
+        "CODPROD": 794,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 5,5KG AM CANARIO"
+      },
+      {
+        "CODPROD": 795,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 5,5KG AZUL CEU"
+      },
+      {
+        "CODPROD": 796,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 5,5KG BRANCO GELO"
+      },
+      {
+        "CODPROD": 797,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 5,5KG CAFE COM LEIT"
+      },
+      {
+        "CODPROD": 798,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 5,5KG CAPUCCIN"
+      },
+      {
+        "CODPROD": 799,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 5,5KG DUNAS JALAPAO"
+      },
+      {
+        "CODPROD": 800,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 5,5KG LILAS"
+      },
+      {
+        "CODPROD": 801,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 5,5KG PEROLA"
+      },
+      {
+        "CODPROD": 802,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 5,5KG TERRACOTA"
+      },
+      {
+        "CODPROD": 803,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 5,5KG QUARTZO "
+      },
+      {
+        "CODPROD": 804,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 5,5KG GOIABA"
+      },
+      {
+        "CODPROD": 806,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG BRANCO TERRAC"
+      },
+      {
+        "CODPROD": 807,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG CREME BRULLE"
+      },
+      {
+        "CODPROD": 808,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG BRANCO PRISMA"
+      },
+      {
+        "CODPROD": 828,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG ALGODAO TERRA"
+      },
+      {
+        "CODPROD": 829,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG SOMBRA DA NOIT"
+      },
+      {
+        "CODPROD": 830,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG CINZA ESCALADA"
+      },
+      {
+        "CODPROD": 833,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L LILAS"
+      },
+      {
+        "CODPROD": 834,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L CHOCOLATE"
+      },
+      {
+        "CODPROD": 835,
+        "DESCRICAO": "STANDARD FS RENDE+ 3,6L LILAS"
+      },
+      {
+        "CODPROD": 836,
+        "DESCRICAO": "STANDARD FS RENDE+ 3,6L CHOCOLATE"
+      },
+      {
+        "CODPROD": 837,
+        "DESCRICAO": "STANDARD SB 18L LILAS"
+      },
+      {
+        "CODPROD": 838,
+        "DESCRICAO": "STANDARD SB 18L CHOCOLATE"
+      },
+      {
+        "CODPROD": 839,
+        "DESCRICAO": "STANDARD SB 3,6L LILAS"
+      },
+      {
+        "CODPROD": 840,
+        "DESCRICAO": "STANDARD SB 3,6L CHOCOLATE"
+      },
+      {
+        "CODPROD": 842,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 18L CAFE COM LEITE"
+      },
+      {
+        "CODPROD": 843,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 3,6L CAFE COM LEITE"
+      },
+      {
+        "CODPROD": 856,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG CAMURCA"
+      },
+      {
+        "CODPROD": 857,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 5,5KG CAMURCA"
+      },
+      {
+        "CODPROD": 859,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 25KG CAMURCA"
+      },
+      {
+        "CODPROD": 860,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 5,5KG CAMURCA"
+      },
+      {
+        "CODPROD": 861,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG CERRADO"
+      },
+      {
+        "CODPROD": 863,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG CASTANHA "
+      },
+      {
+        "CODPROD": 865,
+        "DESCRICAO": "IMPERM. PAREDE KOKAR 18L CINZA AVELUDADO"
+      },
+      {
+        "CODPROD": 866,
+        "DESCRICAO": "IMPERM. PAREDE KOKAR 18L VERDE ESPERANCA"
+      },
+      {
+        "CODPROD": 871,
+        "DESCRICAO": "IMPERM. PAREDE KOKAR 18L VERMELHO BIG"
+      },
+      {
+        "CODPROD": 872,
+        "DESCRICAO": "IMPERM. PAREDE KOKAR 18L VERDE BIG"
+      },
+      {
+        "CODPROD": 873,
+        "DESCRICAO": "IMPERM. PAREDE KOKAR 3,6L VERMELHO BIG"
+      },
+      {
+        "CODPROD": 874,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG VERMELHO BIG"
+      },
+      {
+        "CODPROD": 875,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG VERDE BIG"
+      },
+      {
+        "CODPROD": 883,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG VERDE MUSGO"
+      },
+      {
+        "CODPROD": 884,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG DUBLIN MAXIMO"
+      },
+      {
+        "CODPROD": 885,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG DUBLIN CLARO"
+      },
+      {
+        "CODPROD": 888,
+        "DESCRICAO": "IMPERM. PAREDE KOKAR 18L MANCHERSTE MIN"
+      },
+      {
+        "CODPROD": 889,
+        "DESCRICAO": "IMPERM. PAREDE KOKAR 18LTOURS CLARO"
+      },
+      {
+        "CODPROD": 895,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM FS 15KG BRANCO NEV"
+      },
+      {
+        "CODPROD": 896,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 15KG MANCHESTER "
+      },
+      {
+        "CODPROD": 897,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 15KG TOURS CLARO"
+      },
+      {
+        "CODPROD": 901,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 18L PLATINA"
+      },
+      {
+        "CODPROD": 907,
+        "DESCRICAO": "TEXTURA TRAD PR KOKAR 15KG DUBLIM CHEIO"
+      },
+      {
+        "CODPROD": 908,
+        "DESCRICAO": "TEXTURA TRAD PREM KOKAR 15KG DUBLIM MIN"
+      },
+      {
+        "CODPROD": 909,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 15KG BERLIN MINIMO"
+      },
+      {
+        "CODPROD": 910,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 15KG BRANCO GELO"
+      },
+      {
+        "CODPROD": 911,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 15KG AREIA"
+      },
+      {
+        "CODPROD": 920,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 15KG CHOCOLATE"
+      },
+      {
+        "CODPROD": 921,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 15KG PALHA"
+      },
+      {
+        "CODPROD": 929,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG CONCRETO"
+      },
+      {
+        "CODPROD": 931,
+        "DESCRICAO": "SELADOR ACRILICO KOKAR 18LT PALHA"
+      },
+      {
+        "CODPROD": 946,
+        "DESCRICAO": "STANDARD FS RENDE+ 3,6L CONCRETO "
+      },
+      {
+        "CODPROD": 947,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L CONCRETO"
+      },
+      {
+        "CODPROD": 953,
+        "DESCRICAO": "STANDARD SB 18L AMARELO ARCO IRIS"
+      },
+      {
+        "CODPROD": 954,
+        "DESCRICAO": "STANDARD SB 18L AZUL JAZZ"
+      },
+      {
+        "CODPROD": 956,
+        "DESCRICAO": "KOKAR ACR AC PREMIUM 18L VERDE LIQUIGAS"
+      },
+      {
+        "CODPROD": 957,
+        "DESCRICAO": "KOKAR ACR AC PREMIUM 18L CINZA LIQUIGAS"
+      },
+      {
+        "CODPROD": 958,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL3,6L VERDE LIQUIGAS"
+      },
+      {
+        "CODPROD": 962,
+        "DESCRICAO": "KOKAR DEMARCACAO VIARIA BA 18L BRANCO NN"
+      },
+      {
+        "CODPROD": 965,
+        "DESCRICAO": "KOKAR DEMARCACAO VIARIA BA 18L AMARE NBR"
+      },
+      {
+        "CODPROD": 969,
+        "DESCRICAO": "MASSA CORRIDA PVA KOKAR 20 KG"
+      },
+      {
+        "CODPROD": 979,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 15KG BRANCO NEVE "
+      },
+      {
+        "CODPROD": 981,
+        "DESCRICAO": "FIT ACR FS ECONOMICO 16L BRANCO NEVE "
+      },
+      {
+        "CODPROD": 990,
+        "DESCRICAO": "FIT ACR FS ECONOMICO 16L BRANCO GELO"
+      },
+      {
+        "CODPROD": 991,
+        "DESCRICAO": "FIT ACR FS ECONOMICO 16L PALHA"
+      },
+      {
+        "CODPROD": 992,
+        "DESCRICAO": "FIT ACR FS ECONOMICO 16L PEROLA"
+      },
+      {
+        "CODPROD": 993,
+        "DESCRICAO": "FIT ACR FS ECONOMICO 16L MARFIM"
+      },
+      {
+        "CODPROD": 994,
+        "DESCRICAO": "FIT ACR FS ECONOMICO 16L ERVA DOCE"
+      },
+      {
+        "CODPROD": 995,
+        "DESCRICAO": "FIT ACR FS ECONOMICO 16L AZUL SANHACO"
+      },
+      {
+        "CODPROD": 996,
+        "DESCRICAO": "FIT ACR FS ECONOMICO 16L ORQUIDIA LILAS"
+      },
+      {
+        "CODPROD": 997,
+        "DESCRICAO": "FIT ACR FS ECONOMICO 16L AMARELO CANARIO"
+      },
+      {
+        "CODPROD": 999,
+        "DESCRICAO": "FIT MASSA CORRIDA PVA 25 KG"
+      },
+      {
+        "CODPROD": 1002,
+        "DESCRICAO": "FIT MASSA ACRILICA 25 KG"
+      },
+      {
+        "CODPROD": 1003,
+        "DESCRICAO": "FIT MASSA CORRIDA PVA 5,5 KG"
+      },
+      {
+        "CODPROD": 1004,
+        "DESCRICAO": "FIT MASSA ACRILICA  5,5 KG"
+      },
+      {
+        "CODPROD": 1008,
+        "DESCRICAO": "FIT SELADOR ACRILICO KOKAR 16L"
+      },
+      {
+        "CODPROD": 1009,
+        "DESCRICAO": "FIT SELADOR ACRILICO 3,6L"
+      },
+      {
+        "CODPROD": 1010,
+        "DESCRICAO": "MASSA ACRILICA  KOKAR 20 KG"
+      },
+      {
+        "CODPROD": 1011,
+        "DESCRICAO": "FIT ACR FS ECONOMICO 3,6L BRANCO NEVE"
+      },
+      {
+        "CODPROD": 1012,
+        "DESCRICAO": "FIT ACR FS ECONOMICO 3,6L BRANCO GELO"
+      },
+      {
+        "CODPROD": 1013,
+        "DESCRICAO": "FIT ACR FS ECONOMICO 3,6L PALHA"
+      },
+      {
+        "CODPROD": 1014,
+        "DESCRICAO": "FIT ACR FS ECONOMICO 3,6L PEROLA"
+      },
+      {
+        "CODPROD": 1015,
+        "DESCRICAO": "FIT ACR FS ECONOMICO 3,6L MARFIM"
+      },
+      {
+        "CODPROD": 1016,
+        "DESCRICAO": "FIT ACR FS ECONOMICO 3,6L ERVA DOCE"
+      },
+      {
+        "CODPROD": 1017,
+        "DESCRICAO": "FIT ACR FS ECONOMICO 3,6L AZUL SANHACO"
+      },
+      {
+        "CODPROD": 1018,
+        "DESCRICAO": "FIT ACR FS ECONOMICO 3,6L ORQUIDIA LILAS"
+      },
+      {
+        "CODPROD": 1019,
+        "DESCRICAO": "FIT ACR FS ECONOMICO 3,6L AMARELO CANAR"
+      },
+      {
+        "CODPROD": 1024,
+        "DESCRICAO": "KOKAR ACR AC PREMIUM 18L PEROLA"
+      },
+      {
+        "CODPROD": 1025,
+        "DESCRICAO": "KOKAR ACR AC PREMIUM 3,6L PEROLA"
+      },
+      {
+        "CODPROD": 1027,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 18L AMARELO REAL"
+      },
+      {
+        "CODPROD": 1028,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 3,6L AMARELO REAL"
+      },
+      {
+        "CODPROD": 1031,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L TERRACOTA"
+      },
+      {
+        "CODPROD": 1032,
+        "DESCRICAO": "STANDARD FS RENDE+ 3,6L TERRACOTA"
+      },
+      {
+        "CODPROD": 1034,
+        "DESCRICAO": "TEXTURA ROLADA BRANCA 15 KG"
+      },
+      {
+        "CODPROD": 1036,
+        "DESCRICAO": "TEXTURA ROLADA CAMELO ESCURO 15 KG"
+      },
+      {
+        "CODPROD": 1038,
+        "DESCRICAO": "KOKAR ACR AC PREMIUM 18L CAMURCA"
+      },
+      {
+        "CODPROD": 1039,
+        "DESCRICAO": "KOKAR ACR AC PREMIUM 3,6L CAMURCA"
+      },
+      {
+        "CODPROD": 1052,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 18L CARIBE"
+      },
+      {
+        "CODPROD": 1053,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 3,6L CARIBE"
+      },
+      {
+        "CODPROD": 1055,
+        "DESCRICAO": "TINTA PISO KOKAR 18L VERMELHO SEGURANCA"
+      },
+      {
+        "CODPROD": 1056,
+        "DESCRICAO": "TINTA PISO KOKAR 3,6L VERMELHO SEGURANCA"
+      },
+      {
+        "CODPROD": 1067,
+        "DESCRICAO": "TEXTURA RISC STANDARD 25KG BRANCO GELO"
+      },
+      {
+        "CODPROD": 1068,
+        "DESCRICAO": "TEXTURA RISC STANDARD 25KG BRANCO NATUR"
+      },
+      {
+        "CODPROD": 1069,
+        "DESCRICAO": "TEXTURA RISC STANDARD 25KG ERVA DOCE"
+      },
+      {
+        "CODPROD": 1070,
+        "DESCRICAO": "TEXTURA RISC STANDARD 25KG PALHA"
+      },
+      {
+        "CODPROD": 1071,
+        "DESCRICAO": "TEXTURA RISC STANDARD 25KG CAPUCCINO"
+      },
+      {
+        "CODPROD": 1077,
+        "DESCRICAO": "TEXTURA TRAD STANDARD 25KG BRANCO GELO"
+      },
+      {
+        "CODPROD": 1078,
+        "DESCRICAO": "TEXTURA TRAD STANDARD 25KG BRANCO NATUR"
+      },
+      {
+        "CODPROD": 1079,
+        "DESCRICAO": "TEXTURA TRAD STANDARD 25KG ERVA DOCE"
+      },
+      {
+        "CODPROD": 1080,
+        "DESCRICAO": "TEXTURA TRAD STANDARD 25KG PALHA"
+      },
+      {
+        "CODPROD": 1081,
+        "DESCRICAO": "TEXTURA TRAD STANDARD 25KG CAPUCCINO"
+      },
+      {
+        "CODPROD": 1099,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG BRANCO NATURAL"
+      },
+      {
+        "CODPROD": 1110,
+        "DESCRICAO": "TEXTURA TRAD STANDARD 15KG AREIA"
+      },
+      {
+        "CODPROD": 1111,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 15KG OCRE COLONIAL"
+      },
+      {
+        "CODPROD": 1112,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 15KG CAFE COM LEITE"
+      },
+      {
+        "CODPROD": 1135,
+        "DESCRICAO": "FIT FUNDO PREPARADOR DE PAREDES 16L"
+      },
+      {
+        "CODPROD": 1136,
+        "DESCRICAO": "FIT FUNDO PREPARADOR DE PAREDES 3,6L"
+      },
+      {
+        "CODPROD": 1147,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG PESSEGO"
+      },
+      {
+        "CODPROD": 1150,
+        "DESCRICAO": "KOKAR DEMARCACAO VIARIA BA 18L PRETO"
+      },
+      {
+        "CODPROD": 1151,
+        "DESCRICAO": "TEXTURA TRAD STANDARD 15KG CAPUCCINO"
+      },
+      {
+        "CODPROD": 1153,
+        "DESCRICAO": "RESINA ACR BA KOKAR 18L AREIA"
+      },
+      {
+        "CODPROD": 1154,
+        "DESCRICAO": "RESINA ACR BA KOKAR 3,6L AREIA"
+      },
+      {
+        "CODPROD": 1163,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L VERMELHO PAIXAO"
+      },
+      {
+        "CODPROD": 1164,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L VERDE MUSGO"
+      },
+      {
+        "CODPROD": 1165,
+        "DESCRICAO": "STANDARD FS RENDE+ 3,6L VERMELHO PAIX"
+      },
+      {
+        "CODPROD": 1166,
+        "DESCRICAO": "STANDARD FS RENDE+ 3,6L VERDE MUSGO"
+      },
+      {
+        "CODPROD": 1168,
+        "DESCRICAO": "STANDARD FS RENDE+ 3,6L AMARELO REAL"
+      },
+      {
+        "CODPROD": 1169,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L AMARELO REAL"
+      },
+      {
+        "CODPROD": 1171,
+        "DESCRICAO": "KOKAR ACR AC PREMIUM 3,6L AREIA"
+      },
+      {
+        "CODPROD": 1172,
+        "DESCRICAO": "KOKAR ACR AC PREMIUM 18L AREIA"
+      },
+      {
+        "CODPROD": 1177,
+        "DESCRICAO": "STANDARD SB 18L VERMELHO PAIXAO"
+      },
+      {
+        "CODPROD": 1178,
+        "DESCRICAO": "STANDARD SB 3,6LVERMELHO PAIXAO"
+      },
+      {
+        "CODPROD": 1180,
+        "DESCRICAO": "STANDARD SB 18L VERDE MUSGO"
+      },
+      {
+        "CODPROD": 1181,
+        "DESCRICAO": "STANDARD SB 3,6LVERDE MUSGO"
+      },
+      {
+        "CODPROD": 1183,
+        "DESCRICAO": "STANDARD SB 18L AMARELO REAL"
+      },
+      {
+        "CODPROD": 1184,
+        "DESCRICAO": "STANDARD SB 3,6L AMARELO REAL"
+      },
+      {
+        "CODPROD": 1186,
+        "DESCRICAO": "STANDARD SB 18L CAFE COM LEITE"
+      },
+      {
+        "CODPROD": 1187,
+        "DESCRICAO": "STANDARD SB 3,6L CAFE COM LEITE"
+      },
+      {
+        "CODPROD": 1189,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 18L ACAFRAO"
+      },
+      {
+        "CODPROD": 1190,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 3,6L ACAFRAO"
+      },
+      {
+        "CODPROD": 1192,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 18L CONCRETO"
+      },
+      {
+        "CODPROD": 1193,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 3,6L CONCRETO"
+      },
+      {
+        "CODPROD": 1195,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 18L CONCRETO"
+      },
+      {
+        "CODPROD": 1196,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 3,6L CONCRETO"
+      },
+      {
+        "CODPROD": 1198,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 18L CREME DE LEITE"
+      },
+      {
+        "CODPROD": 1199,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 3,6L CREME DE LEITE"
+      },
+      {
+        "CODPROD": 1202,
+        "DESCRICAO": "RESINA ACR BA KOKAR 18L PEROLA"
+      },
+      {
+        "CODPROD": 1203,
+        "DESCRICAO": "RESINA ACR BA KOKAR 3,6L PEROLA"
+      },
+      {
+        "CODPROD": 1205,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 25KG VERDE MUSGO"
+      },
+      {
+        "CODPROD": 1206,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 5,5KG VERDE MUSGO"
+      },
+      {
+        "CODPROD": 1209,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 18L ACAI"
+      },
+      {
+        "CODPROD": 1210,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 3,6L ACAI"
+      },
+      {
+        "CODPROD": 1227,
+        "DESCRICAO": "KOKAR ACR FS PREMIUM 18L CAPUCCINO"
+      },
+      {
+        "CODPROD": 1230,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 18L AMARELO CANARIO"
+      },
+      {
+        "CODPROD": 1231,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 3,6L AMARELO CANARI"
+      },
+      {
+        "CODPROD": 1233,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 18L AMARELO REAL"
+      },
+      {
+        "CODPROD": 1234,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 3,6L AMARELO REAL"
+      },
+      {
+        "CODPROD": 1236,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 18L AZUL ARARA"
+      },
+      {
+        "CODPROD": 1237,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 3,6L AZUL ARARA"
+      },
+      {
+        "CODPROD": 1239,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 18L AZUL OCEANO"
+      },
+      {
+        "CODPROD": 1240,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 3,6L AZUL OCEANO"
+      },
+      {
+        "CODPROD": 1242,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 18L CAFE COM LEITE"
+      },
+      {
+        "CODPROD": 1243,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 3,6L CAFE COM LEITE"
+      },
+      {
+        "CODPROD": 1245,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 18L CHOCOLATE"
+      },
+      {
+        "CODPROD": 1246,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 3,6L CHOCOLATE"
+      },
+      {
+        "CODPROD": 1248,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 18L DUNAS DO JALAPA"
+      },
+      {
+        "CODPROD": 1249,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 3,6L DUNAS DO JALAP"
+      },
+      {
+        "CODPROD": 1251,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 18L ROXO PAVAO"
+      },
+      {
+        "CODPROD": 1252,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 3,6L ROXO PAVAO"
+      },
+      {
+        "CODPROD": 1255,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 18L VERDE MUSGO"
+      },
+      {
+        "CODPROD": 1256,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 3,6L VERDE MUSGO"
+      },
+      {
+        "CODPROD": 1258,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 18LVERMELHO PAIXAO"
+      },
+      {
+        "CODPROD": 1259,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 3,6LVERMELHO PAIX"
+      },
+      {
+        "CODPROD": 1260,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 18L TERRACOTA"
+      },
+      {
+        "CODPROD": 1261,
+        "DESCRICAO": "KOKAR ACR SB PREMIUM 3,6L TERRACOTA"
+      },
+      {
+        "CODPROD": 1262,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 5,5KG VERDE MUSGO"
+      },
+      {
+        "CODPROD": 1263,
+        "DESCRICAO": "TEXTURA TRAD STANDARD 15KG BRANCO NATUR"
+      },
+      {
+        "CODPROD": 1264,
+        "DESCRICAO": "TEXTURA RISC STANDARD 15KG BRANCO NATUR"
+      },
+      {
+        "CODPROD": 1294,
+        "DESCRICAO": "TEXTURA TRAD STANDARD 15KG MARFIM"
+      },
+      {
+        "CODPROD": 1299,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 3,6  BERLIM MINIMO"
+      },
+      {
+        "CODPROD": 1314,
+        "DESCRICAO": "TEXTURA TRAD STANDARD 15KG PALHA"
+      },
+      {
+        "CODPROD": 1315,
+        "DESCRICAO": "TEXTURA TRAD STANDARD 15KG BRANCO GELO"
+      },
+      {
+        "CODPROD": 1321,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 15KG FLORESTA DO SU"
+      },
+      {
+        "CODPROD": 1323,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 25KG CINZA CS BENC"
+      },
+      {
+        "CODPROD": 1325,
+        "DESCRICAO": "FIT SELADOR ACRILICO KOKAR 16L PALHA"
+      },
+      {
+        "CODPROD": 1327,
+        "DESCRICAO": "RESINA ACR BA KOKAR 18L GRAFITE"
+      },
+      {
+        "CODPROD": 1338,
+        "DESCRICAO": "TEXTURA RISC STANDARD 25KG ASPERULA "
+      },
+      {
+        "CODPROD": 1340,
+        "DESCRICAO": "TEXTURA RISC STANDARD 25KG MOUSSE DE CAF"
+      },
+      {
+        "CODPROD": 1346,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 25KG VEU"
+      },
+      {
+        "CODPROD": 1348,
+        "DESCRICAO": "TEXTURA TRAD STANDARD 25KG CONCRETO"
+      },
+      {
+        "CODPROD": 1361,
+        "DESCRICAO": "TEXTURA TRAD STANDARD 15KG VERDE RODES"
+      },
+      {
+        "CODPROD": 1393,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 25KG FLORESTA DO SU"
+      },
+      {
+        "CODPROD": 1405,
+        "DESCRICAO": "FIT SELADOR ACRILICO KOKAR 16L CAMURCA"
+      },
+      {
+        "CODPROD": 1406,
+        "DESCRICAO": "FIT SELADOR ACRILICO KOKAR 16L CONCRETO"
+      },
+      {
+        "CODPROD": 1413,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG VALE DO JADE"
+      },
+      {
+        "CODPROD": 1415,
+        "DESCRICAO": "FIT ACR FS ECONOMICO 16L AREIA"
+      },
+      {
+        "CODPROD": 1419,
+        "DESCRICAO": "TEXTURA TRAD STANDARD 25KG LIBERTY"
+      },
+      {
+        "CODPROD": 1421,
+        "DESCRICAO": "FIT SELADOR ACR KOKAR 16L BRANCO GELO"
+      },
+      {
+        "CODPROD": 1423,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG DUBAI"
+      },
+      {
+        "CODPROD": 1427,
+        "DESCRICAO": "TEXTURA TRAD STANDARD 25KG PALHA HIKARI"
+      },
+      {
+        "CODPROD": 1429,
+        "DESCRICAO": "BASE NIVELADORA INTERNA KOKAR 20 KG"
+      },
+      {
+        "CODPROD": 1430,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 15KG TERRA COTA"
+      },
+      {
+        "CODPROD": 1431,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 15KG DUNAS DO JALAP"
+      },
+      {
+        "CODPROD": 1433,
+        "DESCRICAO": "FIT SELADOR ACR KOKAR 16L TERRACOTA"
+      },
+      {
+        "CODPROD": 1435,
+        "DESCRICAO": "FIT SELADOR ACR KOKAR 16L DUNAS DO JALAP"
+      },
+      {
+        "CODPROD": 1436,
+        "DESCRICAO": "FIT SELADOR ACR KOKAR 16L OCRE COLONIAL"
+      },
+      {
+        "CODPROD": 1438,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L AMARELO IPE"
+      },
+      {
+        "CODPROD": 1441,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L CINZA BRISTOL"
+      },
+      {
+        "CODPROD": 1444,
+        "DESCRICAO": "KOKAR DEMARCACAO VIARIA BA 18L AMARE NN"
+      },
+      {
+        "CODPROD": 1460,
+        "DESCRICAO": "KOKAR DEMARCACAO VIARIA BA 3,6L AMARE NN"
+      },
+      {
+        "CODPROD": 1461,
+        "DESCRICAO": "KOKAR DEMARCACAO VIARIA BA 18L VERMEL NN"
+      },
+      {
+        "CODPROD": 1462,
+        "DESCRICAO": "KOKAR DEMARCACAO VIARIA BA 3,6L AMAR NBR"
+      },
+      {
+        "CODPROD": 1463,
+        "DESCRICAO": "KOKAR DEMARCACAO VIARIA BA 3,6L BRANC NN"
+      },
+      {
+        "CODPROD": 1464,
+        "DESCRICAO": "KOKAR DEMARCACAO VIARIA BA 3,6L VERME NN"
+      },
+      {
+        "CODPROD": 1466,
+        "DESCRICAO": "KOKAR DEMARCACAO VIARIA BA 18L BRANC NBR"
+      },
+      {
+        "CODPROD": 1467,
+        "DESCRICAO": "KOKAR DEMARCACAO VIARIA BA 3,6L BRAN NBR"
+      },
+      {
+        "CODPROD": 1469,
+        "DESCRICAO": "KOKAR DEMARCACAO VIARIA BA 18L VERME NBR"
+      },
+      {
+        "CODPROD": 1470,
+        "DESCRICAO": "KOKAR DEMARCACAO VIARIA BA 3,6L VERM NBR"
+      },
+      {
+        "CODPROD": 1473,
+        "DESCRICAO": "ESMALTE BA KOKAR BRIL 200L BRANCO NEVE"
+      },
+      {
+        "CODPROD": 1478,
+        "DESCRICAO": "FIT SELADOR ACRILICO KOKAR 16L PEROLA"
+      },
+      {
+        "CODPROD": 1491,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 25KG GRAVETOS DO MA"
+      },
+      {
+        "CODPROD": 1492,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 25KG BRANCO AREIA"
+      },
+      {
+        "CODPROD": 1559,
+        "DESCRICAO": "SELADOR ACRILICO KOKAR 18LT BRANCO GELO"
+      },
+      {
+        "CODPROD": 1566,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 3,6L AMARELO OURO"
+      },
+      {
+        "CODPROD": 1567,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 3,6L AMARELO TRAT"
+      },
+      {
+        "CODPROD": 1568,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 3,6L AREIA"
+      },
+      {
+        "CODPROD": 1569,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 3,6L AZUL CELESTE"
+      },
+      {
+        "CODPROD": 1570,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 3,6L AZUL DEL REY"
+      },
+      {
+        "CODPROD": 1571,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 3,6L AZUL FRANCA"
+      },
+      {
+        "CODPROD": 1572,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 3,6L BRANCO GELO"
+      },
+      {
+        "CODPROD": 1573,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 3,6L BRANCO NEVE"
+      },
+      {
+        "CODPROD": 1574,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 3,6L CAMURCA"
+      },
+      {
+        "CODPROD": 1575,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 3,6L CINZA ESCURO"
+      },
+      {
+        "CODPROD": 1576,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 3,6L CINZA MEDIO"
+      },
+      {
+        "CODPROD": 1577,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 3,6L COLORADO"
+      },
+      {
+        "CODPROD": 1578,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 3,6L CONHAQUE"
+      },
+      {
+        "CODPROD": 1579,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 3,6L LARANJA"
+      },
+      {
+        "CODPROD": 1580,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 3,6L MARFIM"
+      },
+      {
+        "CODPROD": 1581,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 3,6L MARROM"
+      },
+      {
+        "CODPROD": 1582,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 3,6L PALHA"
+      },
+      {
+        "CODPROD": 1583,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 3,6L PLATINA"
+      },
+      {
+        "CODPROD": 1584,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 3,6L PRETO"
+      },
+      {
+        "CODPROD": 1585,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 3,6L TABACO"
+      },
+      {
+        "CODPROD": 1586,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 3,6L VENTO NATUR"
+      },
+      {
+        "CODPROD": 1587,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 3,6L VERDE AMAZON"
+      },
+      {
+        "CODPROD": 1588,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 3,6L VERDE COLONI"
+      },
+      {
+        "CODPROD": 1589,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 3,6L VERDE FOLHA"
+      },
+      {
+        "CODPROD": 1590,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 3,6L VERMELHO"
+      },
+      {
+        "CODPROD": 1591,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 3,6L VERMELHO GOY"
+      },
+      {
+        "CODPROD": 1592,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 0,9L AMAR. OURO"
+      },
+      {
+        "CODPROD": 1593,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 0,9L AMAR. TRATOR"
+      },
+      {
+        "CODPROD": 1594,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 0,9L AREIA"
+      },
+      {
+        "CODPROD": 1598,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 0,9L BRANCO GELO"
+      },
+      {
+        "CODPROD": 1599,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 0,9L AZUL CELESTE"
+      },
+      {
+        "CODPROD": 1600,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 0,9L AZUL DEL REY"
+      },
+      {
+        "CODPROD": 1601,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 0,9L AZUL FRANCA"
+      },
+      {
+        "CODPROD": 1602,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 0,9L CAMURCA"
+      },
+      {
+        "CODPROD": 1603,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 0,9L CINZA MÉDIO"
+      },
+      {
+        "CODPROD": 1604,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 0,9L CINZA ESCURO"
+      },
+      {
+        "CODPROD": 1605,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 0,9L COLORADO"
+      },
+      {
+        "CODPROD": 1606,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 0,9L CONHAQUE"
+      },
+      {
+        "CODPROD": 1607,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 0,9L LARANJA"
+      },
+      {
+        "CODPROD": 1608,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 0,9L MARFIM"
+      },
+      {
+        "CODPROD": 1609,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 0,9L MARROM"
+      },
+      {
+        "CODPROD": 1610,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 0,9L PALHA"
+      },
+      {
+        "CODPROD": 1611,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 0,9L PLATINA"
+      },
+      {
+        "CODPROD": 1612,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 0,9L PRETO"
+      },
+      {
+        "CODPROD": 1613,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 0,9L TABACO"
+      },
+      {
+        "CODPROD": 1614,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 0,9L VENTO NATUR."
+      },
+      {
+        "CODPROD": 1615,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 0,9L VERDE AMAZ."
+      },
+      {
+        "CODPROD": 1616,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 0,9L VERDE COLON."
+      },
+      {
+        "CODPROD": 1617,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 0,9L VERDE FOLHA"
+      },
+      {
+        "CODPROD": 1618,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 0,9L VERMELHO"
+      },
+      {
+        "CODPROD": 1619,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 0,9L VERM. GOYA"
+      },
+      {
+        "CODPROD": 1620,
+        "DESCRICAO": "ESMALTE SINT FOSCO 3,6L BRANCO NEVE"
+      },
+      {
+        "CODPROD": 1621,
+        "DESCRICAO": "ESMALTE SINT FOSCO 3,6L PRETO"
+      },
+      {
+        "CODPROD": 1622,
+        "DESCRICAO": "ESMALTE SINT FOSCO 0,9L BRANCO NEVE"
+      },
+      {
+        "CODPROD": 1623,
+        "DESCRICAO": "ESMALTE SINT FOSCO 0,9L PRETO"
+      },
+      {
+        "CODPROD": 1624,
+        "DESCRICAO": "FUNDO SINTETICO 3,6L CINZA"
+      },
+      {
+        "CODPROD": 1625,
+        "DESCRICAO": "FUNDO SINTETICO 0,9L CINZA"
+      },
+      {
+        "CODPROD": 1626,
+        "DESCRICAO": "FUNDO GALVANIZADO 3,6L BRANCO"
+      },
+      {
+        "CODPROD": 1627,
+        "DESCRICAO": "FUNDO GALVANIZADO 0,9L BRANCO"
+      },
+      {
+        "CODPROD": 1637,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 0,9L BRANCO NEVE"
+      },
+      {
+        "CODPROD": 1639,
+        "DESCRICAO": "FUNDO SERRALHEIRO 3,6L CINZA"
+      },
+      {
+        "CODPROD": 1640,
+        "DESCRICAO": "FUNDO SERRALHEIRO 0,9L CINZA"
+      },
+      {
+        "CODPROD": 1641,
+        "DESCRICAO": "FUNDO NIVELADOR 3,6L BRANCO"
+      },
+      {
+        "CODPROD": 1642,
+        "DESCRICAO": "FUNDO NIVELADOR 0,9L BRANCO"
+      },
+      {
+        "CODPROD": 1643,
+        "DESCRICAO": "FUNDO E ACABAMENTO 18LT AMARELO"
+      },
+      {
+        "CODPROD": 1644,
+        "DESCRICAO": "FUNDO E ACABAMENTO 18LT AZUL DEL REY"
+      },
+      {
+        "CODPROD": 1645,
+        "DESCRICAO": "FUNDO E ACABAMENTO 18LT AZUL FRANCA"
+      },
+      {
+        "CODPROD": 1646,
+        "DESCRICAO": "FUNDO E ACABAMENTO 18LT BRANCO"
+      },
+      {
+        "CODPROD": 1647,
+        "DESCRICAO": "FUNDO E ACABAMENTO 18LT CINZA"
+      },
+      {
+        "CODPROD": 1648,
+        "DESCRICAO": "FUNDO E ACABAMENTO 18LT PLATINA"
+      },
+      {
+        "CODPROD": 1649,
+        "DESCRICAO": "FUNDO E ACABAMENTO 3,6L AMARELO"
+      },
+      {
+        "CODPROD": 1650,
+        "DESCRICAO": "FUNDO E ACABAMENTO 3,6L AZUL DEL REY"
+      },
+      {
+        "CODPROD": 1651,
+        "DESCRICAO": "FUNDO E ACABAMENTO 3,6L BRANCO"
+      },
+      {
+        "CODPROD": 1652,
+        "DESCRICAO": "FUNDO E ACABAMENTO 3,6L AZUL FRANCA"
+      },
+      {
+        "CODPROD": 1653,
+        "DESCRICAO": "FUNDO E ACABAMENTO 3,6L CINZA"
+      },
+      {
+        "CODPROD": 1654,
+        "DESCRICAO": "FUNDO E ACABAMENTO 3,6L PLATINA"
+      },
+      {
+        "CODPROD": 1655,
+        "DESCRICAO": "SELADORA CONCENTRADA P MADEIRA 3,6L"
+      },
+      {
+        "CODPROD": 1656,
+        "DESCRICAO": "SELADORA CONCENTRADA P MADEIRA 0,9L"
+      },
+      {
+        "CODPROD": 1658,
+        "DESCRICAO": "VERNIZ COPAL KOKAR 3,6L"
+      },
+      {
+        "CODPROD": 1659,
+        "DESCRICAO": "VERNIZ COPAL KOKAR 0,9L"
+      },
+      {
+        "CODPROD": 1661,
+        "DESCRICAO": "VERNIZ FILTRO SOLAR INCOLOR KOKAR 0,9L"
+      },
+      {
+        "CODPROD": 1662,
+        "DESCRICAO": "VERNIZ FILTRO SOLAR INCOLOR KOKAR 3,6L"
+      },
+      {
+        "CODPROD": 1664,
+        "DESCRICAO": "VERNIZ FILTRO SOLAR MOGNO KOKAR 0,9L"
+      },
+      {
+        "CODPROD": 1665,
+        "DESCRICAO": "VERNIZ FILTRO SOLAR MOGNO KOKAR 3,6L"
+      },
+      {
+        "CODPROD": 1667,
+        "DESCRICAO": "VERNIZ FILTRO SOLAR IMBUIA KOKAR 0,9L"
+      },
+      {
+        "CODPROD": 1668,
+        "DESCRICAO": "VERNIZ FILTRO SOLAR IMBUIA KOKAR 3,6L"
+      },
+      {
+        "CODPROD": 1671,
+        "DESCRICAO": "MASSA PARA MADEIRA 5,5KG "
+      },
+      {
+        "CODPROD": 1672,
+        "DESCRICAO": "MASSA PARA MADEIRA 1,3KG"
+      },
+      {
+        "CODPROD": 1690,
+        "DESCRICAO": "AGUARRAS KOKAR 0,9 L"
+      },
+      {
+        "CODPROD": 1691,
+        "DESCRICAO": "THINNER 5500 KOKAR 0,9 L"
+      },
+      {
+        "CODPROD": 1694,
+        "DESCRICAO": "AGUARRAS KOKAR 5,0 L"
+      },
+      {
+        "CODPROD": 1695,
+        "DESCRICAO": "THINNER 5500 KOKAR 5,0 L"
+      },
+      {
+        "CODPROD": 1703,
+        "DESCRICAO": "FUNDO SERRALHEIRO 18L CINZA"
+      },
+      {
+        "CODPROD": 1708,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG CANELA"
+      },
+      {
+        "CODPROD": 1709,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG BODAS DE PRATA"
+      },
+      {
+        "CODPROD": 1715,
+        "DESCRICAO": "ESMALTE SINT STANDARD 3,6L RAL 7012"
+      },
+      {
+        "CODPROD": 1721,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L RAL 7012"
+      },
+      {
+        "CODPROD": 1722,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L M 2001"
+      },
+      {
+        "CODPROD": 1723,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L P 1276"
+      },
+      {
+        "CODPROD": 1724,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L P 1278"
+      },
+      {
+        "CODPROD": 1735,
+        "DESCRICAO": "THINNER 5500 KOKAR 200 L"
+      },
+      {
+        "CODPROD": 1741,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 18L LICOR DE CHOC"
+      },
+      {
+        "CODPROD": 1742,
+        "DESCRICAO": "KOKAR ACR FS ECONOMICO 18LCAFE COM NATA"
+      },
+      {
+        "CODPROD": 1746,
+        "DESCRICAO": "SELADOR ACRILICO KOKAR 200L"
+      },
+      {
+        "CODPROD": 1748,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 25KG PEPITA BISMUTO"
+      },
+      {
+        "CODPROD": 1750,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 15KG VERDE RHODES"
+      },
+      {
+        "CODPROD": 1760,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 25KG CONCRETO"
+      },
+      {
+        "CODPROD": 1778,
+        "DESCRICAO": "TEXTURA TRAD STANDARD 25KG CULTURA GREGA"
+      },
+      {
+        "CODPROD": 1787,
+        "DESCRICAO": "FUNDO E ACABAMENTO SR 18LT AZUL DEL REY"
+      },
+      {
+        "CODPROD": 1788,
+        "DESCRICAO": "FUNDO E ACABAMENTO SR 3,6L AZUL DEL REY"
+      },
+      {
+        "CODPROD": 1789,
+        "DESCRICAO": "FUNDO E ACABAMENTO SR 18LT BRANCO"
+      },
+      {
+        "CODPROD": 1790,
+        "DESCRICAO": "FUNDO E ACABAMENTO SR 3,6L BRANCO"
+      },
+      {
+        "CODPROD": 1791,
+        "DESCRICAO": "FUNDO E ACABAMENTO SR 18LT CINZA"
+      },
+      {
+        "CODPROD": 1792,
+        "DESCRICAO": "FUNDO E ACABAMENTO SR 3,6L CINZA"
+      },
+      {
+        "CODPROD": 1793,
+        "DESCRICAO": "FUNDO E ACABAMENTO SR 18LT AZUL FRANCA"
+      },
+      {
+        "CODPROD": 1794,
+        "DESCRICAO": "FUNDO E ACABAMENTO SR 3,6L AZUL FRANCA"
+      },
+      {
+        "CODPROD": 1798,
+        "DESCRICAO": "TEXTURA TRAD STANDARD 15KG CINZA URBANO"
+      },
+      {
+        "CODPROD": 1804,
+        "DESCRICAO": "BASE NIVELADORA EXTERNA KOKAR 20 KG"
+      },
+      {
+        "CODPROD": 1807,
+        "DESCRICAO": "KOKAR ACR AC PREMIUM 18L LARANJA INOVE"
+      },
+      {
+        "CODPROD": 1809,
+        "DESCRICAO": "TEXTURA TRAD STANDARD 15KG NOVO CAMURCA"
+      },
+      {
+        "CODPROD": 1810,
+        "DESCRICAO": "BASE NIVELADORA INTERNA KOKAR 15  KG"
+      },
+      {
+        "CODPROD": 1811,
+        "DESCRICAO": "BASE NIVELADORA EXTERNA KOKAR 15 KG"
+      },
+      {
+        "CODPROD": 1813,
+        "DESCRICAO": "FIT SELADOR ACR KOKAR 16L NOVO CAMURCA "
+      },
+      {
+        "CODPROD": 1814,
+        "DESCRICAO": "FIT SELADOR ACR KOKAR NOVO CAMURCA 3,6L"
+      },
+      {
+        "CODPROD": 1817,
+        "DESCRICAO": "THINNER 5700  KOKAR 0,9 L"
+      },
+      {
+        "CODPROD": 1818,
+        "DESCRICAO": "THINNER 5700 KOKAR 5,0 L"
+      },
+      {
+        "CODPROD": 1821,
+        "DESCRICAO": "FUNDO E ACABAMENTO 0,9L CINZA"
+      },
+      {
+        "CODPROD": 1826,
+        "DESCRICAO": "FUNDO E ACABAMENTO 0,9L AZUL DEL REY"
+      },
+      {
+        "CODPROD": 1827,
+        "DESCRICAO": "KOKAR ACR AC PREMIUM 3,6L LARANJA INOVE"
+      },
+      {
+        "CODPROD": 1828,
+        "DESCRICAO": "THINNER 5700  KOKAR  18 L"
+      },
+      {
+        "CODPROD": 1829,
+        "DESCRICAO": "THINNER 5500  KOKAR  18 L"
+      },
+      {
+        "CODPROD": 1830,
+        "DESCRICAO": "THINNER 5700 KOKAR 200 L"
+      },
+      {
+        "CODPROD": 1832,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG PINOLI D020"
+      },
+      {
+        "CODPROD": 1834,
+        "DESCRICAO": "STANDARD SB 18L LUA DO SERTAO"
+      },
+      {
+        "CODPROD": 1836,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 3,6L AMARELO CANA"
+      },
+      {
+        "CODPROD": 1838,
+        "DESCRICAO": "FUNDO E ACABAMENTO 18LT VERDE FOLHA"
+      },
+      {
+        "CODPROD": 1839,
+        "DESCRICAO": "FUNDO E ACABAMENTO 3,6L VERDE FOLHA"
+      },
+      {
+        "CODPROD": 1840,
+        "DESCRICAO": "STANDARD SB 3,6L LUA DO SERTAO"
+      },
+      {
+        "CODPROD": 1842,
+        "DESCRICAO": "FUNDO E ACABAMENTO 18LT CINZA RAL 7038"
+      },
+      {
+        "CODPROD": 1843,
+        "DESCRICAO": "FUNDO E ACABAMENTO 3,6LCINZA RAL 7038"
+      },
+      {
+        "CODPROD": 1846,
+        "DESCRICAO": "TEXTURA RISC STANDARD 20KG BRANCO NATUR"
+      },
+      {
+        "CODPROD": 1847,
+        "DESCRICAO": "TEXTURA RISC STANDARD 20KG BRANCO GELO"
+      },
+      {
+        "CODPROD": 1848,
+        "DESCRICAO": "TEXTURA RISC STANDARD 20KG CAPUCCINO"
+      },
+      {
+        "CODPROD": 1849,
+        "DESCRICAO": "TEXTURA RISC STANDARD 20KG ERVA DOCE"
+      },
+      {
+        "CODPROD": 1850,
+        "DESCRICAO": "TEXTURA RISC STANDARD 20KG PALHA"
+      },
+      {
+        "CODPROD": 1852,
+        "DESCRICAO": "TEXTURA RISC STANDARD 20KG AREIA"
+      },
+      {
+        "CODPROD": 1854,
+        "DESCRICAO": "TEXTURA RISC STANDARD 20KG BRANCO SER"
+      },
+      {
+        "CODPROD": 1856,
+        "DESCRICAO": "TEXTURA RISC STANDARD 20KG MARFIM"
+      },
+      {
+        "CODPROD": 1859,
+        "DESCRICAO": "TINTA PISO KOKAR 18L CINZA ESCURO"
+      },
+      {
+        "CODPROD": 1860,
+        "DESCRICAO": "TINTA PISO KOKAR 3,6L CINZA ESCURO"
+      },
+      {
+        "CODPROD": 1861,
+        "DESCRICAO": "TEXTURA RISC STANDARD 20KG CAMURCA"
+      },
+      {
+        "CODPROD": 1863,
+        "DESCRICAO": "TEXTURA RISC STANDARD 20KG PEROLA"
+      },
+      {
+        "CODPROD": 1865,
+        "DESCRICAO": "TEXTURA RISC STANDARD 20KG QUARTZO BR"
+      },
+      {
+        "CODPROD": 1867,
+        "DESCRICAO": "TEXTURA RISC STANDARD 20KG DUNAS DO JAL"
+      },
+      {
+        "CODPROD": 1869,
+        "DESCRICAO": "TEXTURA RISC STANDARD 20KG VERDE AMAZON"
+      },
+      {
+        "CODPROD": 1870,
+        "DESCRICAO": "TEXTURA TRAD STANDARD 20KG BRANCO NATUR"
+      },
+      {
+        "CODPROD": 1871,
+        "DESCRICAO": "TEXTURA TRAD STANDARD 20KG BRANCO GELO"
+      },
+      {
+        "CODPROD": 1873,
+        "DESCRICAO": "TEXTURA TRAD STANDARD 20KG BRANCO SERENO"
+      },
+      {
+        "CODPROD": 1874,
+        "DESCRICAO": "TEXTURA TRAD STANDARD 20KG CAPUCCINO"
+      },
+      {
+        "CODPROD": 1875,
+        "DESCRICAO": "TEXTURA TRAD STANDARD 20KG ERVA DOCE"
+      },
+      {
+        "CODPROD": 1876,
+        "DESCRICAO": "TEXTURA TRAD STANDARD 20KG PALHA"
+      },
+      {
+        "CODPROD": 1877,
+        "DESCRICAO": "TEXTURA TRAD STANDARD 20KG AREIA"
+      },
+      {
+        "CODPROD": 1878,
+        "DESCRICAO": "TEXTURA TRAD STANDARD 20KG MARFIM"
+      },
+      {
+        "CODPROD": 1880,
+        "DESCRICAO": "TEXTURA TRAD STANDARD 20KG CAMURCA"
+      },
+      {
+        "CODPROD": 1882,
+        "DESCRICAO": "TEXTURA TRAD STANDARD 20KG PEROLA"
+      },
+      {
+        "CODPROD": 1884,
+        "DESCRICAO": "TEXTURA TRAD STANDARD 20KG QUARTZO BRANC"
+      },
+      {
+        "CODPROD": 1886,
+        "DESCRICAO": "TEXTURA TRAD STANDARD 20KG DUNAS DO JALA"
+      },
+      {
+        "CODPROD": 1888,
+        "DESCRICAO": "TEXTURA TRAD STANDARD 20KG VERDE AMAZON"
+      },
+      {
+        "CODPROD": 1890,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 18L AMARELO SEGUR"
+      },
+      {
+        "CODPROD": 1891,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 3,6L AMARELO SEGU"
+      },
+      {
+        "CODPROD": 1892,
+        "DESCRICAO": "ESMALTE SINT FOSCO 18L PRETO"
+      },
+      {
+        "CODPROD": 1894,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 25KG CERAMICA"
+      },
+      {
+        "CODPROD": 1896,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L RETIRO AZUL"
+      },
+      {
+        "CODPROD": 1897,
+        "DESCRICAO": "STANDARD FS RENDE+ 3,6L RETIRO AZUL"
+      },
+      {
+        "CODPROD": 1899,
+        "DESCRICAO": "FUNDO E ACABAMENTO CINZA 200 L"
+      },
+      {
+        "CODPROD": 1900,
+        "DESCRICAO": "FIT ACR FS ECONOMICO 3,6L AREIA"
+      },
+      {
+        "CODPROD": 1922,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 20KG PALHA"
+      },
+      {
+        "CODPROD": 1923,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 20KG AREIA"
+      },
+      {
+        "CODPROD": 1924,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 20KG VERDE AMAZONAS"
+      },
+      {
+        "CODPROD": 1925,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 20KG QUARTZO BRANCO"
+      },
+      {
+        "CODPROD": 1926,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 20KG PEROLA"
+      },
+      {
+        "CODPROD": 1927,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 20KG MARFIM"
+      },
+      {
+        "CODPROD": 1928,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 20KG ERVA DOCE"
+      },
+      {
+        "CODPROD": 1929,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 20KG DUNAS DO JALAP"
+      },
+      {
+        "CODPROD": 1930,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 20KG CAPUCCINO"
+      },
+      {
+        "CODPROD": 1931,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 20KG CAMURCA"
+      },
+      {
+        "CODPROD": 1933,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 20KG BRANCO SERENO"
+      },
+      {
+        "CODPROD": 1934,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 20KG BRANCO NATURAL"
+      },
+      {
+        "CODPROD": 1935,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 20KG BRANCO GELO"
+      },
+      {
+        "CODPROD": 1936,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 20KG VERMELHO"
+      },
+      {
+        "CODPROD": 1937,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 20KG VERDE MUSGO"
+      },
+      {
+        "CODPROD": 1938,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 20KG VERDE LIMAO"
+      },
+      {
+        "CODPROD": 1939,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 20KG TERRACOTA"
+      },
+      {
+        "CODPROD": 1940,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 20KG PRETO"
+      },
+      {
+        "CODPROD": 1941,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 20KG CHOCOLATE "
+      },
+      {
+        "CODPROD": 1942,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 20KG GOIABA"
+      },
+      {
+        "CODPROD": 1943,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 20KG LARANJA"
+      },
+      {
+        "CODPROD": 1944,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 20KG LILAS "
+      },
+      {
+        "CODPROD": 1945,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 20KG OCRE COLONIAL"
+      },
+      {
+        "CODPROD": 1946,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 20KG AZUL CEU"
+      },
+      {
+        "CODPROD": 1947,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 20KG AMARELO CANARI"
+      },
+      {
+        "CODPROD": 1948,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 20KG BRANCO NEVE "
+      },
+      {
+        "CODPROD": 1949,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 20KG PEROLA"
+      },
+      {
+        "CODPROD": 1950,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 20KG VERDE AMAZONAS"
+      },
+      {
+        "CODPROD": 1951,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 20KG QUARTZO BRANCO"
+      },
+      {
+        "CODPROD": 1952,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 20KG PALHA"
+      },
+      {
+        "CODPROD": 1953,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 20KG MARFIM "
+      },
+      {
+        "CODPROD": 1954,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 20KG ERVA DOCE"
+      },
+      {
+        "CODPROD": 1955,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 20KG DUNAS DO JALAP"
+      },
+      {
+        "CODPROD": 1956,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 20KG CAPUCCINO"
+      },
+      {
+        "CODPROD": 1957,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 20KG CAMURCA"
+      },
+      {
+        "CODPROD": 1958,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 20KG BRANCO SERENO"
+      },
+      {
+        "CODPROD": 1959,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 20KG BRANCO NATURAL"
+      },
+      {
+        "CODPROD": 1960,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 20KG AREIA"
+      },
+      {
+        "CODPROD": 1961,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 20KG BRANCO GELO"
+      },
+      {
+        "CODPROD": 1962,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 20KG VERMELHO"
+      },
+      {
+        "CODPROD": 1963,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 20KG VERDE MUSGO"
+      },
+      {
+        "CODPROD": 1964,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 20KG VERDE LIMÃO"
+      },
+      {
+        "CODPROD": 1965,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 20KG TERRACOTA"
+      },
+      {
+        "CODPROD": 1966,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 20KG PRETO"
+      },
+      {
+        "CODPROD": 1967,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 20KG CHOCOLATE"
+      },
+      {
+        "CODPROD": 1968,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 20KG GOIABA "
+      },
+      {
+        "CODPROD": 1969,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 20KG LARANJA"
+      },
+      {
+        "CODPROD": 1970,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 20KG LILAS"
+      },
+      {
+        "CODPROD": 1971,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 20KG OCRE COLONIAL"
+      },
+      {
+        "CODPROD": 1972,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 20KG AMARELO CANARI"
+      },
+      {
+        "CODPROD": 1973,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 20KG BRANCO NEVE"
+      },
+      {
+        "CODPROD": 1974,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 20KG AZUL CEU"
+      },
+      {
+        "CODPROD": 1976,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L PASTA DE AMEND"
+      },
+      {
+        "CODPROD": 1979,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 3,6L VERDE MARITA"
+      },
+      {
+        "CODPROD": 1999,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 15KG VERDE MUSGO"
+      },
+      {
+        "CODPROD": 2008,
+        "DESCRICAO": "TINTA PISO KOKAR 18L CINZA VANADIO"
+      },
+      {
+        "CODPROD": 2020,
+        "DESCRICAO": "FIT SELADOR ACR KOKAR 16L CAPUCCINO"
+      },
+      {
+        "CODPROD": 2023,
+        "DESCRICAO": "FUNDO E ACABAMENTO TAMBOR AZUL DEL REY"
+      },
+      {
+        "CODPROD": 2031,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG PANTONE WARM G"
+      },
+      {
+        "CODPROD": 2036,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L VERDE MUSGO LAB01"
+      },
+      {
+        "CODPROD": 2039,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 3,6L TERRACOTA"
+      },
+      {
+        "CODPROD": 2041,
+        "DESCRICAO": "TEXTURA RISCADO PREMIUM 25KG CINZA "
+      },
+      {
+        "CODPROD": 2047,
+        "DESCRICAO": "FIT ACR FS ECONOMICO 16L VERDE PRIMAVERA"
+      },
+      {
+        "CODPROD": 2049,
+        "DESCRICAO": "FUNDO SERRALHEIRO 18L VERMELHO OXIDO"
+      },
+      {
+        "CODPROD": 2050,
+        "DESCRICAO": "FUNDO SERRALHEIRO 3,6LVERMELHO OXIDO"
+      },
+      {
+        "CODPROD": 2052,
+        "DESCRICAO": "TEXTURA TRAD STANDARD 20KG AREIA LAB 008"
+      },
+      {
+        "CODPROD": 2055,
+        "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG PO DE ZINCO"
+      },
+      {
+        "CODPROD": 2057,
+        "DESCRICAO": "STANDARD FS RENDE+ 18L AZUL ARARA 010"
+      },
+      {
+        "CODPROD": 2060,
+        "DESCRICAO": "FUNDO E ACABAMENTO 18LT CINZA FERROTEC"
+      },
+      {
+        "CODPROD": 2062,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 0,9L AMARELO SEGU"
+      },
+      {
+        "CODPROD": 2064,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 3,6L VERMELHO SEG"
+      },
+      {
+        "CODPROD": 2065,
+        "DESCRICAO": "ESMALTE SINT BRILHANTE 0,9L VERMELHO SEG"
+      },
+      {
+        "CODPROD": 2070,
+        "DESCRICAO": "FUNDO E ACABAMENTO TAMBOR AZUL FRANCA"
+      },
+      {
+        "CODPROD": 2074,
+        "DESCRICAO": "TINTA PISO KOKAR ALTA PER 3,6L CINZA MED"
+      },
+      {
+        "CODPROD": 2075,
+        "DESCRICAO": "TINTA PISO KOKAR ALTA PER 18L CINZA MED"
+      },
+      {
+        "CODPROD": 2077,
+        "DESCRICAO": "TINTA PISO KOKAR ALTA PER 3,6L AZUL FRAN"
+      },
+      {
+        "CODPROD": 2078,
+        "DESCRICAO": "TINTA PISO KOKAR ALTA PER 18L AZUL FRAN"
+      },
+      {
+        "CODPROD": 2080,
+        "DESCRICAO": "TINTA PISO KOKAR ALTA PER 3,6L AMARELO D"
+      },
+      {
+        "CODPROD": 2081,
+        "DESCRICAO": "TINTA PISO KOKAR ALTA PER 18L AMARELO D"
+      },
+      {
+        "CODPROD": 2082,
+        "DESCRICAO": "TEXTURA RISC PREMIUM 20KG CAFE COM LEITE"
+      },
+      {
+        "CODPROD": 2112,
+        "DESCRICAO": "STANDARD FS 18L BRANCO GELO - NOVO"
+      },
+      {
+        "CODPROD": 2113,
+        "DESCRICAO": "STANDARD FS 3,6L BRANCO GELO - NOVO"
+      },
+      {
+        "CODPROD": 2114,
+        "DESCRICAO": "STANDARD FS 18L CONCRETO - NOVO"
+      },
+      {
+        "CODPROD": 2115,
+        "DESCRICAO": "STANDARD FS 3,6L CONCRETO - NOVO"
+      },
+      {
+        "CODPROD": 2116,
+        "DESCRICAO": "STANDARD FS 18L AREIA - NOVO"
+      },
+      {
+        "CODPROD": 2117,
+        "DESCRICAO": "STANDARD FS 3,6L AREIA - NOVO"
+      },
+      {
+        "CODPROD": 2118,
+        "DESCRICAO": "STANDARD FS 18L AZUL ARARA 010 - NOVO"
+      },
+      {
+        "CODPROD": 2119,
+        "DESCRICAO": "STANDARD FS 18L BRANCO NEVE - NOVO"
+      },
+      {
+        "CODPROD": 2120,
+        "DESCRICAO": "STANDARD FS 3,6L BRANCO NEVE - NOVO"
+      },
+      {
+        "CODPROD": 2121,
+        "DESCRICAO": "STANDARD FS 18L VERDE LIMAO - NOVO"
+      },
+      {
+        "CODPROD": 2122,
+        "DESCRICAO": "STANDARD FS 3,6L VERDE LIMAO - NOVO"
+      },
+      {
+        "CODPROD": 2123,
+        "DESCRICAO": "STANDARD FS 18L AMARELO CANARIO - NOVO"
+      },
+      {
+        "CODPROD": 2124,
+        "DESCRICAO": "STANDARD FS 3,6L AMARELO CANARIO - NOVO"
+      },
+      {
+        "CODPROD": 2125,
+        "DESCRICAO": "STANDARD FS 18L AMARELO SOL - NOVO"
+      },
+      {
+        "CODPROD": 2126,
+        "DESCRICAO": "STANDARD FS 3,6L AMARELO SOL - NOVO"
+      },
+      {
+        "CODPROD": 2127,
+        "DESCRICAO": "STANDARD FS 18L AZUL CEU - NOVO"
+      },
+      {
+        "CODPROD": 2128,
+        "DESCRICAO": "STANDARD FS 3,6L AZUL CEU - NOVO"
+      },
+      {
+        "CODPROD": 2129,
+        "DESCRICAO": "STANDARD FS 18L AZUL OCEANO - NOVO"
+      },
+      {
+        "CODPROD": 2130,
+        "DESCRICAO": "STANDARD FS 3,6L AZUL OCEANO - NOVO"
+      },
+      {
+        "CODPROD": 2131,
+        "DESCRICAO": "STANDARD FS 18L AZUL SANHACO - NOVO"
+      },
+      {
+        "CODPROD": 2132,
+        "DESCRICAO": "STANDARD FS 3,6L AZUL SANHACO - NOVO"
+      },
+      {
+        "CODPROD": 2133,
+        "DESCRICAO": "STANDARD FS 3,6L CAFE COM LEITE - NOVO"
+      },
+      {
+        "CODPROD": 2134,
+        "DESCRICAO": "STANDARD FS 18L CAFE COM LEITE - NOVO"
+      },
+      {
+        "CODPROD": 2135,
+        "DESCRICAO": "STANDARD FS 3,6L CAMURCA - NOVO"
+      },
+      {
+        "CODPROD": 2136,
+        "DESCRICAO": "STANDARD FS 18L CAMURCA - NOVO"
+      },
+      {
+        "CODPROD": 2137,
+        "DESCRICAO": "STANDARD FS 3,6L CINZA AVELUDADO - NOVO"
+      },
+      {
+        "CODPROD": 2138,
+        "DESCRICAO": "STANDARD FS 18L CINZA AVELUDADO - NOVO"
+      },
+      {
+        "CODPROD": 2139,
+        "DESCRICAO": "STANDARD FS 3,6L ERVA DOCE - NOVO"
+      },
+      {
+        "CODPROD": 2140,
+        "DESCRICAO": "STANDARD FS 18L ERVA DOCE - NOVO"
+      },
+      {
+        "CODPROD": 2141,
+        "DESCRICAO": "STANDARD FS 3,6L LARANJA - NOVO"
+      },
+      {
+        "CODPROD": 2142,
+        "DESCRICAO": "STANDARD FS 18L LARANJA - NOVO"
+      },
+      {
+        "CODPROD": 2143,
+        "DESCRICAO": "STANDARD FS 3,6L MARFIM - NOVO"
+      },
+      {
+        "CODPROD": 2144,
+        "DESCRICAO": "STANDARD FS 18L MARFIM  - NOVO"
+      },
+      {
+        "CODPROD": 2145,
+        "DESCRICAO": "STANDARD FS 18L ORQUIDEA LILAS - NOVO"
+      },
+      {
+        "CODPROD": 2146,
+        "DESCRICAO": "STANDARD FS 3,6L ORQUIDEA LILAS - NOVO"
+      },
+      {
+        "CODPROD": 2147,
+        "DESCRICAO": "STANDARD FS 18L PALHA - NOVO"
+      },
+      {
+        "CODPROD": 2148,
+        "DESCRICAO": "STANDARD FS 3,6L PALHA - NOVO"
+      },
+      {
+        "CODPROD": 2149,
+        "DESCRICAO": "STANDARD FS 18L PEROLA - NOVO"
+      },
+      {
+        "CODPROD": 2150,
+        "DESCRICAO": "STANDARD FS 3,6L PEROLA - NOVO"
+      },
+      {
+        "CODPROD": 2151,
+        "DESCRICAO": "STANDARD FS 18L PESSEGO - NOVO"
+      },
+      {
+        "CODPROD": 2152,
+        "DESCRICAO": "STANDARD FS 3,6L PESSEGO - NOVO"
+      },
+      {
+        "CODPROD": 2153,
+        "DESCRICAO": "STANDARD FS 18L ROSA CAPRICHO - NOVO"
+      },
+      {
+        "CODPROD": 2154,
+        "DESCRICAO": "STANDARD FS 3,6L ROSA CAPRICHO - NOVO"
+      },
+      {
+        "CODPROD": 2155,
+        "DESCRICAO": "STANDARD FS 18L ROSA CHA - NOVO"
+      },
+      {
+        "CODPROD": 2156,
+        "DESCRICAO": "STANDARD FS 3,6L ROSA CHA - NOVO"
+      },
+      {
+        "CODPROD": 2157,
+        "DESCRICAO": "STANDARD FS 18L VERDE ESPERANCA - NOVO"
+      },
+      {
+        "CODPROD": 2158,
+        "DESCRICAO": "STANDARD FS 3,6L VERDE ESPERANCA - NOVO"
+      },
+      {
+        "CODPROD": 2159,
+        "DESCRICAO": "STANDARD FS 18L VERDE KIWI - NOVO"
+      },
+      {
+        "CODPROD": 2160,
+        "DESCRICAO": "STANDARD FS 3,6L VERDE KIWI - NOVO"
+      },
+      {
+        "CODPROD": 2166,
+        "DESCRICAO": "STANDARD FS 18L AMARELO REAL - NOVO"
+      },
+      {
+        "CODPROD": 2167,
+        "DESCRICAO": "STANDARD FS 3,6L AMARELO REAL - NOVO"
+      },
+      {
+        "CODPROD": 2168,
+        "DESCRICAO": "STANDARD FS 18L LILAS - NOVO"
+      },
+      {
+        "CODPROD": 2169,
+        "DESCRICAO": "STANDARD FS 3,6L LILAS - NOVO"
+      },
+      {
+        "CODPROD": 2170,
+        "DESCRICAO": "STANDARD FS 18L VERDE MUSGO - NOVO"
+      },
+      {
+        "CODPROD": 2171,
+        "DESCRICAO": "STANDARD FS 3,6L VERDE MUSGO - NOVO"
+      },
+      {
+        "CODPROD": 2172,
+        "DESCRICAO": "STANDARD FS 18L VERMELHO ARARA - NOVO"
+      },
+      {
+        "CODPROD": 2173,
+        "DESCRICAO": "STANDARD FS 3,6L VERMELHO ARARA - NOVO"
+      },
+      {
+        "CODPROD": 2174,
+        "DESCRICAO": "STANDARD FS 18L CHOCOLATE - NOVO"
+      },
+      {
+        "CODPROD": 2175,
+        "DESCRICAO": "STANDARD FS 3,6L CHOCOLATE - NOVO"
+      },
+      {
+        "CODPROD": 2176,
+        "DESCRICAO": "STANDARD FS 18LVERMELHO PAIXAO - NOVO"
+      },
+      {
+        "CODPROD": 2177,
+        "DESCRICAO": "STANDARD FS 3,6L VERMELHO PAIXAO - NOVO"
+      }
+    ]

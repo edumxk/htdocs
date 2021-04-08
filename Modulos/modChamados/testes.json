@@ -1,0 +1,21 @@
+{
+	"cargas": [{
+			"cod": 1,
+            "carga": "Alpha"
+		},
+		{
+			"cod": 2,
+			"carga": "Beta"
+		},
+		{
+			"cod": 4,
+			"carga": "Gama"
+		}
+	],
+	"pedidos": [{
+			"cod": "10001",
+			"peso": 100,
+			"carga": "Alpha"
+		}
+	]
+}

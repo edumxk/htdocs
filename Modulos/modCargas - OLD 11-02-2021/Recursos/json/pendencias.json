@@ -1,0 +1,402 @@
+[
+    {
+      "NOME": "RENACOR",
+      "CODCLI": 6,
+      "CLIENTE": "RENACOR COMERCIO DE TINTAS LTDA - FL 2",
+      "NUMPED": 3003450,
+      "CODPROD": 1,
+      "DESCRICAO": "MASSA CORRIDA PVA KOKAR 15 KG",
+      "QT": 300,
+      "QTDISP": 99
+    },
+    {
+      "NOME": "RENACOR",
+      "CODCLI": 12,
+      "CLIENTE": "RENACOR COMERCIO DE TINTAS LTDA - FL 5",
+      "NUMPED": 3003444,
+      "CODPROD": 787,
+      "DESCRICAO": "TEXTURA TRAD PREMIUM 25KG CAPUCCINO",
+      "QT": 21,
+      "QTDISP": 1
+    },
+    {
+      "NOME": "MAURO",
+      "CODCLI": 1368,
+      "CLIENTE": "COMERCIAL FERRONORTE LTDA",
+      "NUMPED": 330000013,
+      "CODPROD": 1703,
+      "DESCRICAO": "FUNDO SERRALHEIRO 18L CINZA",
+      "QT": 70,
+      "QTDISP": 5
+    },
+    {
+      "NOME": "MAURO",
+      "CODCLI": 1368,
+      "CLIENTE": "COMERCIAL FERRONORTE LTDA",
+      "NUMPED": 330000013,
+      "CODPROD": 2336,
+      "DESCRICAO": "FUNDO GALVANIZADO 0,9L CINZA ESCURO",
+      "QT": 48,
+      "QTDISP": 0
+    },
+    {
+      "NOME": "MAURO",
+      "CODCLI": 1368,
+      "CLIENTE": "COMERCIAL FERRONORTE LTDA",
+      "NUMPED": 330000013,
+      "CODPROD": 2337,
+      "DESCRICAO": "FUNDO GALVANIZADO 3,6L CINZA ESCURO",
+      "QT": 40,
+      "QTDISP": 0
+    },
+    {
+      "NOME": "PALMAS 2",
+      "CODCLI": 99,
+      "CLIENTE": "RODES ENGENHARIA E TRANSPORTES EIRELI",
+      "NUMPED": 292005909,
+      "CODPROD": 1,
+      "DESCRICAO": "MASSA CORRIDA PVA KOKAR 15 KG",
+      "QT": 304,
+      "QTDISP": 99
+    },
+    {
+      "NOME": "PALMAS 2",
+      "CODCLI": 1030,
+      "CLIENTE": "MRV PRIME PROJETO PALMAS A INCORPORACOES SPE LTDA",
+      "NUMPED": 292005543,
+      "CODPROD": 1,
+      "DESCRICAO": "MASSA CORRIDA PVA KOKAR 15 KG",
+      "QT": 160,
+      "QTDISP": 99
+    },
+    {
+      "NOME": "JOILDO 1",
+      "CODCLI": 402,
+      "CLIENTE": "N. R. C. DE OLIVEIRA EPP - ME",
+      "NUMPED": 292005553,
+      "CODPROD": 1003,
+      "DESCRICAO": "FIT MASSA CORRIDA PVA 5,5 KG",
+      "QT": 12,
+      "QTDISP": 0
+    },
+    {
+      "NOME": "JOILDO 1",
+      "CODCLI": 156,
+      "CLIENTE": "MARCELO DE MIRANDA - ME",
+      "NUMPED": 292005845,
+      "CODPROD": 365,
+      "DESCRICAO": "TEXTURA RISC PREMIUM 25KG TERRACOTA",
+      "QT": 40,
+      "QTDISP": 0
+    },
+    {
+      "NOME": "RADAMES 1",
+      "CODCLI": 1366,
+      "CLIENTE": "COMERCIAL FERRONORTE LTDA",
+      "NUMPED": 330000012,
+      "CODPROD": 1626,
+      "DESCRICAO": "FUNDO GALVANIZADO 3,6L BRANCO",
+      "QT": 56,
+      "QTDISP": 35
+    },
+    {
+      "NOME": "RADAMES 1",
+      "CODCLI": 1366,
+      "CLIENTE": "COMERCIAL FERRONORTE LTDA",
+      "NUMPED": 330000012,
+      "CODPROD": 1703,
+      "DESCRICAO": "FUNDO SERRALHEIRO 18L CINZA",
+      "QT": 50,
+      "QTDISP": 5
+    },
+    {
+      "NOME": "RADAMES 1",
+      "CODCLI": 1366,
+      "CLIENTE": "COMERCIAL FERRONORTE LTDA",
+      "NUMPED": 330000012,
+      "CODPROD": 2320,
+      "DESCRICAO": "FUNDO SERRALHEIRO 18L PRETO",
+      "QT": 50,
+      "QTDISP": 21
+    },
+    {
+      "NOME": "RADAMES 1",
+      "CODCLI": 1367,
+      "CLIENTE": "COMERCIAL FERRONORTE LTDA",
+      "NUMPED": 330000015,
+      "CODPROD": 1703,
+      "DESCRICAO": "FUNDO SERRALHEIRO 18L CINZA",
+      "QT": 80,
+      "QTDISP": 5
+    },
+    {
+      "NOME": "RADAMES 1",
+      "CODCLI": 1367,
+      "CLIENTE": "COMERCIAL FERRONORTE LTDA",
+      "NUMPED": 330000015,
+      "CODPROD": 2336,
+      "DESCRICAO": "FUNDO GALVANIZADO 0,9L CINZA ESCURO",
+      "QT": 24,
+      "QTDISP": 0
+    },
+    {
+      "NOME": "RADAMES 1",
+      "CODCLI": 1367,
+      "CLIENTE": "COMERCIAL FERRONORTE LTDA",
+      "NUMPED": 330000015,
+      "CODPROD": 2337,
+      "DESCRICAO": "FUNDO GALVANIZADO 3,6L CINZA ESCURO",
+      "QT": 40,
+      "QTDISP": 0
+    },
+    {
+      "NOME": "RADAMES 1",
+      "CODCLI": 1376,
+      "CLIENTE": "TELANORTE INDUSTRIAL LTDA",
+      "NUMPED": 33000024,
+      "CODPROD": 2445,
+      "DESCRICAO": "PRIMMER ACABAMENTO CINZA ALEUTA 200L",
+      "QT": 5,
+      "QTDISP": 0
+    },
+    {
+      "NOME": "RADAMES 1",
+      "CODCLI": 1376,
+      "CLIENTE": "TELANORTE INDUSTRIAL LTDA",
+      "NUMPED": 33000024,
+      "CODPROD": 2446,
+      "DESCRICAO": "DILUENTE PRIMMER 200 L",
+      "QT": 5,
+      "QTDISP": 0
+    },
+    {
+      "NOME": "RADAMES 1",
+      "CODCLI": 1364,
+      "CLIENTE": "FERROLESTE LTDA",
+      "NUMPED": 330000016,
+      "CODPROD": 1703,
+      "DESCRICAO": "FUNDO SERRALHEIRO 18L CINZA",
+      "QT": 24,
+      "QTDISP": 5
+    },
+    {
+      "NOME": "RADAMES 1",
+      "CODCLI": 1364,
+      "CLIENTE": "FERROLESTE LTDA",
+      "NUMPED": 330000016,
+      "CODPROD": 2337,
+      "DESCRICAO": "FUNDO GALVANIZADO 3,6L CINZA ESCURO",
+      "QT": 24,
+      "QTDISP": 0
+    },
+    {
+      "NOME": "RADAMES 1",
+      "CODCLI": 1358,
+      "CLIENTE": "COMERCIAL FERRONORTE LTDA",
+      "NUMPED": 330000020,
+      "CODPROD": 1703,
+      "DESCRICAO": "FUNDO SERRALHEIRO 18L CINZA",
+      "QT": 24,
+      "QTDISP": 5
+    },
+    {
+      "NOME": "RADAMES 1",
+      "CODCLI": 1362,
+      "CLIENTE": "COMERCIAL FERRONORTE LTDA",
+      "NUMPED": 330000014,
+      "CODPROD": 1703,
+      "DESCRICAO": "FUNDO SERRALHEIRO 18L CINZA",
+      "QT": 50,
+      "QTDISP": 5
+    },
+    {
+      "NOME": "RADAMES 1",
+      "CODCLI": 1362,
+      "CLIENTE": "COMERCIAL FERRONORTE LTDA",
+      "NUMPED": 330000014,
+      "CODPROD": 2336,
+      "DESCRICAO": "FUNDO GALVANIZADO 0,9L CINZA ESCURO",
+      "QT": 48,
+      "QTDISP": 0
+    },
+    {
+      "NOME": "RADAMES 1",
+      "CODCLI": 1362,
+      "CLIENTE": "COMERCIAL FERRONORTE LTDA",
+      "NUMPED": 330000014,
+      "CODPROD": 2337,
+      "DESCRICAO": "FUNDO GALVANIZADO 3,6L CINZA ESCURO",
+      "QT": 60,
+      "QTDISP": 0
+    },
+    {
+      "NOME": "RADAMES 1",
+      "CODCLI": 1109,
+      "CLIENTE": "J E C FEITOSA SOBRINHO & CIA LTDA",
+      "NUMPED": 330000021,
+      "CODPROD": 1003,
+      "DESCRICAO": "FIT MASSA CORRIDA PVA 5,5 KG",
+      "QT": 8,
+      "QTDISP": 0
+    },
+    {
+      "NOME": "RADAMES 1",
+      "CODCLI": 1380,
+      "CLIENTE": "FERROLESTE LTDA",
+      "NUMPED": 330000017,
+      "CODPROD": 1703,
+      "DESCRICAO": "FUNDO SERRALHEIRO 18L CINZA",
+      "QT": 24,
+      "QTDISP": 5
+    },
+    {
+      "NOME": "RADAMES 1",
+      "CODCLI": 1380,
+      "CLIENTE": "FERROLESTE LTDA",
+      "NUMPED": 330000017,
+      "CODPROD": 2337,
+      "DESCRICAO": "FUNDO GALVANIZADO 3,6L CINZA ESCURO",
+      "QT": 24,
+      "QTDISP": 0
+    },
+    {
+      "NOME": "3 DOMINGOS",
+      "CODCLI": 1411,
+      "CLIENTE": "KASA COM VAREJO DE MATERIAIS DE CONSTRUCAO EIRELI",
+      "NUMPED": 150005056,
+      "CODPROD": 1003,
+      "DESCRICAO": "FIT MASSA CORRIDA PVA 5,5 KG",
+      "QT": 8,
+      "QTDISP": 0
+    },
+    {
+      "NOME": "3 DOMINGOS",
+      "CODCLI": 1411,
+      "CLIENTE": "KASA COM VAREJO DE MATERIAIS DE CONSTRUCAO EIRELI",
+      "NUMPED": 150005056,
+      "CODPROD": 1621,
+      "DESCRICAO": "ESMALTE SINT FOSCO 3,6L PRETO",
+      "QT": 4,
+      "QTDISP": 3
+    },
+    {
+      "NOME": "3 DOMINGOS",
+      "CODCLI": 267,
+      "CLIENTE": "ALVORADA COMERCIO DE MATERIAIS DE CONSTRUCAO LTDA - EPP",
+      "NUMPED": 150005060,
+      "CODPROD": 1003,
+      "DESCRICAO": "FIT MASSA CORRIDA PVA 5,5 KG",
+      "QT": 8,
+      "QTDISP": 0
+    },
+    {
+      "NOME": "3 DOMINGOS",
+      "CODCLI": 1388,
+      "CLIENTE": "M.F COM. VAREJO TINTAS EIRELI",
+      "NUMPED": 150005051,
+      "CODPROD": 1237,
+      "DESCRICAO": "KOKAR ACR SB PREMIUM 3,6L AZUL ARARA",
+      "QT": 4,
+      "QTDISP": 0
+    },
+    {
+      "NOME": "3 DOMINGOS",
+      "CODCLI": 353,
+      "CLIENTE": "MARCOS VINICIUS FERREIRA TRINDADE",
+      "NUMPED": 150005044,
+      "CODPROD": 1,
+      "DESCRICAO": "MASSA CORRIDA PVA KOKAR 15 KG",
+      "QT": 200,
+      "QTDISP": 99
+    },
+    {
+      "NOME": "3 DOMINGOS",
+      "CODCLI": 353,
+      "CLIENTE": "MARCOS VINICIUS FERREIRA TRINDADE",
+      "NUMPED": 150005044,
+      "CODPROD": 1003,
+      "DESCRICAO": "FIT MASSA CORRIDA PVA 5,5 KG",
+      "QT": 4,
+      "QTDISP": 0
+    },
+    {
+      "NOME": "4 - FRANKLIN",
+      "CODCLI": 1215,
+      "CLIENTE": "FAUZIA OLIVEIRA SILVA",
+      "NUMPED": 302000842,
+      "CODPROD": 1003,
+      "DESCRICAO": "FIT MASSA CORRIDA PVA 5,5 KG",
+      "QT": 12,
+      "QTDISP": 0
+    },
+    {
+      "NOME": "4 - FRANKLIN",
+      "CODCLI": 985,
+      "CLIENTE": "O. R. COMERCIO DE TINTAS EIRELI",
+      "NUMPED": 302000841,
+      "CODPROD": 999,
+      "DESCRICAO": "FIT MASSA CORRIDA PVA 25 KG",
+      "QT": 150,
+      "QTDISP": 61
+    },
+    {
+      "NOME": "4 - FRANKLIN",
+      "CODCLI": 985,
+      "CLIENTE": "O. R. COMERCIO DE TINTAS EIRELI",
+      "NUMPED": 302000841,
+      "CODPROD": 1003,
+      "DESCRICAO": "FIT MASSA CORRIDA PVA 5,5 KG",
+      "QT": 20,
+      "QTDISP": 0
+    },
+    {
+      "NOME": "4 - FRANKLIN",
+      "CODCLI": 1408,
+      "CLIENTE": "A P T MARTINS COMERCIO",
+      "NUMPED": 302000839,
+      "CODPROD": 1003,
+      "DESCRICAO": "FIT MASSA CORRIDA PVA 5,5 KG",
+      "QT": 4,
+      "QTDISP": 0
+    },
+    {
+      "NOME": "DOMINGOS 2",
+      "CODCLI": 275,
+      "CLIENTE": "COMERCIO DE BEBIDAS E MATERIAIS DE CONSTRUCAO CLB LTDA - ME",
+      "NUMPED": 150005017,
+      "CODPROD": 1003,
+      "DESCRICAO": "FIT MASSA CORRIDA PVA 5,5 KG",
+      "QT": 4,
+      "QTDISP": 0
+    },
+    {
+      "NOME": "DOMINGOS 2",
+      "CODCLI": 508,
+      "CLIENTE": "EVA DA SILVA LIMA - ME",
+      "NUMPED": 150005048,
+      "CODPROD": 1172,
+      "DESCRICAO": "KOKAR ACR AC PREMIUM 18L AREIA",
+      "QT": 4,
+      "QTDISP": 1
+    },
+    {
+      "NOME": "DOMINGOS 2",
+      "CODCLI": 193,
+      "CLIENTE": "M M RIBEIRO E CIA LTDA - ME",
+      "NUMPED": 150005053,
+      "CODPROD": 1003,
+      "DESCRICAO": "FIT MASSA CORRIDA PVA 5,5 KG",
+      "QT": 12,
+      "QTDISP": 0
+    },
+    {
+      "NOME": "DOMINGOS 2",
+      "CODCLI": 275,
+      "CLIENTE": "COMERCIO DE BEBIDAS E MATERIAIS DE CONSTRUCAO CLB LTDA - ME",
+      "NUMPED": 150005055,
+      "CODPROD": 1003,
+      "DESCRICAO": "FIT MASSA CORRIDA PVA 5,5 KG",
+      "QT": 4,
+      "QTDISP": 0
+    }
+   ]

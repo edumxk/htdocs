@@ -1,0 +1,58 @@
+[
+    {
+      "NUMCARGA": 1,
+      "NOME": "RETIRA",
+      "DTABERTURA": "11/07/2019",
+      "VEICULO": "VARIADO",
+      "DTPREVISAO": "01/01/2001"
+    },
+    {
+      "NUMCARGA": 4,
+      "NOME": "RENACOR",
+      "DTABERTURA": "11/07/2019",
+      "VEICULO": "RETIRA",
+      "DTPREVISAO": "15/07/2019"
+    },
+    {
+      "NUMCARGA": 8,
+      "NOME": "JOILDO 1",
+      "DTABERTURA": "11/07/2019",
+      "VEICULO": "BITRUCK",
+      "DTPREVISAO": "15/07/2019"
+    },
+    {
+      "NUMCARGA": 9,
+      "NOME": "PALMAS",
+      "DTABERTURA": "11/07/2019",
+      "VEICULO": "BITRUCK",
+      "DTPREVISAO": "15/07/2019"
+    },
+    {
+      "NUMCARGA": 12,
+      "NOME": "RENACOR GURUPI",
+      "DTABERTURA": "11/07/2019",
+      "VEICULO": "VARIADO",
+      "DTPREVISAO": "15/07/2019"
+    },
+    {
+      "NUMCARGA": 5,
+      "NOME": "DOMINGOS 1",
+      "DTABERTURA": "11/07/2019",
+      "VEICULO": "BITRUCK 19KG",
+      "DTPREVISAO": "16/07/2019"
+    },
+    {
+      "NUMCARGA": 10,
+      "NOME": "FRANKLIN",
+      "DTABERTURA": "11/07/2019",
+      "VEICULO": "BITRUCK 19TON",
+      "DTPREVISAO": "17/07/2019"
+    },
+    {
+      "NUMCARGA": 7,
+      "NOME": "MAURO",
+      "DTABERTURA": "11/07/2019",
+      "VEICULO": "BITRUCK",
+      "DTPREVISAO": "19/07/2019"
+    }
+   ]

@@ -1,0 +1,56 @@
+html,body {height:100%; width: 100%; font-size: small;}
+.header {
+    width: 95%;
+    height: 70px;
+    background-color: teal;
+    margin: 0 auto;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 100;
+}
+
+#secao {
+    text-align: center; 
+    border-style: solid; 
+    border-color: lightseagreen;
+    border-width: 1px;
+    border-radius: 15px;
+    background-color: teal;
+    height: min-content;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+
+}
+
+.footer {
+    width: 95%;
+    height: 70px;
+    background-color: teal;
+    margin: 0 auto;
+    text-align: left;
+    position: fixed;
+    bottom: 0;
+    margin: -16px -8px;
+}
+td{
+    text-align: left;
+    font-size: 12px;
+    padding-top: 1px;
+    
+}
+
+tr{
+    height: 5px;
+    padding: 70px;
+}
+
+
+
+
+
+/*div{border: solid}*/
+
+
+
+
+

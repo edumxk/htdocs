@@ -1,0 +1,12 @@
+
+table, th, td {
+    border: 1px solid darkslategray;
+    
+  }
+tbody{
+  font-size: 10px;
+}
+
+tfoot{
+  font-weight: 700;
+}

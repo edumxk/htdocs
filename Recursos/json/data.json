@@ -1,0 +1,537 @@
+{
+    "ratc": [
+        {
+            "numrat": "514",
+            "codcli": 12,
+            "dtabertura": "12/11/2018",
+            "dtencerramento": "",
+            "pendencia": "LAB-TEC",
+            "status": "PENDENTE",
+            "cliente":"RENACOR COMERCIO DE TINTAS LTDA",
+            "fantasia":"RENACOR LOJA 5",
+            "cnpj": "02.156.589/0001-57",
+            "cidade": "PALMAS",
+            "uf": "TO",
+            "telefone":"3225-9200",
+            "rca":"WANDERLEI",
+            "solicitante":"",
+            "solicitante_tel":"",
+            "pintor":"",
+            "pintor_tel":"",
+            "problema":""
+        },
+        {
+            "numrat": "515",
+            "codcli": "650",
+            "cliente": "CENTER TINTAS FERRAGISTA LTDA - ME",
+            "dtabertura": "13/11/2018",
+            "dtencerramento": "",
+            "pendencia": "LABORATÓRIO",
+            "status": "PENDENTE"
+        },
+        {
+            "numrat": "518",
+            "codcli": "770",
+            "cliente": "PAR TINTAS COM. VAREJISTA DE MATERIAIS PARA PINTURA EIRELI -",
+            "dtabertura": "13/11/2018",
+            "dtencerramento": "20/11/2018",
+            "pendencia": "CONCLUÍDO",
+            "status": "APROVADO"
+        },
+        {
+            "numrat": "517",
+            "codcli": "1087",
+            "cliente": "BGB - AGRICULTURA E SERVICOS DE ARMAZENAGEM DE PRODUTOS AGRI",
+            "dtabertura": "20/11/2018",
+            "dtencerramento": "",
+            "pendencia": "DIRETORIA",
+            "status": "PENDENTE"
+        },
+        {
+            "numrat": "518",
+            "codcli": "380",
+            "cliente": "CESAR TINTAS LTDA",
+            "dtabertura": "22/11/2018",
+            "dtencerramento": "20/11/2018",
+            "pendencia": "ENCERRADO",
+            "status": "REPROVADO"
+        },
+        {
+            "numrat": "515",
+            "codcli": "650",
+            "cliente": "CENTER TINTAS FERRAGISTA LTDA - ME",
+            "dtabertura": "13/11/2018",
+            "dtencerramento": "",
+            "pendencia": "LABORATÓRIO",
+            "status": "PENDENTE"
+        },
+        {
+            "numrat": "518",
+            "codcli": "770",
+            "cliente": "PAR TINTAS COM. VAREJISTA DE MATERIAIS PARA PINTURA EIRELI -",
+            "dtabertura": "13/11/2018",
+            "dtencerramento": "20/11/2018",
+            "pendencia": "CONCLUÍDO",
+            "status": "APROVADO"
+        },
+        {
+            "numrat": "517",
+            "codcli": "1087",
+            "cliente": "BGB - AGRICULTURA E SERVICOS DE ARMAZENAGEM DE PRODUTOS AGRI",
+            "dtabertura": "20/11/2018",
+            "dtencerramento": "",
+            "pendencia": "DIRETORIA",
+            "status": "PENDENTE"
+        },
+        {
+            "numrat": "518",
+            "codcli": "380",
+            "cliente": "CESAR TINTAS LTDA",
+            "dtabertura": "22/11/2018",
+            "dtencerramento": "20/11/2018",
+            "pendencia": "ENCERRADO",
+            "status": "REPROVADO"
+        },
+        {
+            "numrat": "515",
+            "codcli": "650",
+            "cliente": "CENTER TINTAS FERRAGISTA LTDA - ME",
+            "dtabertura": "13/11/2018",
+            "dtencerramento": "",
+            "pendencia": "LABORATÓRIO",
+            "status": "PENDENTE"
+        },
+        {
+            "numrat": "518",
+            "codcli": "770",
+            "cliente": "PAR TINTAS COM. VAREJISTA DE MATERIAIS PARA PINTURA EIRELI -",
+            "dtabertura": "13/11/2018",
+            "dtencerramento": "20/11/2018",
+            "pendencia": "CONCLUÍDO",
+            "status": "APROVADO"
+        },
+        {
+            "numrat": "517",
+            "codcli": "1087",
+            "cliente": "BGB - AGRICULTURA E SERVICOS DE ARMAZENAGEM DE PRODUTOS AGRI",
+            "dtabertura": "20/11/2018",
+            "dtencerramento": "",
+            "pendencia": "DIRETORIA",
+            "status": "PENDENTE"
+        },
+        {
+            "numrat": "518",
+            "codcli": "380",
+            "cliente": "CESAR TINTAS LTDA",
+            "dtabertura": "22/11/2018",
+            "dtencerramento": "20/11/2018",
+            "pendencia": "ENCERRADO",
+            "status": "REPROVADO"
+        }
+    ],
+    "cliente": [
+        {
+            "codcli":"12",
+            "cliente":"RENACOR COMERCIO DE TINTAS LTDA",
+            "fantasia":"RENACOR LOJA 5",
+            "cnpj": "02.156.589/0001-57",
+            "cidade": "PALMAS",
+            "uf": "TO",
+            "telefone":"3225-9200",
+            "rca":"WANDERLEI"
+
+        },
+        {
+            "codcli": 17,
+            "cliente": "WANA INDUSTRIA E COMERCIO DE PROD QUIMICOS LTDA",
+            "fantasia": "WANA QUIMICA",
+            "cnpj": "07.009.769/0002-09",
+            "cidade": "JACAREI",
+            "uf": "SP",
+            "telefone": "12 2127-0027",
+            "rca": "KOKAR"
+          },
+          {
+            "codcli": 18,
+            "cliente": "R.G.A. INDUSTRIA E COMERCIO DE MAQUINAS LTDA",
+            "fantasia": "RGA MAQUINAS",
+            "cnpj": "03.268.344/0001-74",
+            "cidade": "APUCARANA",
+            "uf": "PR",
+            "telefone": "43 3423-6469",
+            "rca": "KOKAR"
+          },
+          {
+            "codcli": 22,
+            "cliente": "CONSTRUTORA D.I. LTDA",
+            "fantasia": "D.I. CONSTRUTORA",
+            "cnpj": "07.197.626/0002-60",
+            "cidade": "PALMAS",
+            "uf": "TO",
+            "telefone": "63 3225 1107",
+            "rca": "KOKAR"
+          },
+          {
+            "codcli": 25,
+            "cliente": "FILLERCAL MINERA��O E COMERCIO LTDA",
+            "fantasia": "FILLERCAL",
+            "cnpj": "00.420.347/0002-74",
+            "cidade": "INDIARA",
+            "uf": "GO",
+            "telefone": 62,
+            "rca": "KOKAR"
+          },
+          {
+            "codcli": 16,
+            "cliente": "SILCAM CONTRUCAO E MANUTENCAO INDUSTRIAL LTDA",
+            "fantasia": "SILCAM",
+            "cnpj": "17.775.328/0001-82",
+            "cidade": "SAO LUIS",
+            "uf": "MA",
+            "telefone": "98 3245-1091",
+            "rca": "KOKAR"
+          },
+          {
+            "codcli": 6,
+            "cliente": "RENACOR COMERCIO DE TINTAS LTDA - FL 2",
+            "fantasia": "RENACOR - LOJA 2",
+            "cnpj": "00.749.616/0004-02",
+            "cidade": "PALMAS",
+            "uf": "TO",
+            "telefone": "63  3225-5050",
+            "rca": "WANDERLEI"
+          },
+          {
+            "codcli": 7,
+            "cliente": "W D DISTRIBUIDORA LTDA",
+            "fantasia": "RENACOR - LOJA 6",
+            "cnpj": "12.900.075/0001-08",
+            "cidade": "MARABA",
+            "uf": "PA",
+            "telefone": "94 3321 4444",
+            "rca": "WANDERLEI"
+          },
+          {
+            "codcli": 10,
+            "cliente": "RENACOR COMERCIO DE TINTAS LTDA - FL 3",
+            "fantasia": "RENACOR - LOJA 3",
+            "cnpj": "00.749.616/0005-93",
+            "cidade": "ARAGUAINA",
+            "uf": "TO",
+            "telefone": "63  3414 8900",
+            "rca": "WANDERLEI"
+          },
+          {
+            "codcli": 11,
+            "cliente": "W D DISTRIBUIDORA LTDA",
+            "fantasia": "RENACOR - LOJA 8",
+            "cnpj": "12.900.075/0002-99",
+            "cidade": "MARABA",
+            "uf": "PA",
+            "telefone": "94 3324 1899",
+            "rca": "WANDERLEI"
+          },
+          {
+            "codcli": 12,
+            "cliente": "RENACOR COMERCIO DE TINTAS LTDA - FL 5",
+            "fantasia": "RENACOR - LOJA 5",
+            "cnpj": "00.749.616/0006-74",
+            "cidade": "PALMAS",
+            "uf": "TO",
+            "telefone": "63  3213 1050",
+            "rca": "WANDERLEI"
+          },
+          {
+            "codcli": 13,
+            "cliente": "RENACOR COMERCIO DE TINTAS LTDA - FL 7",
+            "fantasia": "RENACOR - LOJA 7",
+            "cnpj": "00.749.616/0007-55",
+            "cidade": "PALMAS",
+            "uf": "TO",
+            "telefone": "63  3224 8000",
+            "rca": "WANDERLEI"
+          },
+          {
+            "codcli": 9,
+            "cliente": "RENACOR COMERCIO DE TINTAS LTDA - MTZ",
+            "fantasia": "RENACOR - LOJA 4  MTZ",
+            "cnpj": "00.749.616/0001-60",
+            "cidade": "GURUPI",
+            "uf": "TO",
+            "telefone": "63  3312 4979",
+            "rca": "DOMINGOS"
+          },
+          {
+            "codcli": 15,
+            "cliente": "BUENO E OLIVEIRA LTDA",
+            "fantasia": "OLIVEIRA E OLIVEIRA",
+            "cnpj": "07.022.164/0001-69",
+            "cidade": "PALMAS",
+            "uf": "TO",
+            "telefone": "63  3217-7755",
+            "rca": "JOILDO"
+          },
+          {
+            "codcli": 21,
+            "cliente": "JRC ENGENHARIA E CONSTRU�OES LTDA",
+            "fantasia": "JRC ENGENHARIA",
+            "cnpj": "08.262.635/0002-50",
+            "cidade": "PALMAS",
+            "uf": "TO",
+            "telefone": "63 3212 1001",
+            "rca": "JOILDO"
+          },
+          {
+            "codcli": 23,
+            "cliente": "URBAN PALMAS 001 EMPREENDIMENTOS IMOBILIARIOS LTDA",
+            "fantasia": "URBAN PALMAS",
+            "cnpj": "15.917.715/0001-80",
+            "cidade": "PALMAS",
+            "uf": "TO",
+            "telefone": "63 3225 8592",
+            "rca": "JOILDO"
+          },
+          {
+            "codcli": 24,
+            "cliente": "COCENO CONSTRUTORA CENTRO NORTE LTDA",
+            "fantasia": "COCENO CONSTRUTORA CENTRO NORTE",
+            "cnpj": "38.146.510/0001-44",
+            "cidade": "PALMAS",
+            "uf": "TO",
+            "telefone": "(63)3225 3198",
+            "rca": "JOILDO"
+          },
+          {
+            "codcli": 26,
+            "cliente": "ALPHA ARQUITETURA E CONSTRUCOES LTDA",
+            "fantasia": "ALPHA ARQUITETURA E CONSTRUCOES",
+            "cnpj": "06.370.057/0001-69",
+            "cidade": "PALMAS",
+            "uf": "TO",
+            "telefone": "63 3225 1023",
+            "rca": "JOILDO"
+          },
+          {
+            "codcli": 27,
+            "cliente": "CONSTRUTORA VISAO LTDA",
+            "fantasia": "CONSTRUTORA VISAO",
+            "cnpj": "38.147.179/0001-87",
+            "cidade": "PALMAS",
+            "uf": "TO",
+            "telefone": "63 3215 4008",
+            "rca": "JOILDO"
+          },
+          {
+            "codcli": 29,
+            "cliente": "LOCATINS-LOCADORA DE MAQUINAS E FERRAMENTAS PARA CONSTRUCAO",
+            "fantasia": "LOCATINS",
+            "cnpj": "02.770.103/0001-66",
+            "cidade": "PALMAS",
+            "uf": "TO",
+            "telefone": "63 3225 1001",
+            "rca": "JOILDO"
+          }
+    ],
+    "produto":[
+        {
+          "codprod": 1,
+          "produto": "MASSA CORRIDA PVA 15KG",
+          "numlote": 1001,
+          "dtfabricacao": "02/03/2017",
+          "dtvalidade": "20/02/2019",
+          "valor": "15,5"
+        },
+        {
+          "codprod": 1,
+          "produto": "MASSA CORRIDA PVA 15KG",
+          "numlote": 1002,
+          "dtfabricacao": "03/03/2017",
+          "dtvalidade": "21/02/2019",
+          "valor": "15,5"
+        },
+        {
+          "codprod": 1,
+          "produto": "MASSA CORRIDA PVA 15KG",
+          "numlote": 1003,
+          "dtfabricacao": "04/03/2017",
+          "dtvalidade": "22/02/2019",
+          "valor": "15,5"
+        },
+        {
+          "codprod": 1,
+          "produto": "MASSA CORRIDA PVA 15KG",
+          "numlote": 1004,
+          "dtfabricacao": "05/03/2017",
+          "dtvalidade": "23/02/2019",
+          "valor": "15,5"
+        },
+        {
+          "codprod": 1,
+          "produto": "MASSA CORRIDA PVA 15KG",
+          "numlote": 1005,
+          "dtfabricacao": "06/03/2017",
+          "dtvalidade": "24/02/2019",
+          "valor": "15,5"
+        },
+        {
+          "codprod": 2,
+          "produto": "MASSA ACRILICA 15KG",
+          "numlote": 1006,
+          "dtfabricacao": "07/03/2017",
+          "dtvalidade": "25/02/2019",
+          "valor": "18,8"
+        },
+        {
+          "codprod": 2,
+          "produto": "MASSA ACRILICA 15KG",
+          "numlote": 1007,
+          "dtfabricacao": "08/03/2017",
+          "dtvalidade": "26/02/2019",
+          "valor": "18,8"
+        },
+        {
+          "codprod": 2,
+          "produto": "MASSA ACRILICA 15KG",
+          "numlote": 1008,
+          "dtfabricacao": "09/03/2017",
+          "dtvalidade": "27/02/2019",
+          "valor": "18,8"
+        },
+        {
+          "codprod": 2,
+          "produto": "MASSA ACRILICA 15KG",
+          "numlote": 1009,
+          "dtfabricacao": "10/03/2017",
+          "dtvalidade": "28/02/2019",
+          "valor": "18,8"
+        },
+        {
+          "codprod": 2,
+          "produto": "MASSA ACRILICA 15KG",
+          "numlote": 1010,
+          "dtfabricacao": "11/03/2017",
+          "dtvalidade": "01/03/2019",
+          "valor": "18,8"
+        },
+        {
+          "codprod": 3,
+          "produto": "KOKAR ACR AC PREMIUM 18LT BRANCO GELO",
+          "numlote": 1011,
+          "dtfabricacao": "12/03/2017",
+          "dtvalidade": "02/03/2019",
+          "valor": "187,32"
+        },
+        {
+          "codprod": 3,
+          "produto": "KOKAR ACR AC PREMIUM 18LT BRANCO GELO",
+          "numlote": 1012,
+          "dtfabricacao": "13/03/2017",
+          "dtvalidade": "03/03/2019",
+          "valor": "187,32"
+        },
+        {
+          "codprod": 3,
+          "produto": "KOKAR ACR AC PREMIUM 18LT BRANCO GELO",
+          "numlote": 1013,
+          "dtfabricacao": "14/03/2017",
+          "dtvalidade": "04/03/2019",
+          "valor": "187,32"
+        },
+        {
+          "codprod": 3,
+          "produto": "KOKAR ACR AC PREMIUM 18LT BRANCO GELO",
+          "numlote": 1014,
+          "dtfabricacao": "15/03/2017",
+          "dtvalidade": "05/03/2019",
+          "valor": "187,32"
+        },
+        {
+          "codprod": 3,
+          "produto": "KOKAR ACR AC PREMIUM 18LT BRANCO GELO",
+          "numlote": 1015,
+          "dtfabricacao": "16/03/2017",
+          "dtvalidade": "06/03/2019",
+          "valor": "187,32"
+        },
+        {
+          "codprod": 4,
+          "produto": "TEXTURA TRAD STANDARD 25KG BRANCO GELO",
+          "numlote": 1016,
+          "dtfabricacao": "17/03/2017",
+          "dtvalidade": "07/03/2019",
+          "valor": "210,28"
+        },
+        {
+          "codprod": 4,
+          "produto": "TEXTURA TRAD STANDARD 25KG BRANCO GELO",
+          "numlote": 1017,
+          "dtfabricacao": "18/03/2017",
+          "dtvalidade": "08/03/2019",
+          "valor": "210,28"
+        },
+        {
+          "codprod": 4,
+          "produto": "TEXTURA TRAD STANDARD 25KG BRANCO GELO",
+          "numlote": 1018,
+          "dtfabricacao": "19/03/2017",
+          "dtvalidade": "09/03/2019",
+          "valor": "210,28"
+        },
+        {
+          "codprod": 4,
+          "produto": "TEXTURA TRAD STANDARD 25KG BRANCO GELO",
+          "numlote": 1019,
+          "dtfabricacao": "20/03/2017",
+          "dtvalidade": "10/03/2019",
+          "valor": "210,28"
+        },
+        {
+          "codprod": 4,
+          "produto": "TEXTURA TRAD STANDARD 25KG BRANCO GELO",
+          "numlote": 1020,
+          "dtfabricacao": "21/03/2017",
+          "dtvalidade": "11/03/2019",
+          "valor": "210,28"
+        },
+        {
+          "codprod": 5,
+          "produto": "ESM SINT BRILHANTE 3,6LT AZUL DEL REY",
+          "numlote": 1021,
+          "dtfabricacao": "22/03/2017",
+          "dtvalidade": "12/03/2019",
+          "valor": "48,85"
+        },
+        {
+          "codprod": 5,
+          "produto": "ESM SINT BRILHANTE 3,6LT AZUL DEL REY",
+          "numlote": 1022,
+          "dtfabricacao": "23/03/2017",
+          "dtvalidade": "13/03/2019",
+          "valor": "48,85"
+        },
+        {
+          "codprod": 5,
+          "produto": "ESM SINT BRILHANTE 3,6LT AZUL DEL REY",
+          "numlote": 1023,
+          "dtfabricacao": "24/03/2017",
+          "dtvalidade": "14/03/2019",
+          "valor": "48,85"
+        },
+        {
+          "codprod": 5,
+          "produto": "ESM SINT BRILHANTE 3,6LT AZUL DEL REY",
+          "numlote": 1024,
+          "dtfabricacao": "25/03/2017",
+          "dtvalidade": "15/03/2019",
+          "valor": "48,85"
+        },
+        {
+          "codprod": 5,
+          "produto": "ESM SINT BRILHANTE 3,6LT AZUL DEL REY",
+          "numlote": 1025,
+          "dtfabricacao": "26/03/2017",
+          "dtvalidade": "16/03/2019",
+          "valor": "48,85"
+        }
+    ]
+}

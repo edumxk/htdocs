@@ -104,7 +104,7 @@
         public static function getNovoNumeroRat(){
             $numrat = Rat::getNovoNumeroRat();
 
-            $result;
+            $result=0;
 
             if(count($numrat)>0){
                 $row = $numrat[0];
@@ -158,7 +158,7 @@
 
             $tipo = $key['tipo'];
 
-            if($_SESSION['codsetor'] == 0 || $_SESSION['codsetor'] == 3 || $_SESSION['codsector'] == 2){
+            if($_SESSION['codsetor'] == 0 || $_SESSION['codsetor'] == 3 || $_SESSION['codsector'] == 2 || $_SESSION['codsector'] == 12){
                 /*CodSec 2 temporario para acesso do Paulo enquanto Jociel viaja.*/
                 switch ($tipo) {
                     case 'finalProdutos':
@@ -173,15 +173,15 @@
                 }
             }
 
-            if($_SESSION['codsetor'] == 0 || $_SESSION['codsetor'] == 2){
+            if($_SESSION['codsetor'] == 0 || $_SESSION['codsetor'] == 2 || $_SESSION['codsetor'] == 12){
                 switch ($tipo) {
                     case 'finalALab':
                         echo Rat::finalizarALab($numrat);
                         break;
                 }
             }
-
-            if($_SESSION['codsetor'] == 0 || $_SESSION['codsetor'] == 2 || $_SESSION['codsector'] == 1){
+            //aprovar rat diretoria/quimico
+            if($_SESSION['codsetor'] == 0 || $_SESSION['codsetor'] == 12 || $_SESSION['codsector'] == 1){
                 if($tipo == 'reabrir') {
                     Rat::reabrirRat($numrat);
                     Rat::logAprova($_SESSION['coduser'], $numrat, $tipo);

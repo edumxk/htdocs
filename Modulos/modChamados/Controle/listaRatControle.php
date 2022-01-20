@@ -32,27 +32,27 @@
                         if($chamado->prodFinal == 'N'){
                             //Se produto final não lançado;
                             //Departamento Técnico
-                            if($setor == 0 || $setor == 3 || $setor == 2){
+                            if($setor == 0 || $setor == 3 || $setor == 2 || $setor == 12){
                                 /*Cod 2 (laboratorio) temporario enquanto jociel viaja*/
                                 array_push($lista, $chamado);
                             }
                         }elseif($chamado->alabFinal == 'N'){
                             //Se ALab é nulo ou "Não";
                             //Laboratório
-                            if($setor == 0 || $setor == 2){
+                            if($setor == 0 || $setor == 2 || $setor == 12){
                                 array_push($lista, $chamado);
                             }
                         }elseif($chamado->acaoFinal == 'N'){
                             //Se Ação Final não lançada;
                             //Departamento Técnico;
-                            if($setor == 0 || $setor == 3 || $setor == 2){
+                            if($setor == 0 || $setor == 3 || $setor == 2 || $setor == 12){
                                 /*Cod 2 (laboratorio) temporario enquanto jociel viaja*/
                                 array_push($lista, $chamado);
                             }
                         }elseif($chamado->dirFinal == 'N'){
                             //Se Analise de Diretoria não Realizada;
                             //Diretoria;
-                            if($setor == 0 || $setor == 1 || $setor == 2 || $setor == 4){
+                            if($setor == 0 || $setor == 1 || $setor == 12 || $setor == 4){
                                 array_push($lista, $chamado);
                             }
                         }

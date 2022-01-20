@@ -10,7 +10,7 @@ require_once ($_SERVER["DOCUMENT_ROOT"] . '/model/sqlOracle.php');
 
             $sql = new SqlOra();
 
-            $ret = $sql->select("SELECT * from ratuser where nome = :nome",
+            $ret = $sql->select("SELECT * from paralelo.ratuser where nome = :nome",
                 array(":nome"=>$nome)
             );
 

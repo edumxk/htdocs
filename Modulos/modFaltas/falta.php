@@ -16,7 +16,7 @@ session_start();
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Nova Falta</title>
+	<title>Nova Falta - Kokar</title>
 
 	<meta name="description" content="Source code generated using layoutit.com">
 	<meta name="author" content="LayoutIt!">
@@ -118,6 +118,7 @@ session_start();
 									<option value="ISMAELDO">Ismaeldo</option>
 									<option value="JHONATHAN">Jhonathan</option>
 									<option value="EVANDRO">Evandro</option>
+									<option value="TERCEIROS">Terceiros</option>
 								</optgroup>
 							</select>
 						</div>
@@ -173,7 +174,9 @@ session_start();
 			var obs =  $("#obs").val();
 			var dados = {'codcli':codcli, 'numnota':numnota, 'numnotacusto':numnotacusto, 'motorista':motorista, 'obs':obs};
 			//console.log(dados);
-	
+			if(codcli=='' || numnota=='' || motorista==''){
+				alert("Dados não preenchidos corretamente, verifique!")
+			}else{
 			$.ajax({
 				type: 'POST',
 				url: 'Controle/faltaControle.php',
@@ -199,6 +202,7 @@ session_start();
 				}
 			});	
 		}}
-		});		
+		});	
+			}	
 		}
 </script>

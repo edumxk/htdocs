@@ -43,7 +43,11 @@
                     $c->tipo = $ret[$i]['TIPO'];
                     $c->custo = utf8_encode($ret[$i]['CUSTO']);
                     $c->codprod = $ret[$i]['CODPROD'];
+                    if(utf8_encode($ret[$i]['OBS'])!="")
+                    $c->despesa = utf8_encode($ret[$i]['DESPESA']).' / '.utf8_encode($ret[$i]['OBS']);
+                    else
                     $c->despesa = utf8_encode($ret[$i]['DESPESA']);
+                    $c->obs = utf8_encode($ret[$i]['OBS']);
                     $c->qt = $ret[$i]['QT'];
                     $c->valor = $ret[$i]['VALOR']*$ret[$i]['QT'];
 
@@ -106,11 +110,13 @@
             $numrat = $key['numrat'];
             $codcli = $key['codcli'];
             $custo = $key['custo'];
+            $obs = strtoupper($key['obs']);
+            $tipo = $key['tipo'];
         
             echo json_encode($key);
 
 
-            if($key['codprod']>0){
+            if($key['codprod']>0 && $key['obs']==""){
                 $prod = CorretivaDao::getProduto($codprod);
                 $c = new Corretiva();
 
@@ -127,12 +133,40 @@
                 
                 $c->valor = $pvenda;
                 $c->codcusto = $custo;
-
+                $c->obs = strtoupper($obs);
 
                 }
             }else{
-                if($acao=='CUSTEAR'){
+                if($key['obs']!="" && $tipo=='1'){
+                    $prod = CorretivaDao::getProduto($codprod);
                     $c = new Corretiva();
+                    if(sizeof($prod)>0){
+                    $c->numrat = $numrat;
+                    $c->tipo = $acao;
+                    $c->codprod = $key['codprod'];
+                    $c->despesa = strtoupper($key['produto']);
+                    $c->qt = 1;
+                    $c->valor = $key['qt'];
+                    $c->codcusto = $custo;
+                    $c->obs = strtoupper($obs);
+                    }else{
+                        $prod = CorretivaDao::getProdutoByNome($key['produto']);
+                        
+                        $c = new Corretiva();
+                        $c->numrat = $numrat;
+                        $c->tipo = $acao;
+                        $c->codprod = $prod[0]['CODPROD'];
+                        $c->despesa = $prod[0]['DESCRICAO'];
+                        $c->qt = $key['qt'];
+                        $pvenda = RatProdDao::getPvendaByCod($codcli, $c->codprod);
+                        $c->valor = $pvenda;
+                        $c->codcusto = $custo;
+                        $c->obs = strtoupper($obs);
+                    }
+                }else if($key['obs']!="" && $tipo=='2'){
+                    $prod = CorretivaDao::getProduto($codprod);
+                    $c = new Corretiva();
+                   
                     $c->numrat = $numrat;
                     $c->tipo = $acao;
                     $c->codprod = 0;
@@ -140,46 +174,31 @@
                     $c->qt = 1;
                     $c->valor = $key['qt'];
                     $c->codcusto = $custo;
-
-                }else{
-                    $prod = CorretivaDao::getProdutoByNome($key['produto']);
-                    
-                    $c = new Corretiva();
-                    $c->numrat = $numrat;
-                    $c->tipo = $acao;
-                    $c->codprod = $prod[0]['CODPROD'];
-                    $c->despesa = $prod[0]['DESCRICAO'];
-                    $c->qt = $key['qt'];
-                    $pvenda = RatProdDao::getPvendaByCod($codcli, $c->codprod);
-                    $c->valor = $pvenda;
-                    $c->codcusto = $custo;
+                    $c->obs = strtoupper($obs);
                 }
-
             }
 
             $arr = CorretivaControle::getCorretivaIn($numrat);
 
 
             foreach($arr as $a){
-                if($c->despesa == $a->despesa && $c->tipo == $a->tipo){
+                if($c->despesa == $a->despesa && $c->tipo == $a->tipo ){
                     echo 'EXISTE';
                     exit();
                 }
             }
             //if($c->tipo == )
-            $ret = CorretivaDao::setAcao($c->tipo, $c->numrat, $c->codprod, $c->despesa, $c->qt, $c->valor, $c->codcusto);
+            $ret = CorretivaDao::setAcao($c->tipo, $c->numrat, $c->codprod, $c->despesa, $c->qt, $c->valor, $c->codcusto, $c->obs);
             echo json_encode($ret);
             exit();
-            
-
-
-
         }
+    
 
         public static function delAcao($data){
-
+            if(strripos(utf8_decode($data['despesa']), ' / ') == false)
                 echo JSON_ENCODE(CorretivaDao::delAcao($data['numrat'], $data['tipo'], utf8_decode($data['despesa'])));
-    
+            else
+                echo JSON_ENCODE(CorretivaDao::delAcao($data['numrat'], $data['tipo'], utf8_decode(explode(' / ',($data['despesa']))[0])));
         }
 
 
@@ -191,7 +210,7 @@
                 return null;
             }else{
                 $rat = RatProdDao::getRat($numrat);
-                $result;
+                $result=[];
 
                 if(count($rat)>0){
                     $row = $rat[0];
@@ -243,7 +262,7 @@
         public static function getNovoNumeroRat(){
             $numrat = Rat::getNovoNumeroRat();
 
-            $result;
+            $result=[];
 
             if(count($numrat)>0){
                 $row = $numrat[0];

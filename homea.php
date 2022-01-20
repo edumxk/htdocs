@@ -120,7 +120,7 @@
         </div>
         <div class="row">
 
-            <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']==6): //Apenas TI e comercial?>
+            <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']==6 || $_SESSION['codsetor']==61 || $_SESSION['codsetor']==2): //Apenas TI e comercial?>
             <div class="col-md-3" style="padding-bottom:30px">
                 <div class="card" style="width: 18rem;">
                     <h5 class="card-title" style="text-align:center">Nova Requisição</h5>
@@ -155,6 +155,18 @@
                 </div>
             </div>
             <?php endif?>
+        
+        <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']==6 ): //Apenas TI e comercial?>
+            <div class="col-md-3" style="padding-bottom:30px">
+                <div class="card" style="width: 18rem;">
+                    <h5 class="card-title" style="text-align:center">Peso Padrão</Ri:a></h5>
+                    <form action="modulos/abast/editarest.php" method="GET">
+                        <button type="input" value="teste"> <img alt="W3Schools" src="recursos/src/efficiency.png"
+                                style="width:50%"></button>
+                    </form>
+                </div>
+            </div>
+            <?php endif?>
         </div>
 
     </div>
@@ -165,9 +177,9 @@
 
 
     <script src="recursos/js/jquery.min.js"></script>
-    <script src=".recursos/js/bootstrap.min.js"></script>
+    <script src="recursos/js/bootstrap.min.js"></script>
     <script src="recursos/js/scripts.js"></script>
-    <script src="recursos/js/Charts.js"></script>
+    <script src="recursos/js/Chart.js"></script>
     <script src="recursos/js/Chart.bundle.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8"

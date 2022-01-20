@@ -110,7 +110,7 @@ class Carga{
                 
         $sql = new SqlOra();
 
-        $arr = $sql->select("SELECT codprod, descricao, qt,  qtdisp, TO_CHAR(peso-(qtdisp*pesobruto), '999999990.999')peso
+        $ret = $sql->select("SELECT * from (SELECT codprod, descricao, qt,  qtdisp, TO_CHAR(peso-(qtdisp*pesobruto), '999999990.999')peso
         from (
         select ki.codprod, 
                 kp.descricao,
@@ -126,13 +126,69 @@ class Carga{
         and numcarga = :numcarga
         group by ki.codprod, kp.pesobruto, kp.descricao, ke.qtestger-ke.qtbloqueada-ke.qtreserv
         ) where qtdisp < qt 
-        order by codprod",array(":numcarga"=>$numcarga)
+        order by descricao)t1
+        left join(
+select codprodp, qtprod, t3.codproducao, previsao, status from
+((select codprod codprodp, sum(qt) qtprod from paralelo.mproducaoi
+where status not in ('S','F') and dtexclusao is null
+group by codprod)t2       
+INNER JOIN
+( select distinct * from (
+   select  First_Value(li.codproducao) OVER (PARTITION BY li.codprod ORDER BY dtproducao, horaproducao) codproducao, codprod
+   from paralelo.mproducaoc lc
+   inner join paralelo.mproducaoi li on li.codproducao = lc.codproducao 
+   where lc.status not in ('S', 'F')and lI.dtexclusao is null
+   order by codprod, dtproducao, horaproducao)
+ )t3 on t3.codprod = t2.codprodp)
+ inner join(
+        select (replace(to_char(extract(day from dtproducao),'00')||'/'||
+        to_char(extract(month from dtproducao),'00'),' ','')||' - '|| horaproducao) previsao, codproducao, status
+        from paralelo.mproducaoc where status not in('F', 'B'))t4 on t4.codproducao = t3.codproducao
+ )t5
+ on t5.codprodp = t1.codprod  
+ order by descricao",array(":numcarga"=>$numcarga)
         );
 
-        for($i = 0; $i<sizeof($arr); $i++){
-            $arr[$i]['DESCRICAO'] =  utf8_encode($arr[$i]['DESCRICAO']);
+        for($i=0; $i<sizeof($ret); $i++){
+            $ret[$i]['DESCRICAO'] = utf8_encode($ret[$i]['DESCRICAO']);
+            switch ( $ret[$i]['STATUS']):
+                case ('A'):
+                     $ret[$i]['STATUS'] = "ABERTURA/OP";
+                    break;
+                case ('P'):
+                     $ret[$i]['STATUS'] = "PESAGEM";
+                    break;
+                case ('D'):
+                     $ret[$i]['STATUS'] = "DISPERSÃO/BASE";
+                    break;
+                case ('L'):
+                     $ret[$i]['STATUS'] = "LABORATÓRIO";
+                    break;
+                case ('C'):
+                     $ret[$i]['STATUS'] = "COR";
+                    break;
+                case ('E'):
+                     $ret[$i]['STATUS'] = "ENVASE";
+                    break;
+                case ('B'):
+                     $ret[$i]['STATUS'] = "CORREÇÃO";
+                    break;
+                case ('F'):
+                     $ret[$i]['STATUS'] = "FINALIZADO";
+                    break;
+                case ('S'):
+                     $ret[$i]['STATUS'] = "AGUARDANDO";
+                    break;
+            endswitch;
+            if($ret[$i]['QTPROD'] == null){
+               
+                $ret[$i]['STATUS'] ='';
+                $ret[$i]['QTPROD'] ='';
+                $ret[$i]['PREVISAO'] ='';
+            } 
         }
-        return $arr;
+        
+        return $ret;
     }
 
     //Mudar de carga para SEM CARGA
@@ -250,40 +306,97 @@ class Carga{
         $ret = $sql->select("SELECT fechado from cargac where numcarga = :numcarga", array(":numcarga"=>$numcarga));
         return $ret;
     }
-    public static function getSaldoCarga($cargas){
+    public static function getSaldoCarga($cargas)
+    {
         $sql = new SqlOra();
         $varCargas = "";
-        foreach($cargas as $c){
-            if(strlen($varCargas) == 0){
+        foreach ($cargas as $c) {
+            if (strlen($varCargas) == 0) {
                 $varCargas .= $c;
-            }else{
-                $varCargas .= ','.$c;
+            } else {
+                $varCargas .= ',' . $c;
             }
         }
 
-        $ret = $sql->select("SELECT codprod, descricao, pesobruto, qt, qtest, TO_CHAR(pesopendente-(qtest*pesobruto), '999999990.999')pesopendente
-        from (
-        SELECT i.codprod, p.descricao,p.pesobruto, sum(i.qt) qt, e.qtestger-e.qtreserv-e.qtbloqueada as qtest,
-        sum(i.qt*p.pesobruto) as pesopendente
-        from paralelo.cargac cc inner join paralelo.cargai ci on cc.numcarga = ci.numcarga
-            inner join kokar.pcpedi i on ci.numped = i.numped
-            inner join kokar.pcprodut p on p.codprod = i.codprod
-            inner join kokar.pcpedc c on c.numped = i.numped
-            inner join kokar.pcest e on e.codprod = i.codprod
-        where cc.numcarga in ($varCargas)
-          and c.posicao in ('P')
-        group by i.codprod, p.descricao, p.pesobruto, e.qtestger-e.qtreserv-e.qtbloqueada
-        
-        )
-        where qt > qtest    
-        order by codprod"
+        $ret = $sql->select(
+            "SELECT distinct t1.*,t5.*, d.codprod promo from (SELECT codprod, descricao, pesobruto, qt, qtest, TO_CHAR(pesopendente-(qtest*pesobruto), '999999990.999')pesopendente
+            from (
+            SELECT i.codprod, p.descricao,p.pesobruto, sum(i.qt) qt, e.qtestger-e.qtreserv-e.qtbloqueada as qtest,
+            sum(i.qt*p.pesobruto) as pesopendente
             
+            from paralelo.cargac cc inner join paralelo.cargai ci on cc.numcarga = ci.numcarga
+                inner join kokar.pcpedi i on ci.numped = i.numped
+                inner join kokar.pcprodut p on p.codprod = i.codprod
+                inner join kokar.pcpedc c on c.numped = i.numped
+                inner join kokar.pcest e on e.codprod = i.codprod
+            where cc.numcarga in($varCargas)
+              and c.posicao in ('P')
+            group by i.codprod, p.descricao, p.pesobruto, e.qtestger-e.qtreserv-e.qtbloqueada)
+            where qt > qtest    
+            )t1
+    left join(
+    select codprodp, qtprod, t3.codproducao, previsao, status from
+    ((select codprod codprodp, sum(qt) qtprod from paralelo.mproducaoi
+    where status not in ('S','F') and dtexclusao is null
+    group by codprod)t2       
+    INNER JOIN
+    ( select distinct * from (
+       select  First_Value(li.codproducao) OVER (PARTITION BY li.codprod ORDER BY dtproducao, horaproducao) codproducao, codprod
+       from paralelo.mproducaoc lc
+       inner join paralelo.mproducaoi li on li.codproducao = lc.codproducao 
+       where lc.status not in ('S', 'F')and lI.dtexclusao is null
+       order by codprod, dtproducao, horaproducao)
+     )t3 on t3.codprod = t2.codprodp)
+     inner join(
+            select (replace(to_char(extract(day from dtproducao),'00')||'/'||
+            to_char(extract(month from dtproducao),'00'),' ','')||' - '|| horaproducao) previsao, codproducao, status
+            from paralelo.mproducaoc where status not in('F', 'B'))t4 on t4.codproducao = t3.codproducao
+     )t5
+     on t5.codprodp = t1.codprod
+     left join kokar.pcdesconto d on d.codprod = t1.codprod and d.dtfim >= to_date(sysdate)
+     order by t1.descricao"
+
         );
 
         for($i=0; $i<sizeof($ret); $i++){
             $ret[$i]['DESCRICAO'] = utf8_encode($ret[$i]['DESCRICAO']);
+            switch ( $ret[$i]['STATUS']):
+                case ('A'):
+                     $ret[$i]['STATUS'] = "ABERTURA/OP";
+                    break;
+                case ('P'):
+                     $ret[$i]['STATUS'] = "PESAGEM";
+                    break;
+                case ('D'):
+                     $ret[$i]['STATUS'] = "DISPERSÃO/BASE";
+                    break;
+                case ('L'):
+                     $ret[$i]['STATUS'] = "LABORATÓRIO";
+                    break;
+                case ('C'):
+                     $ret[$i]['STATUS'] = "COR";
+                    break;
+                case ('E'):
+                     $ret[$i]['STATUS'] = "ENVASE";
+                    break;
+                case ('B'):
+                     $ret[$i]['STATUS'] = "CORREÇÃO";
+                    break;
+                case ('F'):
+                     $ret[$i]['STATUS'] = "FINALIZADO";
+                    break;
+                case ('S'):
+                     $ret[$i]['STATUS'] = "AGUARDANDO";
+                    break;
+            endswitch;
+            if($ret[$i]['QTPROD'] == null){
+               
+                $ret[$i]['STATUS'] ='';
+                $ret[$i]['QTPROD'] ='';
+                $ret[$i]['PREVISAO'] ='';
+            } 
         }
-
+        
         return $ret;
     }
 

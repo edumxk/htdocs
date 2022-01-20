@@ -410,7 +410,7 @@ $chamado = Chamado::getRat($numrat);
 											<tbody id="lista_json">
 												<?php foreach($chamado->produtos as $p) :?>
 												<tr>
-													<th scope="row" style="widht:50px" id="cellCod">
+													<th scope="row" style="width:50px" id="cellCod">
 														<?php echo $p->codprod?>
 													</th>
 													<td id="tbProduto">

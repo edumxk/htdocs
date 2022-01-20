@@ -1,0 +1,41 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,400i,700");
+
+table {
+  font-family: Bold;
+  background:#ffffff ;
+  margin: 0 auto;
+  border: solid 1px black;
+ 
+}
+.numeros {
+  text-align: right;
+}
+
+.produto {
+  text-align: left;
+}
+tfoot tr td{
+  background:rgb(78, 78, 78);
+  color:white;
+}
+
+tr:nth-child(even) {
+  background:rgb(170, 170, 170);
+}
+td{
+  width: auto;
+  text-align: center;
+}
+
+.table-hover tbody tr:hover td {
+  background: aqua;
+}
+thead tr th {
+  background:rgb(78, 78, 78);
+  color:white;
+  text-align: center;
+}
+#coluna div{
+
+  background-color: gray;
+}

@@ -14,13 +14,13 @@ class Logout{
          header("location: ../../index.php");
       }
       
-      $timeout = 1200; // Number of seconds until it times out.
+      $timeout = 7200; // Number of seconds until it times out.
       
       // Check if the timeout field exists.
       if(isset($_SESSION['timeout'])) {
          $duration = time() - (int)$_SESSION['timeout'];
          if($duration > $timeout) {
-            session_destroy();
+            $_SESSION = array();
             header("location: ../../index.php");
          }
       }

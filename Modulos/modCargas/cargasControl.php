@@ -9,7 +9,9 @@
 	}else{
 		$buscaRca = '';
 	}
-
+	
+	$data = date("Y-m-d", time()-(15 * 24 * 60 * 60));
+	//echo $data;
 	$ret = CargasControle::getPedidosView($buscaRca);
 	
 
@@ -24,6 +26,7 @@
 	$qtPedCarg = 0;
 	$cargaNum = 0;
 	$faux = 0;
+	$totValorCarga = 0;
 ?>
 
 
@@ -37,11 +40,11 @@
 	<!-- Recarrega a cada 5 min. -->
 
 
-	<title>Lista de RAT's</title>
+	<title>Cargas |Kokar</title>
 
 	<meta name="description" content="Source code generated using layoutit.com">
 	<meta name="author" content="LayoutIt!">
-
+	<link rel="shortcut icon" type="image/x-icon" href="/Recursos/img/favicon.ico"> 
 	<link href="../../recursos/css/bootstrap.min.css" rel="stylesheet">
 	<link href="../../recursos/css/style.css" rel="stylesheet">
 	<link href="recursos/css/table.css" rel="stylesheet">
@@ -49,8 +52,6 @@
 
 
 </head>
-
-
 <body style="background-color: teal;width:100%">
 	<nav aria-label="breadcrumb">
 		<ol class="breadcrumb">
@@ -100,8 +101,7 @@
 										<?php else:?>
 											<option value="<?php echo $r['nome']?>"><?php echo $r['nome']?></option>
 										<?php endif;
-									endforeach ?>
-									
+									endforeach ?>									
 								</select>
 							</div>
 							<div class="col-sm-1">
@@ -125,15 +125,15 @@
 							</div>
 						</div>
 					</div>
-
 					<div class="col-md-12">
 						<table style="width: 100%" id="tableSemCarga" class="table_pedidos" >
 							<thead style="border: 2px solid darkslategray">
 								<tr style="background-color: lightgray">
 									<th style="text-align: center; font-size:10px; ">DATA</th>
+									<th style="text-align: center; font-size:10px; ">HORA</th>
 									<th style="text-align: center; font-size:10px; ">RCA</th>
 									<th style="text-align: center; font-size:10px; ">NUMPED</th>
-									<th style="text-align: center; font-size:10px; ">#</th>
+									<th style="text-align: center; font-size:10px; "><input type="checkbox" onClick=toggle2(this) name="select-all" id="select-all" /></th>
 									<th style="text-align: center; font-size:10px; ">COD</th>
 									<th style="text-align: center; font-size:10px">CLIENTE</th>
 									<th style="text-align: center; font-size:10px; ">CARGA</th>
@@ -150,9 +150,10 @@
 							<?php foreach ($pedidosSemCarga as $p):?>
 								<tr onmouseover="listaHoverIn(this)" onmouseout="listaHoverOut(this)" >
 									<td style="text-align: center"><?php echo $p->data ?></td>
+									<td style="text-align: center"><?php echo $p->hora ?></td>
 									<td style="text-align: left; padding-left: 10px"><?php echo $p->rca ?></td>
 									<td style="text-align: right; padding-right: 10px"><?php echo $p->numped ?></td>
-									<td style="text-align: center"><input type="checkbox" value="<?php echo $p->numped?>" class="ckbIncluir"></td>
+									<td style="text-align: center"><input type="checkbox" name="semcarga" value="<?php echo $p->numped?>" class="ckbIncluir"></td>
 									<td style="text-align: center"><?php echo $p->cod ?></td>
 									<td style="text-align: left; padding-left: 10px"><?php echo $p->cliente ?></td>
 									<td style="text-align: center"><?php echo $p->numcar ?></td>
@@ -172,11 +173,10 @@
 			</div>
 			<div class="col-md-12" style="padding-bottom: 10px; background-color: white; width: 100%">
 				<div class="row" style="padding-bottom: 10px">
-
-
-					<div class="col-sm-8" style="text-align:center; left: 15%">
+					<div class="col-sm-5" style="text-align:center; left: 15%">
 						<h4>Cargas Montadas</h4>
 					</div>
+					<div class="col-sm-2" style="text-align:center"></div>
 					<div class="col-sm-1" style="text-align:center">
 						<button class="btn btn-warning" onClick="saldoCargas()">Pendente</button>
 					</div>
@@ -196,12 +196,28 @@
 							border: solid 2px  black;
 						}
 					</style>
-					<div class="col-2"></div>
+					<!-- Função para selecionar todas as checkbox pelo nome -->
+					<script language="JavaScript">
+						var vresumo
+						function toggle(source) {
+							checkboxes = document.getElementsByName('resumo');
+							for(var i=0, n=checkboxes.length;i<n;i++) {
+								checkboxes[i].checked = source.checked;
+							}
+						}
+						function toggle2(source) {
+							checkboxes = document.getElementsByName('semcarga');
+							for(var i=0, n=checkboxes.length;i<n;i++) {
+								checkboxes[i].checked = source.checked;
+							}
+						}
+					</script>
+					
 					<div class="col">
 					<table class="resumo">
 						<thead>
 							<tr>
-								<th style="width:15px; text-align:center">#</th>
+								<th style="width:15px; text-align:center"><input type="checkbox" onClick=toggle(this) name="select-all" id="select-all" /></th>
 								<th style="padding-left:15px">CARGA</th>
 								<th style="width:150px; text-align:center">PREVISÃO</th>
 								<th style="width:150px; text-align:center">PESO</th>
@@ -212,7 +228,7 @@
 							<?php $totPesoResumo = 0; $totValorResumo = 0;?>
 							<?php foreach($cargas as $c):?>
 							<tr onmouseover="resumoHoverIn(this)" onmouseout="resumoHoverOut(this)">
-								<td class="chbResumo" style="margin: auto"><input  type="checkbox" id="<?php echo $c->numcarga ?>"></td>
+								<td class="chbResumo" style="margin: auto; text-align:center"><input name="resumo" type="checkbox" id="<?php echo $c->numcarga ?>" value="<?=$c->valor?>"></td>
 								<td style="padding-left:15px"><?php echo $c->nome ?></td>
 								<td style="text-align:center"><?php echo $c->dtPrevisao ?></td>
 								<td style="text-align:right; padding-right:15px"><?php echo number_format($c->peso,2,',','.'); $totPesoResumo += $c->peso;  ?> KG</td>
@@ -230,23 +246,57 @@
 					</table>
 					
 					</div>
-					<div class="col-2"></div>
+					<div class="col-4">
+						
+					<table class="legenda">
+						<thead>
+							<tr>
+								<th style="width:100px; text-align:center">Legenda</th>
+								<th style="width:250px; text-align:center">Descrição</th>
+								
+							</tr>
+						</thead>
+						<tbody>
+							
+							<tr>
+								<td style="text-align: center;"> <img src="../modCargas/Recursos/img/st.JPG" alt="ST"> </td>
+								<td style="padding-left:10px;"> <h5>Conferir Calculo de ST </h5></td>
+								
+							</tr>	
+							<tr>
+								<td style="text-align: center;">  <img src="../modCargas/Recursos/img/icon3.JPG" alt="Parc"> </td> </td>
+								<td style="padding-left:10px;"><p><h5> Azul: Valor suficiente para venda.</h5></p>									
+									<p><h5> Vermelho: Valor inferior ao mínimo para venda.</h5></p>
+									<p><h5> Branco: Valor sem parcelamento.</h5></p>
+									
+							</td>
+									
+							</tr>	
+							<tr>
+							<td style="text-align: center;">  <img src="../modCargas/Recursos/img/icon1compra.png" width="60px" height="60px" alt="Pcompra"> </td> </td>
+								<td style="padding-left:10px;"><h5>  Primeira Compra</h5> </td>
+								
+							</tr>
+							<td style="text-align: center;">  <button style="width:75px" type="submit" class="btn btn-sm btn-success"><i class="fas fa-truck fa-4x"></i></button> </td> </td>
+								<td style="padding-left:10px;"><h5>  Indicativo de Falta</h5> </td>	
+							</tr>
+							<td style="text-align: center;">  <button style="width:55px" type="submit" class="btn btn-sm btn-warning"> <i class="fa fa-male fa-4x"></i> </button> </td> </td>
+								<td style="padding-left:10px;"><h5>  Consumidor Final</h5> </td>	
 
-
-
+								 
+							</tr>
+						</tbody>
+					</table>
 				</div>
-
-
-
-	
 			</div>
+			<div>.</div>
 			<?php foreach($cargas as $c):?>
 			<div id="comCargas" class="col-md-12" style="padding-bottom: 10px; background-color: white; border:2px solid black">
 				<div  class="cabecaTabela"style="background-color: lightblue">
 					<div class="row">
 						<div class="col-sm-1" style="text-align:center">
-							<button style="width:50%" type="submit" class="btn btn-sm btn-danger"value="<?php echo $c->numcarga?>-<?php echo $c->nome?>" onclick="openDeleteCarga(this)">
-								<i class="fas fa-trash"></i>
+							<button style="width:35px; height:28px" type="submit" class="btn btn-sm btn-danger"value="<?php echo $c->numcarga?>-<?php echo $c->nome?>" onclick="openDeleteCarga(this)">
+								<i class="fas fa-trash fa-lg"></i>
 							</button>
 						</div>
 						<div class="col-md-2">
@@ -264,30 +314,30 @@
 						<div style="display: inline-flex">
 							<?php if($c->fechado == 0):?>
 								<div class="" style="text-align:center; width: 50px">
-									<button style="width:50%" type="submit" class="btn btn-sm btn-success"value="<?php echo $c->numcarga?>" onclick="travar(this)">
-										<i class="fas fa-unlock"></i>
+									<button style="width:35px; height:28px" type="submit" class="btn btn-sm btn-success" value="<?php echo $c->numcarga?>" onclick="travar(this)">
+										<img style="width:20px; height:20px" src="/Recursos/src/rca.png">
 									</button>
 								</div>
 							<?php else:?>
-								<div class="" style="text-align:center; width: 50px">
-									<button style="width:50%" type="submit" class="btn btn-sm btn-warning"value="<?php echo $c->numcarga?>" onclick="destravar(this)">
-										<i class="fas fa-lock"></i>
+								<div class="" style="text-align:center; width: 40px">
+									<button style="width:35px; height:28px" type="submit" class="btn btn-sm btn-warning" value="<?php echo $c->numcarga?>" onclick="destravar(this)">
+										<img style="width:20px; height:20px" src="/Recursos/src/rca2.png">
 									</button>
 								</div>
 							<?php endif?>
 							<div class="" style="text-align:center; width: 50px">
-								<button style="width:50%" type="submit" class="btn btn-sm btn-warning"value="<?php echo $c->numcarga?>" onclick="openEditCarga(this)">
-									<i class="fas fa-edit"></i>
+								<button style="width:35px; height:28px" type="submit" class="btn btn-sm btn-warning" value="<?php echo $c->numcarga?>" onclick="openEditCarga(this)">
+									<i class="fas fa-edit fa-lg"></i>
 								</button>
 							</div>
 							<div class="" style="text-align:center; width: 50px">
-								<button style="width:50%" type="submit" class="btn btn-sm btn-success" onclick="getPendencias('<?php echo $c->numcarga ?>')">
-									<i class="fas fa-eye fa-sm"></i>
+								<button style="width:35px; height:28px" type="submit" class="btn btn-sm btn-success" onclick="getPendencias('<?php echo $c->numcarga ?>')">
+									<i class="fas fa-eye fa-lg"></i>
 								</button>
 							</div>
 							<div class="" style="text-align:center; width: 50px">
-								<button style="width:50%" type="submit" class="btn btn-sm btn-primary" onclick="getDisponivel('<?php echo $c->numcarga ?>')">
-									<i class="fas fa-cog"></i>
+								<button style="width:35px; height:28px" type="submit" class="btn btn-sm btn-primary" onclick="getDisponivel('<?php echo $c->numcarga ?>')">
+									<i class="fas fa-cog fa-lg"></i>
 								</button>
 							</div>
 						</div>
@@ -299,9 +349,10 @@
 							<thead style="border: 2px solid darkslategray">
 								<tr style="background-color: lightgray" >
 									<th style="text-align: center; font-size:10px; width:6%">DATA</th>
+									<th style="text-align: center; font-size:10px; width:3%">HORA</th>
 									<th style="text-align: center; font-size:10px; width:8%">RCA</th>
 									<th style="text-align: center; font-size:10px; width:6%">NUMPED</th>
-									<th style="text-align: left; font-size:10px; width: 3%">COD</th>
+									<th style="text-align: center; font-size:10px; width: 3%">COD</th>
 									<th style="text-align: center; font-size:10px; width:30%">CLIENTE</th>
 									<th style="text-align: center; font-size:10px; width:3%">PARC</th>
 									<th style="text-align: center; font-size:10px; width:3%">CARGA</th>
@@ -320,10 +371,14 @@
 							<?php foreach ($pedidosComCarga as $p):
 								if($p->numcarga == $c->numcarga):
 									if ($cargaNum!=$c->numcarga){
-									$cargaNum = $c->numcarga;}else{}
-							?>
+									$cargaNum = $c->numcarga;}else{} ?>	
 								<tr onmouseover="listaHoverIn(this)" onmouseout="listaHoverOut(this)" >
-									<td style="text-align: center"><?php echo $p->data ?></td>
+									<?php if ($p->obs == 'SD' && strtotime(Formatador::dataFormatUs2($p->data)) <= strtotime($data) ){ ?>	
+										<td style="text-align: center; background-color:tomato"><?php echo $p->data; ?></td>
+									<?php }else{ ?>
+										<td style="text-align: center"><?php echo $p->data; ?></td>
+										<?php } ?>
+									<td style="text-align: center"><?php echo $p->hora; ?></td>	
 									<td style="text-align: left; padding-left: 10px"><?php echo $p->rca ?></td>
 									<td style="text-align: right; padding-right: 10px" id="montNumped"><?php echo $p->numped ?></td>
 									<td style="text-align: center"><?php echo $p->cod ?></td>
@@ -335,16 +390,22 @@
 												<td style="text-align: left; padding-left: 5px"> <button style="width:25px" type="submit" class="btn btn-sm btn-warning"> <i class="fa fa-male fa-lg"></i> </button> <button style="width:35px" type="submit" class="btn btn-sm btn-success" onclick="getFaltasCli2('<?php echo $p->cod ?>')">
 									<i class="fas fa-truck fa-lg"></i>
 								</button> <?php echo $p->cliente ?> </td>
-													<?php $faux = 1; }else{  ?>
+													<?php $faux = 1; }else if($p->st == 0 && $p->calculast =='S'){  ?>
+														<td style="text-align: left; padding-left: 10px; background-color:cyan"> <button style="width:35px" type="submit" class="btn btn-sm btn-success" onclick="getFaltasCli2('<?php echo $p->cod ?>')">
+									<i class="fas fa-truck fa-lg"></i>
+								</button> <?php echo $p->cliente ?> </td>
+													<?php $faux = 1; }else {  ?>
 														<td style="text-align: left; padding-left: 10px"> <button style="width:35px" type="submit" class="btn btn-sm btn-success" onclick="getFaltasCli2('<?php echo $p->cod ?>')">
 									<i class="fas fa-truck fa-lg"></i>
 								</button> <?php echo $p->cliente ?> </td>
-													<?php $faux = 1; }
+													<?php $faux = 1; }  
 											}} if ($faux == 0) {
 											if($p->consumidorfinal == 'S'){?>
 											<td style="text-align: left; padding-left: 5px"> <button style="width:25px" type="submit" class="btn btn-sm btn-warning"> <i class="fa fa-male fa-lg"></i> </button> <?php echo $p->cliente ?></td>
+											<?php }else if($p->st == 0 && $p->calculast =='S'){ ?>
+												<td style="text-align: left; padding-left: 10px; background-color:cyan" ><?php echo $p->cliente ?> </td>
 											<?php }else{ ?>
-											<td style="text-align: left; padding-left: 10px"><?php echo $p->cliente ?> </td>
+												<td style="text-align: left; padding-left: 10px"><?php echo $p->cliente ?></td>
 											<?php }}
 											$faux = 0; ?>
 									<!-- fim de impressão de faltas e consumidor final -->
@@ -373,8 +434,12 @@
 										}} 
 								
 										?>
-									<td style="text-align: right; padding-right: 10px"><?php echo $p->valor ?></td>
+									<td style="text-align: right; padding-right: 10px"><?php echo $p->valor; $totValorCarga += $p->valor?></td>
+										<?php if($p->primeiracompra != '01/01/9999'){ ?>
 									<td style="text-align: left; padding-left: 10px"><?php echo $p->praca ?></td>
+										<?php }else{ ?>	
+											<td style="text-align: left; padding-left: 10px"><img src="../modCargas/Recursos/img/icon1compra.png" width="20px" height="20px" alt="Pcompra"> <?php echo $p->praca ?></td>	
+										<?php } ?>			
 									<td style="text-align: left; padding-left: 10px"><?php echo $p->cidade ?></td>
 									<td style="text-align: center"><?php echo $p->uf ?></td>
 									<td style="text-align: center"><?php echo $p->obs ?></td>
@@ -392,7 +457,7 @@
 						<div  class=""style="background-color: lightblue">
 							<div class="row">
 								<div class="col-md-2">
-									<h4 style="text-align:center" class="">Carga: <?php echo $cargaNum ?></h4>
+									<h4 style="text-align:center" class="">R$ <?php echo number_format($totValorCarga,'2',',','.')?></h4>
 								</div>
 								<div class="col-md-4">
 									<h4 style="text-align:center" class="">Peso Pendente: <?php echo number_format($totPesoP,'2',',','.') ?> kg</h4>
@@ -401,7 +466,7 @@
 									<h4 style="text-align:center" class="">Peso Liberado: <?php echo number_format($totPesoL,'2',',','.') ?> kg</h4>
 								</div>
 								<div class="col-md-2">
-									<h4 style="text-align:right" class="">Pedidos: <?php echo $qtPedCarg; $qtPedCarg = 0;$totPesoL=0; $totPesoP=0; $cargaNum=0; ?></h4>
+									<h4 style="text-align:right" class="">Pedidos: <?php echo $qtPedCarg; $qtPedCarg = 0;$totPesoL=0; $totPesoP=0; $cargaNum=0; $totValorCarga=0?></h4>
 								</div>
 							</div>
 						</div>
@@ -515,7 +580,7 @@
 		<!-- FIM MODAL -->
 		<!-- INICIO MODAL PARA VISUALIZAR PENDENCIAS -->
 		<div class="modal" tabindex="-1" role="dialog" id="modalVerPendencias">
-			<div class="modal-dialog" role="document">
+		<div class="modal-dialog modal-lg" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title">Pendencias da Carga</h5>
@@ -527,12 +592,21 @@
 						<div class="row">
 							<div class="col-md-12" style="overflow:auto; height: 450px">
 								<table style="width:100%"> 
-									<thead>
+								<thead>
+										<tr >
+										<th colspan="4"style="width:40px; text-align:center">COMERCIAL</th>
+										<th colspan="3"style="width:40px; text-align:center">PCP</th>
+										</tr>
 										<tr>
 											<th style="width:40px; text-align:center">COD</th>
 											<th style="padding-left:10px">PRODUTO</th>
 											<th style="width:40px; text-align:center">PEDIDO</th>
-											<th style="width:40px; text-align:center">DISP</th>
+											<th style="width:40px; text-align:center">ESTOQUE</th>
+
+											<th style="width:40px; text-align:center">STATUS</th>
+											<th style="width:40px; text-align:center">QTD</th>
+											<th style="width:40px; text-align:center">PREVISÃO</th>
+											
 										</tr>
 									</thead>
 									<tbody  id="pendencias">
@@ -553,7 +627,7 @@
 
 		<!-- INICIO MODAL PARA VISUALIZAR PENDENCIAS PEDIDOS -->
 		<div class="modal" tabindex="-1" role="dialog" id="modalVerPendenciasPedidos">
-			<div class="modal-dialog" role="document">
+			<div class="modal-dialog modal-lg" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title">Pendencias do Pedido</h5>
@@ -565,12 +639,21 @@
 						<div class="row">
 							<div class="col-md-12" style="overflow:auto; height: 450px">
 								<table style="width:100%"> 
-									<thead>
+								<thead>
+										<tr >
+										<th colspan="4"style="width:40px; text-align:center">COMERCIAL</th>
+										<th colspan="3"style="width:40px; text-align:center">PCP</th>
+										</tr>
 										<tr>
 											<th style="width:40px; text-align:center">COD</th>
 											<th style="padding-left:10px">PRODUTO</th>
 											<th style="width:40px; text-align:center">PEDIDO</th>
-											<th style="width:40px; text-align:center">DISP</th>
+											<th style="width:40px; text-align:center">ESTOQUE</th>
+
+											<th style="width:40px; text-align:center">STATUS</th>
+											<th style="width:40px; text-align:center">QTD</th>
+											<th style="width:40px; text-align:center">PREVISÃO</th>
+											
 										</tr>
 									</thead>
 									<tbody  id="pendenciasPedidos">
@@ -620,6 +703,7 @@
 									<tbody  id="pendenciasFaltas">
 									</tbody>
 								</table>
+								<b><p><p><div id="info" style="text-align:left"></div></b>
 							</div>
 						</div>
 					</div>
@@ -632,8 +716,8 @@
 		<!-- FIM MODAL -->
 
 		<!-- INICIO MODAL PARA VISUALIZAR SALDO CARGA -->
-		<div class="modal"  role="dialog" id="modalSaldoCarga">
-			<div class="modal-dialog" role="document">
+		<div class="modal"  role="dialog" id="modalSaldoCarga" >
+			<div class="modal-dialog modal-lg" role="document">
 				<div class="modal-content" id="contentSaldo">
 					<div class="modal-header">
 						<h5 class="modal-title">Consolidado Pendente por Carga</h5>
@@ -643,20 +727,30 @@
 					</div>
 					<div class="modal-body" >
 						<div class="row">
-							<div class="col-md-12" style="overflow:auto; height: 350px">
+							<div class="col-md-12" style="overflow:auto; height: 450px; ">
 								<table id="tblSaldoCarga" style="width:100%"> 
 									<thead>
+										<tr >
+										<th colspan="4"style="width:40px; text-align:center">COMERCIAL</th>
+										<th colspan="3"style="width:40px; text-align:center">PCP</th>
+										</tr>
 										<tr>
 											<th style="width:40px; text-align:center">COD</th>
 											<th style="padding-left:10px">PRODUTO</th>
 											<th style="width:40px; text-align:center">PEDIDO</th>
 											<th style="width:40px; text-align:center">ESTOQUE</th>
+
+											<th style="width:40px; text-align:center">STATUS</th>
+											<th style="width:40px; text-align:center">QTD</th>
+											<th style="width:40px; text-align:center">PREVISÃO</th>
+											
 										</tr>
 									</thead>
 									<tbody id="saldoCarga">
 									</tbody>
 								</table>
 								<b><div id="pesoTotal4" style="text-align:right"></div></b>
+								<b><div id="pesoTotal5" style="text-align:right"></div></b>
 							</div>
 						</div>
 					</div>
@@ -670,6 +764,7 @@
 
 
 		<script src="../../recursos/js/jquery.min.js"></script>
+		<script src="../../recursos/css/jquery.formatNumber-master/jquery.formatNumber-0.1.1.min.js"></script>
 		<script src="../../recursos/js/bootstrap.min.js"></script>
 		<script src="../../recursos/js/scripts.js"></script>
 		<script src="../../recursos/js/Chart.bundle.min.js"></script>
@@ -689,7 +784,7 @@
 	$(document).ready(function () {
 
 		$.each($('.pos'), function (index, value) {
-			value.addEventListener("click", console.log('ok'));
+			//value.addEventListener("click", console.log('ok'));
 			//console.log($(value).prop("id"));
 		});
 
@@ -764,11 +859,14 @@
 							+'<td style="padding-left:10px">'+t['DESCRICAO']+'</td>'
 							+'<td style="width:40px; text-align:center">'+t['QT']+'</td>'
 							+'<td style="width:40px; text-align:center">'+t['QTDISP']+'</td>'
+							+'<td style="width:120px; text-align:center">'+t['STATUS']+'</td>'
+							+'<td style="width:40px; text-align:center">'+t['QTPROD']+'</td>'
+							+'<td style="width:80px; text-align:center">'+t['PREVISAO']+'</td>'
 						+'</tr>';
 				})
 				$('#pendencias').empty();
 				$('#pendencias').append(body);
-				$('#pesoTotal').text("Peso da pendencia: "+parseFloat(peso).toFixed(2)+" kg");
+				$('#pesoTotal').text("Peso da pendência "+parseFloat(peso).toFixed(2)+" kg");
 				$('#modalVerPendencias').modal('toggle');
 			}
 		});
@@ -815,6 +913,9 @@
 							+'<td style="padding-left:10px;">'+t['DESCRICAO']+'</td>'
 							+'<td style="width:40px; text-align:center">'+t['QT']+'</td>'
 							+'<td style="width:40px; text-align:center">'+t['QTDISP']+'</td>'
+							+'<td style="width:120px; text-align:center">'+t['STATUS']+'</td>'
+							+'<td style="width:40px; text-align:center">'+t['QTPROD']+'</td>'
+							+'<td style="width:80px; text-align:center">'+t['PREVISAO']+'</td>'
 						+'</tr>';
 					}else{
 						body += '<tr>'
@@ -822,12 +923,15 @@
 							+'<td style="padding-left:10px; color:red">'+t['DESCRICAO']+'</td>'
 							+'<td style="width:40px; color:red; text-align:center">'+t['QT']+'</td>'
 							+'<td style="width:40px; color:red; text-align:center">'+t['QTDISP']+'</td>'
+							+'<td style="width:120px; text-align:center">'+t['STATUS']+'</td>'
+							+'<td style="width:40px; text-align:center">'+t['QTPROD']+'</td>'
+							+'<td style="width:80px; text-align:center">'+t['PREVISAO']+'</td>'
 						+'</tr>';
 					}				
 				})
 				$('#pendenciasPedidos').empty();
 				$('#pendenciasPedidos').append(body);
-				$('#pesoTotal9').text("Peso da pendencia: "+parseFloat(peso2).toFixed(2)+" kg");
+				$('#pesoTotal9').text("Peso da pendência "+parseFloat(peso2).toFixed(2)+" kg");
 				$('#modalVerPendenciasPedidos').modal('toggle');
 			}
 		});
@@ -871,6 +975,7 @@
 				})
 				$('#pendenciasFaltas').empty();
 				$('#pendenciasFaltas').append(body);
+				$('#info').text("No winthor, imprimir o recibo da falta na rotina 8116.");
 				$('#modalVerPendenciasfaltas').modal('toggle');
 			}
 		});
@@ -943,13 +1048,31 @@
 			}
 		});
 	}
+	// Listen for click on toggle checkbox
+	function selectall(){
+		$('#select-all').click(function(event) {   
+			if(this.checked) {
+				// Iterate each checkbox
+				$(':checkbox').each(function() {
+					this.checked = true;                        
+				});
+			} else {
+				$(':checkbox').each(function() {
+					this.checked = false;                       
+				});
+			}
+		});
+	}
 		/* Função Ajax para somar cargas montadas selecionadas com checkbox */
 	function saldoCargas(){
 		arr = [];
+		soma = 0;
+		var elements = document.getElementsByClassName("hid_id");
+		//var value = elements[0].value;
 		$(".chbResumo").find('input[type="checkbox"]:checked').each(function (c, elm) {
 			arr.push(elm.id)
+			soma+=(parseFloat(elm.value));
     	});
-
 		if(arr.length > 0){
 			$.ajax({
 			type: 'POST',
@@ -961,17 +1084,35 @@
 					$('#saldoCarga').text("");
 					pesoTotalPen =0;
 					arr.forEach(function(t){
-						body += '<tr>'
+						if(t['PROMO']==t['CODPROD']){
+						body += '<tr style="font-size: 13px">'
+								+'<td style="width:40px; text-align:center; background-color: yellow">'+t['CODPROD']+'</td>'
+								+'<td style="padding-left:10px">'+t['DESCRICAO']+'</td>'
+								+'<td style="width:60px; text-align:center">'+t['QT']+'</td>'
+								+'<td style="width:60px; text-align:center">'+t['QTEST']+'</td>'
+								+'<td style="width:120px; text-align:center">'+t['STATUS']+'</td>'
+								+'<td style="width:40px; text-align:center">'+t['QTPROD']+'</td>'
+								+'<td style="width:80px; text-align:center">'+t['PREVISAO']+'</td>'
+						}else{
+							body += '<tr style="font-size: 13px">'
 								+'<td style="width:40px; text-align:center">'+t['CODPROD']+'</td>'
 								+'<td style="padding-left:10px">'+t['DESCRICAO']+'</td>'
-								+'<td style="width:40px; text-align:center">'+t['QT']+'</td>'
-								+'<td style="width:40px; text-align:center">'+t['QTEST']+'</td>'
+								+'<td style="width:60px; text-align:center">'+t['QT']+'</td>'
+								+'<td style="width:60px; text-align:center">'+t['QTEST']+'</td>'
+								+'<td style="width:120px; text-align:center">'+t['STATUS']+'</td>'
+								+'<td style="width:40px; text-align:center">'+t['QTPROD']+'</td>'
+								+'<td style="width:80px; text-align:center">'+t['PREVISAO']+'</td>'
+						}
+
+								
 					pesoTotalPen = pesoTotalPen + parseFloat(t['PESOPENDENTE']);
 					})
 					$('#pesoTotal4').empty();
+					$('#pesoTotal5').empty();
 					$('#saldoCarga').empty();
 					$('#saldoCarga').append(body);	
-					$('#pesoTotal4').text("Peso da pendencia: "+parseFloat(pesoTotalPen).toFixed(2)+" kg");
+					$('#pesoTotal4').text("Peso da pendência "+parseFloat(pesoTotalPen).toFixed(2)+" kg");
+					$('#pesoTotal5').text("Valor Total: R$ "+(soma).toFixed(2));
 					$('#modalSaldoCarga').modal('toggle');	
 				}
 			});
@@ -1107,7 +1248,6 @@
 	function resumoHoverOut(elm){
 		$(elm).css('background-color', 'transparent')
 	}
-
 
 	function listaHoverIn(elm){
 		$(elm).css('background-color', 'gold')

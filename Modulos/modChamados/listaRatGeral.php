@@ -4,7 +4,7 @@
 	//echo json_encode($_SESSION);
 	//echo $_SESSION['codsetor'];
 
-	if($_SESSION['codsetor'] == 0 ||$_SESSION['codsetor'] == 1){
+	if($_SESSION['codsetor'] == 0 ||$_SESSION['codsetor'] == 1 ||$_SESSION['codsetor'] == 12){
 		header("location:listaRatDiretoria.php");
 	}
 	//$rat = ListaRatControl::getListaRatGeral();

@@ -1,0 +1,79 @@
+body{
+    background-color: #002695;
+}
+
+.logo{
+    display: inline;
+   
+    
+}
+.usuario{
+    display: inline;
+}
+.usuario ul{
+    display: inline;
+    color:white;
+    vertical-align: bottom;
+    text-align: left;
+    position: absolute;
+    top: 25px; left: 55%;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    line-height: 1.2em;
+    
+}
+
+.principal{
+    
+    background-color: white;
+    width: auto;
+    padding: 0;
+    border-radius: 5px;
+    margin: 3% 3% 0 3%;
+}
+
+.dropbtn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    
+  }
+  
+  .dropdown-content p {
+    background-color: #f4f4f4;
+    border-left: 6px solid #005282;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: inline;
+  }
+  
+  .menu-itens input{
+    margin: 0.8rem 1rem 0.8rem 1rem;
+  }
+
+  label{
+      width: 100px;
+  }
+  .dropdown-content .menu-itens:hover {background-color: #ddd;}
+  
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  .dropdown:hover .dropbtn {background-color: #3e8e41;}

@@ -52,6 +52,7 @@ class ProdDiaria{
 
 
     public static function getProdResumo($data){
+       
         $data = ProdDiaria::formatador($data);
         $sql = new sqlOra();
         $ret = $sql->select("SELECT tipo, cod, count(numop)qt, TO_CHAR(sum(qtproduzida),'9999999.99') total
@@ -83,6 +84,7 @@ class ProdDiaria{
         }
 
         return $arrRet;
+        return 'TESTE';
     }
 
 

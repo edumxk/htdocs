@@ -1,4 +1,6 @@
-html,body {height:100%; width: 100%; font-size: small;}
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Montserrat:wght@200&display=swap');
+
+html,body {height:100%; width: 100%; font-size: small; font-family: 'Lato', sans-serif;}
 .header {
     width: 95%;
     height: 70px;
@@ -87,17 +89,172 @@ html,body {height:100%; width: 100%; font-size: small;}
 .red {
     background-color: lightsalmon !important;
   }
+
+  .loader {
+    border: 8px solid #f3f3f3; /* Light grey */
+    border-top: 8px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+  }
   
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
 
+.logo{
+    display: inline;
+    width: 300px;
+    position: relative;
+    left: 10%;
+    
+}
+.usuario{
+    display: inline;
+}
+.usuario ul{
+    display: inline;
+    color:white;
+    vertical-align: bottom;
+    text-align: left;
+    position: absolute;
+    top: 7%; left: 70%;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    line-height: 1.2em;
+    
+}
 
+/* CSS DA PAGINA HOME BY EDUARDO */
+.icones-principal{
+    border: 1px solid black;
+    margin: 15px 5% 0 5%;
+    background-color: white;
+    display: inline-block;
+    width: 90%;
+    text-align: center;
+    border-radius: 5px;
+    padding-right: 3%;
 
+    
+}
+.icones-titulo h1{
+    font-size: 2.5em;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+.icones{
+    display: inline-block;
+    margin: 0 0 5% 5%;
+}
+.icones:hover{
+    background-color: rgba(0, 71, 171, 0.1);
+    border-radius: 10px;
+    font-weight: bold;
+    box-shadow: rgba(0, 71, 171, 0.2) ;
+    cursor: pointer;
+    transition: 100ms;
+}
 
+.cartao{
+    border: 1px solid black;
+    display: inline-block;
+    width: 140px; 
+    height: 140px;
+    
+}
+.cartao-title{
+    font-size: 1.5em;
+    margin: 8px 0 8px 0;
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
+}
 
-@media print {
-    .header {
-        display: none !important;
+.botao{
+    width: 140px; 
+    height: 140px;
+    background-color: rgba(0, 71, 171, 0.15);
+    vertical-align: bottom;
+    display: inline-block;
+    padding: 10px;
+    border-radius: 10px;
+    
+}
+.complemento{
+    background-color: #002695; 
+    height:10%;
+}
+
+@media (max-width: 600px){
+    .usuario ul{
+        display: inline;
+        color:white;
+        vertical-align: bottom;
+        text-align: left;
+        position: absolute;
+        top: 3%; left: 65%;
+        font-size: 1em;
+        text-transform: uppercase;
     }
-    #mybar1 {
-        display: none !important;
+    .icones-principal{
+        margin: 0 2% 0 2%;
+        width: 96%;
+        text-align: center;
+    }
+    .logo img{
+        width: 196px;
+    }
+    .logo{
+        height: 300px;
+    }
+    .icones{
+        display: inline-block;
+        margin: 0 0 3% 3%;
+    }
+    .cartao{
+        border: 1px solid black;
+        display: inline-block;
+        width: 140px; 
+        height: 140px;
+        
+    }
+    .cartao-title{
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+    }
+    .botao{
+        width: 140px; 
+        height: 140px; 
+    }
+}
+@media (max-width: 330px){
+    .usuario ul{
+        top: 1%; left: 60%;
+        font-size: 0.8em;
+        text-transform: uppercase;
+    }
+    .logo img{
+        width: 155px;
+    }
+    .icones{
+        display: inline-block;
+        margin: 0 0 1% 1%;
+    }
+    .cartao{
+        border: 1px solid black;
+        display: inline-block;
+        width: 120px; 
+        height: 120px;
+        
+    }
+    .botao{
+        width: 120px; 
+        height: 120px; 
+    }
+    .cartao-title{
+        font-size: 1.1em;
+        margin: 5px 0 5px 0;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
     }
 }

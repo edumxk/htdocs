@@ -7,7 +7,7 @@ class CorretivaDao{
     public static function getCorretiva($numrat){
         $sql = new SqlOra();
 
-        $ret = $sql->select("SELECT c.numrat, u.codcusto, u.custo, c.tipo,  c.codprod, c.despesa, to_number(c.qt) qt, to_char(c.valor, '9999.99') valor
+        $ret = $sql->select("SELECT c.numrat, u.codcusto, u.custo, c.tipo,  c.codprod, c.despesa, to_number(c.qt) qt, to_char(c.valor, '9999.99') valor, c.obs
             FROM ratcorretivai c inner join ratcusto u on c.codcusto = u.codcusto
             WHERE c.numrat = :numrat",
                 array(":numrat"=>$numrat)
@@ -37,19 +37,20 @@ class CorretivaDao{
         return $ret;
     }
 
-    public static function setAcao($tipo, $numrat, $codprod, $despesa, $qt, $valor, $custo){
+    public static function setAcao($tipo, $numrat, $codprod, $despesa, $qt, $valor, $custo, $obs){
         $sql = new SqlOra();
 
         try{
-            $ret = $sql->insert('INSERT INTO ratcorretivai (numrat, tipo, codprod, despesa, qt, valor, codcusto)
-                values (:numrat, :tipo, :codprod, :despesa, :qt, :valor, :custo)',array(
+            $ret = $sql->insert('INSERT INTO ratcorretivai (numrat, tipo, codprod, despesa, qt, valor, codcusto, obs)
+                values (:numrat, :tipo, :codprod, :despesa, :qt, :valor, :custo, :obs)',array(
                     ":numrat"=>$numrat,
                     ":tipo"=>$tipo,
                     ":codprod"=>$codprod,
                     ":despesa"=>$despesa,
                     ":qt"=>$qt,
                     ":valor"=>$valor,
-                    ":custo"=>$custo
+                    ":custo"=>$custo,
+                    ":obs"=>$obs
             ));
             
             return 'ok';

@@ -1,0 +1,135 @@
+body{
+    background-color: #002695;
+}
+
+.logo{
+    display: inline;
+   
+    
+}
+.usuario{
+    display: inline;
+}
+.usuario ul{
+    display: inline;
+    color:white;
+    vertical-align: bottom;
+    text-align: left;
+    position: absolute;
+    top: 25px; left: 55%;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    line-height: 1.2em;
+    
+}
+
+.principal{
+    
+    background-color: white;
+    width: auto;
+    padding: 0;
+    border-radius: 5px;
+    margin: 3% 3% 0 3%;
+}
+
+.titulo{
+    text-align: center;
+    font-family: Verdana, sans-serif;
+    padding: 1.5rem 3%;
+    
+}
+.titulo h1{
+    padding: .5rem 0;
+    font-size: 2.2rem;
+}
+.titulo h2{
+    padding: .5rem 3rem;
+    font-size: 1.5rem;
+}
+.formulario-itens-titulo{
+    text-align: center;
+    
+}
+.formulario{
+    margin: 0 3rem 0 3rem;
+    padding: 1rem 0 5% 0;
+    width: auto;
+}
+.formulario-itens{
+    display: inline-block;
+    width: 100%;
+    border: 2px ridge #f0f0f0;/* temp*/
+    background-color: #f0f0f0;
+    text-align: center;
+    border-radius: 7px;
+    margin: 0 0 2rem 0;
+    padding: 2% 0;
+
+}
+
+.formulario-itens-img{
+    display: inline;
+    position: relative;
+    left: -50px;
+    top: -50px;
+}
+.formulario-itens-img img{
+   border-radius: 5px;
+   width: 90px;
+   height: 90px;
+}
+
+#contrario{
+    transform: rotateY(180deg);
+}
+.formulario-itens-codigo{
+    display: inline-block;
+}
+
+.formulario-itens-produto{
+    display: inline-block;
+    margin: 2rem 0;
+    
+}
+
+label{ 
+    display: block;
+    font-size: 2rem;
+}
+
+.formulario-itens-codigo input{
+    width: 6rem;
+}
+
+.formulario-itens-produto input{
+    width: 25rem;
+}
+
+.formulario-itens-produto a{
+  border: 1px outset rgb(118, 118, 118);
+ box-sizing: border-box;
+  padding: 1px 6px;
+  line-height: 24px;
+  font-size: 16px;
+  width: auto;
+  height: 30px;
+  display: inline-block;
+  margin-left: -5px;
+  background-color: rgba(150,150,150, 0.3);
+  border-radius: 5px;
+  cursor: pointer;
+
+}
+.formulario-itens-produto a:active{
+    background-color: rgba(150,150,150, 1);
+
+}
+
+.formulario-botao{
+    text-align: right;
+}
+.busca{
+    margin: 0 0 0 -5px;
+    display: inline-block;
+}

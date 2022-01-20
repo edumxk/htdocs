@@ -31,7 +31,6 @@
             return $texto;
         }
 
-
         public static function formatarData($data){
             if($data == null){
                 return null;
@@ -81,6 +80,16 @@
             $arr = explode('/',$data);
             $ret = $arr[2].'/'.$arr[1].'/'.$arr[0];
             return $ret;
+        }
+        function dataFormatUs2($data){
+            $arr = explode('/',$data);
+            $ret = $arr[2].'-'.$arr[1].'-'.$arr[0];
+            return $ret;
+        }
+        public static function formatador2($data){
+            $d = explode('-', $data);
+            $saida = $d[2].'/'.$d[1].'/'.$d[0];
+            return $saida;
         }
 
         function explodir($divisor, $string){

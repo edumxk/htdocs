@@ -60,13 +60,8 @@
 	<link href="../../recursos/css/style.css" rel="stylesheet">
 	<link href="recursos/css/table.css" rel="stylesheet">
 	<link href="../../recursos/css/fawsome/css/all.css" rel="stylesheet">
-	
-
-
 
 </head>
-
-
 <body style="background-color: teal;">
 
 
@@ -118,18 +113,12 @@
 				<div class="col-md-12">
 					<canvas id="mybar1" height="200"></canvas>
 				</div>
-
 			</div>
-
-
-
 			<!-- Seção do dia -->
-
 			<div class="col-md-12" style="padding-bottom: 10px;">
 				<div id="secao">
 					<div ><?php echo $data?></div>
 				</div>
-
 				<div id="dia">
 					<!-- Tabela Cliente Retira -->
 					<div class="col-md-12">
@@ -193,14 +182,8 @@
 
 						</div>
 					</div>
-
-
-
 					<?php for($i=0; $i<count($cargas); $i++):?>
 						<?php if($cargas[$i]['NUMCAR'] <> 0):?>
-
-
-
 					<!-- Tabelas de Carregamentos -->
 					<div id="cargas">
 						<div class="col-md-12">
@@ -233,7 +216,6 @@
 													for($c=0; $c<count($fat); $c++):
 												?>
 												<?php if($fat[$c]['NUMCAR'] == $cargas[$i]['NUMCAR']):?>
-
 												<tr onmouseover="listaHoverIn(this)" onmouseout="listaHoverOut(this)">
 												<td style="text-align: left; padding-left:10px"><?php echo $fat[$c]['NOME']?></td>
 												<td style="text-align: center"><?php echo $fat[$c]['NUMNOTA']?></td>
@@ -243,7 +225,6 @@
 												<td style="text-align: right; padding-right:10px"><?php echo number_format($fat[$c]['TOTPESO'],2,'.',',')?></td>
 												<td style="text-align: left; padding-left:10px"><?php echo $fat[$c]['NOMECIDADE']?></td>
 												<td style="text-align: center"><?php echo $fat[$c]['UF']?></td>
-
 												</tr>
 												<?php 
 												$vltotal += $fat[$c]['VLTOTAL'];
@@ -267,7 +248,6 @@
 							</div>
 						</div>
 					</div>
-
 						<?php endif ?>
 					<?php endfor ?>	
 					<!-- Resumo Final -->
@@ -281,17 +261,7 @@
 						</div>
 					</div>
 				</div>
-
 			</div>
-
-
-
-
-
-
-
-
-
 			<div class="col-md-12">
 				<div class="col-md-12">
 					<div class="row" style="padding-bottom: 10px;">
@@ -330,10 +300,10 @@
 		data: {
 			labels: labels,
 			datasets: [{
-				label: 'Peso Faturado',
+				label: 'Peso Produzido',
 				data: dataset,
 				backgroundColor: 'rgba(54, 162, 235, 0.8)',
-				borderColor:'rgba(54, 162, 235, 0.8)',
+				borderColor:'rgba(255, 20, 147, 0.8)',
 				borderWidth: 1
 			}]
 		},

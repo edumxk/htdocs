@@ -430,7 +430,7 @@
 									<?php endforeach?>
 								</tbody>
 								<tfoot>
-									<tr style="; border-left: 3px solid darkslategray; border-right: 3px solid darkslategray; border-bottom: 3px solid darkslategray">
+									<tr style="border-left: 3px solid darkslategray; border-right: 3px solid darkslategray; border-bottom: 3px solid darkslategray">
 										<th colspan="5"></th>
 										<th colspan="1" style="background-color: lightgray; text-align:right; padding-right:5px"><?php echo number_format($subTotalPatologia,2,',','.') ?></th>
 										<th></th>

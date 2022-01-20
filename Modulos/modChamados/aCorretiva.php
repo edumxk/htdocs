@@ -220,7 +220,7 @@ $chamado = $chamado->getRat($numrat);
 									<?php $vltotal = 0; 
 										foreach($chamado->produtos as $p) :?>
 									<tr>
-										<th scope="row" style="widht:50px" id="cellCod">
+										<th scope="row" style="width:50px" id="cellCod">
 											<?php echo $p->codprod?>
 										</th>
 										<td id="tbProduto">
@@ -414,20 +414,24 @@ $chamado = $chamado->getRat($numrat);
 															<div class="col-md-12" style="text-align: center">
 																<h5>Custear Cliente:</h5>
 															</div>
-															<div class="col-md-2"></div>
+															<div class="col-md-1">Selecione:</div>
+															
 															<div class="col-md-2">Tipo:</div>
 															<div class="col-md-5">Despesa:</div>
 															<div class="col-md-1">Valor.:</div>
 															<div class="col-md-2"></div>
 														</div>
-
 														<div class="row">
-															<div class="col-md-2">
+															<div class="col-md-1">
+																<select name="tipopag" id="tipopag">
+																	<option value="1">Produtos</option>
+																	<option value="2">Dinheiro</option>
+																</select>
 															</div>
+															
 															<div class="col-md-2">
 																<div class="form-group" id="form-custos">
 																	<select class="form-control form-control-sm" id="custos">
-																		
 																	</select>
 																</div>
 															</div>
@@ -437,13 +441,31 @@ $chamado = $chamado->getRat($numrat);
 															<div class="col-md-1">
 																<input id="valor" type="text" class="form-control form-control-sm">
 															</div>
-
+														</div>
+													
+													
+														<div class="row" style="padding-top: 10px; padding-bottom: 10px; font-weight: 700">
+															<div class="col-md-12" style="text-align: center">
+																<h5>Custear em Produtos:</h5>
+															</div>
+															<div class="col-md-2"></div>
+															<div class="col-md-1">Código:</div>
+															<div class="col-md-5">Produto:</div>
+														</div>
+														<div class="row">
+															<div class="col-md-2"></div>
 															<div class="col-md-1">
-																<button type="submit" class="btn btn-primary btn-sm" onclick="incluirProd(this)">Incluir</button>
+																<input type="text" id="codprod" class="form-control form-control-sm" onfocusout="getProdTroca(this)" >
+															</div>
+															<div class="col-md-5">
+															<input type="text"  id="trocaJson" class="form-control form-control-sm" disabled> 
 															</div>
 														</div>
-
+														<div class="col-md-1">
+																<button type="submit" class="btn btn-primary btn-sm" onclick="incluirProd(this)">Incluir</button>
+														</div>
 													</div>
+
 												</div>
 											</div>
 										</div>
@@ -692,7 +714,9 @@ $chamado = $chamado->getRat($numrat);
 						tabela += '<th scope="row" id="tbTipo">' + arr[i].tipo + '</th>'
 						tabela += '<td>' + arr[i].codprod + '</td>'
 						tabela += '<td>'+arr[i].custo+'</td>'
-						tabela += '<td id="tbDespesa">' + arr[i].despesa + '</td>'
+
+							tabela += '<td id="tbDespesa">' + arr[i].despesa +'</td>'
+		
 						tabela += '<td style="text-align: center">' + arr[i].qt + '</td>'
 						tabela += '<<td style="text-align: center">' + arr[i].valor.toLocaleString('pt-BR') + '</td>'
 						tabela += '<td style="text-align: center;"><button type="button" class="btn-xs btn-danger" onclick="delProd(this)">x</button></td>'
@@ -792,10 +816,11 @@ $chamado = $chamado->getRat($numrat);
 			var codcli = "<?php echo $chamado->codCli?>"//$("#codcli").val();
 
 
-			////console.log(codcli);
+			console.log(codcli);
 
 			var codprod = $(elm).parent().parent().find("#codprod").val();
 			var produto = $(elm).parent().parent().find("#trocaJson").val();
+			var obs = $(elm).parent().parent().find("#obs").val();
 			var qt = $(elm).parent().parent().find("#qt").val();
 			if(qt === null){
 				qt = 0;
@@ -804,16 +829,17 @@ $chamado = $chamado->getRat($numrat);
 
 			var acao = $(elm).parent().parent().parent().parent().attr('id');
 
-			var custo = $(elm).parent().parent().find("#custos").val();;
+			var custo = $(elm).parent().parent().find("#custos").val();
 
 
-
-			if (acao != 'CUSTEAR') {
+			
+			if (custo == undefined) {
 				if($("#btnTroca").attr('class') != 'btn btn-warning'){
 					acao = 'BONIFICAR';
+					
 				}
 				if (/*qt > 0 && */produto != "") {
-					var dados = { 'acao': acao, 'numrat': numrat, 'codcli':codcli, 'codprod': codprod, 'produto': produto, 'qt': qt, 'custo':0 };
+					var dados = { 'acao': acao, 'numrat': numrat, 'codcli':codcli, 'codprod': codprod, 'produto': produto, 'qt': qt, 'custo':0, 'obs': "" };
 					$.ajax({
 						type: 'POST',
 						url: 'controle/corretivaControle.php',
@@ -836,22 +862,24 @@ $chamado = $chamado->getRat($numrat);
 
 						}
 					});
+					
 				} else {
 					alert("Dados incompletos!");
 				}
 			} else {
-				var despesa = $("#despesa").val();
 				
-				var valor = $("#valor").val();
-				if (valor > 0 && despesa != "") {
-
-					var dados = { 'acao': acao, 'numrat': numrat, 'codcli':codcli, 'codprod': 0, 'produto': despesa, 'qt': valor, 'custo':custo };
+				var despesa = $(elm).parent().parent().find("#trocaJson").val();
+				var obs = $(elm).parent().parent().find("#despesa").val();
+				var tipo = $(elm).parent().parent().find("#tipopag").val();
+				var valor = $(elm).parent().parent().find("#valor").val();
+				if (tipo == "1") {
+					var dados = { 'acao': "CUSTEAR", 'numrat': numrat, 'codcli':codcli, 'codprod': codprod, 'produto': despesa, 'qt': valor, 'custo':custo, 'obs': obs, 'tipo': tipo };
 					$.ajax({
 						type: 'POST',
 						url: 'controle/corretivaControle.php',
 						data: { 'action': 'setAcao', 'query': dados },
 						success: function (response) {
-							//console.log(response);
+							console.log(response);
 							if (response.includes("ok")) {
 								setTabela();
 								acao = null;
@@ -865,8 +893,34 @@ $chamado = $chamado->getRat($numrat);
 							$("#qt").val("");
 							$("#despesa").val("");
 							$("#valor").val("");
+							$("#trocaJson").val("");
 						}
 					});
+				}else{
+					var dados = { 'acao': "CUSTEAR", 'numrat': numrat, 'codcli':codcli, 'codprod': 1, 'produto': obs, 'qt': valor, 'custo':custo, 'obs': 'DINHEIRO','tipo': tipo };
+					$.ajax({
+						type: 'POST',
+						url: 'controle/corretivaControle.php',
+						data: { 'action': 'setAcao', 'query': dados },
+						success: function (response) {
+							console.log(response);
+							if (response.includes("ok")) {
+								setTabela();
+								acao = null;
+								dados = null;
+							}
+							if (response == 'EXISTE') {
+								alert("Correção já cadastrada no chamado.");
+							}
+							$("#codprod").val("");
+							$("#produto").val("");
+							$("#qt").val("");
+							$("#despesa").val("");
+							$("#valor").val("");
+							$("#trocaJson").val("");
+						}
+					});
+
 				}
 			}
 		}

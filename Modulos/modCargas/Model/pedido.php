@@ -25,6 +25,17 @@ class Pedido{
     public $conferencia;
     public $vlparc;
     public $qtparc;
+    public $st;
+    public $ivafonte;
+    public $fontest;
+    public $calculast;
+    public $isentodifal;
+    public $primeiracompra;
+    public $hora;
+    
+    
+    
+    
     
     public static function getListaPedidos(){
 
@@ -35,10 +46,9 @@ class Pedido{
         $sql = new SqlOra();
 
         $ret = $sql->select(
-            "SELECT t.data, t.numped, t.codusur, t.nome, t.codcli, t.cliente, t.consumidorfinal, t.numcar, 
+            "SELECT t.data,t.hora, t.numped, t.codusur, t.nome, t.codcli, t.cliente, t.consumidorfinal, nvl(dtprimcompra,'01/01/9999') primeiracompra, t.numcar, st, usaivafontediferenciado, calculast, clientefontest, isentodifaliquotas,
             t.posicao, t.peso, to_char(round(t.valor, 2), '999999.99') valor, t.nomecidade, t.uf, t.codpraca, t.praca, round(t.valor/qtparc,2) vlparc, qtparc,
-            fc.POS POSFALTA,
-             
+                        
                 CASE WHEN TROCA = '0' THEN(
                      CASE WHEN EMPRESTIMO = '0' THEN(
                           CASE WHEN BONIFICACAO = '0' THEN(
@@ -47,9 +57,9 @@ class Pedido{
                  )ELSE BONIFICACAO END)ELSE EMPRESTIMO END)ELSE TROCA END AS MOV,
                  nvl(numcarga,0) numcarga, c1.conferencia
           from (
-                 SELECT kc.data, kc.numped, kc.codusur, ku.nome, kc.codcli, kl.cliente, kl.consumidorfinal, kc.posicao,
+                 SELECT kc.data, to_char(to_date(kc.hora||to_char(kc.minuto,'00'), 'hh24mi'),'hh24:mi') hora, kc.numped, kc.codusur, ku.nome, kc.codcli, kl.cliente, kl.consumidorfinal, kl.dtprimcompra, kc.posicao,
                         to_char(round(sum(kp.pesobruto * ki.qt), 2), '999999.99') peso,
-                        sum(ki.pvenda * ki.qt) valor,
+                        sum(ki.pvenda * ki.qt) valor, round(sum(nvl(ki.st,0)),2) st, kl.usaivafontediferenciado, kl.calculast, kl.clientefontest, kl.isentodifaliquotas,
                         kd.nomecidade, kd.uf, kc.codpraca, kc.numcar, kpr.praca,REGEXP_COUNT(kpl.descricao,'/',1,'i')+1 qtparc, 
                         CASE
                           when (upper(kc.obs) like '%RETIRA%') OR
@@ -100,12 +110,10 @@ class Pedido{
                         
                         
                    where kc.posicao not in ('C', 'F')
-                  group by kc.data, kc.numped, kc.codusur, ku.nome, kc.codcli, kl.cliente, kl.consumidorfinal, kc.posicao,
-                           kd.nomecidade, kd.uf, kc.codpraca, kc.obs, kc.obs1, kc.obs2, kc.obsentrega1,
-                           kc.obsentrega2, kc.obsentrega3, ci.numcarga, kc.numcar, kpr.praca,kpl.descricao
+                  group by kc.data, kc.hora,kc.minuto,kc.numped, kc.codusur, ku.nome, kc.codcli, kl.cliente, kl.consumidorfinal, kc.posicao,
+                           kd.nomecidade, kd.uf, kc.codpraca, kc.obs, kc.obs1, kc.obs2, usaivafontediferenciado, calculast, clientefontest, isentodifaliquotas, kc.obsentrega1,
+                           kc.obsentrega2, kc.obsentrega3, ci.numcarga, kc.numcar, kpr.praca,kpl.descricao, kl.dtprimcompra
                   order by kc.codusur, kd.nomecidade, kl.cliente)t
-                 
-                 left join paralelo.Faltaaux fc on fc.codcli = t.codcli
      
                  left join (select numped, inicio, fim, case when fim is not null then 'FINAL' else(
                      case when inicio is not null then 'ABERTO' else 'PEND' end) end conferencia
@@ -136,6 +144,7 @@ class Pedido{
                 $p = new Pedido();
                 $p->numcarga = $r['NUMCARGA'];
                 $p->data = Formatador::formatarData($r['DATA']);
+                $p->hora = $r['HORA'];
                 $rca = $r['NOME'];
                 $p->rca = Pedido::ajustaRca($rca);
                 $p->numped = $r['NUMPED'];
@@ -153,6 +162,15 @@ class Pedido{
                 $p->conferencia = $r['CONFERENCIA'];
                 $p->vlparc = $r['VLPARC'];
                 $p->qtparc = $r['QTPARC'];
+                $p->st = $r['ST'];
+                $p->ivafonte = $r['USAIVAFONTEDIFERENCIADO'];
+                $p->calculast = $r['CALCULAST'];
+                $p->fontest = $r['CLIENTEFONTEST'];
+                $p->isentodifal = $r['ISENTODIFALIQUOTAS'];
+                $p->primeiracompra = $r['PRIMEIRACOMPRA'];
+                
+                
+
                 // if($p->conferencia == null){
                 //     $p->conferencia = 'PEND';
                 // }
@@ -219,7 +237,7 @@ class Pedido{
                 
         $sql = new SqlOra();
 
-        $arr = $sql->select("SELECT t.codprod, t.descricao, t.qt, t.peso,
+        $ret = $sql->select("SELECT * from (SELECT t.codprod, t.descricao, t.qt, t.peso,
         ke.qtestger-ke.qtbloqueada-ke.qtreserv as qtdisp,
         CASE 
           WHEN T.QT <= ke.qtestger-ke.qtbloqueada-ke.qtreserv
@@ -246,13 +264,69 @@ class Pedido{
         group by ki.codprod, kp.descricao, KP.PESOBRUTO, KI.POSICAO
         )t inner join kokar.pcest ke on ke.codprod = t.codprod
         GROUP BY t.codprod, t.descricao, t.qt, t.peso, ke.qtestger, ke.qtbloqueada, ke.qtreserv, T.PESOBRUTO, T.POSICAO
-        order by t.codprod",array(":numped"=>$numped)
+        order by t.descricao)t1
+        left join(
+select codprodp, qtprod, t3.codproducao, previsao, status from
+((select codprod codprodp, sum(qt) qtprod from paralelo.mproducaoi
+where status not in ('S','F') and dtexclusao is null
+group by codprod)t2       
+INNER JOIN
+( select distinct * from (
+   select  First_Value(li.codproducao) OVER (PARTITION BY li.codprod ORDER BY dtproducao, horaproducao) codproducao, codprod
+   from paralelo.mproducaoc lc
+   inner join paralelo.mproducaoi li on li.codproducao = lc.codproducao 
+   where lc.status not in ('S', 'F')and lI.dtexclusao is null
+   order by codprod, dtproducao, horaproducao)
+ )t3 on t3.codprod = t2.codprodp)
+ inner join(
+        select (replace(to_char(extract(day from dtproducao),'00')||'/'||
+        to_char(extract(month from dtproducao),'00'),' ','')||' - '|| horaproducao) previsao, codproducao, status
+        from paralelo.mproducaoc where status not in('F', 'B'))t4 on t4.codproducao = t3.codproducao
+ )t5
+ on t5.codprodp = t1.codprod  
+ order by descricao",array(":numped"=>$numped)
         );
 
-        for($i = 0; $i<sizeof($arr); $i++){
-            $arr[$i]['DESCRICAO'] =  utf8_encode($arr[$i]['DESCRICAO']);
+        for($i=0; $i<sizeof($ret); $i++){
+            $ret[$i]['DESCRICAO'] = utf8_encode($ret[$i]['DESCRICAO']);
+            switch ( $ret[$i]['STATUS']):
+                case ('A'):
+                     $ret[$i]['STATUS'] = "ABERTURA/OP";
+                    break;
+                case ('P'):
+                     $ret[$i]['STATUS'] = "PESAGEM";
+                    break;
+                case ('D'):
+                     $ret[$i]['STATUS'] = "DISPERSÃO/BASE";
+                    break;
+                case ('L'):
+                     $ret[$i]['STATUS'] = "LABORATÓRIO";
+                    break;
+                case ('C'):
+                     $ret[$i]['STATUS'] = "COR";
+                    break;
+                case ('E'):
+                     $ret[$i]['STATUS'] = "ENVASE";
+                    break;
+                case ('B'):
+                     $ret[$i]['STATUS'] = "CORREÇÃO";
+                    break;
+                case ('F'):
+                     $ret[$i]['STATUS'] = "FINALIZADO";
+                    break;
+                case ('S'):
+                     $ret[$i]['STATUS'] = "AGUARDANDO";
+                    break;
+            endswitch;
+            if($ret[$i]['QTPROD'] == null){
+               
+                $ret[$i]['STATUS'] ='';
+                $ret[$i]['QTPROD'] ='';
+                $ret[$i]['PREVISAO'] ='';
+            } 
         }
-        return $arr;
+        
+        return $ret;
     }
 
     public static function getFaltasCliente($cod){
@@ -301,6 +375,8 @@ class Pedido{
             return '36 - GIAN';
         }elseif(strpos($nome, 'ALEX') !== false) {
             return '37 - ALEX';
+        }elseif(strpos($nome, 'HIGOR') !== false) {
+            return '38 - HIGOR';
         }else {
             return $nome;
         }
@@ -386,6 +462,7 @@ class Pedido{
                 $p = new Pedido();
                 $p->numcarga = $r['NUMCARGA'];
                 $p->data = Formatador::formatarData($r['DATA']);
+                $p->hora = $r['HORA'];
                 $rca = $r['NOME'];
                 $p->rca = Pedido::ajustaRca($rca);
                 $p->numped = $r['NUMPED'];

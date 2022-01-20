@@ -12,6 +12,7 @@ class Corretiva{
     public $despesa;
     public $qt;
     public $valor;
+    public $obs;
 
     public static function getCorretiva($numrat){
         $lista = [];

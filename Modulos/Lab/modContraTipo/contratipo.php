@@ -58,7 +58,19 @@ date_default_timezone_set('America/Araguaina');
                     <div class="menu-itens"><input id="5" type="checkbox"><label for="5">Piso</label></div>
                 </div>
             </div>
+            <div class="dropdown">
+                <button class="dropbtn">Tintas</button>
+                <div class="dropdown-content">
+                    <div class="menu-itens"><input id="1" type="checkbox"><label for="1">Fit</label></div>
+                    <div class="menu-itens"><input id="2" type="checkbox"><label for="2">Economica</label></div>
+                    <div class="menu-itens"><input id="3" type="checkbox"><label for="3">Standard</label></div>
+                    <div class="menu-itens"><input id="4" type="checkbox"><label for="4">Premium</label></div>
+                    <div class="menu-itens"><input id="5" type="checkbox"><label for="5">Piso</label></div>
+                </div>
+            </div>
+            <div>
                 <button onclick="link(relatorio.php)" type="submit">Concluir</button>                  
+            </div>
             </section>
         </section>
     </main>
@@ -67,6 +79,3 @@ date_default_timezone_set('America/Araguaina');
         <script src="js/scripts.js"></script>
     </body>
 </html>
-
-background-color: #f4f4f4;
-border-left: 6px solid #005282;

@@ -35,6 +35,7 @@ $metasm = array();
 $metasd = array();
 $diasuteis =  ProdDiaria::getDiasUteis(ProdDiaria::getPrimeiroDiaMes($data), ProdDiaria::getUltimoDiaMes($data), ProdDiaria::feriados($data));
 $diasuteish =  ProdDiaria::getDiasUteis(ProdDiaria::getPrimeiroDiaMes($data),  $data ,ProdDiaria::feriados($data));
+
 $producaodia = 0;
 //echo (ProdDiaria::getUltimoDiaMes($data));
 

@@ -225,13 +225,13 @@ class ProdDiaria{
         
         return $ret;
     }
-    function getPrimeiroDiaMes($data) {
+    static function getPrimeiroDiaMes($data) {
         $d = explode('-', $data);
         $saida = $d[0].'-'.$d[1].'-01';
         return $saida;
 
     }
-    function getUltimoDiaMes($data) {
+    static function getUltimoDiaMes($data) {
         $d = explode('-', $data);
         /* Validação proximo ano bisexto */
         if($d[1]=='02'){
@@ -254,7 +254,7 @@ class ProdDiaria{
         return $saida;
     }
 
-    function getDiasUteis($dtInicio, $dtFim, $feriados = []) {
+    static function getDiasUteis($dtInicio, $dtFim, $feriados = []) {
         $tsInicio = strtotime($dtInicio);
         $tsFim = strtotime($dtFim);
     
@@ -276,7 +276,7 @@ class ProdDiaria{
     
         return $quantidadeDias;
     }
-    function feriados($data){
+    static function feriados($data){
         $ano = explode('-',$data)[0];
         return [
             $ano.'-01-01',

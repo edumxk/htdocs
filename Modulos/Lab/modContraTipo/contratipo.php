@@ -16,23 +16,10 @@ date_default_timezone_set('America/Araguaina');
         <meta charset="UTF-8">
         <title>Contratipo</title>
         <link rel="stylesheet" href="css/reset.css">
-        <link rel="stylesheet" href="css/index.css">
         <link rel="stylesheet" href="css/bootstrap.min.css"> 
         <link rel="stylesheet" href="css/contratipo.css">  
     </head>
 <body>
-    <header>
-        <div class="logo">
-            <img src="/Recursos/src/Logo-Kokar5.png" alt="Logo Kokar" width="350">
-        </div>
-        <div class="usuario">
-            <ul>
-                <li>Usuário: <?php echo $_SESSION['nome']?></li>
-                <li>Setor: <?php echo $_SESSION['setor']?></li>
-                <li><a style="color: white" href="../index.php">Sair</a></li>
-            </ul>
-        </div>		
-    </header>
     <main>
         <section class="principal">
             <section class="navegacao">
@@ -47,30 +34,63 @@ date_default_timezone_set('America/Araguaina');
                     </ol>
                 </nav>
             </section>
+            <section class="conteudo">
+                    <div class="conteudo-tabela">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>#<input type="checkbox"/></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </section>
             <section class="itens">
-            <div class="dropdown">
-                <button class="dropbtn">Tintas</button>
-                <div class="dropdown-content">
-                    <div class="menu-itens"><input id="1" type="checkbox"><label for="1">Fit</label></div>
-                    <div class="menu-itens"><input id="2" type="checkbox"><label for="2">Economica</label></div>
-                    <div class="menu-itens"><input id="3" type="checkbox"><label for="3">Standard</label></div>
-                    <div class="menu-itens"><input id="4" type="checkbox"><label for="4">Premium</label></div>
-                    <div class="menu-itens"><input id="5" type="checkbox"><label for="5">Piso</label></div>
+                <div class="dropdown">
+                    <button class="dropbtn">Tintas</button>
+                    <div class="dropdown-content">
+                        <div class="menu-itens"><input id="1" type="checkbox"><label for="1">Fit</label></div>
+                        <div class="menu-itens"><input id="2" type="checkbox"><label for="2">Economica</label></div>
+                        <div class="menu-itens"><input id="3" type="checkbox"><label for="3">Standard</label></div>
+                        <div class="menu-itens"><input id="4" type="checkbox"><label for="4">Premium</label></div>
+                        <div class="menu-itens"><input id="5" type="checkbox"><label for="5">Piso</label></div>
+                        <div class="menu-itens"><input id="5" type="checkbox"><label for="6">Resina</label></div>
+                    </div>
                 </div>
-            </div>
-            <div class="dropdown">
-                <button class="dropbtn">Tintas</button>
-                <div class="dropdown-content">
-                    <div class="menu-itens"><input id="1" type="checkbox"><label for="1">Fit</label></div>
-                    <div class="menu-itens"><input id="2" type="checkbox"><label for="2">Economica</label></div>
-                    <div class="menu-itens"><input id="3" type="checkbox"><label for="3">Standard</label></div>
-                    <div class="menu-itens"><input id="4" type="checkbox"><label for="4">Premium</label></div>
-                    <div class="menu-itens"><input id="5" type="checkbox"><label for="5">Piso</label></div>
+                <div class="dropdown">
+                    <button class="dropbtn">Revestimentos</button>
+                    <div class="dropdown-content">
+                        <div class="menu-itens"><input id="6" type="checkbox"><label for="6">Texturas</label></div>
+                        <div class="menu-itens"><input id="7" type="checkbox"><label for="7">Sublime</label></div>
+                        <div class="menu-itens"><input id="8" type="checkbox"><label for="8">Rev. Marmore</label></div>
+                        <div class="menu-itens"><input id="9" type="checkbox"><label for="9">Rev. Cimento</label></div>
+                        <div class="menu-itens"><input id="1" type="checkbox"><label for="10">Minerais</label></div>
+                    </div>
                 </div>
-            </div>
-            <div>
-                <button onclick="link(relatorio.php)" type="submit">Concluir</button>                  
-            </div>
+                <div class="dropdown">
+                    <button class="dropbtn">Sintéticos</button>
+                    <div class="dropdown-content">
+                        <div class="menu-itens"><input id="11" type="checkbox"><label for="11">Esmalte</label></div>
+                        <div class="menu-itens"><input id="12" type="checkbox"><label for="12">Verniz</label></div>
+                        <div class="menu-itens"><input id="13" type="checkbox"><label for="13">Fundo Complemento</label></div>
+                        <div class="menu-itens"><input id="14" type="checkbox"><label for="14">Pasta</label></div>
+                        
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn">Complementos</button>
+                    <div class="dropdown-content">
+                        <div class="menu-itens"><input id="16" type="checkbox"><label for="16">Acrilia/Fit</label></div>
+                        <div class="menu-itens"><input id="17" type="checkbox"><label for="17">Corrida/Fit</label></div>
+                        <div class="menu-itens"><input id="18" type="checkbox"><label for="18">Selador/Fit</label></div>
+                        <div class="menu-itens"><input id="19" type="checkbox"><label for="19">Funto Preparador/Fit</label></div>
+                        
+                    </div>
+                </div>
+                
             </section>
         </section>
     </main>

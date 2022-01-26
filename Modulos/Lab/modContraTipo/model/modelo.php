@@ -24,5 +24,22 @@ class ContraTipoModel{
         }
         return "FAIL";
     }
+
+    public static function getProdutos($codprod, $metodo)
+    {
+        $sql = new SqlOra();
+        try{
+            $ret = $sql->select("SELECT C.CODPRODMASTER, C.CODPROD, C.METODO, P.DESCRICAO , CA.CATEGORIA, CA.CODCATEGORIA
+            FROM KOKAR.PCCOMPOSICAO C 
+            INNER JOIN KOKAR.PCPRODUT P ON P.CODPROD = C.CODPRODMASTER
+            INNER JOIN KOKAR.PCCATEGORIA CA ON CA.CODSEC = P.CODSEC AND CA.CODCATEGORIA = P.CODCATEGORIA
+            WHERE C.METODO = $metodo AND C.CODPROD = $codprod
+            ORDER BY P.DESCRICAO");
+            return $ret;
+        }catch(Exception $e){
+            echo 'Exceção capturada: ',  $e->getMessage(), "\n";
+        }
+        return "FAIL";
+    }
     
 }                                         

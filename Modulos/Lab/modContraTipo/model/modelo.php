@@ -33,7 +33,7 @@ class ContraTipoModel{
             FROM KOKAR.PCCOMPOSICAO C 
             INNER JOIN KOKAR.PCPRODUT P ON P.CODPROD = C.CODPRODMASTER
             INNER JOIN KOKAR.PCCATEGORIA CA ON CA.CODSEC = P.CODSEC AND CA.CODCATEGORIA = P.CODCATEGORIA
-            WHERE C.METODO = $metodo AND C.CODPROD = $codprod
+            WHERE C.METODO = $metodo AND C.CODPROD = $codprod --and c.codprodmaster < 1000
             ORDER BY P.DESCRICAO");
             return $ret;
         }catch(Exception $e){

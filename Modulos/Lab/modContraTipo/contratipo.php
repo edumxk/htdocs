@@ -8,7 +8,6 @@ if($_SESSION['nome']== null){
 }
 $produtos = ContraTipoControle::getProdutos(1276, 1);
 //var_dump($produtos);
-header("refresh: 180;");
 date_default_timezone_set('America/Araguaina');
 ?>
 <html>
@@ -83,7 +82,7 @@ date_default_timezone_set('America/Araguaina');
                     <div class="busca-itens">    
                         <label for="produto">Pesquisar Produto</label><input type="text" id="produto"/>
                         <div class="botao">    
-                           <button>Concluir</button>
+                           <button onclick="concluir()">Concluir</button>
                         </div> 
                     </div> 
                      
@@ -91,19 +90,19 @@ date_default_timezone_set('America/Araguaina');
                     <table class="conteudo__produtos" id="tabelas-busca">
                         <thead>
                             <tr>
-                                <th><input class="checkbox" type="checkbox" id="select-all"/></th>
+                                <th><input class="checkbox" onclick="marcar(this)" type="checkbox" id="select-all"/></th>
                                 <th>Codprod</th>
                                 <th>Descricao</th>
-                                <th>Categoria</th>
+                               
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach($produtos as $p):?>
-                            <tr class="produtos">
-                                <td><input class="checkbox" type="checkbox" id="codprod"/></td>
+                            <tr class="produtos" id="#<?= $p->codprodmaster?>">
+                                <td><input class="checkbox" type="checkbox" name="produto" id="<?= $p->codprodmaster?>"/></td>
                                 <td><?= $p->codprodmaster?></td>
                                 <td class="texto"><?= $p->produto?></td>
-                                <td class="texto"><?= $p->categoria?></td>
+                               
                             </tr>
                             <?php endforeach?>
                         </tbody>
@@ -115,27 +114,10 @@ date_default_timezone_set('America/Araguaina');
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/scripts.js"></script>
+        <script src="/Modulos/Lab/modContraTipo/js/scripts.js"></script>
         <script src="../../../recursos/js/jquery.tablesorter.js"></script>
-    
         <script>
-            window.onload = function() {
-                $("#tabelas-busca").tablesorter();
-                $(".loader").toggle();
-                //$(".container").toggle();
-
-                $("#produto").on("keyup", function() {
-                    var value = $(this).val().toUpperCase();
-                    
-                    $(".produtos").each(function() {
-                        if(!$(this).text().toUpperCase().includes(value)){
-                            $(this).hide()
-                        }
-                        if($(this).text().toUpperCase().includes(value)){	
-                            $(this).show()
-                        }
-                    });
-                });
-            }
+            //window.onload = carregar()
         </script>
     </body>
 </html>

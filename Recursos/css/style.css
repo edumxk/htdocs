@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato&family=Montserrat:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Montserrat:wght@500&display=swap');
 
-html,body {height:100%; width: 100%; font-size: small; font-family: 'Lato', sans-serif;}
+html,body {height:100%; width: 100%; font-size: small; font-family:  sans-serif;}
 .header {
     width: 95%;
     height: 70px;

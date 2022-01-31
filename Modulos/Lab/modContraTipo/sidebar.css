@@ -1,0 +1,146 @@
+body{
+    position:relative;
+    min-width: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.menu{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 240px;
+    background: #11101d;
+    padding: 6px 14px;
+}
+
+.menu .logo-conteudo .logo {
+    color: #fff;
+    display: flex;
+    height: 50px;
+    width: 100%;
+    align-items: center;
+}
+.logo-conteudo i{
+    font-size: 28px;
+    margin-right: 5px;
+}
+
+.logo-conteudo .logo .logo-nome{
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.menu #btn{
+    position: absolute;
+    color: #fff;
+    left: 90%;
+    top: 6px;
+    font-size: 20px;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    line-height: 50px;
+    transform: translateX(-50%);
+}
+.menu ul{
+    margin-top: 20px;
+}
+.menu ul li{
+    position: relative;
+    height: 50px;
+    width: 100%;
+    margin:  0 5px;
+    list-style: none;
+    line-height: 50px;
+}
+.menu ul li a{
+    color: #fff;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    border-radius: 12px;
+}
+
+.menu ul li a:hover{
+    color: #11101d;
+    background: #fff;
+
+}
+
+.menu ul li a i{
+    height: 50px;
+    min-width: 50px;
+    border-radius: 12px;
+    line-height: 50px;
+    text-align: center;
+}
+.menu .perfil-conteudo{
+    position: absolute;
+    color: #fff;
+    bottom: 5px;
+    left: 0;
+    width: 100%;
+}
+
+.menu .perfil-conteudo .perfil{
+    position: relative;
+    padding: 10px 6px;
+    height: 60px;
+    background: #1d1b31;
+}
+
+.perfil-conteudo .perfil .perfil-detalhes{
+    display: flex;
+    align-items: center;
+}
+
+.perfil .perfil-detalhes img{
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.perfil .perfil-detalhes .nome-setor{
+    margin-left: 10px;
+    line-height: 18px;
+}
+
+.perfil .perfil-detalhes .nome{
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.perfil .perfil-detalhes .cargo, .setor{
+    font-size: 12;
+}
+
+.perfil #sair{
+    position: absolute;
+    left: 90%;
+    bottom: 5px;
+    transform: translateX(-50%);
+    min-width: 50px;
+    line-height: 50px;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    font-size: 20px;
+}
+
+.home-conteudo{
+    position: absolute;
+    height: 100%;
+    width: calc(100% - 268px);
+    left: 268px;
+}
+
+.home-conteudo .text{
+    font-size: 25px;
+    font-weight: 500;
+    color: #1d1b31;
+    margin-top: 12px;
+}

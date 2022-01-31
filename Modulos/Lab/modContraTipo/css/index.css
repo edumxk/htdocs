@@ -45,3 +45,8 @@ table {
   #coluna div{
     background-color: gray;
   }
+  @media only screen and (max-width: 400px) {
+    .usuario{
+      visibility: hidden;
+    }
+  }

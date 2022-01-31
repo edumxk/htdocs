@@ -8,12 +8,12 @@ if($_SESSION['nome']== null){
 }
 ?>
 <?php
-header("refresh: 180;");
 date_default_timezone_set('America/Araguaina');
 ?>
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Contratipo</title>
         <link rel="stylesheet" href="css/reset.css">
         <link rel="stylesheet" href="css/index.css">
@@ -48,7 +48,7 @@ date_default_timezone_set('America/Araguaina');
                     </nav>
                 </section>
                 <section class="titulo">
-                    <h1>Contratipo de Produtos em Fórmulas</h1>
+                    <h1>Contratipo de Produtos</h1>
                     <h2>Este módulo substitui o produto "Origem" pelo produto "Destino" de acordo com os produtos selecionados na próxima tela.</h2>
                 </section> 
 
@@ -57,9 +57,6 @@ date_default_timezone_set('America/Araguaina');
                         <div class="formulario-itens">
                             <div class="formulario-itens-titulo">
                                 <h2>Produto Origem</h2>
-                            </div>
-                            <div class="formulario-itens-img">
-                                <img src="/Recursos/src/frente.png" id="contrario" alt="">
                             </div>
                             <div class="formulario-itens-codigo"> 
                                 <label for="codigo1">Código</label> 
@@ -74,9 +71,6 @@ date_default_timezone_set('America/Araguaina');
                         <div class="formulario-itens">
                             <div class="formulario-itens-titulo">
                                 <h2>Produto Destino</h2>
-                            </div>
-                            <div class="formulario-itens-img" >
-                                <img src="/Recursos/src/frente.png"  alt="">
                             </div>
                             <div class="formulario-itens-codigo">
                                 <label for="codigo2">Código</label>

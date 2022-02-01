@@ -1,16 +1,3 @@
-header{
-   background-color: #002695;
-}
-.caixa {
-    width: 940px;
-    position: relative;
-    margin: 0 auto;
-}
-img{
-    display: inline;
-    height: 110px;
-    width: auto;
-}
 table {
     background:#ffffff ;
     margin: 0 auto;

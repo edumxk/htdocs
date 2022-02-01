@@ -10,87 +10,117 @@ if($_SESSION['nome']== null){
 <?php
 date_default_timezone_set('America/Araguaina');
 ?>
-<html>
+<html lang="pt-BR">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Contratipo</title>
+        meta:
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+        <title>Formulas - Alterar</title>
         <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="./sidebar.css">
         <link rel="stylesheet" href="css/index.css">
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/style.css">  
     </head>
-<body>
-    <header>
-        <div class="logo">
-            <img src="/Recursos/src/Logo-Kokar5.png" alt="Logo Kokar" width="350">
-        </div>
-        <div class="usuario">
-            <ul>
-                <li>Usuário: <?php echo $_SESSION['nome']?></li>
-                <li>Setor: <?php echo $_SESSION['setor']?></li>
-                <li><a style="color: white" href="../index.php">Sair</a></li>
-            </ul>
-        </div>		
-    </header>
+    <body>
         <main>
-            <section class="principal">  
-                <section class="navegacao">
-                    <nav id="home" aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item active" aria-current="page">
-                                <a href="/homelab.php">Home</a>
-                            </li>
-                            <li class="breadcrumb-item active" aria-current="page">
-                                <a href="index.php">Contratipo</a>
-                            </li>
-                        </ol>
-                    </nav>
-                </section>
-                <section class="titulo">
-                    <h1>Contratipo de Produtos</h1>
-                    <h2>Este módulo substitui o produto "Origem" pelo produto "Destino" de acordo com os produtos selecionados na próxima tela.</h2>
-                </section> 
-
-                <section class="formulario">     
+            <section class="menu">
+                <div class="logo-conteudo">
+                    <div class="logo">
+                        <img class='kokar_logo' src="/Recursos/src/Logo-kokar.png"></img>
+                        <div class="logo-nome">Laboratório</div>
+                    </div>
+                    <i class='bx bx-menu' id="btn"></i>
+                </div>
+                <ul class="navegacao">
+                    <li>
+                        <a href="#">
+                            <i class='bx bx-home'></i>
+                            <span class="link-nome">Página Inicial</span>
+                        </a>
+                        <span class="tooltip">Página Inicial</span>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class='bx bx-message-rounded-edit'></i>
+                            <span class="link-nome">Revalidar Lotes</span>
+                        </a>
+                        <span class="tooltip">Revalidar Lotes</span>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class='bx bx-copy-alt'></i>
+                            <span class="link-nome">Copiar Métodos</span>
+                        </a>
+                        <span class="tooltip">Copiar Métodos</span>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class='bx bx-merge'></i>
+                            <span class="link-nome">Alterar Fórmulas</span>
+                        </a>
+                        <span class="tooltip">Alterar Fórmulas</span>
+                    </li>
+                </ul>
+                <div class="perfil-conteudo">
+                    <div class="perfil">
+                        <div class="perfil-detalhes">
+                            <img src="./src/img/curr.jpg" alt="imagem de perfil">
+                            <div class="nome-setor">
+                                <div class="nome">Eduardo Patrick</div>
+                                <div class="cargo">Desenvolvedor</div>
+                                <div class="setor">T.I.</div>
+                            </div>
+                        </div>
+                        <i class='bx bxs-log-out' id="sair"></i>
+                    </div>
+                </div>
+            </section>
+            <section class="home-conteudo"> 
+            <datalist id="produtos-lista">
+                <?php for($i=0; $i<1000; $i++):?>
+                <option id="<?=$i?>" value="<?=$i?>">Produto Unico nº <?=$i?></option>
+                <?php endfor?> 
+            </datalist>
+                <div class="formulario">     
                     <form action="contratipo.php?" method="GET"> 
-                        <div class="formulario-itens">
+                        <div class="titulo">
+                            <span>Contratipo de Produtos</span>
+                        </div>
                             <div class="formulario-itens-titulo">
-                                <h2>Produto Origem</h2>
+                                <spam>Produto Origem</spam>
                             </div>
                             <div class="formulario-itens-codigo"> 
                                 <label for="codigo1">Código</label> 
-                                <input type="number" id="codigo1"> 
+                                <input list="produtos-lista" class="codigo" placeholder="Código..." type="text" id="codigo1"> 
                             </div>
                             <div class="formulario-itens-produto"> 
-                                <label for="produto1">Produto</label> 
-                                <input type="text"  placeholder="Origem" disabled>
-                            <a id="produto1" action="#" onclick="busca()">...</a>  
+    
+                            <input type="text" id="produto1" placeholder="Digite o código do produto"  autocomplete="off" disabled> 
                             </div>                
-                        </div>
-                        <div class="formulario-itens">
                             <div class="formulario-itens-titulo">
-                                <h2>Produto Destino</h2>
+                                <spam>Produto Destino</spam>
                             </div>
                             <div class="formulario-itens-codigo">
                                 <label for="codigo2">Código</label>
-                                <input type="number" id="codigo2">
+                                <input list="produtos-lista" class="codigo" placeholder="Código..." type="text" id="codigo2">
                             </div>
                             <div class="formulario-itens-produto">
-                                <label for="produto2">Produto</label>
-                                <input type="text" id="produto2" placeholder="Destino"  autocomplete="off" disabled>                        
-                                <a id="produto2" action="#" onclick="busca()">...</a>  
+                                <input type="text" id="produto2" placeholder="Digite o código do produto"  autocomplete="off" disabled>                        
+                                 
                             </div>
-                        </div>
+                       
                         <div class="formulario-botao">
                             <button type="submit">Avançar</button>
                         </div>
                     </form>
-                </section>
+                </div>
             </section>  
         </main>
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/scripts.js"></script>
+        <script src="./sidebar.js"></script>
     </body>
 </html>

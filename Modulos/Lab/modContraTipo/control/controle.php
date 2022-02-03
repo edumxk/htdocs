@@ -6,7 +6,28 @@
         }        
     }
         
+    class ProdutoPesquisa{
+        protected $produto;
+        protected $codprod;
 
+        public function getCodprod(){
+            return $this->codprod;
+        }
+        public function getDescricao(){
+            return $this->produto;
+        }
+        public static function getProduto(){
+            $arr = [];
+            $ret = ContraTipoModel::getProduto();
+            foreach($ret as $r){
+                $c = new ProdutoPesquisa();
+                $c->codprod = $r['CODPROD'] ;       
+                $c->produto = utf8_encode($r['DESCRICAO']) ;
+                array_push($arr, $c);
+            }
+            return $arr;
+        }
+    }
     class ContraTipoControle{
         public $codsubcategoria;
         public $categoria;
@@ -14,6 +35,7 @@
         public $subcategoria;
         public $codprodmaster; 
         public $produto;
+        public $codprod;
 
 
         public static function getFiltros(){
@@ -45,4 +67,5 @@
                }
             return $arr;
         }
-    }
+        
+}

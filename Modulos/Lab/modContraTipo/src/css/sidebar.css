@@ -1,6 +1,5 @@
 body{
     position:relative;
-    
 }
 
 .menu{
@@ -154,7 +153,7 @@ body{
 
 .menu .perfil-conteudo .perfil{
     position: relative;
-    padding: 10px 6px;
+    padding: 5px 6px;
     height: 60px;
     background: #1d1b31;
 }
@@ -196,7 +195,7 @@ body{
 .perfil #sair{
     position: absolute;
     left: 50%;
-    bottom: 12px;
+    bottom: 5px;
     transform: translateX(-50%);
     min-width: 50px;
     line-height: 50px;
@@ -214,7 +213,7 @@ body{
     opacity: 1;
     pointer-events: auto;
     left: 90%;
-    bottom: 8px;
+    bottom: 5px;
 }
 
 .home-conteudo{

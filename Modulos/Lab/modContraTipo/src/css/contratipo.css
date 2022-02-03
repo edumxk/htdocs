@@ -1,0 +1,229 @@
+body{
+  background: linear-gradient(45deg, #71b7e6, #15004e);
+  display: flex;
+  height: 100vh;
+  overflow-x: hidden;
+}
+.home-conteudo{
+  justify-content: center;
+  align-items: center;
+  overflow-y: scroll;
+}
+
+.menu .principal{
+    width: calc(100vh-78px);  
+}
+.menu.active .principal{
+    width: calc(100vh-240px);
+    
+}
+
+.itens{
+  width: 180px;
+  position: absolute;
+}
+.dropbtn{
+  display: block;
+}
+.dropbtn {
+    background-color: #b1b1b1;
+    width: 100%;
+    color: black;
+    padding: 16px;
+    font-size: 16px;
+    border-radius: 0 ;
+    transition: 600ms;
+    border: none;
+  }
+  
+  .dropdown label{
+    width: 70%;
+    
+  }
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    border: none;
+    transition: 600ms;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    left:179px;
+    top: 0;
+    background-color: #b1b1b1;
+    min-width: 160px;
+    width: 250px;
+    box-shadow:none;
+    z-index: 1;
+    transition: 600ms;
+    border-left: 6px solid #005282;
+
+    text-transform: uppercase;
+  }
+  
+  .dropdown-content p {
+    background-color: #f4f4f4;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: inline;
+    transition: 600ms;
+  }
+
+  .busca-itens{
+    display: inline;
+    position: relative;
+    left: calc(198px + 78px);
+    margin: 2rem 0;
+    width: calc(100vh - 198px);
+    white-space: nowrap;
+  }
+  .conteudo-tabela{
+    display: inline;
+    position: relative;
+    left: 0;
+   
+  }
+
+  .busca-itens label, input{
+    display: inline;
+   
+  }
+
+  .menu-itens input{
+    margin: 0.8rem 1rem 0.8rem 1rem;
+  }
+  .botao{
+    display: inline;
+    text-align: right;
+    display: flex;
+  }
+  .busca-itens button{
+    background-color: blue;
+    border-radius: 5px;
+    color: #f0f0f0;
+    font-weight: 600;
+    transition: 600ms;
+    height: 30px;
+    margin: 1rem 0;
+  }
+
+  button{
+    text-transform: uppercase;
+  }
+
+  .botao button:hover{
+    cursor: pointer;
+    background-color: red;
+    color: white;
+    transition: 600ms;
+  }
+
+  .dropdown-content .menu-itens:hover {background-color: #646464;}
+  
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  .dropdown:hover .dropbtn {background-color: #646464;}
+
+  .conteudo{
+    margin: 0;
+    padding: 0;
+  }
+  .conteudo__produtos{
+    position:relative;
+    left: 180px;
+    margin: 2%;
+    border-radius: 5px;
+    background: linear-gradient(90deg, #fff, #a0a0a0);
+  }
+  th, td{
+    text-transform: uppercase;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 20px;
+  }
+  tr:hover{
+    background: linear-gradient(45deg, #71b7e6, #15004e);
+    color: white;
+    transition: all 0.3s ease;
+  }
+  th{
+    min-width: 50px;
+    min-height: 50px;
+    border-bottom: 2px solid;
+    border-color: linear-gradient(45deg, #71b7e6, #15004e);
+  }
+  td, th{
+    padding: 0 0 3px 0;
+  }
+  .texto{
+    text-align: left;
+    padding: 0 0 0 5px;
+  }
+  input .checkbox{
+    width: 10px;
+  }
+  th input,td input{
+    padding: 0 0 2px 0;
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+  }
+  thead tr:hover{
+    cursor: pointer;
+  }
+  th input:hover, td input:hover{
+    cursor: pointer;
+  }
+  .unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+@media only screen and (max-width: 450px) {
+  td, th{
+    font-size: 20px;
+  }
+  .itens{
+    display: none;
+  }
+  .conteudo-tabela{
+    position: relative;
+    display: block;
+    left: 0;
+  }
+  .busca-itens{
+    position: relative;
+    display: inline;
+    left: 5px;
+  }
+  .busca-itens input{
+    width: 180px;
+  }
+  .conteudo__produtos{
+    left: 5px;
+  }
+  #tabelas-busca{
+    margin: 0;
+    padding: 0;
+    width: calc(100vw-78px);
+    color: black;
+    line-height: 25px;
+    font-size: 22px;
+  }
+  .texto{
+    width: 80px;
+  }
+  th input,td input{
+    width: 25px;
+    height: 25px;
+  }
+
+}

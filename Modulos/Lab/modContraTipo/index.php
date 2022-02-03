@@ -1,27 +1,26 @@
 <!DOCTYPE html>
 
 <?php 
-require_once($_SERVER["DOCUMENT_ROOT"].'/modulos/modFrete/model/frete.php');
+require_once($_SERVER["DOCUMENT_ROOT"].'/Modulos/Lab/modContraTipo/control/controle.php');
 session_start();
 if($_SESSION['nome']== null){
     header("location:\..\..\home.php");
 }
-?>
-<?php
 date_default_timezone_set('America/Araguaina');
+
+$produtos = ProdutoPesquisa::getProduto();
 ?>
 <html lang="pt-BR">
     <head>
-        meta:
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
         <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
         <title>Formulas - Alterar</title>
-        <link rel="stylesheet" href="css/reset.css">
-        <link rel="stylesheet" href="./sidebar.css">
-        <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="./src/css/reset.css">
+        <link rel="stylesheet" href="./src/css/sidebar.css">
+        <link rel="stylesheet" href="./src/css/index.css">
         <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/style.css">  
+        <link rel="stylesheet" href="./src/css/style.css">  
     </head>
     <body>
         <main>
@@ -79,9 +78,9 @@ date_default_timezone_set('America/Araguaina');
             </section>
             <section class="home-conteudo"> 
             <datalist id="produtos-lista">
-                <?php for($i=0; $i<1000; $i++):?>
-                <option id="<?=$i?>" value="<?=$i?>">Produto Unico nº <?=$i?></option>
-                <?php endfor?> 
+                <?php foreach($produtos as $i):?>
+                <option id="<?=$i->getCodprod()?>" value="<?=$i->getCodprod()?>"><?=$i->getDescricao()?></option>
+                <?php endforeach?> 
             </datalist>
                 <div class="formulario">     
                     <form action="contratipo.php?" method="GET"> 
@@ -94,23 +93,17 @@ date_default_timezone_set('America/Araguaina');
                             <div class="formulario-itens-codigo"> 
                                 <label for="codigo1">Código</label> 
                                 <input list="produtos-lista" class="codigo" placeholder="Código..." type="text" id="codigo1"> 
+                                <input type="text" id="produto1" placeholder="Digite o código do produto"  autocomplete="off" disabled> 
                             </div>
-                            <div class="formulario-itens-produto"> 
-    
-                            <input type="text" id="produto1" placeholder="Digite o código do produto"  autocomplete="off" disabled> 
-                            </div>                
+            
                             <div class="formulario-itens-titulo">
                                 <spam>Produto Destino</spam>
                             </div>
                             <div class="formulario-itens-codigo">
                                 <label for="codigo2">Código</label>
                                 <input list="produtos-lista" class="codigo" placeholder="Código..." type="text" id="codigo2">
-                            </div>
-                            <div class="formulario-itens-produto">
                                 <input type="text" id="produto2" placeholder="Digite o código do produto"  autocomplete="off" disabled>                        
-                                 
                             </div>
-                       
                         <div class="formulario-botao">
                             <button type="submit">Avançar</button>
                         </div>
@@ -119,8 +112,23 @@ date_default_timezone_set('America/Araguaina');
             </section>  
         </main>
         <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/scripts.js"></script>
-        <script src="./sidebar.js"></script>
+        <script src="./src/js/sidebar.js"></script>
+        <script src="./src/js/index.js"></script>
+        <script>
+            window.onload = function() {
+            let produto1 = $("#codigo1");
+            let produto2 = $("#codigo2");
+            
+                produto1.on("keyup", function() {
+                    console.log($('input[id="produto1"]').val())
+                })
+                produto2.on("keyup", function() {
+                    $("#produto2")
+                })
+                $("input[id=produtos-lista] option:selected").focusout(function(){
+                    alert($(this).label());
+                });
+            }
+        </script>
     </body>
 </html>

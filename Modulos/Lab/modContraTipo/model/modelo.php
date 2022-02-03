@@ -41,5 +41,19 @@ class ContraTipoModel{
         }
         return "FAIL";
     }
+    public static function getProduto()
+    {
+        $sql = new SqlOra();
+        try{
+            $ret = $sql->select("SELECT CODPROD, DESCRICAO
+            FROM KOKAR.PCPRODUT P
+            WHERE CODEPTO = 10001 AND CODSEC NOT IN (10013)
+            ORDER BY DESCRICAO");
+            return $ret;
+        }catch(Exception $e){
+            echo 'Exceção capturada: ',  $e->getMessage(), "\n";
+        }
+        return "FAIL";
+    }
     
 }                                         

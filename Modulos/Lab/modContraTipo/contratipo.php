@@ -77,7 +77,7 @@ date_default_timezone_set('America/Araguaina');
                 </div>
             </section>
             <section class="home-conteudo"> 
-                <section class="itens">
+                <section class="home-conteudo__itens">
                     <div class="dropdown">
                         <button class="dropbtn">Tintas</button>
                         <div class="dropdown-content">
@@ -121,30 +121,30 @@ date_default_timezone_set('America/Araguaina');
                     </div>                    
                 </section>
                 <section class="conteudo">    
-                    
                         <div class="busca-itens">    
                             <input type="text" id="produto"/>
                             <button onclick="concluir()">Concluir</button>
                         </div>
-                        <table class="conteudo__produtos" id="tabelas-busca">
-                            <thead>
-                                <tr>
-                                    <th><input class="checkbox" onclick="marcar(this)" type="checkbox" id="select-all"/></th>
-                                    <th>Código</th>
-                                    <th>Descricao</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach($produtos as $p):?>
-                                <tr class="produtos" id="#<?= $p->codprodmaster?>">
-                                    <td><input class="checkbox" type="checkbox" name="produto" id="<?= $p->codprodmaster?>"/></td>
-                                    <td><?= $p->codprodmaster?></td>
-                                    <td class="texto"><?= $p->produto?></td>
-                                </tr>
-                                <?php endforeach?>
-                            </tbody>
-                        </table>
-                   
+                        <div class="conteudo__tabela">
+                            <table class="conteudo__produtos" id="tabelas-busca">
+                                <thead>
+                                    <tr>
+                                        <th><input class="checkbox" onclick="marcar(this)" type="checkbox" id="select-all"/></th>
+                                        <th>Código</th>
+                                        <th>Descricao</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach($produtos as $p):?>
+                                    <tr class="produtos" id="#<?= $p->codprodmaster?>">
+                                        <td><input class="checkbox" type="checkbox" name="produto" id="<?= $p->codprodmaster?>"/></td>
+                                        <td><?= $p->codprodmaster?></td>
+                                        <td class="texto"><?= $p->produto?></td>
+                                    </tr>
+                                    <?php endforeach?>
+                                </tbody>
+                            </table>
+                        </div>             
                 </section>
             </section>
         </main>

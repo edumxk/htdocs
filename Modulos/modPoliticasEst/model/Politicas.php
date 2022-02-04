@@ -16,7 +16,7 @@ class Politicas{
                     INNER join kokar.pcdesconto d on d.codprod = i.codprod --AND I.CODDESCONTO = D.CODDESCONTO
                     inner join kokar.pcest e on e.codprod = i.codprod
                     WHERE i.data > '27/09/2021' and c.posicao not in ('C') and c.numped not in (15009567) 
-                    and p.descricao like '%ECONOMICO%'  and i.perdesc > 54 and d.dtinicio < '10/10/2021')
+                    and p.descricao like '%ECONOMICO%'  and i.perdesc >= 50 and d.dtinicio < '10/10/2021')
                     group by codprod, descricao, QTMAX, QTMIN, ESTOQUE,dtfim
                     order by descricao");
         return $ret;
@@ -53,7 +53,7 @@ class Politicas{
                     INNER join kokar.pcdesconto d on d.codprod = i.codprod --AND I.CODDESCONTO = D.CODDESCONTO
                     inner join kokar.pcest e on e.codprod = i.codprod
                     WHERE i.data >= '08/10/2021' and c.posicao not in ('C') and p.descricao like '%STANDARD%'
-                    and i.perdesc > 54 and d.dtinicio < '10/10/2021')
+                    and i.perdesc >= 50 and d.dtinicio < '10/10/2021')
                     group by codprod, descricao, QTMAX, QTMIN, ESTOQUE,dtfim
                     order by descricao");
         return $ret;
@@ -68,7 +68,7 @@ class Politicas{
                     inner join kokar.pcprodut p on p.codprod = i.codprod
                     inner join kokar.pcdesconto d on d.codprod = i.codprod
                     inner join kokar.pcest e on e.codprod = i.codprod
-                    and i.data > '27/09/2021' and c.posicao not in ('C') and c.numped not in (15009567, 29008948)
+                    and i.data > '27/09/2021' and c.posicao not in ('C', 'F') and c.numped not in (15009567, 29008948)
                     AND I.perdesc >=30 and d.dtinicio < '10/10/2021')
                    group by numped,data,codcli,codprod,descricao, POSICAO,desconto, pvenda, qtmax, qtmin, estoque, MES
                     order by MES desc, DATA DESC, descricao");

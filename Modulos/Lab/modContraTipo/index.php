@@ -34,7 +34,7 @@ $produtos = ProdutoPesquisa::getProduto();
                 </div>
                 <ul class="navegacao">
                     <li>
-                        <a href="#">
+                        <a href="index.php">
                             <i class='bx bx-home'></i>
                             <span class="link-nome">Página Inicial</span>
                         </a>
@@ -55,7 +55,7 @@ $produtos = ProdutoPesquisa::getProduto();
                         <span class="tooltip">Copiar Métodos</span>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="index.php">
                             <i class='bx bx-merge'></i>
                             <span class="link-nome">Alterar Fórmulas</span>
                         </a>
@@ -72,38 +72,39 @@ $produtos = ProdutoPesquisa::getProduto();
                                 <div class="setor">T.I.</div>
                             </div>
                         </div>
-                        <i class='bx bxs-log-out' id="sair"></i>
+                        <a href="/homelab.php"><i class='bx bxs-log-out' id="sair"></i></a>
                     </div>
                 </div>
             </section>
             <section class="home-conteudo"> 
-            <datalist id="produtos-lista">
+            <datalist id="produtos-lista" name="produtos-lista">
                 <?php foreach($produtos as $i):?>
                 <option id="<?=$i->getCodprod()?>" value="<?=$i->getCodprod()?>"><?=$i->getDescricao()?></option>
-                <?php endforeach?> 
+                <?php array_push($produtos,[$i->getCodprod()=>$i->getDescricao()]);
+                endforeach;?> 
             </datalist>
                 <div class="formulario">     
-                    <form action="contratipo.php?" method="GET"> 
+                    <form action="contratipo.php" method="POST"> 
                         <div class="titulo">
                             <span>Contratipo de Produtos</span>
                         </div>
-                            <div class="formulario-itens-titulo">
-                                <spam>Produto Origem</spam>
-                            </div>
-                            <div class="formulario-itens-codigo"> 
-                                <label for="codigo1">Código</label> 
-                                <input list="produtos-lista" class="codigo" placeholder="Código..." type="text" id="codigo1"> 
-                                <input type="text" id="produto1" placeholder="Digite o código do produto"  autocomplete="off" disabled> 
-                            </div>
-            
-                            <div class="formulario-itens-titulo">
-                                <spam>Produto Destino</spam>
-                            </div>
-                            <div class="formulario-itens-codigo">
-                                <label for="codigo2">Código</label>
-                                <input list="produtos-lista" class="codigo" placeholder="Código..." type="text" id="codigo2">
-                                <input type="text" id="produto2" placeholder="Digite o código do produto"  autocomplete="off" disabled>                        
-                            </div>
+                        <div class="formulario-itens-titulo">
+                            <spam>Produto Origem</spam>
+                        </div>
+                        <div class="formulario-itens-codigo"> 
+                            <label for="codigo1">Código</label> 
+                            <input list="produtos-lista" required class="codigo" placeholder="Código..." type="text" id="codigo1" name="codigo1"> 
+                            <input type="text" id="produto1" required placeholder="Digite o código do produto"  autocomplete="off" disabled> 
+                        </div>
+        
+                        <div class="formulario-itens-titulo">
+                            <spam>Produto Destino</spam>
+                        </div>
+                        <div class="formulario-itens-codigo">
+                            <label for="codigo2">Código</label>
+                            <input list="produtos-lista" required class="codigo" placeholder="Código..." type="text" id="codigo2" name="codigo2">
+                            <input type="text" id="produto2" required placeholder="Digite o código do produto"  autocomplete="off" disabled>                        
+                        </div>
                         <div class="formulario-botao">
                             <button type="submit">Avançar</button>
                         </div>
@@ -118,16 +119,47 @@ $produtos = ProdutoPesquisa::getProduto();
             window.onload = function() {
             let produto1 = $("#codigo1");
             let produto2 = $("#codigo2");
-            
+            let descricao1 = $("#produto1");
+            let descricao2 = $("#produto2");
+
                 produto1.on("keyup", function() {
-                    console.log($('input[id="produto1"]').val())
+                    let cod = produto1.val();
+                    $.ajax({
+                        type: 'POST',
+                        url: './control/controle.php',
+                        data: { 'action': 'getProduto', cod },
+                        success: function (response) {
+                         
+                            if(response.length>0){
+                                descricao1.val(response); 
+                            }
+                            else {
+                                descricao1.val("CÓDIGO INVÁLIDO");
+                            }
+                        }		  
+                    });
                 })
                 produto2.on("keyup", function() {
-                    $("#produto2")
+                    let cod = produto2.val();
+                    $.ajax({
+                        type: 'POST',
+                        url: './control/controle.php',
+                        data: { 'action': 'getProduto', cod },
+                        success: function (response) {
+                          
+                            if(response.length>0){
+                                descricao2.val(response); 
+                            }
+                            else {
+                                descricao2.val("CÓDIGO INVÁLIDO");
+                            }
+                        }		  
+                    });
                 })
-                $("input[id=produtos-lista] option:selected").focusout(function(){
-                    alert($(this).label());
-                });
+                if(produto1.val().length>0){
+                produto1.keyup();
+                produto2.keyup();
+                }                
             }
         </script>
     </body>

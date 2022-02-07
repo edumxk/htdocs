@@ -132,6 +132,7 @@ $numreq = ($numreq[0]['NUMREQ'] + 1);
                         <option value="BASE SOLVENTE">LEONARDO</option>
                         <option value="BASE SOLVENTE">VENILSON</option>
                         <option value="BASE SOLVENTE">AKIRA</option>
+                        <option value="BASE SOLVENTE">WANDERSON</option>
                     </optgroup>
                     <optgroup value="Tunel" id="TUNEL" label="Túnel">                       
                         <option value="TUNEL">VALDEILSON</option>                        

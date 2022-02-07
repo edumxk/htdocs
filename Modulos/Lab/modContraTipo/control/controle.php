@@ -4,8 +4,11 @@
         if($_POST['action']=='getFiltros'){
             return ContraTipoControle::getFiltros(); 
         }        
+        if($_POST['action']=='getProduto'){
+            $codigo = $_POST['cod'];
+            echo ProdutoPesquisa::getProduto2($codigo);
+        }        
     }
-        
     class ProdutoPesquisa{
         protected $produto;
         protected $codprod;
@@ -26,6 +29,13 @@
                 array_push($arr, $c);
             }
             return $arr;
+        }
+        public static function getProduto2($codprod){
+            $ret = ContraTipoModel::getProduto();
+            foreach($ret as $r){
+                if($codprod == $r['CODPROD'] )    
+                return utf8_encode($r['DESCRICAO']) ;
+            }
         }
     }
     class ContraTipoControle{

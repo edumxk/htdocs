@@ -5,9 +5,10 @@ body{
   overflow-x: hidden;
 }
 .home-conteudo{
-  justify-content: center;
-  align-items: center;
   overflow-y: scroll;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .menu{
   z-index: 99;
@@ -22,13 +23,16 @@ body{
 
 .home-conteudo__itens{
   display: flex;
-  flex-direction: column;
-  width: 180px;
-  z-index: 1;
+    flex-direction: column;
+    position: absolute;
+    width: 180px;
+    z-index: 1;
+    left: 0;
 }
 
 .dropbtn{
   display: block;
+  align-self: flex-end;
 }
 .dropbtn {
     background-color: #b1b1b1;
@@ -39,11 +43,6 @@ body{
     border-radius: 0 ;
     transition: 600ms;
     border: none;
-  }
-  
-  .dropdown label{
-    width: 70%;
-    
   }
 
   .dropdown {
@@ -66,7 +65,6 @@ body{
     z-index: 1;
     transition: 600ms;
     border-left: 6px solid #005282;
-    
     text-transform: uppercase;
   }
   
@@ -80,10 +78,30 @@ body{
   }
   .dropdown-content .menu-itens:hover {background-color: #646464;}
   
-  .dropdown:hover .dropdown-content {display: block;}
+  .dropdown:hover .dropdown-content {
+    display: block;
+    
+  }
   
   .dropdown:hover .dropbtn {background-color: #646464;}
   
+  .menu-itens input{
+    display: flex;
+    height: 25px;
+    width: 25px;
+    margin: 0 0 0 5px;
+  }
+  .menu-itens label{
+    display: block;
+    width: 100%;
+    padding: 10px;
+    
+  }
+  .dropdown .dropdown-content .menu-itens{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
   .busca-itens{
     display: flex;
     
@@ -92,17 +110,18 @@ body{
     display: inline;
     position: relative;
     left: 0;
+    
+  }
+
+  .conteudo .busca-itens > input{
+    display: flex;
+    height: 30px;
+    align-self: center;
+    width: 300px;
+    margin-right: 10px;
    
   }
 
-  .busca-itens label, input{
-    display: inline;
-   
-  }
-
-  .menu-itens input{
-    margin: 0.8rem 1rem 0.8rem 1rem;
-  }
   .botao{
     display: inline;
     text-align: right;
@@ -134,9 +153,6 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    margin: 0;
-    padding: 0;
   }
   .conteudo__produtos{
     border-radius: 5px;
@@ -160,20 +176,22 @@ body{
     border-color: linear-gradient(45deg, #71b7e6, #15004e);
   }
   td, th{
-    padding: 0 0 3px 0;
+    padding: 2px;
+    align-items: center;
+    
   }
   .texto{
     text-align: left;
-    padding: 0 0 0 5px;
+    padding: 0 3px;
   }
   input .checkbox{
     width: 10px;
   }
   th input,td input{
-    padding: 0 0 2px 0;
+    padding: 2px;
     width: 25px;
     height: 25px;
-    vertical-align: middle;
+    
   }
   thead tr:hover{
     cursor: pointer;
@@ -193,9 +211,14 @@ body{
 .conteudo__tabela{
   display: flex;
   justify-content: center;
-  
 }
 @media only screen and (max-width: 450px) {
+  .conteudo{
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    width: 100vw;
+  }
   td, th{
     font-size: 20px;
   }
@@ -203,25 +226,25 @@ body{
     display: none;
   }
   .conteudo-tabela{
-    position: relative;
-    display: block;
-    left: 0;
+    width: 100vw;
   }
   .busca-itens{
-    position: relative;
-    display: inline;
-    left: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: right;
+    padding: 0;
+    width: 75vw;
   }
   .busca-itens input{
-    width: 180px;
+   
   }
-  .conteudo__produtos{
-
-  }
+ .dropdown{
+   display: none;
+ }
   #tabelas-busca{
     margin: 0;
     padding: 0;
-    width: calc(100vw-78px);
+    width: 75vw;
     color: black;
     line-height: 25px;
     font-size: 22px;
@@ -234,4 +257,9 @@ body{
     height: 25px;
   }
 
+}
+@media only screen and (max-width: 1080px) {
+  .dropdown{
+    display: none;
+  }
 }

@@ -3,16 +3,33 @@
 <?php 
 require_once($_SERVER["DOCUMENT_ROOT"].'/Modulos/Lab/modContraTipo/control/controle.php');
 session_start();
+
 if($_SESSION['nome']== null){
     header("location:\..\..\home.php");
 }
-$produtos = ContraTipoControle::getProdutos(1276, 1);
+$codprodOrigem = 1;
+$codprodDestino = 1;
+$metodo = 1;
+if(isset($_POST['codigo1'])){
+    $codprodOrigem = $_POST['codigo1'];
+    $codprodDestino = $_POST['codigo2'];
+}else{
+    ?><script>
+        if(confirm("Alguma coisa deu errado, confirme para ser redirecionado a pagina inicial ou cancele para sair")){
+            alert("Retornando a Contratipo")
+            window.location.replace('index.php');
+        }else{
+            alert("Retornando ao login")
+            window.location.replace('/index.php');
+        }
+    </script> <?php
+}
+$produtos = ContraTipoControle::getProdutos($codprodOrigem, $metodo);
 //var_dump($produtos);
 date_default_timezone_set('America/Araguaina');
 ?>
 <html lang="pt-BR">
     <head>
-        meta:
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
         <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
@@ -34,7 +51,7 @@ date_default_timezone_set('America/Araguaina');
                 </div>
                 <ul class="navegacao">
                     <li>
-                        <a href="#">
+                        <a href="index.php">
                             <i class='bx bx-home'></i>
                             <span class="link-nome">Página Inicial</span>
                         </a>
@@ -55,7 +72,7 @@ date_default_timezone_set('America/Araguaina');
                         <span class="tooltip">Copiar Métodos</span>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="index.php">
                             <i class='bx bx-merge'></i>
                             <span class="link-nome">Alterar Fórmulas</span>
                         </a>
@@ -72,7 +89,7 @@ date_default_timezone_set('America/Araguaina');
                                 <div class="setor">T.I.</div>
                             </div>
                         </div>
-                        <i class='bx bxs-log-out' id="sair"></i>
+                        <a href="/homelab.php"><i class='bx bxs-log-out' id="sair"></i></a>
                     </div>
                 </div>
             </section>
@@ -120,7 +137,7 @@ date_default_timezone_set('America/Araguaina');
                         </div>
                     </div>                    
                 </section>
-                <section class="conteudo">    
+                <section class="conteudo">
                         <div class="busca-itens">    
                             <input type="text" id="produto"/>
                             <button onclick="concluir()">Concluir</button>
@@ -145,7 +162,7 @@ date_default_timezone_set('America/Araguaina');
                                 </tbody>
                             </table>
                         </div>             
-                </section>
+                        </section>
             </section>
         </main>
         <script src="js/jquery.min.js"></script>

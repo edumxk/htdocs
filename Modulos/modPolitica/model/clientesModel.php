@@ -14,7 +14,6 @@
             );
 
             for($i=0; $i<sizeof($ret); $i++){
-                // echo json_encoe($ret[$i]['CLIENTE'] ;
                 $ret[$i]['NOME'] = utf8_encode(Clientes::nomeRca($ret[$i]['NOME']));
             }
 

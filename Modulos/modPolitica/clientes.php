@@ -5,10 +5,8 @@ require_once ('model/clientesModel.php');
     $arrClientesMes = Clientes::getClientesMes();
     $arrClientesAtivos = Clientes::getClientesAtivos();
     $arrClientesInativos = Clientes::getClientesInativos();
-
-    // echo json_encode($arrRca);
 ?>
-
+    
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -216,7 +214,7 @@ require_once ('model/clientesModel.php');
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach($arrClientesInativos as $a):?>
+                            
                                 <tr class="trCliente" onmouseover="listaHoverIn(this)" onmouseout="listaHoverOut(this)" class="colunas" id="<?php echo $a['CODCLI']?>">
                                     <th class="codCli" style="text-align:center; width:40px"><?php echo $a['CODCLI']?></th>
                                     <th class="cliente" style="padding-left:10px; text-align:left"><?php echo $a['CLIENTE']?></th>
@@ -248,7 +246,7 @@ require_once ('model/clientesModel.php');
                                         <?php endif?>
                                     </form>
                                 </tr>
-                            <?php endforeach?>  
+                            
                         </tbody>
                     </table>
 
@@ -267,11 +265,14 @@ require_once ('model/clientesModel.php');
     <script>
 
     	window.onload = function() {
+           console.log("inicio scripts")
             $("#tblPositivados").tablesorter();
             $("#tblAtivos").tablesorter();
             $("#tblInativos").tablesorter();
+            console.log("inicio loader troca")
             $(".loader").toggle();
             $(".container").toggle();
+            console.log("fim loader troca")
 
             $("#buscaCod").on("keyup", function() {
                 var value = $(this).val().toLowerCase();
@@ -291,7 +292,7 @@ require_once ('model/clientesModel.php');
                 var value = $(this).val().toLowerCase();
                 // console.log(value)
                 $(".trCliente").each(function() {
-                    // console.log($(this).find(".cliente").text(), value)
+                    //console.log($(this).find(".cliente").text(), value)
                     if(!$(this).find(".cliente").text().toLowerCase().includes(value)){
                         $(this).hide()
                     }
@@ -360,7 +361,6 @@ require_once ('model/clientesModel.php');
 
 
         function listaHoverIn(elm){
-            console.log('ok');
             $(elm).css('background-color', 'gold')
         }
         function listaHoverOut(elm){

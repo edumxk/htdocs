@@ -13,6 +13,7 @@ $metodo = 1;
 if (isset($_POST['codigo1']) && isset($_POST['codigo2'])) {
     $codprodOrigem = $_POST['codigo1'];
     $codprodDestino = $_POST['codigo2'];
+    $metodo = $_POST['metodo'];
 } else {
 ?><script>
         if (confirm("Alguma coisa deu errado, confirme para ser redirecionado a pagina inicial ou cancele para sair")) {
@@ -266,7 +267,7 @@ if (isset($_POST['codigo1']) && isset($_POST['codigo2'])) {
                         body += '<tr>'
                                 +'<td>'+t['CODPROD']+'</td>'
                                 +'<td class="tabela__formulas__dados-descricao">'+t['DESCRICAO']+'</td>'
-                                +'<td class="tabela__formulas__dados-perc">'+parseFloat(t['PERCENTUAL'])+'</td>'
+                                +'<td class="tabela__formulas__dados-perc">'+parseFloat(t['PERCENTUAL']).toFixed(3)+'</td>'
                                 +'<td>'+t['NUMSEQ']+'</td>'
                                 +'<td>'+t['FRACAOUMIDA']+'</td>'
                                 +'</tr>'

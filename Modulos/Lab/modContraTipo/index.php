@@ -84,7 +84,7 @@ $produtos = ProdutoPesquisa::getProduto();
                 endforeach;?> 
             </datalist>
                 <div class="formulario">     
-                    <form action="contratipo.php" method="POST"> 
+                    <form action="contratipo.php" id="contratipo" method="POST"> 
                         <div class="titulo">
                             <span>Contratipo de Produtos</span>
                         </div>
@@ -116,7 +116,8 @@ $produtos = ProdutoPesquisa::getProduto();
                             </select>
                         </div>
                         <div class="formulario-botao">
-                            <button type="submit">Avançar</button>
+                            <button onclick="return validar()" type="submit">Avançar</button>
+                            
                         </div>
                     </form>
                 </div>
@@ -169,7 +170,19 @@ $produtos = ProdutoPesquisa::getProduto();
                 if(produto1.val().length>0){
                 produto1.keyup();
                 produto2.keyup();
-                }                
+                }              
+            }
+            function validar() {
+                let descricao1 = $("#produto1").val();
+                let descricao2 = $("#produto2").val();
+                if (descricao1 == '' || descricao2 == '' || descricao1 == "CÓDIGO INVÁLIDO" || descricao2 == "CÓDIGO INVÁLIDO") {
+                    alert("Por favor preencha todos os campos.");
+                    return false;
+                }else{
+                    document.getElementById("contratipo").submit();
+                    return true;
+                }
+
             }
         </script>
     </body>

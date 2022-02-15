@@ -103,5 +103,20 @@ class ContraTipoModel{
         }
         return "FAIL";
     }
+    public static function getFormula($codprod, $metodo){
+        $sql = new SqlOra();
+        try{
+            $ret = $sql->select("SELECT c.codprodmaster, p2.descricao descricaomaster, c.codprod, p.descricao, c.qt, numseq, fracaoumida, percformulacaototal percentual
+            from KOKAR.pccomposicao c
+            inner join KOKAR.pcprodut p on p.codprod = c.codprod
+            inner join KOKAR.pcprodut p2 on p2.codprod = c.codprodmaster
+            where c.codprodmaster = $codprod and metodo = $metodo
+           order by numseq");
+            return $ret;
+        }catch(Exception $e){
+            echo 'Exceção capturada: ',  $e->getMessage(), "\n";
+        }
+        return "FAIL";
+    }
     
 }                                         

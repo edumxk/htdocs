@@ -98,11 +98,13 @@ body{
     padding: 10px;
     
   }
+
   .dropdown .dropdown-content .menu-itens{
     display: flex;
     flex-direction: row;
     align-items: center;
   }
+
   .busca-itens{
     display: flex;
     
@@ -129,6 +131,7 @@ body{
     text-align: right;
     display: flex;
   }
+
   .busca-itens button{
     background-color: blue;
     border-radius: 5px;
@@ -167,43 +170,53 @@ body{
       color: black;
     
   }
+
   .conteudo__produtos .conteudo__produtos__tabela{
     width: 100vw;
     display: block;
   }
+
   th, td{
     
     text-align: center;
     vertical-align: middle;
-    font-size: 20px;
+    font-size: 14px;
   }
+
   tr:hover{
     background: linear-gradient(45deg, #71b7e6, #15004e);
     color: white;
     transition: all 0.3s ease;
+    cursor: pointer;
   }
+
   th{
     min-width: 50px;
-    min-height: 50px;
+    min-height: 20px;
     border-bottom: 2px solid;
     border-color: linear-gradient(45deg, #71b7e6, #15004e);
   }
+
   td, th{
     padding: 2px;
     align-items: center;
     
   }
+
   .texto{
     text-align: left;
-    padding: 0 3px;
+    padding: 0 6px;
   }
+
   input .checkbox{
     width: 10px;
+
   }
+
   th input,td input{
     padding: 2px;
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     
   }
   thead tr:hover{
@@ -232,8 +245,9 @@ body{
     margin-top: 20px;
     width: 100vw;
   }
+  
   td, th{
-    font-size: 20px;
+    font-size: 15px;
   }
   .itens{
     display: none;
@@ -248,42 +262,77 @@ body{
     padding: 0;
     width: 75vw;
   }
-  .busca-itens input{
-   
-  }
+ 
  .dropdown{
    display: none;
  }
   #tabelas-busca{
     margin: 0;
     padding: 0;
-    width: 75vw;
+    width: 80%;
     color: black;
-    line-height: 25px;
-    font-size: 22px;
+    font-size: 15px;
   }
   .texto{
     width: 80px;
+    font-size: 1rem;
   }
   th input,td input{
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
   }
 
 }
+
 .botao{
   display: flex;
   justify-content: center;
-  width:50px;
-  height:30px;
-  font-size:20px;
+  width:35px;
+  height:25px;
+  font-size: 18px;
   color:white;
   background-color:#71b7e6;
-  border-style: solid;
-  border-color: #15004e;
+  border: 1px solid #71b7e6;
+  border-radius: 3px;
 }
+.botao:hover{
+  cursor: pointer;
+}
+.modal-content{
+  width: 60vw
+}
+.modal-body{
+  display: flex;
+  justify-content: center;
+}
+.modal{
+  position: absolute;
+  left: -200px;
+}
+
+#tabela__formulas{
+  width: 100%;
+}
+
+.tabela__formulas__dados-descricao{
+ text-align: left;
+ padding-left: 5px;
+}
+
+.tabela__formulas__dados-perc{
+  text-align: left;
+  padding-left: 35px;
+ }
+
 @media only screen and (max-width: 1080px) {
   .dropdown{
     display: none;
   }
+  .modal-content{
+    width: 60vw;
+  }
+  .tabela__formulas__dados-perc{
+    text-align: left;
+    padding-left: 15px;
+   }
 }

@@ -98,7 +98,7 @@ $produtos = ProdutoPesquisa::getProduto();
                                     <td class="conteudo__dados conteudo__dados-data"><?= $p[5]?></td>
                                     <td class="conteudo__dados conteudo__dados-produtos"><?= $p[1]?> => <?= $p[2]?></td>
                                     <td class="conteudo__dados conteudo__dados-nome"><?= $p[3]?></td>
-                                    <td class="conteudo__dados conteudo__dados-cancelar"><button onclick="alert('Cancelar id: '+ <?= $p[0]?>)">Cancelar</button></td>
+                                    <td class="conteudo__dados conteudo__dados-cancelar"><button onclick="cancelar(<?= $p[0]?>)">Cancelar</button></td>
                                 </tr>
                             <?php endforeach ?>
                         </tbody>
@@ -117,9 +117,8 @@ $produtos = ProdutoPesquisa::getProduto();
                             </tr>
                         </thead>
                         <tbody id="dados">
-                            <tr >
+                            <tr>
                                 <td colspan="2" class="conteudo__dados conteudo__dados-codprod">Selecione um Registro</td>
-                                
                             </tr>
                         </tbody>
                     </table>

@@ -18,6 +18,11 @@
             $id = $_POST['id'];
             echo json_encode(ProdutoPesquisa::getProduto3($id));
         }        
+        if($_POST['action']=='verFormula'){
+            $codprod = $_POST['codprod'];
+            $metodo = $_POST['metodo'];
+            echo json_encode(ProdutoPesquisa::getFormula($codprod, $metodo));
+        }        
     }
     class ProdutoPesquisa{
         protected $produto;
@@ -54,6 +59,9 @@
                 array_push( $arr , [ $r['CODPROD'] , utf8_encode( $r['DESCRICAO'] )] );
             }
             return $arr;
+        }
+        public static function getFormula($codprod, $metodo){
+            return ContraTipoModel::getFormula($codprod, $metodo);
         }
     }
     class ContraTipoControle{

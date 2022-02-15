@@ -8,6 +8,16 @@
             $codigo = $_POST['cod'];
             echo ProdutoPesquisa::getProduto2($codigo);
         }        
+        if($_POST['action']=='concluir'){
+            $lista = $_POST['lista'];
+            $cabecalho = $_POST['cabecalho'];
+            
+            ContraTipoModel::setListaAlterados($cabecalho, $lista);
+        }        
+        if($_POST['action']=='preencher'){
+            $id = $_POST['id'];
+            echo json_encode(ProdutoPesquisa::getProduto3($id));
+        }        
     }
     class ProdutoPesquisa{
         protected $produto;
@@ -37,6 +47,14 @@
                 return utf8_encode($r['DESCRICAO']) ;
             }
         }
+        public static function getProduto3($id){
+            $arr = [];
+            $ret = ContraTipoModel::getProduto2($id);
+            foreach($ret as $r){
+                array_push( $arr , [ $r['CODPROD'] , utf8_encode( $r['DESCRICAO'] )] );
+            }
+            return $arr;
+        }
     }
     class ContraTipoControle{
         public $codsubcategoria;
@@ -64,7 +82,7 @@
         }
         public static function getProdutos($codprod, $metodo){
 
-              $arr = [];
+            $arr = [];
             $ret = ContraTipoModel::getProdutos($codprod, $metodo);
                foreach($ret as $r){
                 $c = new ContraTipoControle();
@@ -75,6 +93,15 @@
                   
                 array_push($arr, $c);
                }
+            return $arr;
+        }
+        public static function getAlteracoes(){
+            $arr = [];
+            $ret = ContraTipoModel::getAlteracoes();
+                foreach($ret as $r){
+                    array_push($arr, [$r['ID'], $r['CODPROD1'], $r['CODPROD2'],
+                    utf8_encode($r['NOME']), $r['METODO'], $r['DATA']]);
+                }
             return $arr;
         }
         

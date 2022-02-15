@@ -105,6 +105,16 @@ $produtos = ProdutoPesquisa::getProduto();
                             <input list="produtos-lista" required class="codigo" placeholder="Código..." type="text" id="codigo2" name="codigo2">
                             <input type="text" id="produto2" required placeholder="Digite o código do produto"  autocomplete="off" disabled>                        
                         </div>
+                        <div class="formulario-itens-metodo">
+                            <label class="formulario-itens-metodo-label" for="metodo">Método</label>
+                            <select name="metodo" id="metodo">
+                                <option value="1">1</option>
+                                <option value="1">2</option>
+                                <option value="1">3</option>
+                                <option value="1">4</option>
+                                <option value="1">5</option>
+                            </select>
+                        </div>
                         <div class="formulario-botao">
                             <button type="submit">Avançar</button>
                         </div>

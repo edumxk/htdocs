@@ -1,0 +1,93 @@
+body{
+  display: flex;
+  height: 100vh;
+}
+.menu{
+  z-index: 99;
+}
+main .conteudo{
+    width:  calc(100vw - 78px);  
+    position: absolute;
+    left: 78px;
+    display: flex;
+    justify-content: space-around;
+  }
+main.active .conteudo{
+  width: calc(100vh-240px);
+  position: absolute;
+  left: 240px;
+  display: flex;
+}
+
+.conteudo{
+  background: linear-gradient(45deg, #71b7e6, #15004e);
+  display: flex;
+  height: 100vh;
+  overflow-x: hidden;
+  padding: 20px 0 0 0;
+}
+
+.conteudo .conteudo__produtos + .conteudo__ultimos{
+  display: flex;
+}
+
+table{
+  box-shadow: 5px 5px 15px 1px black;
+      margin-bottom: 50px;
+      border-radius: 0 15px 15px 0;
+      border-left: 6px solid blue;
+      background-color: white;
+      color: black;
+    
+}
+
+.conteudo .conteudo__titulo{
+  font-size: 1.3rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.conteudo .conteudo__cabecalho{
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-align: center;
+}
+.conteudo .conteudo__ultimos .conteudo__ultimos__tabela{
+  width: 50vw;
+}
+
+.conteudo .conteudo__produtos .conteudo__produtos__tabela{
+  width: 35vw;
+}
+
+tr td, tr th{
+  padding: 8px;
+  line-height: 24px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.conteudo__ultimos__tabela tbody tr td:last-child{
+  border-radius: 0 15px 15px 0;
+}
+
+.conteudo__ultimos__tabela tbody tr:hover{
+  background-color: #71b7e6;
+}
+
+.conteudo__dados{
+  text-align: center;
+}
+
+.conteudo__dados-cancelar button{
+  border: none;
+  border-radius: 5px;
+  background-color: red;
+  
+  color: white;
+  font-weight: 700;
+  font-size: 12px;
+  
+  height: 23px;
+}

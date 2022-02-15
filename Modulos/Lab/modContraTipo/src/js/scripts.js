@@ -2,7 +2,6 @@ window.onload = function() {
     $("#tabelas-busca").tablesorter();
     $(".loader").toggle();
     //$(".container").toggle();
-
     $("#produto").on("keyup", function() {
         const value = $(this).val().toUpperCase().split(' ');
 
@@ -40,17 +39,12 @@ function marcar(source) {
    // console.log($(visibilidade[i]).css('display'));
 }
 
-function concluir() {
-
-    if(confirm("Deseja mesmo confirmar esta alteração?")==true){
-        var produtos = document.getElementsByName('produto');
-        var listaProdutos=[]
-        for(var i=0, n=produtos.length;i<n;i++) {
-            if(produtos[i].checked == true){ 
-                listaProdutos.push(produtos[i].id);
-            }
-            
-        }
-        alert(listaProdutos)
-    }
+function novaData(){
+    var today = new Date();
+        var date = today.toJSON().slice(0, 10);
+        var nDate = date.slice(8, 10) + '/' 
+                    + date.slice(5, 7) + '/' 
+                    + date.slice(0, 4);
+        return nDate;
 }
+

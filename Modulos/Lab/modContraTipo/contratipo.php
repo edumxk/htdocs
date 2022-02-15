@@ -38,6 +38,7 @@ date_default_timezone_set('America/Araguaina');
         <link rel="stylesheet" href="./src/css/reset.css">
         <link rel="stylesheet" href="./src/css/sidebar.css">
         <link rel="stylesheet" href="./src/css/contratipo.css">
+        <script src="https://use.fontawesome.com/62e43a72a9.js"></script>
     </head>
     <body>
         <main>
@@ -149,6 +150,7 @@ date_default_timezone_set('America/Araguaina');
                                         <th><input class="checkbox" onclick="marcar(this)" type="checkbox" id="select-all"/></th>
                                         <th>Código</th>
                                         <th>Descricao</th>
+                                        <th>Fórmula</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -157,6 +159,7 @@ date_default_timezone_set('America/Araguaina');
                                         <td><input class="checkbox" type="checkbox" name="produto" id="<?= $p->codprodmaster?>"/></td>
                                         <td><?= $p->codprodmaster?></td>
                                         <td class="texto"><?= $p->produto?></td>
+                                        <td class="btn"><button class="botao" onclick="verFormula(<?= $p->codprodmaster?>)"><i class="fa fa-eye"></i></button></td>
                                     </tr>
                                     <?php endforeach?>
                                 </tbody>
@@ -171,7 +174,37 @@ date_default_timezone_set('America/Araguaina');
         <script src="./src/js/sidebar.js"></script>
         <script src="../../../recursos/js/jquery.tablesorter.js"></script>
         <script>
-            //window.onload = carregar()
+            function concluir() {
+                if(confirm("Deseja mesmo confirmar esta alteração?")==true){
+                    var produtos = document.getElementsByName('produto');
+                    var listaProdutos=[]
+                    for(var i=0, n=produtos.length;i<n;i++) {
+                        if(produtos[i].checked == true){ 
+
+                            listaProdutos.push(produtos[i].id);
+                        }
+                    }
+                    let delay = 500;
+                    cabecalho = {
+                        codprod1: "<?=$_POST['codigo1']?>",
+                        codprod2: "<?=$_POST['codigo2']?>",
+                        metodo: "<?=$_POST['metodo']?>",
+                        codfun: "<?=$_SESSION['coduser']?>",
+                        data: novaData()
+                    }
+                    $.ajax({
+                        type : 'POST',
+                        url : "control/controle.php",
+                        data : {'action': 'concluir', 'lista': listaProdutos, 'cabecalho': cabecalho},
+                        success: function(response) {
+                            setTimeout(function() {
+                            delaySuccess(response);
+                            }, delay);
+                    window.location.replace('relatorio.php');
+                    }
+                });
+            }
+        }
         </script>
     </body>
 </html>

@@ -3,6 +3,7 @@ body{
   display: flex;
   height: 100vh;
   overflow-x: hidden;
+  font-family: 'Open sans', sans-serif;
 }
 .home-conteudo{
   overflow-y: scroll;
@@ -106,6 +107,7 @@ body{
     display: flex;
     
   }
+  
   .conteudo-tabela{
     display: inline;
     position: relative;
@@ -154,12 +156,23 @@ body{
     flex-direction: column;
     align-items: center;
   }
-  .conteudo__produtos{
-    border-radius: 5px;
-    background: linear-gradient(90deg, #fff, #a0a0a0);
+
+  .conteudo__tabela .conteudo__produtos{
+  
+      box-shadow: 5px 5px 15px 1px black;
+      margin-bottom: 50px;
+      border-radius: 0 15px 15px 0;
+      border-left: 6px solid blue;
+      background-color: white;
+      color: black;
+    
+  }
+  .conteudo__produtos .conteudo__produtos__tabela{
+    width: 100vw;
+    display: block;
   }
   th, td{
-    text-transform: uppercase;
+    
     text-align: center;
     vertical-align: middle;
     font-size: 20px;
@@ -209,7 +222,7 @@ body{
 }
 
 .conteudo__tabela{
-  display: flex;
+  display: block;
   justify-content: center;
 }
 @media only screen and (max-width: 450px) {
@@ -257,6 +270,17 @@ body{
     height: 25px;
   }
 
+}
+.botao{
+  display: flex;
+  justify-content: center;
+  width:50px;
+  height:30px;
+  font-size:20px;
+  color:white;
+  background-color:#71b7e6;
+  border-style: solid;
+  border-color: #15004e;
 }
 @media only screen and (max-width: 1080px) {
   .dropdown{

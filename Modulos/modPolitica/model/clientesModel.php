@@ -140,8 +140,8 @@
                 return '29 - JOILDO';
             }elseif(strpos($nome, 'FRANKLIN') !== false) {
                 return '30 - FRANKLIN';
-            }elseif(strpos($nome, 'RADAMES') !== false) {
-                return '33 - RADAMES';
+            }elseif(strpos($nome, 'HIGOR') !== false) {
+                return '38 - HIGOR';
             }elseif(strpos($nome, 'ALEX') !== false) {
                 return '37 - ALEX';
             }else {

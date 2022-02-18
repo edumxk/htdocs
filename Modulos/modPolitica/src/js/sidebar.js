@@ -1,5 +1,5 @@
 let sidebar = document.querySelector(".menu");
-let home = document.querySelector(".home-conteudo");
+let home = document.querySelector(".principal");
 let btn = document.querySelector("#btn");
 
 

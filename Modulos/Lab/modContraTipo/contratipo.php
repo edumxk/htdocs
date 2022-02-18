@@ -261,7 +261,6 @@ if (isset($_POST['codigo1']) && isset($_POST['codigo2'])) {
                 success: function(response) {
                     arr = JSON.parse(response);
                     body = "";
-                    $('#saldoCarga').text("");
                     pesoTotalPen =0;
                     arr.forEach(function(t){
                         body += '<tr>'

@@ -60,7 +60,7 @@
             
         }
 
-        public function getPoliticas($codCli, $numRegiao){
+        public static function getPoliticas($codCli, $numRegiao){
             $listaPoliticas = [];
 
             $sql = new SqlOra();

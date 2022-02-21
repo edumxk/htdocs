@@ -120,7 +120,7 @@ require_once ('model/calculaPoliticas.php');
                         </thead>
                         <tbody>
                                 <?php foreach($politicas as $p):?>
-                                <tr class="trCliente" onmouseover="listaHoverIn(this)" onmouseout="listaHoverOut(this)" class="colunas" style="; font-size:12px">
+                                <tr class="trCliente" onmouseover="listaHoverIn(this)" onmouseout="listaHoverOut(this)" class="colunas" style="font-size:12px">
                                     <td class="codGrupo" style="text-align:center; width:50px"><?php echo $p['CODGRUPO']?></td>
                                     <td style="padding-left:10px; text-align:left;"><?php echo utf8_encode($p['DESCRICAO'])?></td>
                                     <td class="tabela" style="padding-right:10px; text-align:right"><?php echo number_format($p['TABELA'],2,',','.')?></td>

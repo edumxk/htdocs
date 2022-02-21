@@ -7,6 +7,7 @@ require_once './control/controle.php';
     }
 
     $clientes = Controle::getClientes();
+    //$politicas2 = Controle::getPoliticas(271 ,2);
 ?>
 
 
@@ -169,20 +170,20 @@ require_once './control/controle.php';
                 <!-- Modal Header -->
                 <div class="modal-header">
                 <h2 id="modal-titulo"></h2>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" class="close" onclick="fechar()" data-dismiss="modal">&times;</button>
                 </div>
                 
                 <!-- Modal body -->
                 <div class="modal-body">
                     <div>
-                        <table>
-                            <thead>
+                        <table class="table">
+                            <thead class="thead-dark">
                                 <tr>
                                     <th>Código</th>
                                     <th>Grupo</th>
                                     <th>Desconto</th>
                                     <th>Tabela</th>
-                                    
+                                    <th>Obs</th> 
                                 </tr>
                             </thead>
                             <tbody id="dadosmodal">
@@ -209,7 +210,6 @@ require_once './control/controle.php';
 <script>
     function ver(codcli, numregiao){
         var modal = $('#modalPoliticas')
-        console.log(codcli, numregiao)
         $.ajax({
                 type: 'POST',
                 url: "control/controle.php",
@@ -219,25 +219,33 @@ require_once './control/controle.php';
                     'numregiao': numregiao,
                 },
                 success: function(resposta) {
-                    console.log(resposta);
                     arr = JSON.parse(resposta);
                     body = "";
 
                     arr.forEach(function(t){
                         body += '<tr>'
-                                +    '<td>'+t['SYSDATE']+'</td>'
-                                   
+                                +    '<td class="politica__grupo">'+t[0]+'</td>'
+                                +    '<td class="politica__descricao">'+t[1]+'</td>'
+                                +    '<td class="politica__desconto"><input type="number" step="0.0001" value="'+t[2]+'"></input></td>'
+                                +    '<td class="politica__tabela"><input type="text" disabled value="'+(parseFloat(t[3])*((100 - parseFloat(t[2]))/100)).toFixed(2)+'"></input></td>'
+                                +    '<td class="politica__obs"><input type="text" placeholder="Informar Observação na Alteração" id="obs'+t[0]+'"></input></td>'
                                 +'</tr>'
                                 })
 
                     $('#dadosmodal').empty();
-                    $('#modal-titulo').append('Cliente: '+codcli+'Região: '+numregiao);
+                    $('#modal-titulo').empty();
+                    $('#modal-titulo').append('Cliente: '+codcli+'\nRegião: '+numregiao);
                     $('#dadosmodal').append(body);
                     console.log("abrir modal");
                     modal.modal('show');
                 }
                 }); 
     }
+
+    function fechar(){
+        $('#modalPoliticas').modal('hide');
+    }
+
     window.onload = function() {
         let botao = $('.btn__politica');
         let atividade = $('.btn__status');

@@ -25,8 +25,8 @@ class Controle{
         $politicas = ModelPoliticas::getPoliticas($cliente, $numregiao); 
         $saida = [];
         foreach($politicas as $p):
-            array_push( $saida, [$p["CODGRUPO"],  utf8_encode($p["DESCRICAO"]),  $p["PERCDESC"],
-              $p["TABELA"] ] );
+            array_push( $saida, [ $p["CODGRUPO"],  utf8_encode($p["DESCRICAO"]),  $p["PERCDESC"],
+              $p["TABELA"], $p['CLIENTE'] ] );
         endforeach;
         return json_encode($saida);
     }   

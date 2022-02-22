@@ -97,7 +97,8 @@ class ModelPoliticas{
                     nvl((select percdesc from kokar.pcdesconto d inner join kokar.pcdescontoitem di on d.coddesconto = di.coddesconto 
                             where d.codcli = $codCli and di.valor_num = t1.codgrupo),0) percdesc,
                     to_char(t.pvenda1-t.vlipi, '9999999.9999') tabela,
-                    nvl((select ativo from pcpoliticas where codcli = $codCli),0) ativo
+                    nvl((select ativo from pcpoliticas where codcli = $codCli),0) ativo,
+                    cl.cliente
                 from 
                 (
                     select c.codgrupo, c.descricao, min(i.coditem) codprod 
@@ -106,6 +107,7 @@ class ModelPoliticas{
                     group by c.codgrupo, c.descricao
                     order by c.descricao
                 )t1 inner join kokar.pctabpr t on t.codprod = t1.codprod and t.numregiao = $numRegiao
+                inner join kokar.pcclient cl on cl.codcli = $codCli
                 where t.pvenda > 0"
             );
         }catch(Exception $e){

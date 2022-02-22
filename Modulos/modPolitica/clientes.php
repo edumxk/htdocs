@@ -215,6 +215,7 @@ require_once ('model/clientesModel.php');
                         </thead>
                         <tbody>
                             
+                            <?php foreach($arrClientesInativos as $a):?>
                                 <tr class="trCliente" onmouseover="listaHoverIn(this)" onmouseout="listaHoverOut(this)" class="colunas" id="<?php echo $a['CODCLI']?>">
                                     <th class="codCli" style="text-align:center; width:40px"><?php echo $a['CODCLI']?></th>
                                     <th class="cliente" style="padding-left:10px; text-align:left"><?php echo $a['CLIENTE']?></th>
@@ -223,7 +224,6 @@ require_once ('model/clientesModel.php');
                                     <td class="nomeRca" style="text-align:left; padding-left: 10px; width:100px"><?php echo $a['NOMERCA']?></td>
                                     <td style="text-align:center; width:70px"><?php echo $a['ULTCOMPRA']?></td>
                                     <td style="text-align:right; width:70px; padding-right:10px"><a hidden><?php echo $a['TOTAL']?></a><?php echo number_format($a['TOTAL'],2,',','.')?></td>
-                                    
                                     <form method="get" action="visualizarPoliticas.php">
                                         <?php if ($a['ATIVO'] == 1):?>
                                             <td style="text-align:center; width:70px" >
@@ -246,7 +246,7 @@ require_once ('model/clientesModel.php');
                                         <?php endif?>
                                     </form>
                                 </tr>
-                            
+                                <?php endforeach?>
                         </tbody>
                     </table>
 

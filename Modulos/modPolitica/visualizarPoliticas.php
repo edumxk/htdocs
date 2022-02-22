@@ -175,6 +175,8 @@ require_once ('model/calculaPoliticas.php');
             tabela = visualParaNumero($(elm).parent().parent().find('.tabela').text());
             desconto = visualParaNumero($(elm).parent().parent().find('.desconto').val());
             
+            console.log(codGrupo, tabela, desconto)
+
             novoPartida = numeroParaVisual(tabela-(tabela*(desconto/100)));
             descontoN = numeroParaVisual(desconto);
 
@@ -297,12 +299,7 @@ require_once ('model/calculaPoliticas.php');
                     }
                 });
             }
-
         }
-
-
     </script>
-
-
 </html>
 

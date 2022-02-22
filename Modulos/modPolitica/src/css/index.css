@@ -194,6 +194,28 @@ vertical-align: middle;
 }
 
 /* Estilos do modal */
+.modal-header{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 0.2fr;
+    align-items: start;
+    grid-gap: 8px;
+}
+
+.modal-header.botoes{
+    display: grid;
+    grid-template-columns: 4fr 1fr 1fr;
+    justify-content: flex-end;
+    grid-gap: 8px;
+}
+
+#modalObs{
+    grid-column: span 2;
+}
+
+.close{
+    width: 30px;
+    height: 30px;
+}
 
 .politica__desconto input{
     width: 100px;
@@ -212,4 +234,9 @@ vertical-align: middle;
 
 .table{
     font-size: 14px;
+}
+
+#tbPoliticas thead tr th{
+    text-transform: uppercase;
+    text-align: center;
 }

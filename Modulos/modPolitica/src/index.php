@@ -126,7 +126,7 @@ require_once './control/controle.php';
                 </select>
             </div>
             <div class="principal__filtros-caixa pesquisa">
-                <input type="text" placeholder="Pesquisar...">
+                <input id="busca" type="text" placeholder="Pesquisar...">
             </div>
         </div>
         <div class="pagina__loader">
@@ -148,7 +148,7 @@ require_once './control/controle.php';
                 </thead>
                 <tbody>
                     <?php foreach($clientes as $c): ?>
-                    <tr>
+                    <tr class="linha">
                         <td class="principal__conteudo__clientes-codcli"><?= $c->getCodcli()?></td>
                         <td class="principal__conteudo__clientes-cliente"><?= $c->getCliente()?></td> 
                         <td class="principal__conteudo__clientes-uf"><?= $c->getUf()?></td>
@@ -169,14 +169,20 @@ require_once './control/controle.php';
             
                 <!-- Modal Header -->
                 <div class="modal-header">
-                <h2 id="modal-titulo"></h2>
-                <button type="button" class="close" onclick="fechar()" data-dismiss="modal">&times;</button>
+                    <h2 id="modal-titulo"></h2>
+                    <textarea id="modalObs" name="obs-cliente" cols="40" rows="3"></textarea>
+            
+                    <button type="button" class="close" onclick="fechar()" data-dismiss="modal">&times;</button>
+                    
+                    <button type="button" onclick="desativar()" class="btn btn-warning" data-dismiss="modal">Desativar</button>
+                    <button type="button" onclick="excluir()" class="btn btn-danger" data-dismiss="modal">Excluir</button>
+                    <button type="button" onclick="salvar()" class="btn btn-primary" data-dismiss="modal">Salvar Alterações</button>
                 </div>
                 
                 <!-- Modal body -->
                 <div class="modal-body">
                     <div>
-                        <table class="table">
+                        <table class="table" id="tbPoliticas">
                             <thead class="thead-dark">
                                 <tr>
                                     <th>Código</th>
@@ -188,7 +194,7 @@ require_once './control/controle.php';
                             </thead>
                             <tbody id="dadosmodal">
                                 <tr>
-                                    <td colspan="4">teste</td>
+                                    <td colspan="4">ERRO</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -197,8 +203,8 @@ require_once './control/controle.php';
                 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Salvar Alterações</button>
+                    <button type="button" onclick="fechar()" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" onclick="salvar()" class="btn btn-primary" data-dismiss="modal">Salvar Alterações</button>
                 </div>
                 
             </div>
@@ -207,6 +213,7 @@ require_once './control/controle.php';
     </section>
 </body>
 <script src="./js/sidebar.js"></script>
+<script src="../js/jquery.tablesorter.js"></script>
 <script>
     function ver(codcli, numregiao){
         var modal = $('#modalPoliticas')
@@ -226,16 +233,18 @@ require_once './control/controle.php';
                         body += '<tr>'
                                 +    '<td class="politica__grupo">'+t[0]+'</td>'
                                 +    '<td class="politica__descricao">'+t[1]+'</td>'
-                                +    '<td class="politica__desconto"><input type="number" step="0.0001" value="'+t[2]+'"></input></td>'
-                                +    '<td class="politica__tabela"><input type="text" disabled value="'+(parseFloat(t[3])*((100 - parseFloat(t[2]))/100)).toFixed(2)+'"></input></td>'
+                                +    '<td class="politica__desconto"><input class="desconto" onfocusout="attDesconto(this, '+parseFloat(t[3])+')" type="text" value="'+t[2]+'"></input></td>'
+                                +    '<td class="politica__tabela"><input class="tabela" type="text" disabled value="'+getTabela(parseFloat(t[2]), parseFloat(t[3]))+'"></input></td>'
                                 +    '<td class="politica__obs"><input type="text" placeholder="Informar Observação na Alteração" id="obs'+t[0]+'"></input></td>'
                                 +'</tr>'
                                 })
 
                     $('#dadosmodal').empty();
                     $('#modal-titulo').empty();
-                    $('#modal-titulo').append('Cliente: '+codcli+'\nRegião: '+numregiao);
+                    $('#modal-titulo').append(arr[0][4]);
+                    $('#modalObs').text('Obs do cliente, obs geral');
                     $('#dadosmodal').append(body);
+                    $('#dadosmodal').trigger("update", true);
                     console.log("abrir modal");
                     modal.modal('show');
                 }
@@ -244,6 +253,30 @@ require_once './control/controle.php';
 
     function fechar(){
         $('#modalPoliticas').modal('hide');
+    }
+
+    function getTabela(desconto, tabela){
+        return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(((100-desconto)/100)*tabela);
+    }
+
+    function salvar(){
+        //1° - Salvar log da politica alterada com a respectiva alteração.
+    }
+
+    function excluir(){
+
+    }
+
+    function desativar(){
+
+    }
+
+    function attDesconto(linha, tabela){
+        let grupo = $(linha).parent().parent().find('.politica__grupo').text();
+        let desconto = parseFloat($(linha).val());
+        let refTabela = $(linha).parent().parent().find('.tabela');
+        console.log(grupo +', '+desconto+', '+ tabela);
+        refTabela.val(getTabela(desconto,tabela));
     }
 
     window.onload = function() {
@@ -270,6 +303,33 @@ require_once './control/controle.php';
                 $(this).css('background-color', '#e04729');
         });
 
+        $("#clientes").tablesorter();
+        $("#tbPoliticas").tablesorter();
+
+        //Pesquisa da tabela clientes
+        $("#busca").on("keyup", function() {
+            const valor = $(this).val().toUpperCase().split(' ');
+
+        $(".linha").each(function() {
+            const busca = $(this).text().toUpperCase();
+            let referencia = $(this);
+            let flag= 0;
+            valor.filter(function(element) {                            
+                if (busca.indexOf(element) !== -1) {   // se for encontrado um valor nos dois arrays
+                    flag  ++;
+                }else{
+                    flag = 0;
+                }
+                if(valor.length === flag){
+                    referencia.show()
+                }else{
+                    referencia.hide()
+                }
+                });
+            }); 
+        });
+    
+        //carregamento da página
         $(".loader").toggle();
         $(".pagina__loader").css('height', '90px');
         $(".principal__conteudo").toggle();

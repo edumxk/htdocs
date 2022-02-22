@@ -312,7 +312,7 @@ date_default_timezone_set('America/Araguaina');
 							<?php echo number_format($p->litragem*$p->qt,2,',',''); array_push($arr2[1],$p->litragem*$p->qt) ?>
 							</td>
 							<td>
-							<?php echo $p->status ?>
+							<span class="em-producao__status"><?php echo $p->status?></span>
 							</td>
 						</tr>
 					<?php endforeach; ?>
@@ -345,6 +345,14 @@ date_default_timezone_set('America/Araguaina');
 	<script>
 		$(document).ready(function () {
 		   
+			var lista = $('.em-producao__status');
+			//console.log(lista)
+			lista.each(function (i){
+				if($(this).text() == 'ENVASE')
+				$(this).parent().css('background-color', '#42FFD0');
+			})
+			
+
 			$("table").tablesorter(
 			{
 				dateFormat:'mmddYYYY',

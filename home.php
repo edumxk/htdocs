@@ -108,10 +108,22 @@
             
             <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']==5 || $_SESSION['codsetor']==101): //Apenas diretoria e comercial?>
                 <div class="icones">  
-                    <h5 class="cartao-title">Bonificações</h5>
-                    <input class="botao" onclick="bnf1()" 
-                    type="image" src="recursos/src/gift.png" height="140" width="140"/> 
+                <h5 class="cartao-title">Bonificações</h5>
+                    <form action="//172.168.1.254:8099/modulos/modBonific/listaBnf.php" method="POST">
+                        <!-- <form action="//172.168.1.254:8099/teste.php" method="POST"> -->
+                        <input hidden name="coduser" value=<?php echo $_SESSION['coduser']?>>
+                        <input hidden name="nome" value=<?php echo $_SESSION['nome']?>>
+                        <input hidden name="codsetor" value=<?php echo $_SESSION['codsetor']?>>
+                        <input hidden name="setor" value=<?php echo $_SESSION['setor']?>>
+                        <input hidden name="codrca" value=<?php echo $_SESSION['codrca']?>>
+                        <input hidden name="origem" value="interno">
+                        <button style="border: none" type="submit"><input class="botao" type="image" src="recursos/src/gift.png" height="140" width="140"/> </button>
+                    </form>
                 </div>
+           
+
+
+                
             <?php endif?>
             
             <?php if($_SESSION['codsetor']<=0): //Apenas diretoria e comercial?>
@@ -226,13 +238,13 @@
                 </div>
             <?php endif?>
 
-            <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']==4 || $_SESSION['codsetor']==5 || $_SESSION['codsetor']==6 || $_SESSION['codsetor']==101): //Apenas TI e comercial?>
+            
                 <div class="icones">  
                     <h5 class="cartao-title">Resumo Produção</h5>
                     <input class="botao" onclick="window.location.href='modulos/modProducao2/INDEX.php'" 
                     type="image" src="recursos/src/producao2.png" height="140" width="140"/> 
                 </div>
-            <?php endif?>
+  
                                
         </div>
 	<div class="complemento"></div>

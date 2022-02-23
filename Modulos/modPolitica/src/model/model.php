@@ -42,7 +42,7 @@ class ModelPoliticas{
                             c.numregiaocli numregiao
                     from kokar.pcclient c
                     LEFT join kokar.pcpedc p
-                        on c.codcli = p.codcli and p.data > '01/01/2020'
+                        on c.codcli = p.codcli and p.data > '01/01/2022'
                     inner join kokar.pcusuari u
                         on c.codusur1 = u.codusur
                     inner join kokar.pccidade m

@@ -166,7 +166,7 @@ require_once './control/controle.php';
         <div class="modal fade" id="modalPoliticas">
             <div class="modal-dialog modal-xl">
             <div class="modal-content">
-            
+                
                 <!-- Modal Header -->
                 <div class="modal-header">
                     <h2 id="modal-titulo"></h2>
@@ -176,37 +176,35 @@ require_once './control/controle.php';
                     
                     <button type="button" onclick="desativar()" class="btn btn-warning" data-dismiss="modal">Desativar</button>
                     <button type="button" onclick="excluir()" class="btn btn-danger" data-dismiss="modal">Excluir</button>
-                    <button type="button" onclick="salvar()" class="btn btn-primary" data-dismiss="modal">Salvar Alterações</button>
+                    <button type="submit" onclick="salvar(4)" class="btn btn-primary" data-dismiss="modal">Salvar</button>
                 </div>
                 
                 <!-- Modal body -->
-                <div class="modal-body">
-                    <div>
-                        <table class="table" id="tbPoliticas">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th>Código</th>
-                                    <th>Grupo</th>
-                                    <th>Desconto</th>
-                                    <th>Tabela</th>
-                                    <th>Obs</th> 
-                                </tr>
-                            </thead>
-                            <tbody id="dadosmodal">
-                                <tr>
-                                    <td colspan="4">ERRO</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="modal-body">
+                        <div>
+                            <table class="table" id="tbPoliticas">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Código</th>
+                                        <th>Grupo</th>
+                                        <th>Desconto</th>
+                                        <th>Tabela</th>
+                                        <th>Obs</th> 
+                                    </tr>
+                                </thead>
+                                <tbody id="dadosmodal">
+                                    <tr>
+                                        <td colspan="4">ERRO</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
-                
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="button" onclick="fechar()" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" onclick="salvar()" class="btn btn-primary" data-dismiss="modal">Salvar Alterações</button>
-                </div>
-                
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" onclick="fechar()" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" onclick="salvar(4)" class="btn btn-primary" data-dismiss="modal">Salvar Alterações</button>
+                    </div>
             </div>
             </div>
         </div>
@@ -235,7 +233,7 @@ require_once './control/controle.php';
                                 +    '<td class="politica__descricao">'+t[1]+'</td>'
                                 +    '<td class="politica__desconto"><input class="desconto" onfocusout="attDesconto(this, '+parseFloat(t[3])+')" type="text" value="'+t[2]+'"></input></td>'
                                 +    '<td class="politica__tabela"><input class="tabela" type="text" disabled value="'+getTabela(parseFloat(t[2]), parseFloat(t[3]))+'"></input></td>'
-                                +    '<td class="politica__obs"><input type="text" placeholder="Informar Observação na Alteração" id="obs'+t[0]+'"></input></td>'
+                                +    '<td class="politica__obs"><input class="politica__obs-input" type="text" placeholder="Informar Observação na Alteração" id="obs'+t[0]+'"></input></td>'
                                 +'</tr>'
                                 })
 
@@ -259,8 +257,47 @@ require_once './control/controle.php';
         return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(((100-desconto)/100)*tabela);
     }
 
-    function salvar(){
+    function salvar(chars){
         //1° - Salvar log da politica alterada com a respectiva alteração.
+        let listaAlteracoes = [];
+        let obs =  $('.politica__obs-input');
+        let pendencias = [];
+        /* Validação para Salvar Politica */
+        obs.each(function (){
+            let novoDesconto = $(this).parent().parent().find('.politica__desconto').find('.desconto').val();
+            let ref = $(this);
+
+            if( $(ref).prop('required')){ 
+                
+                arr.forEach(function(t){ 
+                    if($(ref).prop('id').substr(3)==(t[0])){
+                        if(t[2]!= novoDesconto){
+                            if($(ref).val().length >= chars)
+                            //inserindo alterações de desconto
+                            listaAlteracoes.push( {
+                                grupo: t[0], 
+                                descAntigo: t[2], 
+                                descNovo: novoDesconto, 
+                                obs: $(ref).val()
+                            })
+                            if($(ref).val().length < chars ){
+                                let grupo = $(ref).parent().parent().find('.politica__descricao').text()
+                                alert('Politica alterada com obs não preenchida: '+grupo);
+                                pendencias.push(grupo);
+                                listaAlteracoes = [];
+                            }
+                        } 
+                    }
+                })
+            }
+        
+        })
+
+        listaAlteracoes.forEach(function(i){
+            console.log(i.grupo, i.descNovo, i.obs)
+        })
+       
+        listaAlteracoes, pendencias = []
     }
 
     function excluir(){
@@ -275,7 +312,10 @@ require_once './control/controle.php';
         let grupo = $(linha).parent().parent().find('.politica__grupo').text();
         let desconto = parseFloat($(linha).val());
         let refTabela = $(linha).parent().parent().find('.tabela');
-        console.log(grupo +', '+desconto+', '+ tabela);
+        
+        //checar se o desconto foi alterado, se sim, atribuir requered.
+        $('#obs'+grupo).prop('required',true);
+        
         refTabela.val(getTabela(desconto,tabela));
     }
 

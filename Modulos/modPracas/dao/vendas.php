@@ -58,7 +58,7 @@ class Vendas{
             from kokar.pcpraca p inner join kokar.pcregiao r on p.numregiao = r.numregiao
             where p.situacao = 'A'
             and p.numregiao in (1,2,3,4,6,7)
-            and p.codpraca not in (80,335,1,126)
+            and p.codpraca not in (80,335,126)
             order by p.praca");
         
         for($i = 0; $i<sizeof($ret); $i++){

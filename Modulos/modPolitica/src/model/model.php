@@ -93,7 +93,7 @@ class ModelPoliticas{
     public static function getPoliticas($codCli, $numRegiao){
         $sql = new SqlOra();
         try{
-            return $sql->select("SELECT t1.codgrupo, t1.descricao, t1.codprod, t1.codgrupo,
+            return $sql->select("SELECT t1.codgrupo, t1.descricao, t1.codprod,
                     nvl((select percdesc from kokar.pcdesconto d inner join kokar.pcdescontoitem di on d.coddesconto = di.coddesconto 
                             where d.codcli = $codCli and di.valor_num = t1.codgrupo),0) percdesc,
                     to_char(t.pvenda1-t.vlipi, '9999999.9999') tabela,

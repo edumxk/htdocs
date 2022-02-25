@@ -74,6 +74,7 @@
     min-height: 40px;
     flex-wrap: wrap;
     flex-direction: row;
+    width: 100%;
     align-items: center;
     border-bottom: 2px solid #11101d;
     background: white;
@@ -212,11 +213,17 @@ vertical-align: middle;
     grid-column: span 2;
 }
 
-.close{
+#close { 
     width: 30px;
     height: 30px;
+    border: none;
+    background-color: none;
+    text-transform: uppercase;
+    color: #a0a0a0;
 }
-
+#close:hover{
+    color: black;
+}
 .politica__desconto input{
     width: 100px;
     text-align: right;
@@ -239,4 +246,8 @@ vertical-align: middle;
 #tbPoliticas thead tr th{
     text-transform: uppercase;
     text-align: center;
+}
+#tbPoliticas tbody tr:hover{
+    background-color: #11101d;
+    color: #f3f3f3;
 }

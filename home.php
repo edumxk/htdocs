@@ -117,7 +117,7 @@
                         <input hidden name="setor" value=<?php echo $_SESSION['setor']?>>
                         <input hidden name="codrca" value=<?php echo $_SESSION['codrca']?>>
                         <input hidden name="origem" value="interno">
-                        <button style="border: none" type="submit"><input class="botao" type="image" src="recursos/src/gift.png" height="140" width="140"/> </button>
+                        <button style="border: none; background: none" type="submit"><input class="botao" type="image" src="recursos/src/gift.png" height="140" width="140"/> </button>
                     </form>
                 </div>
            

@@ -102,12 +102,6 @@ require_once './control/controle.php';
                 </select>
             </div>
             <div class="principal__filtros-caixa">
-                <label for="cidade">Cidade</label>
-                <select name="cidade" id="">
-                    <option value="0">Todos</option>
-                </select>
-            </div>
-            <div class="principal__filtros-caixa">
                 <label for="uf">UF</label>
                 <select name="uf" id="">
                     <option value="0">Todos</option>
@@ -172,11 +166,15 @@ require_once './control/controle.php';
                     <h2 id="modal-titulo"></h2>
                     <textarea id="modalObs" name="obs-cliente" cols="40" rows="3"></textarea>
             
-                    <button type="button" class="close" onclick="fechar()" data-dismiss="modal">&times;</button>
+                    <button type="button" id="close" onclick="fechar()">&times;</button>
                     
-                    <button type="button" onclick="desativar()" class="btn btn-warning" data-dismiss="modal">Desativar</button>
-                    <button type="button" onclick="excluir()" class="btn btn-danger" data-dismiss="modal">Excluir</button>
-                    <button type="submit" onclick="salvar(4)" class="btn btn-primary" data-dismiss="modal">Salvar</button>
+                    
+                    <button id="btn_desativar" type="button" onclick="desativar()" class="btn btn-warning">Desativar</button>
+                    <button id="btn_ativar" type="button" onclick="ativar()" class="btn btn-success">Ativar</button>
+                    
+                    <button id="btn_excluir" type="button" hidden onclick="excluir()" class="btn btn-danger">Excluir</button>
+                    <button id="btn_criar" type="button" hidden onclick="criar()" class="btn btn-info">Criar</button>
+                    <button type="submit" onclick="salvar(4)" class="btn btn-primary">Salvar</button>
                 </div>
                 
                 <!-- Modal body -->
@@ -189,7 +187,7 @@ require_once './control/controle.php';
                                         <th>Grupo</th>
                                         <th>Desconto</th>
                                         <th>Tabela</th>
-                                        <th>Obs</th> 
+                                        
                                     </tr>
                                 </thead>
                                 <tbody id="dadosmodal">
@@ -226,24 +224,47 @@ require_once './control/controle.php';
                 success: function(resposta) {
                     arr = JSON.parse(resposta);
                     body = "";
-
+                    status = arr[0][5];
                     arr.forEach(function(t){
                         body += '<tr>'
                                 +    '<td class="politica__grupo">'+t[0]+'</td>'
                                 +    '<td class="politica__descricao">'+t[1]+'</td>'
                                 +    '<td class="politica__desconto"><input class="desconto" onfocusout="attDesconto(this, '+parseFloat(t[3])+')" type="text" value="'+t[2]+'"></input></td>'
                                 +    '<td class="politica__tabela"><input class="tabela" type="text" disabled value="'+getTabela(parseFloat(t[2]), parseFloat(t[3]))+'"></input></td>'
-                                +    '<td class="politica__obs"><input class="politica__obs-input" type="text" placeholder="Informar Observação na Alteração" id="obs'+t[0]+'"></input></td>'
                                 +'</tr>'
                                 })
 
                     $('#dadosmodal').empty();
                     $('#modal-titulo').empty();
                     $('#modal-titulo').append(arr[0][4]);
-                    $('#modalObs').text('Obs do cliente, obs geral');
+                    $('#modalObs').text('Obs da ultima alteração de politica');
                     $('#dadosmodal').append(body);
                     $('#dadosmodal').trigger("update", true);
                     console.log("abrir modal");
+                    switch(status){
+                        case '1':
+                            console.log(status)
+                            $('#btn_desativar').prop('hidden',false);
+                            $('#btn_ativar').prop('hidden',true);
+                            $('#btn_excluir').prop('hidden',false);
+                            $('#btn_criar').prop('hidden',true);
+                            break;
+                        case '0':
+                                console.log(status)
+                                $('#btn_desativar').prop('hidden',true);
+                                $('#btn_ativar').prop('hidden',true);
+                                $('#btn_excluir').prop('hidden',true);
+                                $('#btn_criar').prop('hidden',false);
+                                
+                                break;
+                        case '2':
+                            console.log(status)
+                            $('#btn_desativar').prop('hidden',true);
+                            $('#btn_ativar').prop('hidden',false);
+                            $('#btn_excluir').prop('hidden',false);
+                            $('#btn_criar').prop('hidden',true);
+                            break;
+                    }
                     modal.modal('show');
                 }
                 }); 
@@ -257,47 +278,66 @@ require_once './control/controle.php';
         return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(((100-desconto)/100)*tabela);
     }
 
-    function salvar(chars){
+    function salvar(){
         //1° - Salvar log da politica alterada com a respectiva alteração.
         let listaAlteracoes = [];
-        let obs =  $('.politica__obs-input');
         let pendencias = [];
-        /* Validação para Salvar Politica */
-        obs.each(function (){
-            let novoDesconto = $(this).parent().parent().find('.politica__desconto').find('.desconto').val();
-            let ref = $(this);
 
-            if( $(ref).prop('required')){ 
-                
-                arr.forEach(function(t){ 
-                    if($(ref).prop('id').substr(3)==(t[0])){
-                        if(t[2]!= novoDesconto){
-                            if($(ref).val().length >= chars)
-                            //inserindo alterações de desconto
-                            listaAlteracoes.push( {
-                                grupo: t[0], 
-                                descAntigo: t[2], 
-                                descNovo: novoDesconto, 
-                                obs: $(ref).val()
-                            })
-                            if($(ref).val().length < chars ){
-                                let grupo = $(ref).parent().parent().find('.politica__descricao').text()
-                                alert('Politica alterada com obs não preenchida: '+grupo);
-                                pendencias.push(grupo);
-                                listaAlteracoes = [];
-                            }
-                        } 
-                    }
-                })
-            }
-        
-        })
-
-        listaAlteracoes.forEach(function(i){
-            console.log(i.grupo, i.descNovo, i.obs)
-        })
+        let obsGeral = $('#modalObs').text();
+        let descontos = $('.desconto');
+        let novoDesconto = [];
        
-        listaAlteracoes, pendencias = []
+        /* Validação para Salvar Politica */
+        descontos.each(function (){
+            let grupo = $(this).parent().parent().find('.politica__grupo').text();
+            let ref = $(this).val();
+            arr.forEach(function(t){ 
+                if(t[0]==grupo){
+                    novoDesconto.push({
+                        grupo: grupo,
+                        novo: ref,
+                        antigo: t[2]
+                    })
+                }
+            })
+        })
+        console.log(validarDesconto(novoDesconto))
+            
+/*
+arr.forEach(function(t){ 
+    if($(ref).prop('id').substr(3)==(t[0])){
+        if(t[2]!= novoDesconto){
+            
+            //inserindo alterações de desconto
+            listaAlteracoes.push( {
+                grupo: t[0], 
+                descAntigo: t[2], 
+                descNovo: novoDesconto
+            })
+            if($(ref).val().length < chars ){
+                let grupo = $(ref).parent().parent().find('.politica__descricao').text()
+                alert('Politica alterada com obs não preenchida: '+grupo);
+                pendencias.push(grupo);
+                listaAlteracoes = [];
+            }
+        } 
+    }
+})
+*/
+    }
+
+    function validarDesconto(novoDesconto){
+        console.log('inicio')
+        let listaAlteracoes = [];
+        novoDesconto.forEach(function(d){
+            if(d.novo != d.antigo)
+            listaAlteracoes.push({
+                grupo:  d.grupo, 
+                descAntigo: d.antigo, 
+                descNovo: d.novo
+            })
+        })
+        return listaAlteracoes;
     }
 
     function excluir(){
@@ -312,10 +352,25 @@ require_once './control/controle.php';
         let grupo = $(linha).parent().parent().find('.politica__grupo').text();
         let desconto = parseFloat($(linha).val());
         let refTabela = $(linha).parent().parent().find('.tabela');
-        
+        $(linha).val(parseFloat($(linha).val()));
         //checar se o desconto foi alterado, se sim, atribuir requered.
-        $('#obs'+grupo).prop('required',true);
+        arr.forEach(function(i){
+            if (i[0]==grupo && desconto != i[2]){
+                $('#obs'+grupo).prop('required',true);
+                $('#obs'+grupo).prop('hidden',false);
+                if(desconto<0 || desconto>100 || isNaN(desconto)){
+                    $(linha).val(i[2]);
+                    desconto = i[2];
+                    $('#obs'+grupo).prop('required',false);
+                    $('#obs'+grupo).prop('hidden',true);
+                }
+            }if(i[0]==grupo && desconto == i[2]){
+                $('#obs'+grupo).prop('required',false);
+                $('#obs'+grupo).prop('hidden',true);
+            }
+        })
         
+
         refTabela.val(getTabela(desconto,tabela));
     }
 

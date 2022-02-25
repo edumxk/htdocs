@@ -26,7 +26,7 @@ class Controle{
         $saida = [];
         foreach($politicas as $p):
             array_push( $saida, [ $p["CODGRUPO"],  utf8_encode($p["DESCRICAO"]),  $p["PERCDESC"],
-              $p["TABELA"], $p['CLIENTE'] ] );
+              $p["TABELA"], $p['CLIENTE'], $p['ATIVO'] ] );
         endforeach;
         return json_encode($saida);
     }   

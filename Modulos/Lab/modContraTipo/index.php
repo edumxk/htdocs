@@ -18,9 +18,9 @@ $produtos = ProdutoPesquisa::getProduto();
         <title>Formulas - Alterar</title>
         <link rel="stylesheet" href="./src/css/reset.css">
         <link rel="stylesheet" href="./src/css/sidebar.css">
-        <link rel="stylesheet" href="./src/css/index.css">
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="./src/css/style.css">  
+        <link rel="shortcut icon" type="image/x-icon" href="/Recursos/img/favicon.ico"> 
     </head>
     <body>
         <main>
@@ -41,35 +41,35 @@ $produtos = ProdutoPesquisa::getProduto();
                         <span class="tooltip">Página Inicial</span>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="relatorio.php">
                             <i class='bx bx-message-rounded-edit'></i>
+                            <span class="link-nome">Histórico</span>
+                        </a>
+                        <span class="tooltip">Histórico</span>
+                    </li>
+                    <li>
+                        <a href="./../modRevalidacao/revalidacao.php">
+                            <i class='bx bx-copy-alt'></i>
                             <span class="link-nome">Revalidar Lotes</span>
                         </a>
                         <span class="tooltip">Revalidar Lotes</span>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class='bx bx-copy-alt'></i>
-                            <span class="link-nome">Copiar Métodos</span>
-                        </a>
-                        <span class="tooltip">Copiar Métodos</span>
-                    </li>
-                    <li>
-                        <a href="index.php">
+                        <a href="./../modMetodo/index.php">
                             <i class='bx bx-merge'></i>
-                            <span class="link-nome">Alterar Fórmulas</span>
+                            <span class="link-nome">Copiar Fórmulas</span>
                         </a>
-                        <span class="tooltip">Alterar Fórmulas</span>
+                        <span class="tooltip">Copiar Fórmulas</span>
                     </li>
                 </ul>
                 <div class="perfil-conteudo">
                     <div class="perfil">
                         <div class="perfil-detalhes">
-                            <img src="./src/img/curr.jpg" alt="imagem de perfil">
-                            <div class="nome-setor">
-                                <div class="nome">Eduardo Patrick</div>
-                                <div class="cargo">Desenvolvedor</div>
-                                <div class="setor">T.I.</div>
+                             <!--<img src="./src/img/curr.jpg" alt="imagem de perfil">-->
+                             <div class="nome-setor">
+                                <div class="nome"><?=$_SESSION['nome']?></div>
+                                <div class="cargo"><?=$_SESSION['cargo']?></div>
+                                <div class="setor"><?=$_SESSION['setor']?></div>
                             </div>
                         </div>
                         <a href="/homelab.php"><i class='bx bxs-log-out' id="sair"></i></a>
@@ -96,7 +96,6 @@ $produtos = ProdutoPesquisa::getProduto();
                             <input list="produtos-lista" required class="codigo" placeholder="Código..." type="text" id="codigo1" name="codigo1"> 
                             <input type="text" id="produto1" required placeholder="Digite o código do produto"  autocomplete="off" disabled> 
                         </div>
-        
                         <div class="formulario-itens-titulo">
                             <spam>Produto Destino</spam>
                         </div>
@@ -117,7 +116,6 @@ $produtos = ProdutoPesquisa::getProduto();
                         </div>
                         <div class="formulario-botao">
                             <button onclick="return validar()" type="submit">Avançar</button>
-                            
                         </div>
                     </form>
                 </div>

@@ -33,7 +33,7 @@ class ProdDiaria{
                     case when c.qtproduzida <= 2700 then 2 else 1 end
                 when a.tipo = 'TEXTURAS' then 3 
                 when a.tipo = 'MASSAS' then 4
-                --when a.tipo = 'SOLVENTES' then 5 
+                when a.tipo = 'SOLVENTES' then 5 
                 end cod
             from kokar.pcopc c inner join PARALELO.kkagrupamentosa a on a.codprod = c.codprodmaster
             where extract (month from c.dtfecha) = extract (month from to_date(:dtFecha))
@@ -80,7 +80,7 @@ class ProdDiaria{
                                            case when c.qtproduzida <= 2700 then 2 else 1 end
                                                when a.tipo = 'TEXTURAS' then 3 
                                                when a.tipo = 'MASSAS' then 4
-                                              -- when a.tipo = 'SOLVENTES' then 5 
+                                               when a.tipo = 'SOLVENTES' then 5 
                                                end cod
                                                  
                                    from kokar.pcopc c inner join paralelo.kkagrupamentosa a on a.codprod = c.codprodmaster

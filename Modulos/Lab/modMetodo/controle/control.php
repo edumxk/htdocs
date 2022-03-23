@@ -1,5 +1,5 @@
 <?php 
-    require_once ($_SERVER["DOCUMENT_ROOT"] . '/modulos/modMetodo/model/model.php');
+    require_once ($_SERVER["DOCUMENT_ROOT"] . '/modulos/lab/modMetodo/model/model.php');
 
     if(isset($_POST['action'])){
         if($_POST['action']=='duplicar'){

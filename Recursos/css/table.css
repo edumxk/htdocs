@@ -27,18 +27,4 @@ tbody{
   width: 150px; */
   overflow-y: scroll;
 }
-.principal {
-  overflow: auto;
-  background-color: white;
-  position:inherit;
-  top: 0;
-  width: 85%;
-  float:right;
-  display: block;
-  text-align: right;
-  text-decoration: none;
-} 
-tr:hover {
-  background-color: #ffff99;
-}
 

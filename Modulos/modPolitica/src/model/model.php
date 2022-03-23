@@ -41,8 +41,8 @@ class ModelPoliticas{
                             round(avg(p.vlatend), 2) total,
                             c.numregiaocli numregiao
                     from kokar.pcclient c
-                    LEFT join kokar.pcpedc p
-                        on c.codcli = p.codcli and p.data > '01/01/2022'
+                    left join kokar.pcpedc p
+                        on c.codcli = p.codcli and p.data > '01/01/2021'
                     inner join kokar.pcusuari u
                         on c.codusur1 = u.codusur
                     inner join kokar.pccidade m

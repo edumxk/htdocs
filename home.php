@@ -28,6 +28,7 @@
         $_SESSION['codsetor'] = $user['user']['CODSETOR'];
         $_SESSION['setor'] =    $user['user']['SETOR'];
         $_SESSION['codrca'] =   $user['user']['CODRCA'];
+        $_SESSION['cargo'] =   $user['user']['CARGO'];
         //$timeout = 7200; // Number of seconds until it times out.
 
         // Check if the timeout field exists.
@@ -54,7 +55,7 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="br">
+<html lang="pt-br">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">

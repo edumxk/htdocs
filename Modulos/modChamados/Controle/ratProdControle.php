@@ -87,7 +87,7 @@
 
         /*BUSCA DE PRODUTO POR LOTE*/
         public static function getProduto($key){
-            $produto;
+            $produto='';
             if($key['lote'] == ""){
                 $produto = ratProdDao::getProdutoByCod($key['codprod']);
                 $produto = $produto[0];

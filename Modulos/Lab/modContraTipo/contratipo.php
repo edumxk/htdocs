@@ -40,6 +40,7 @@ if (isset($_POST['codigo1']) && isset($_POST['codigo2'])) {
     <link rel="stylesheet" href="./src/css/reset.css">
     <link rel="stylesheet" href="./src/css/sidebar.css">
     <link rel="stylesheet" href="./src/css/contratipo.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/Recursos/img/favicon.ico"> 
     <script src="https://use.fontawesome.com/62e43a72a9.js"></script>
 </head>
 
@@ -53,44 +54,44 @@ if (isset($_POST['codigo1']) && isset($_POST['codigo2'])) {
                 </div>
                 <i class='bx bx-menu' id="btn"></i>
             </div>
-            <ul class="navegacao">
-                <li>
-                    <a href="index.php">
-                        <i class='bx bx-home'></i>
-                        <span class="link-nome">Página Inicial</span>
-                    </a>
-                    <span class="tooltip">Página Inicial</span>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class='bx bx-message-rounded-edit'></i>
-                        <span class="link-nome">Revalidar Lotes</span>
-                    </a>
-                    <span class="tooltip">Revalidar Lotes</span>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class='bx bx-copy-alt'></i>
-                        <span class="link-nome">Copiar Métodos</span>
-                    </a>
-                    <span class="tooltip">Copiar Métodos</span>
-                </li>
-                <li>
-                    <a href="index.php">
-                        <i class='bx bx-merge'></i>
-                        <span class="link-nome">Alterar Fórmulas</span>
-                    </a>
-                    <span class="tooltip">Alterar Fórmulas</span>
-                </li>
-            </ul>
+                <ul class="navegacao">
+                    <li>
+                        <a href="index.php">
+                            <i class='bx bx-home'></i>
+                            <span class="link-nome">Página Inicial</span>
+                        </a>
+                        <span class="tooltip">Página Inicial</span>
+                    </li>
+                    <li>
+                        <a href="relatorio.php">
+                            <i class='bx bx-message-rounded-edit'></i>
+                            <span class="link-nome">Histórico</span>
+                        </a>
+                        <span class="tooltip">Histórico</span>
+                    </li>
+                    <li>
+                        <a href="./../modRevalidacao/revalidacao.php">
+                            <i class='bx bx-copy-alt'></i>
+                            <span class="link-nome">Revalidar Lotes</span>
+                        </a>
+                        <span class="tooltip">Revalidar Lotes</span>
+                    </li>
+                    <li>
+                        <a href="./../modMetodo/index.php">
+                            <i class='bx bx-merge'></i>
+                            <span class="link-nome">Copiar Fórmulas</span>
+                        </a>
+                        <span class="tooltip">Copiar Fórmulas</span>
+                    </li>
+                </ul>
             <div class="perfil-conteudo">
                 <div class="perfil">
                     <div class="perfil-detalhes">
-                        <img src="./src/img/curr.jpg" alt="imagem de perfil">
-                        <div class="nome-setor">
-                            <div class="nome">Eduardo Patrick</div>
-                            <div class="cargo">Desenvolvedor</div>
-                            <div class="setor">T.I.</div>
+                         <!--<img src="./src/img/curr.jpg" alt="imagem de perfil">-->
+                         <div class="nome-setor">
+                            <div class="nome"><?=$_SESSION['nome']?></div>
+                            <div class="cargo"><?=$_SESSION['cargo']?></div>
+                            <div class="setor"><?=$_SESSION['setor']?></div>
                         </div>
                     </div>
                     <a href="/homelab.php"><i class='bx bxs-log-out' id="sair"></i></a>
@@ -239,10 +240,13 @@ if (isset($_POST['codigo1']) && isset($_POST['codigo2'])) {
                         'cabecalho': cabecalho
                     },
                     success: function(response) {
-                        setTimeout(function() {
-                            delaySuccess(response);
-                        }, delay);
-                        window.location.replace('relatorio.php');
+                        if(response.indexOf('erro')!=-1)
+                            alert(response)
+                        else{
+                            setTimeout(function() {}, delay);
+                            //console.log(response)
+                            window.location.replace('relatorio.php');
+                        }
                     }
                 });
             }

@@ -112,8 +112,21 @@ class SqlOra extends PDO{
             
             return 'ok';
         }catch(PDOException $e) {
-            return 'Error: ' . $e->getMessage();
-            return 'erro';
+            return 'Error de Update: ' . $e->getMessage();
+            return 'erro de Update';
+        }
+    }
+
+    public function update2($query, $params){
+        try{
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute($params);
+            
+            
+            return  $stmt->rowCount();
+        }catch(PDOException $e) {
+            return 'Error de Update: ' . $e->getMessage();
+            return 'erro de Update';
         }
     }
 

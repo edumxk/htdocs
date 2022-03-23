@@ -151,9 +151,9 @@ class ratProdDao{
                 l.datafabricacao, 
                 l.dtvalidade
             FROM kokar.pcprodut p INNER JOIN kokar.pclote l ON p.codprod = l.codprod
-            INNER JOIN kokar.pcopc o ON o.numlote = l.numlote
+            --INNER JOIN kokar.pcopc o ON o.numlote = l.numlote
             WHERE p.codepto = 10000
-            and o.posicao in ('F')
+            --and o.posicao in ('F')
             and l.numlote = :numlote", array(":numlote"=>$numlote)
         );
 

@@ -12,11 +12,16 @@
             $lista = $_POST['lista'];
             $cabecalho = $_POST['cabecalho'];
             
-            ContraTipoModel::setListaAlterados($cabecalho, $lista);
+            echo ContraTipoModel::setListaAlterados($cabecalho, $lista);
         }        
         if($_POST['action']=='preencher'){
             $id = $_POST['id'];
             echo json_encode(ProdutoPesquisa::getProduto3($id));
+        }        
+        if($_POST['action']=='deletar'){
+            $id = $_POST['id'];
+            $senha = $_POST['senha'];
+            ContraTipoModel::deletar($id, $senha);
         }        
         if($_POST['action']=='verFormula'){
             $codprod = $_POST['codprod'];
@@ -56,7 +61,7 @@
             $arr = [];
             $ret = ContraTipoModel::getProduto2($id);
             foreach($ret as $r){
-                array_push( $arr , [ $r['CODPROD'] , utf8_encode( $r['DESCRICAO'] )] );
+                array_push( $arr , [ $r['CODPROD'] , utf8_encode( $r['DESCRICAO'] ), $r['FRACAOUMIDA'] ]);
             }
             return $arr;
         }

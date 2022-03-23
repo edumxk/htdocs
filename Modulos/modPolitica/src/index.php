@@ -95,30 +95,6 @@ require_once './control/controle.php';
     </section>
     <section class="principal">
         <div class="principal__filtros">
-            <div class="principal__filtros-caixa">
-                <label for="rca">Rca</label>
-                <select name="rca" id="">
-                    <option value="0">Todos</option>
-                </select>
-            </div>
-            <div class="principal__filtros-caixa">
-                <label for="uf">UF</label>
-                <select name="uf" id="">
-                    <option value="0">Todos</option>
-                </select>
-            </div>
-            <div class="principal__filtros-caixa">
-                <label for="status">Status</label>
-                <select name="status" id="">
-                    <option value="0">Todos</option>
-                </select>
-            </div>
-            <div class="principal__filtros-caixa">
-                <label for="politica">Política</label>
-                <select name="politica" id="">
-                    <option value="0">Todos</option>
-                </select>
-            </div>
             <div class="principal__filtros-caixa pesquisa">
                 <input id="busca" type="text" placeholder="Pesquisar...">
             </div>

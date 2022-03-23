@@ -64,100 +64,78 @@
 
 ?>
 
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!DOCTYPE html>
-<html lang="en">
 
+        <title>Kokar Intranet</title>
 
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>INTRANET</title>
-
-    <meta name="description" content="Source code generated using layoutit.com">
-    <meta name="author" content="LayoutIt!">
-
-    <link href="recursos/css/bootstrap.min.css" rel="stylesheet">
-    <link href="recursos/css/style.css" rel="stylesheet">
-    </div>
-</head>
-
-<body style="background-color: teal;">
-    <div class="header">
-        <div class="row" style="width: 100%">
-            <div class="col-md-9" style="left: 10%; top:2px;">
-                <img src="recursos/src/Logo-kokar.png" alt="Logo Kokar">
-            </div>
-            <div class="float-md-right">
-                <div class="col-sm-12" style="top: 15px; font-weight: 700; color: white">
-                    Usuário: <?php echo $_SESSION['nome'] ?>
-                </div>
-                <div class="col-sm-12" style="top: 15px; font-weight: 700; color: white">
-                    Setor: <?php echo $_SESSION['setor']?>
-                </div>
-            </div>
+        <meta name="Home Extranet" content="By Edumxk">
+        <meta name="Home" content="Home">
+        <link rel="shortcut icon" type="image/x-icon" href="/Recursos/img/favicon.ico"> 
+        <link href="recursos/css/bootstrap.min.css" rel="stylesheet">
+        <link href="recursos/css/reset.css" rel="stylesheet">
+        <link href="recursos/css/style.css" rel="stylesheet">
         </div>
-    </div>
-
-    <div class="container" style="background-color: white; border-style: solid; border-width: 1px">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page">
-                    <a href="home.php">Home</a>
-                </li>
-                <li class="breadcrumb-item active" aria-current="page">
-                <a>Laboratório</a>
-            </li>
-            </ol>
-        </nav>
-        <div class="row">
-            <div class="col-md-8">
-                <h1 style="padding-bottom: 20px; padding-top: 20px">Módulos
-                </h1>
-            </div>
+    </head>
+    <header>
+        <div class="logo">
+            <img src="../../recursos/src/Logo-kokar5.png" alt="Logo Kokar" width="350">
         </div>
-        <div class="row">
+        <div class="usuario">
+            <ul>
+                <li>Usuário: <?php echo $_SESSION['nome']?></li>
+                <li>Setor: <?php echo $_SESSION['setor']?></li>
+                <li><a style="color: white" href="../index.php">Sair</a></li>
+            </ul>
+        </div>		
+    </header>
+<body style="background-color: #002695 ; width:auto;">
+    <div class="icones-principal">
+		<nav id="home" aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item active" aria-current="page">
+					<a href="home.php">Home</a>
+				</li>
+				<li class="breadcrumb-item active" aria-current="page">
+					<a href="homelab.php">Laboratório</a>
+				</li>
+			</ol>
+		</nav>
+
+			<div class="icones-titulo">
+				<h1 style="padding-bottom: 20px; padding-top: 20px">Módulos
+				</h1>
+			</div>
+
             <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']==2 || $_SESSION['codsetor']== 12): //Apenas TI e laboratorio?>
-            <div class="col-md-3" style="padding-bottom:30px">
-                <div class="card" style="width: 18rem;">
-                    <h5 class="card-title" style="text-align:center">Revalidar Lote</h5>
-                    <form action="/Modulos/modRevalidacao/revalidacao.php" method="GET">
-                        <button type="input" value="teste"> <img alt="W3Schools" src="recursos/src/multiple.png"
-                                style="width:50%"></button>
-                    </form>
+			    <div class="icones">  
+                    <h5 class="cartao-title">Revalidar Lote</h5>
+                    <input class="botao" onclick="window.location.href='/Modulos/Lab/modRevalidacao/revalidacao.php'" 
+                    type="image" src="recursos/src/multiple.png" height="140" width="140"/> 
                 </div>
-            </div>
             <?php endif?>
+            
             <?php if($_SESSION['codsetor']<=0 || $_SESSION['codsetor']== 12): //Apenas TI e laboratorio?>
-            <div class="col-md-3" style="padding-bottom:30px">
-                <div class="card" style="width: 18rem;">
-                    <h5 class="card-title" style="text-align:center">Métodos</h5>
-                    <form action="/Modulos/modMetodo/index.php" method="GET">
-                        <button type="input" value="teste"> <img alt="W3Schools" src="recursos/src/planejamento.png"
-                                style="width:50%"></button>
-                    </form>
+			    <div class="icones">  
+                    <h5 class="cartao-title">Métodos</h5>
+                    <input class="botao" onclick="window.location.href='/Modulos/Lab/modMetodo/index.php'" 
+                    type="image" src="recursos/src/planejamento.png" height="140" width="140"/> 
                 </div>
-            </div>
             <?php endif?>
+            
             <?php if($_SESSION['codsetor']<=0 || $_SESSION['codsetor']== 12): //Apenas TI e laboratorio?>
-            <div class="col-md-3" style="padding-bottom:30px">
-                <div class="card" style="width: 18rem;">
-                    <h5 class="card-title" style="text-align:center">Contratipo (Em Desenvolvimento)</h5>
-                    <form action="/Modulos/lab/modContraTipo/index.php" method="GET">
-                        <button type="input" value="teste"> <img alt="W3Schools" src="recursos/src/troca.png"
-                                style="width:50%"></button>
-                    </form>
+			    <div class="icones">  
+                    <h5 class="cartao-title">Contratipo</h5>
+                    <input class="botao" onclick="window.location.href='/Modulos/lab/modContraTipo/index.php'" 
+                    type="image" src="recursos/src/frasco.png" height="140" width="140"/> 
                 </div>
-            </div>
             <?php endif?>
-        </div>      
-    </div>
-    <div class="header">
-    </div>
-
+            
+        </div>
     <script src="recursos/js/jquery.min.js"></script>
     <script src="recursos/js/bootstrap.min.js"></script>
     <script src="recursos/js/scripts.js"></script>

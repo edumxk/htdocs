@@ -1,7 +1,7 @@
 <?php
 require_once($_SERVER["DOCUMENT_ROOT"] . '/model/sqlOracle.php');
 require_once($_SERVER["DOCUMENT_ROOT"] . '/controle/formatador.php');
-require_once($_SERVER["DOCUMENT_ROOT"]. '/Modulos/modRevalidacao/model/model.php');
+require_once($_SERVER["DOCUMENT_ROOT"]. '/Modulos/lab/modRevalidacao/model/model.php');
 
 if(isset($_POST['action'])){
     if($_POST['action']=='revalidar'){

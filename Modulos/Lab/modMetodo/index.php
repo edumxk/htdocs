@@ -1,5 +1,5 @@
 <?php 
-require_once($_SERVER["DOCUMENT_ROOT"].'/modulos/modMetodo/model/model.php');
+require_once($_SERVER["DOCUMENT_ROOT"].'/modulos/lab/modMetodo/model/model.php');
 session_start();
 $dataini = date('Y-m-d');
 $datafin = date('Y-m-d');
@@ -87,10 +87,10 @@ date_default_timezone_set('America/Araguaina');
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Métodos</title>
-
     <meta name="description" content="Source code generated using layoutit.com">
     <meta name="author" content="LayoutIt!">
-
+	
+	<link rel="shortcut icon" type="image/x-icon" href="/Recursos/img/favicon.ico"> 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 

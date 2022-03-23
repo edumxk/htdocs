@@ -1,0 +1,131 @@
+.head{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items:flex-end;
+    
+    background: #11101d;
+    color: white;
+    
+    position: fixed;
+    z-index: 2;
+    
+    width: 100%;
+    height: 80px;
+    
+}
+
+.head__logo{
+    display: flex;
+}
+
+.head__logo img{
+    height: 80px;
+}
+
+.head__navegacao{
+    display: flex;
+}
+
+.head__navegacao .head__navegaca__lista{
+    display: flex;
+    padding: 10px 15px;
+}
+
+.head__navegacao .head__navegaca__lista li::before{
+    content: '/ ';
+}
+.head__navegacao .head__navegaca__lista li::after{
+    content: ' /';
+}
+
+.head__usuario{
+    display: flex;
+    align-items: center;
+}
+
+.head__usuario img{
+    width: 80px;
+    height: 80px;
+}
+
+
+
+.principal{
+    display: block;
+    position: absolute;
+    left: 78px;
+    top: 80px;
+    z-index: 0;
+    width: calc(100% - 78px);
+    transition: all 0.5s ease;
+    font-family: 'Lato', sans-serif;
+}
+
+.principal.active{
+    left: 240px;
+    width: calc(100% - 240px);
+    transition: all 0.5s ease;
+}
+
+.principal__filtros{
+    display: flex;
+    min-height: 40px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    border-bottom: 2px solid #11101d;
+    background: white;
+    position: fixed;
+    z-index: 2;
+}
+
+.principal__filtros-caixa{
+    width: 192px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 10px;
+}
+
+.principal__filtros-caixa.pesquisa{
+    width: 300px;
+}
+
+.principal__filtros select{
+    width: 120px;
+}
+
+.principal__filtros input{
+    width: 100%;
+}
+
+.pagina__loader{
+display: flex;
+width: 100%;
+height: calc(100vh - 80px);
+align-items: center;
+justify-content: center;
+vertical-align: middle;
+}
+
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.principal__conteudo{
+    width: 100%;
+    display: none;
+    z-index: 0;
+}

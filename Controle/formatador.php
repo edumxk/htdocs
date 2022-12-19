@@ -87,6 +87,8 @@
             return $ret;
         }
         public static function formatador2($data){
+            if($data == null)
+                return null;
             $d = explode('-', $data);
             $saida = $d[2].'/'.$d[1].'/'.$d[0];
             return $saida;

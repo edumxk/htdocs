@@ -53,21 +53,21 @@ require_once './control/controle.php';
                 <span class="tooltip">Página Inicial</span>
             </li>
             <li>
-                <a href="#">
+                <a href="copiarPolitica.php">
                     <i class='bx bx-message-rounded-edit'></i>
                     <span class="link-nome">Copiar Política</span>
                 </a>
                 <span class="tooltip">Copiar Política</span>
             </li>
             <li>
-                <a href="#">
+                <a href="historico.php">
                     <i class='bx bx-copy-alt'></i>
                     <span class="link-nome">Histórico</span>
                 </a>
                 <span class="tooltip">Histórico</span>
             </li>
             <li>
-                <a href="index.php">
+                <a href="#">
                     <i class='bx bx-merge'></i>
                     <span class="link-nome">Perfil Política</span>
                 </a>
@@ -77,11 +77,11 @@ require_once './control/controle.php';
         <div class="perfil-conteudo">
             <div class="perfil">
                 <div class="perfil-detalhes">
-                    <img src="/Recursos/src/imgfun/curr.jpg" alt="imagem de perfil">
-                    <div class="nome-setor">
-                        <div class="nome">Eduardo Patrick</div>
-                        <div class="cargo">Desenvolvedor</div>
-                        <div class="setor">T.I.</div>
+                     <!--<img src="./src/img/curr.jpg" alt="imagem de perfil">-->
+                     <div class="nome-setor">
+                        <div class="nome"><?=$_SESSION['nome']?></div>
+                        <div class="cargo"><?=$_SESSION['cargo']?></div>
+                        <div class="setor"><?=$_SESSION['setor']?></div>
                     </div>
                 </div>
                 <a href="/homelab.php"><i class='bx bxs-log-out' id="sair"></i></a>
@@ -99,89 +99,223 @@ require_once './control/controle.php';
         </div> 
         <div class="principal__conteudo">
             <div class="principal__conteudo-conteudo">
-                <section class="principal__conteudo-cadastro">
-                    <div class="principal__conteudo-cadastro-btnnovo">
-                        <button>Novo</button>
-                    </div>
-                    <div class="principal__conteudo-cadastro-origem">
-                        <select><option value="Origem">Origem1</option> </select>
-                        <select><option value="Origem">Origem2</option> </select>
-                        <select><option value="Origem">Origem3</option> </select>
-
-                    </div>
-                    <div class="principal__conteudo-cadastro-formulario">
-                        <div class="principal__conteudo-cadastro-formulario-campo">
-                            <label for="descricao">Descrição</label>
-                            <input type="text" id="descricao" placeholder="Descrição do Perfil">
-                        </div>
-                        <div class="principal__conteudo-cadastro-formulario-campo">
-                            <label for="regiao">Região</label>
-                            <input type="text" id="regiao" placeholder="Descrição da Região">
-                        </div>
-                        <div class="principal__conteudo-cadastro-formulario-campo">
-                            <label for="rca">Representante Comercial</label>
-                            <input type="text" id="rca" placeholder="Selecione o RCA">
-                        </div>
-                        <div>
-                            <button>Avançar</button>
-                        </div>
-                    </div>
-                </section>
-                <section class="principal__conteudo-listagem">
-                    <div class="principal__conteudo-listagem-titulo">
-                        <h3>Listagem</h3>
-                    </div>
-                    <div class="principal__conteudo-listagem-lista">
-                        <ul>
-                            <li>Perfil Para Edição</li>
-                            <li>Perfil Para Edição</li>
-                            <li>Perfil Para Edição</li>
-                            <li>Perfil Para Edição</li>
-                            <li>Perfil Para Edição</li>
-                            <li>Perfil Para Edição</li>
-                            <li>Perfil Para Edição</li>
-                            <li>Perfil Para Edição</li>
-                            <li>Perfil Para Edição</li>
-                            <li>Perfil Para Edição</li>
-                        </ul>
-                    </div>
-
-                </section>
+                <div>
+                    <h1>Perfis Cadastrados</h1>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Descrição</th>
+                            <th>Representante</th>
+                            <th>Região</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabela__itens">
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="5"> 
+                                <div class="controles">
+                                    <button onclick="controls.goTo(1)"><<</button>
+                                    <button onclick="controls.prev()"><</button>
+                                    <div class="botoes" id="botoes_num_pages"></div>
+                                    <button onclick="controls.next()">></button>
+                                    <button onclick="controls.goTo(999)">>></button>
+                                </div>
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
         </div>
     </section>
 </body>
 <script>
-        window.onload = function() {
-        let botao = $('.btn__politica');
-        let atividade = $('.btn__status');
+    function listItems(items, pageActual, limitItems){
+        let result = [];
+        totalPage = state.totalPage
+        let count = ( pageActual * limitItems ) - limitItems;
+        let delimiter = count + limitItems;
+        //console.log(totalPage, count, delimiter)
 
-        //Pesquisa da tabela clientes
-        $("#busca").on("keyup", function() {
-            const valor = $(this).val().toUpperCase().split(' ');
+        if(pageActual <= totalPage){
+            for(let i=count; i<delimiter; i++){
+                if(items[i] != null){
+                    result.push(items[i]);
+                }
+                count++;
+            }
+        }
 
-        $(".linha").each(function() {
-            const busca = $(this).text().toUpperCase();
-            let referencia = $(this);
-            let flag= 0;
-            valor.filter(function(element) {                            
-                if (busca.indexOf(element) !== -1) {   // se for encontrado um valor nos dois arrays
-                    flag  ++;
-                }else{
-                    flag = 0;
-                }
-                if(valor.length === flag){
-                    referencia.show()
-                }else{
-                    referencia.hide()
-                }
-                });
-            }); 
-        });
-        //carregamento da página
-        $(".loader").toggle();
-        $(".pagina__loader").css('height', '60px');
-        $(".principal__conteudo").toggle();
+        return result;
     }
+
+    function listarPagina(){
+        
+        let paginavel = listItems(dados.items, state.page, state.perPage);
+        console.log(paginavel)
+        let itens = [];
+        paginavel.forEach(function(i){
+            itens+= `<tr class="perfil_linhas">
+                                    <td>${i}</td>
+                                    <td>${i}</td>
+                                    <td>${i}</td>
+                                    <td>${i}</td>
+                                    <td><button onClick="historico.getHistorico(${i})">Ver</button></td>
+                            </tr>`;
+                })
+                document.getElementById('tabela__itens').innerHTML= itens ;
+    }    
+
+    const dados = {
+        items: [1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0]
+                
+    }
+
+    const perPage = 15;
+
+     const state = {
+        page: 1,
+        perPage,
+        totalPage : Math.ceil( dados.items.length / perPage ),
+        maxVisibleButtons : 3,
+    }
+
+    const controls = {
+        next() {
+            if(state.page < state.totalPage)
+                state.page++
+            //console.log(state.page)
+            list.update()
+            button.update();
+        },
+        prev() {
+            if(state.page > 1 )
+                state.page--
+            //console.log(state.page)
+            list.update()
+            button.update();
+        },
+        goTo(page) {
+            state.page = +page;
+
+            if(page <= 1)
+                state.page = 1;
+
+            if(page >= state.totalPage)
+                state.page = state.totalPage;
+            //console.log(state.page);
+            list.update()
+            button.update();
+        },
+    }
+
+    const list = {
+        create(){
+            let item= dados.items
+        },
+        update(){
+            document.getElementById('tabela__itens').innerHTML ="<div></div>";
+            listarPagina(dados.items, state.page);
+        }
+
+    }
+
+    const button = {
+        element:  document.getElementById('botoes_num_pages'),
+        create(number) {
+            const button2 = document.createElement('button');
+            button2.innerHTML = number;
+
+            button2.addEventListener('click', (event)=>{
+                const page = event.target.innerText;
+
+                controls.goTo(page)
+            })
+            button.element.appendChild(button2); //
+        },
+        update() {
+            button.element.innerHTML = "";
+            const {maxLeft, maxRight} = button.calculateMaxVisible();
+            //console.log(maxLeft, maxRight)
+
+            for(let page = maxLeft; page <= maxRight; page ++)
+                button.create(page)
+            let btn = button.element.children;
+            
+            for(let cont = 0; cont < btn.length; cont ++){
+                if(btn[cont].innerText == state.page){
+                    btn[cont].style.backgroundColor = "red";
+                }
+            };
+
+        },
+        calculateMaxVisible() {
+            let maxLeft = (state.page - Math.floor(state.maxVisibleButtons/2))
+            let maxRight = (state.page + Math.floor(state.maxVisibleButtons/2))
+
+            if(maxLeft < 1){
+                maxLeft = 1;
+                maxRight = state.maxVisibleButtons
+            }
+            if(maxRight >= state.totalPage ){
+                maxLeft = state.totalPage - (state.maxVisibleButtons - 1)
+                maxRight = state.totalPage
+            }
+            if(maxLeft < 1)
+                maxLeft = 1
+            return {maxLeft, maxRight}
+        },
+        eventos() {
+            
+        }
+    }
+
+    function init(){
+        list.update()
+        button.update()
+    }
+
+        window.onload = function() {
+            let botao = $('.btn__politica');
+            let atividade = $('.btn__status');
+
+            //Pesquisa da tabela clientes
+            $("#busca").on("keyup", function() {
+                const valor = $(this).val().toUpperCase().split(' ');
+
+            $(".linha").each(function() {
+                const busca = $(this).text().toUpperCase();
+                let referencia = $(this);
+                let flag= 0;
+                valor.filter(function(element) {                            
+                    if (busca.indexOf(element) !== -1) {   // se for encontrado um valor nos dois arrays
+                        flag  ++;
+                    }else{
+                        flag = 0;
+                    }
+                    if(valor.length === flag){
+                        referencia.show()
+                    }else{
+                        referencia.hide()
+                    }
+                    });
+                }); 
+            });
+            //carregamento da página
+            $(".loader").toggle();
+            $(".pagina__loader").css('height', '60px');
+            $(".principal__conteudo").toggle();
+    }
+    init();
 </script>
 </html>

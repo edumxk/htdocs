@@ -31,6 +31,7 @@
             $codfun = $array["codfun"];
             $status = $array["status"];
             $dataini = $array["dataini"];
+            $lote = $array["lote"];
             if($codtanque>0 && $dtprevisao != "" &&  $codfun>0)
                 echo Mapa::cadastrar($array);
             else
@@ -40,12 +41,13 @@
             $array = $_POST['query'];
             $codtanque =  $array["codtanque"];
             $dtprevisao = $array["dtprevisao"];
-            $produtos = $array["produtos"];
+            //$produtos = $array["produtos"];
             $codfun = $array["codfun"];
             $codproducao = $array["codproducao"];
-            $status = $array["status"];
+            /*$status = $array["status"];
             $dtfecha = $array["dtfecha"];
             $hrfecha = $array["hrfecha"];
+            $lote = $array["lote"];*/
             if($codtanque>0 && $dtprevisao != "" &&  $codfun>0 && $codproducao>0)
                 echo Mapa::editar($array);
             else
@@ -95,7 +97,9 @@
     }
     static function getProducaoEditar($codproducao){
         $head = Mapa::getProducaoEditar($codproducao);
+        
         $produtos = Mapa::getItem();
+        $produtos2 = Mapa::getItemLote($head[0]->lote);
         $itens =[];
         foreach($produtos as $p):
             if($p->codproducao == $codproducao):

@@ -89,7 +89,7 @@
             <ul>
                 <li>Usuário: <?php echo $_SESSION['nome']?></li>
                 <li>Setor: <?php echo $_SESSION['setor']?></li>
-                <li><a style="color: white" href="../index.php">Sair</a></li>
+                <li><a style="color: white" onclick="sair()" href="#">Sair</a></li>
             </ul>
         </div>		
     </header>
@@ -127,11 +127,27 @@
                 </div>
             <?php endif?>
             
-            <?php if($_SESSION['codsetor']<=0 || $_SESSION['codsetor']== 12): //Apenas TI e laboratorio?>
+            <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']== 12): //Apenas TI e laboratorio?>
 			    <div class="icones">  
                     <h5 class="cartao-title">Contratipo</h5>
                     <input class="botao" onclick="window.location.href='/Modulos/lab/modContraTipo/index.php'" 
                     type="image" src="recursos/src/frasco.png" height="140" width="140"/> 
+                </div>
+            <?php endif?>
+
+            <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']== 12): //Apenas TI e laboratorio?>
+			    <div class="icones">  
+                    <h5 class="cartao-title">Densidade</h5>
+                    <input class="botao" onclick="window.location.href='/modulos/modDensidade/src/home.php'" 
+                    type="image" src="recursos/src/densidade.png" height="140" width="140"/> 
+                </div>
+            <?php endif?>
+
+            <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']== 12): //Apenas TI e laboratorio?>
+			    <div class="icones">  
+                    <h5 class="cartao-title">Corrigir Laudos</h5>
+                    <input class="botao" onclick="window.location.href='/Modulos/lab/modLaudo/laudo.php'" 
+                    type="image" src="recursos/src/artigo.png" height="140" width="140"/> 
                 </div>
             <?php endif?>
             
@@ -144,7 +160,8 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8"
         src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-
+    <script src="/recursos/js/scripts.js"></script>
+          
 </body>
 
 </html>

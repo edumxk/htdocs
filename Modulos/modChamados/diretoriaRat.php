@@ -232,7 +232,7 @@ $chamado = Chamado::getRat($numrat);
 							</div>
 							<div class="col-md-2">
 								<div>
-									<b>Pintor:</b>
+									<b>Cliente:</b>
 								</div>
 							</div>
 							<div class="col-md-4">
@@ -244,7 +244,7 @@ $chamado = Chamado::getRat($numrat);
 							</div>
 							<div class="col-md-2">
 								<div>
-									<b>Tel. Pintor:</b>
+									<b>Tel. Cliente:</b>
 								</div>
 							</div>
 							<div class="col-md-4">
@@ -364,13 +364,13 @@ $chamado = Chamado::getRat($numrat);
 									<div class="col-md-12" >
 										<div class="row" style="padding-top: 10px">
 											<div class="col-md-8" id="reabrir">
-												<button type="submit"  class="btn btn-warning" onclick="finalizar(this)">Reabrir</button>
+												<button type="submit"  class="btn btn-warning" onclick="this.disabled=true;finalizar(this)">Reabrir</button>
 											</div>
 											<div class="col-md-2" id="reprovar">
-												<button type="submit"  class="btn btn-danger" onclick="finalizar(this)">Reprovar</button>
+												<button type="submit"  class="btn btn-danger" onclick="this.disabled=true;finalizar(this)">Reprovar</button>
 											</div>
 											<div class="col-md-2" id="aprovar">
-												<button type="submit"  class="btn btn-success" onclick="finalizar(this)">Aprovar</button>
+												<button type="submit"  class="btn btn-success" onclick="this.disabled=true;finalizar(this)">Aprovar</button>
 											</div>
 										</div>
 									</div>

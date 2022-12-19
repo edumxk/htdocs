@@ -12,17 +12,16 @@ class Metodo{
     public static function tabela($codprodbase, $codprodnovo){
         $sql = new sqlOra();
         try{
-            $teste = $sql->select("SELECT t1.metodo metodobase, t2.metodo metodonovo FROM 
-                                    (select distinct c.codprodmaster, p.descricao, p.codepto, p.codsec, p.codcategoria, c.metodo
-                                    from kokar.pcprodut p
-                                    inner join kokar.pccomposicao c on c.codprodmaster = p.codprod
-                                    where c.codprodmaster = $codprodbase)t1
-                                    left join
-                                    (select distinct c.codprodmaster, p.descricao, p.codepto, p.codsec, p.codcategoria, c.metodo
-                                    from kokar.pcprodut p
-                                    inner join kokar.pccomposicao c on c.codprodmaster = p.codprod
-                                    where c.codprodmaster = $codprodnovo)t2 on t1.metodo = t2.metodo
-                                    order by t1.metodo");
+            $teste = $sql->select("SELECT distinct c.codprodmaster codprod, c.metodo metodo
+            from kokar.pcprodut p
+            inner join kokar.pccomposicao c on c.codprodmaster = p.codprod
+            where c.codprodmaster = $codprodbase
+            union
+            SELECT distinct c.codprodmaster codprod, c.metodo metodo
+            from kokar.pcprodut p
+            inner join kokar.pccomposicao c on c.codprodmaster = p.codprod
+            where c.codprodmaster = $codprodnovo
+            order by codprod, metodo");
             return $teste;
         }catch(Exception $e){
             echo 'Exceção capturada: ',  $e->getMessage(), "\n";

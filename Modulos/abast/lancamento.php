@@ -124,6 +124,7 @@ $lista = [];
                         <select name="Solicitante" id="solicitante">
                             <optgroup value="abastecimento" id="abastecimento" label="Responsável pelo Abastecimento">
                                 <option value="EVERALDO">Everaldo</option>
+                                <option value="EVERALDO">Luciane</option>
                                 <option value="VINICIUS">Vinicius</option>
                                 <option value="WALLYSON">Wallyson</option>
                                 <option value="GERFESON">Gerfeson</option>

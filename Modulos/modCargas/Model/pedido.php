@@ -47,7 +47,7 @@ class Pedido{
 
         $ret = $sql->select(
             "SELECT t.data,t.hora, t.numped, t.codusur, t.nome, t.codcli, t.cliente, t.consumidorfinal, nvl(dtprimcompra,'01/01/9999') primeiracompra, t.numcar, st, usaivafontediferenciado, calculast, clientefontest, isentodifaliquotas,
-            t.posicao, t.peso, to_char(round(t.valor, 2), '999999.99') valor, t.nomecidade, t.uf, t.codpraca, t.praca, round(t.valor/qtparc,2) vlparc, qtparc,
+            t.posicao, t.peso, to_char(round(t.valor, 2), '999999.99') valor, status, t.nomecidade, t.uf, t.codpraca, t.praca, round(t.valor/qtparc,2) vlparc, qtparc,
                         
                 CASE WHEN TROCA = '0' THEN(
                      CASE WHEN EMPRESTIMO = '0' THEN(
@@ -58,7 +58,7 @@ class Pedido{
                  nvl(numcarga,0) numcarga, c1.conferencia
           from (
                  SELECT kc.data, to_char(to_date(kc.hora||to_char(kc.minuto,'00'), 'hh24mi'),'hh24:mi') hora, kc.numped, kc.codusur, ku.nome, kc.codcli, kl.cliente, kl.consumidorfinal, kl.dtprimcompra, kc.posicao,
-                        to_char(round(sum(kp.pesobruto * ki.qt), 2), '999999.99') peso,
+                        to_char(round(sum(kp.pesobruto * ki.qt), 2), '999999.99') peso, pc.status,
                         sum(ki.pvenda * ki.qt) valor, round(sum(nvl(ki.st,0)),2) st, kl.usaivafontediferenciado, kl.calculast, kl.clientefontest, kl.isentodifaliquotas,
                         kd.nomecidade, kd.uf, kc.codpraca, kc.numcar, kpr.praca,REGEXP_COUNT(kpl.descricao,'/',1,'i')+1 qtparc, 
                         CASE
@@ -107,12 +107,12 @@ class Pedido{
                         inner join kokar.pcpraca kpr on kc.codpraca = kpr.codpraca
                         inner join kokar.pcplpag kpl on kpl.codplpag = kc.codplpag
                         full join PARALELO.cargai ci on kc.numped = ci.numped
-                        
+                        full join PARALELO.cargac pc on pc.numcarga = ci.numcarga
                         
                    where kc.posicao not in ('C', 'F')
                   group by kc.data, kc.hora,kc.minuto,kc.numped, kc.codusur, ku.nome, kc.codcli, kl.cliente, kl.consumidorfinal, kc.posicao,
                            kd.nomecidade, kd.uf, kc.codpraca, kc.obs, kc.obs1, kc.obs2, usaivafontediferenciado, calculast, clientefontest, isentodifaliquotas, kc.obsentrega1,
-                           kc.obsentrega2, kc.obsentrega3, ci.numcarga, kc.numcar, kpr.praca,kpl.descricao, kl.dtprimcompra
+                           kc.obsentrega2, kc.obsentrega3, ci.numcarga, pc.status, kc.numcar, kpr.praca,kpl.descricao, kl.dtprimcompra
                   order by kc.codusur, kd.nomecidade, kl.cliente)t
      
                  left join (select numped, inicio, fim, case when fim is not null then 'FINAL' else(
@@ -168,6 +168,7 @@ class Pedido{
                 $p->fontest = $r['CLIENTEFONTEST'];
                 $p->isentodifal = $r['ISENTODIFALIQUOTAS'];
                 $p->primeiracompra = $r['PRIMEIRACOMPRA'];
+                $p->status = $r['STATUS'];
                 
                 
 
@@ -377,6 +378,8 @@ INNER JOIN
             return '37 - ALEX';
         }elseif(strpos($nome, 'HIGOR') !== false) {
             return '38 - HIGOR';
+        }elseif(strpos($nome, 'HANNA') !== false) {
+            return '39 - HANNA';
         }else {
             return $nome;
         }

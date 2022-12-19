@@ -7,15 +7,13 @@ private $dtinicio;
 private $dtfim;
 private $status;
 
-function __construct($coddesconto, $codcli, $percdesc, $dtinicio, $dtfim, $status){
-    $this->coddesconto = $coddesconto;
-    $this->codcli = $codcli;
-    $this->percdesc = $percdesc;
-    $this->dtinicio = $dtinicio;
-    $this->dtfim = $dtfim;
-    $this->status = $status;
-
-}
-
-get
+    function __construct($coddesconto, $codcli, $percdesc, $dtinicio, $dtfim, $status){
+        $this->coddesconto = $coddesconto;
+        $this->codcli = $codcli;
+        $this->percdesc = $percdesc;
+        $this->dtinicio = $dtinicio;
+        $this->dtfim = $dtfim;
+        $this->status = $status;
+    }
+    
 }

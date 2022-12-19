@@ -21,9 +21,76 @@ class ProdDiaria{
     public $operador;
 
 
+    public static function getProdMensalNovo($data){
+        $data = ProdDiaria::formatador($data);
+        
+        $sql = new sqlOra();
+        $ret = $sql->select("SELECT a.COD, M.NOME TIPO, NVL(A.TOTAL,0)TOTAL, M.META1 FROM(
+            SELECT COD, SUM(TOTAL) TOTAL FROM(
+            SELECT CASE WHEN TIPO = 'TINTAS' AND TOTAL < 2600
+            THEN 2
+              WHEN TIPO = 'TINTAS' AND TOTAL >= 2600
+            THEN 1
+              WHEN TIPO = 'TEXTURAS'
+            THEN 3
+              WHEN TIPO = 'MASSAS'
+            THEN 4
+              WHEN TIPO = 'SOLVENTES'
+            THEN 5
+              WHEN TIPO = 'NONE'
+            THEN 6 END AS COD, SUM(TOTAL) TOTAL FROM(
+            SELECT SUM(PESOLIQ) TOTAL, NUMLOTE, TIPO FROM (            
+            SELECT codprod, descricao, qt, peso_padrao_formula, qt * peso_padrao_formula pesoliq,
+            unidade, categoria, codcategoria, numlote, numop, tipo, dtfecha
+            from (select c.codprodmaster codprod, p.descricao, p.codepto,
+            p.codsec, p.codcategoria, g.categoria, c.numlote, c.numop,dtfecha,
+            c.metodo, cp.qt peso_padrao_formula, p.unidade,
+            case when c.qtproduzida is null then
+              c.qtproduzir else c.qtproduzida end as qt, a.tipo
+            from kokar.pcopc c
+            inner join kokar.pcprodut p on
+            p.codprod = c.codprodmaster
+            inner join kokar.pccategoria g on
+            g.codcategoria = p.codcategoria
+            and g.codsec = p.codsec
+            left join
+            (select c1.codprodmaster, c1.qt, c1.metodo from kokar.pccomposicao c1 
+            inner join kokar.pcprodut p1 on c1.codprod = p1.codprod and p1.codepto = 10001 and p1.codsec IN (10012, 10013))cp
+            on cp.codprodmaster = c.codprodmaster and cp.metodo = c.metodo
+            left join paralelo.agrupamentosa a on a.codcategoria = p.codcategoria
+            where extract (month from c.dtfecha) = extract (month from to_date(:dtFecha))
+            and extract (year from c.dtfecha) = extract (year from to_date(:dtFecha))
+              and c.posicao = 'F' 
+              and p.codepto = 10000
+              order by DTFECHA, numlote, descricao))GROUP BY NUMLOTE, TIPO)
+              GROUP BY TIPO, TOTAL)
+              GROUP BY COD)A
+                        RIGHT JOIN PARALELO.METASPROD M ON A.COD = M.COD
+                        order by cod",
+            array(":dtFecha"=>$data)
+        );
+
+
+        $arrRet = [];
+        if(sizeof($ret)>0){
+            foreach($ret as $r){
+                $p = new ProdDiaria();
+                $p->cod = $r['COD'];
+                $p->linha = $r['TIPO'];
+                //$p->qtOp = $r['QT'];
+                $p->qtProduzida = $r['TOTAL'];
+                $p->meta1 = $r['META1'];
+                array_push($arrRet, $p);
+            }
+        }
+
+        return $arrRet;
+        //return 'teste';
+    }
+
     public static function getProdMensal($data){
         $data = ProdDiaria::formatador($data);
-
+        
         $sql = new sqlOra();
         $ret = $sql->select("SELECT M.COD, M.NOME TIPO, A.QT, NVL(A.TOTAL,0)TOTAL, M.META1 FROM(                
             SELECT tipo, cod, count(numop)qt, TO_CHAR(sum(qtproduzida),'9999999.99') total
@@ -68,33 +135,116 @@ class ProdDiaria{
 
 
     public static function getProdResumo($data){
-       
+        $mes = ProdDiaria::mes($data);
+        $ano = ProdDiaria::ano($data);
+
         $data = ProdDiaria::formatador($data);
+
+       
+
         $sql = new sqlOra();
-        $ret = $sql->select("SELECT M.COD, M.NOME TIPO, A.QT, NVL(A.TOTAL,0)TOTAL, M.META1, MC.OPERADOR
-        FROM(
-                   SELECT tipo, cod, count(numop)qt, TO_CHAR(sum(nvl(qtproduzida,0)),'9999999.99') total
-                                   from (
-                                   select a.tipo, c.numop, c.qtproduzida, 
-                                       case when a.tipo = 'TINTAS' then
-                                           case when c.qtproduzida <= 2700 then 2 else 1 end
-                                               when a.tipo = 'TEXTURAS' then 3 
-                                               when a.tipo = 'MASSAS' then 4
-                                               when a.tipo = 'SOLVENTES' then 5 
-                                               end cod
-                                                 
-                                   from kokar.pcopc c inner join paralelo.kkagrupamentosa a on a.codprod = c.codprodmaster
-                                   
-                                   where c.dtfecha = :dtFecha
-                                   and c.dtcancel is null
-                                   AND C.NUMOP NOT IN (54421, 54622, 55549)--OPS COM PROBLEMAS
-                                   ) group by tipo, cod
-                                   order by cod)A
-                                   RIGHT JOIN PARALELO.METASPROD M ON A.COD = M.COD
-                                   INNER JOIN PARALELO.METASPRODC MC ON M.COD = MC.COD
-                                   order by cod",
-            array(":dtFecha"=>$data)
-        );
+        
+        $resultado = $sql->select("SELECT meta from paralelo.metasprodi t where extract(month from to_date(t.competencia)) = $mes and extract(year from to_date(t.competencia)) = $ano",[]);
+
+        if(sizeof($resultado) < 1):
+            $ret = $sql->select("SELECT m.COD, M.NOME TIPO, NVL(A.TOTAL,0)TOTAL, M.META1,MC.OPERADOR FROM(
+                SELECT COD, SUM(TOTAL) TOTAL FROM(
+                SELECT CASE WHEN TIPO = 'TINTAS' AND TOTAL < 2600
+                THEN 2
+                  WHEN TIPO = 'TINTAS' AND TOTAL >= 2600
+                THEN 1
+                  WHEN TIPO = 'TEXTURAS'
+                THEN 3
+                  WHEN TIPO = 'MASSAS'
+                THEN 4
+                  WHEN TIPO = 'SOLVENTES'
+                THEN 5
+                  WHEN TIPO = 'NONE'
+                THEN 6 END AS COD, SUM(TOTAL) TOTAL FROM(
+                SELECT SUM(PESOLIQ) TOTAL, NUMLOTE, TIPO FROM (            
+                SELECT codprod, descricao, qt, peso_padrao_formula, qt * peso_padrao_formula pesoliq,
+                unidade, categoria, codcategoria, numlote, numop, tipo, dtfecha
+                from (select c.codprodmaster codprod, p.descricao, p.codepto,
+                p.codsec, p.codcategoria, g.categoria, c.numlote, c.numop,dtfecha,
+                c.metodo, cp.qt peso_padrao_formula, p.unidade,
+                case when c.qtproduzida is null then
+                  c.qtproduzir else c.qtproduzida end as qt, a.tipo
+                from kokar.pcopc c
+                inner join kokar.pcprodut p on
+                p.codprod = c.codprodmaster
+                inner join kokar.pccategoria g on
+                g.codcategoria = p.codcategoria
+                and g.codsec = p.codsec
+                left join
+                (select c1.codprodmaster, c1.qt, c1.metodo from kokar.pccomposicao c1 
+                inner join kokar.pcprodut p1 on c1.codprod = p1.codprod and p1.codepto = 10001 and p1.codsec IN (10012, 10013))cp
+                on cp.codprodmaster = c.codprodmaster and cp.metodo = c.metodo
+                left join paralelo.agrupamentosa a on a.codcategoria = p.codcategoria
+                where  c.dtfecha = to_date(:dtFecha)
+    
+                  and c.posicao = 'F' 
+                  and p.codepto = 10000
+                  order by DTFECHA, numlote, descricao))GROUP BY NUMLOTE, TIPO)
+                  GROUP BY TIPO, TOTAL)
+                  GROUP BY COD)A
+                            RIGHT JOIN PARALELO.METASPROD M ON A.COD = M.COD
+                            INNER JOIN PARALELO.METASPRODC MC ON M.COD = MC.COD
+                            order by cod",
+                array(":dtFecha"=>$data)
+            );
+        else:
+            $ret = $sql->select("SELECT M.CODLINHA cod, mc.linha TIPO, nvl(A.QT,0) qt, NVL(A.TOTAL,0)TOTAL, M.META meta1, MC.OPERADOR
+            FROM(
+                SELECT COD, SUM(TOTAL) TOTAL FROM(
+                SELECT CASE WHEN TIPO = 'TINTAS' AND TOTAL < 2600
+                THEN 2
+                  WHEN TIPO = 'TINTAS' AND TOTAL >= 2600
+                THEN 1
+                  WHEN TIPO = 'TEXTURAS'
+                THEN 3
+                  WHEN TIPO = 'MASSAS'
+                THEN 4
+                  WHEN TIPO = 'SOLVENTES'
+                THEN 5
+                  WHEN TIPO = 'NONE'
+                THEN 6 END AS COD, SUM(TOTAL) TOTAL FROM(
+                SELECT SUM(PESOLIQ) TOTAL, NUMLOTE, TIPO FROM (            
+                SELECT codprod, descricao, qt, peso_padrao_formula, qt * peso_padrao_formula pesoliq,
+                unidade, categoria, codcategoria, numlote, numop, tipo, dtfecha
+                from (select c.codprodmaster codprod, p.descricao, p.codepto,
+                p.codsec, p.codcategoria, g.categoria, c.numlote, c.numop,dtfecha,
+                c.metodo, cp.qt peso_padrao_formula, p.unidade,
+                case when c.qtproduzida is null then
+                  c.qtproduzir else c.qtproduzida end as qt, a.tipo
+                from kokar.pcopc c
+                inner join kokar.pcprodut p on
+                p.codprod = c.codprodmaster
+                inner join kokar.pccategoria g on
+                g.codcategoria = p.codcategoria
+                and g.codsec = p.codsec
+                left join
+                (select c1.codprodmaster, c1.qt, c1.metodo from kokar.pccomposicao c1 
+                inner join kokar.pcprodut p1 on c1.codprod = p1.codprod and p1.codepto = 10001 and p1.codsec IN (10012, 10013))cp
+                on cp.codprodmaster = c.codprodmaster and cp.metodo = c.metodo
+                left join paralelo.agrupamentosa a on a.codcategoria = p.codcategoria
+                where  c.dtfecha = to_date(:dtFecha)
+    
+                  and c.posicao = 'F' 
+                  and p.codepto = 10000
+                  order by DTFECHA, numlote, descricao))GROUP BY NUMLOTE, TIPO)
+                  GROUP BY TIPO, TOTAL)
+                  GROUP BY COD)A
+                     right JOIN PARALELO.METASPRODI M ON A.COD = M.CODLINHA 
+                     right JOIN PARALELO.METASPRODC MC ON M.CODLINHA = MC.COD
+    
+                    where  
+                    extract(month from to_date(competencia)) = extract(month from to_date(:dtfecha)) 
+                    and extract(year from to_date(competencia)) = extract(year from to_date(:dtfecha))
+                      
+                     order by M.CODLINHA",
+                array(":dtFecha"=>$data)
+            );
+        endif;
 
         $arrRet = [];
         if(sizeof($ret)>0){
@@ -102,7 +252,7 @@ class ProdDiaria{
                 $p = new ProdDiaria();
                 $p->cod = $r['COD'];
                 $p->linha = $r['TIPO'];
-                $p->qtOp = $r['QT'];
+                //$p->qtOp = $r['QT'];
                 $p->qtProduzida = $r['TOTAL'];
                 $p->meta1 = $r['META1'];
                 $p->operador = $r['OPERADOR'];
@@ -121,7 +271,18 @@ class ProdDiaria{
         $saida = $d[2].'/'.$d[1].'/'.$d[0];
         return $saida;
     }
-    
+
+    function mes($data){
+        $d = explode('-', $data);
+        $saida = $d[1];
+        return $saida;
+    }
+
+    function ano($data){
+        $d = explode('-', $data);
+        $saida = $d[0];
+        return $saida;
+    }
 
 
 
@@ -232,6 +393,7 @@ class ProdDiaria{
 
     }
     static function getUltimoDiaMes($data) {
+       
         $d = explode('-', $data);
         /* Validação proximo ano bisexto */
         if($d[1]=='02'){
@@ -251,13 +413,14 @@ class ProdDiaria{
         }
         
         $saida = $d[0].'-'.$d[1].'-'.$d[2];
+        
         return $saida;
     }
 
     static function getDiasUteis($dtInicio, $dtFim, $feriados = []) {
         $tsInicio = strtotime($dtInicio);
         $tsFim = strtotime($dtFim);
-    
+        //echo($tsInicio);
         $quantidadeDias = 0;
         while ($tsInicio <= $tsFim) {
             // Verifica se o dia é igual a sábado ou domingo, caso seja continua o loop
@@ -285,11 +448,11 @@ class ProdDiaria{
             $ano.'-05-01',
             $ano.'-09-07',
             $ano.'-10-05',
-            $ano.'-10-12',
+            //$ano.'-10-12',
             $ano.'-11-02',
             $ano.'-11-15',
             /* Férias coletivas */
-            
+           '2022-12-21',
             $ano.'-12-22',
             $ano.'-12-23',
             $ano.'-12-24',
@@ -301,6 +464,10 @@ class ProdDiaria{
             $ano.'-12-30',
             $ano.'-12-31',
             /* Fim Férias coletivas */
+            /* Feriados dinamicos */
+
+            '2022-04-15',
+            /* Feriados dinamicos */
             ];
     } 
 

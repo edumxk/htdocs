@@ -261,7 +261,7 @@ class Chamado{
                 $rat->ATec = $row['ATEC'];
                 $rat->ADir = $row['ADIR'];
                 $rat->codRca = $row['CODUSUR'];
-                $rat->rca = $row['NOME'];
+                $rat->rca = explode(' ',$row['NOME'])[0];
                 $rat->telRca = $row['TELEFONE1'];
                 $rat->telCliente = $row['TELENT'];
                 $rat->cliente = $row['CLIENTE'];

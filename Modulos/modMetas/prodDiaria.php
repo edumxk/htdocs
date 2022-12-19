@@ -6,7 +6,7 @@ if (isset($_GET['data'])) {
     $data = $_GET['data'];
 }
 $resumo = ProdDiaria::getProdResumo($data);
-$mensal = ProdDiaria::getProdMensal($data);
+$mensal = ProdDiaria::getProdMensalNovo($data);
 //var_dump(ProdDiaria::getFaturado($data));
 if (sizeof(ProdDiaria::getFaturado($data)) > 0) {
     $faturado = ProdDiaria::getFaturado($data)[0];
@@ -14,7 +14,12 @@ if (sizeof(ProdDiaria::getFaturado($data)) > 0) {
     $faturado = 0;
 }
 $pesod = ProdDiaria::getPesoD($data)[0]['PESOLIQ'];
-$pesom = ProdDiaria::getPesoM($data)[0]['PESOLIQ'];
+$pesom = 0;
+
+$pesomes=[];
+foreach($mensal as $m){
+    $pesom += $m->qtProduzida; 
+}
 
 $labels = array();
 
@@ -38,6 +43,8 @@ $diasuteish =  ProdDiaria::getDiasUteis(ProdDiaria::getPrimeiroDiaMes($data),  $
 
 $producaodia = 0;
 //echo (ProdDiaria::getUltimoDiaMes($data));
+//echo $diasuteis. ' - ' . $diasuteish;
+
 
 foreach ($resumo as $r) {
     if ($r->cod != 6) {
@@ -51,8 +58,13 @@ foreach ($resumo as $r) {
 
 $metafat = $faturado['PERC_META'];
 
+if(array_sum($metasm) == 0) 
+$metames = 50000;
+else 
+$metames = array_sum($metasm);
+
 $dataset4 = array("100", "100");
-Array_push($dataset3, round(($pesom / array_sum($metasm)) * 100, 2));
+Array_push($dataset3, round(($pesom /$metames ) * 100, 2));
 Array_push($dataset3, $metafat);
 $somadia = 0;
 ?>
@@ -131,7 +143,7 @@ date_default_timezone_set('America/Araguaina');
                 </div>
                 <div class="col-2" style="text-align: left">
                     <li class="breadcrumb-item active" aria-current="page">
-                        <a style="font-size:large" href="../../home.php">Sair</a>
+                        <a style="font-size:large" href="../../home.php">Home</a>
                     </li>
                 </div>
             </div>
@@ -230,7 +242,7 @@ date_default_timezone_set('America/Araguaina');
                                 <tr>
                                     <?php if ($r->cod != 6) : ?>
                                         <td style="padding-left: 10px"><?= $r->linha ?></td>
-                                        <td style="text-align: center;"><?php echo number_format($r->qtProduzida, 0, ',', '.') ?></td>
+                                        <td style="text-align: center;"><?php echo number_format($r->qtProduzida, 0, ',', '.'); $pesomes[]=$r->qtProduzida; ?></td>
                                         <td style="text-align: center;"><?php echo number_format($r->meta1 * $diasuteish, 0, ',', '.') ?></td>
                                         <td class="metap" style="text-align: center;"><?php echo number_format($r->qtProduzida - ($r->meta1 * $diasuteish), 0, ',', '.') ?></td>
                                         <td style="text-align: center;background-color:lightsteelblue"><?php echo number_format($r->meta1 * $diasuteis, 0, ',', '.') ?></td>
@@ -243,11 +255,11 @@ date_default_timezone_set('America/Araguaina');
                     <tfoot>
                         <tr>
                             <th colspan="1" style="text-align: center;">TOTAIS</th>
-                            <th style="text-align: center;"><?php echo number_format($pesom, 0, ',', '.') ?></th>
+                            <th style="text-align: center;"><?php echo number_format(array_sum($pesomes), 0, ',', '.') ?></th>
                             <th style="text-align: center;"><?php echo number_format(array_sum($metasd), 0, ',', '.') ?></th>
                             <th class="metam" style="text-align: center;"><?php echo number_format($pesom - array_sum($metasd), 0, ',', '.') ?></th>
                             <th style="text-align: center;background-color: lightsteelblue"><?php echo number_format(array_sum($metasm), 0, ',', '.') ?></th>
-                            <th class="metadiariat2" style="text-align: center;background-color:lightsteelblue"><?php echo number_format((($pesom / array_sum($metasm)) * 100), 2, ',', '.') . '%' ?></th>
+                            <th class="metadiariat2" style="text-align: center;background-color:lightsteelblue"><?php echo number_format(((array_sum($pesomes)/ array_sum($metasm)) * 100), 2, ',', '.') . '%' ?></th>
                         </tr>
                     </tfoot>
                 </table>
@@ -524,5 +536,6 @@ date_default_timezone_set('America/Araguaina');
         $(elm).css('background-color', 'transparent')
     }
 </script>
+<script src="/recursos/js/scripts.js"></script>
 
 </html>

@@ -1,0 +1,44 @@
+.historico_cabecalho th{
+    text-align: center;
+}
+
+.historico_linhas td{
+    vertical-align: middle;
+}
+.principal__pesquisa{
+    padding: 10px;
+}
+.principal__pesquisa-tabela_ultimos{
+    height: calc(100vh - 160px);
+}
+
+.botoes{
+    display: flex;
+    justify-content: center;
+}
+
+.botoes button{
+    margin: 0 5px;
+}
+
+#botoes_num_pages button{
+    background-color: white;
+
+}
+
+#clientes{
+    width: 100%;
+    padding: 10px 0 0 0 ;
+}
+
+#clientes thead tr{
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 700;
+}
+
+#clientes thead tr th{
+    padding: 8px 0;
+    background-color: #11101d;
+    color: #fff
+}

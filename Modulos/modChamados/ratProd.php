@@ -211,7 +211,7 @@
 					</div>
 					<div class="col-md-2">
 						<div>
-							<b>Pintor:</b>
+							<b>Cliente:</b>
 						</div>
 					</div>
 					<div class="col-md-4">
@@ -221,7 +221,7 @@
 					</div>
 					<div class="col-md-2">
 						<div>
-							<b>Tel. Pintor:</b>
+							<b>Tel. Cliente:</b>
 						</div>
 					</div>
 					<div class="col-md-4">
@@ -352,7 +352,25 @@
 
 			</div>
 		</div>
-
+	<!-- Modal para seleção de produto do Lote -->
+		<div class="modal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Seleção de Produto</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" onclick="buscarEspecial(), buscaprod(),closeModal()">Confirmar</button>
+				</div>
+				</div>
+			</div>
+			</div>
 	</div>
 
 	<div class="header">
@@ -452,15 +470,54 @@ function setTabela(){
 
 
 <script>
+	codprod = 0;
+
+function buscaProdutosLote(){
+	var lote = $("#prodlote").val();
+	var codcli = "<?php echo $rat->codCli?>";
+	var modal = $(".modal-body");
+	dataset= {'lote': lote,
+			 'codcli': codcli}
+	$.ajax({
+		type: 'POST',
+		url: 'Controle/ratProdControle.php',
+		data: {'action': 'produto2', 'query':dataset},
+			success: function(response){
+				let arr = JSON.parse(response);
+				let body = '';
+				console.log(arr)
+
+				console.log('lote 2')
+				$(modal).empty();
+
+				arr.forEach(function(t){
+					body += `<option value='${t['codprod']}'> ${t['codprod'] +' - '+t['produto']} </option>`;
+				})
+				$(modal).append(`<select id='modal_produto'>${body}</select>`);
+				$(".modal").modal('toggle');
+			}
+		});
+	
+}
+function buscarEspecial(){
+	codprod = $("#modal_produto option:selected").val();
+}
+
+function closeModal(){
+	$('.modal').modal('toggle');
+}
 /*Função de Busca de Produto por Lote*/
 function buscaprod(){
 	var lote = $("#prodlote").val(); 
-	var codprod = $("#codprod").val();
 	var produto =  $("#produtoJson").val();
 	var codcli = "<?php echo $rat->codCli?>";
+	if(codprod == 0)
+	codprod = $("#codprod").val();
+
 	//console.log(codcli);
 
-	var dataset = {'lote':lote, 'codcli':codcli, 'codprod':codprod, 'produto':produto };
+	
+	var dataset = {'lote':lote, 'codcli':codcli, 'codprod':codprod, 'produto':produto};
 
 	$.ajax({
 		type: 'POST',
@@ -469,7 +526,7 @@ function buscaprod(){
 		success: function(response){
 			console.log(response);
 			if(response==false){
-				alert("Produto Não Encontrado!");
+				alert("Selecione o produto!");
 				$("#produtoJson").val("");
 				$("#codprod").val("");
 
@@ -483,8 +540,12 @@ function buscaprod(){
 
 			}
 		}
-	});
+	})	
+	if(lote != ''&& codprod =='')
+			buscaProdutosLote()
+	codprod = 0;
 }
+	
 </script>
 
 <script>

@@ -1,0 +1,22 @@
+.principal{
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 8px;
+    justify-items: center;
+}
+
+.principal div label{
+    display: block;
+    text-align: center;
+    padding: 0 0 10px 0;
+
+    font-size: 2rem;
+}
+div input{
+    width: 300px;
+}
+
+div input:first-of-type{
+    width: 80px;
+}

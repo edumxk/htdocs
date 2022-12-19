@@ -264,12 +264,7 @@
             if($ret1 == 0){
                 $ret2=$sql->insertDirect($strDeleteI);
             }
-
             return "$ret - $ret1 - $ret2";
-
         }
-
     }
-
-
 ?>

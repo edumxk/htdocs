@@ -15,8 +15,9 @@
             $arr = (Metodo::tabela($base, $novo));
             $ret = '';
             foreach($arr as $r){
-                if($r['METODOBASE']!= null)
-                echo "<option value='".strval($r['METODOBASE'])."'>Metodo ".strval($r['METODOBASE'])."</option><br>";
+                if($r['CODPROD']==$base){
+                    $ret = $ret . "<option value='".strval($r['METODO'])."'>Metodo ".strval($r['METODO'])."</option><br>";
+                }
             }
             echo $ret;
          }
@@ -25,15 +26,17 @@
             $novo = $_POST['dataset']['novo'];
             $arr = (Metodo::tabela($base, $novo));
             $cont = 0;
+            $cont2 = 1;
+            $ret='';
+            var_dump (($arr));
             foreach($arr as $r){
-                if($r['METODONOVO']!= null){
-                echo "<option disabled value='".strval($r['METODONOVO'])."'>Metodo ".strval($r['METODONOVO'])."</option><br>";
-                $cont++;
+                
+            if($r['CODPROD']==$novo){
+                    $ret = $ret . "<option disabled value='".strval($r['METODO'])."'>Metodo ".strval($r['METODO'])."</option><br>";
+                    $cont2 ++;
                 }
             }
-            for($i=1; $i<=($cont+1); $i++){
-                echo "<option value='".strval($i+$cont)."'>Metodo ".strval($i+$cont)."</option><br>"; 
-            }
+            $ret = $ret . "<option value='".strval($cont2)."'>Metodo ".strval($cont2)."</option><br>";
             echo $ret;
          }
     }

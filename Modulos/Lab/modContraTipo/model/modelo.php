@@ -8,15 +8,15 @@ class ContraTipoModel{
         $sql = new SqlOra();
         try{
             $ret = $sql->select("SELECT DISTINCT  P.CODCATEGORIA , CATEGORIA, p.codsubcategoria, sg.subcategoria
-            FROM KOKAR.PCPRODUT P 
-            INNER JOIN KOKAR.PCCATEGORIA G 
+            FROM kokar.PCPRODUT P 
+            INNER JOIN kokar.PCCATEGORIA G 
             ON G.CODSEC = P.CODSEC 
             AND P.CODCATEGORIA = G.CODCATEGORIA
-            inner join KOKAR.pcsubcategoria sg on sg.codsubcategoria= p.codsubcategoria
+            inner join kokar.pcsubcategoria sg on sg.codsubcategoria= p.codsubcategoria
             and sg.codcategoria = p.codcategoria
-            INNER JOIN KOKAR.PCCOMPOSICAO C ON C.CODPRODMASTER = P.CODPROD
+            INNER JOIN kokar.PCCOMPOSICAO C ON C.CODPRODMASTER = P.CODPROD
             AND METODO = 1
-            WHERE P.CODSEC = 10013 AND CODEPTO = 10001
+            WHERE P.CODSEC IN (10013, 10014) AND CODEPTO IN (10001, 10002)
             ORDER BY CATEGORIA, subcategoria");
             return $ret;
         }catch(Exception $e){
@@ -30,9 +30,9 @@ class ContraTipoModel{
         $sql = new SqlOra();
         try{
             $ret = $sql->select("SELECT DISTINCT C.CODPRODMASTER, C.CODPROD, C.METODO, P.DESCRICAO , CA.CATEGORIA, CA.CODCATEGORIA
-            FROM HOMOLOGA.PCCOMPOSICAO C 
-            INNER JOIN HOMOLOGA.PCPRODUT P ON P.CODPROD = C.CODPRODMASTER
-            INNER JOIN HOMOLOGA.PCCATEGORIA CA ON CA.CODSEC = P.CODSEC AND CA.CODCATEGORIA = P.CODCATEGORIA
+            FROM kokar.PCCOMPOSICAO C 
+            INNER JOIN kokar.PCPRODUT P ON P.CODPROD = C.CODPRODMASTER
+            INNER JOIN kokar.PCCATEGORIA CA ON CA.CODSEC = P.CODSEC AND CA.CODCATEGORIA = P.CODCATEGORIA
             WHERE C.METODO = $metodo AND C.CODPROD = $codprod
             ORDER BY P.DESCRICAO");
             return $ret;
@@ -46,8 +46,8 @@ class ContraTipoModel{
         $sql = new SqlOra();
         try{
             $ret = $sql->select("SELECT CODPROD, DESCRICAO
-            FROM KOKAR.PCPRODUT P
-            WHERE CODEPTO = 10001 --AND CODSEC NOT IN (10013)
+            FROM kokar.PCPRODUT P
+            WHERE CODEPTO IN (10001, 10002) --AND CODSEC NOT IN (10013)
             ORDER BY DESCRICAO");
             return $ret;
         }catch(Exception $e){
@@ -61,7 +61,7 @@ class ContraTipoModel{
         try{
             return $sql->select("SELECT I.ID, I.CODPROD, P.DESCRICAO, I.FRACAOUMIDA
             FROM CONTRATIPOI I
-            INNER JOIN KOKAR.PCPRODUT P ON I.CODPROD = P.CODPROD
+            INNER JOIN kokar.PCPRODUT P ON I.CODPROD = P.CODPROD
             WHERE I.ID = $id
             ORDER BY DESCRICAO");
              
@@ -81,8 +81,8 @@ class ContraTipoModel{
         try{
             foreach($arrayi as $i):
                 
-                array_push($tempArr, $sql->select("SELECT rowid, codprodmaster, codprod, fracaoumida from homologa.pccomposicao WHERE codprodmaster = $i AND codprod = $produtoAntigo AND metodo = $metodo"));
-                $updateLinha = $sql->update("UPDATE homologa.pccomposicao c SET codprod = $produtoNovo, dtultalter = sysdate WHERE codprodmaster = $i AND codprod = $produtoAntigo AND metodo = $metodo",[]);
+                array_push($tempArr, $sql->select("SELECT rowid, codprodmaster, codprod, fracaoumida from kokar.pccomposicao WHERE codprodmaster = $i AND codprod = $produtoAntigo AND metodo = $metodo"));
+                $updateLinha = $sql->update("UPDATE kokar.pccomposicao c SET codprod = $produtoNovo, dtultalter = sysdate WHERE codprodmaster = $i AND codprod = $produtoAntigo AND metodo = $metodo",[]);
                 if($updateLinha!='ok')
                     return $updateLinha  = 'erro: master:'.$i.' | prod: '.$produtoNovo.'| antigo: '.$produtoAntigo;
                 array_push($updateSQL, $i." - ".$updateLinha);
@@ -137,9 +137,9 @@ class ContraTipoModel{
         $sql = new SqlOra();
         try{
             $ret = $sql->select("SELECT c.codprodmaster, p2.descricao descricaomaster, c.codprod, p.descricao, c.qt, numseq, fracaoumida, percformulacaototal percentual
-            from KOKAR.pccomposicao c
-            inner join KOKAR.pcprodut p on p.codprod = c.codprod
-            inner join KOKAR.pcprodut p2 on p2.codprod = c.codprodmaster
+            from kokar.pccomposicao c
+            inner join kokar.pcprodut p on p.codprod = c.codprod
+            inner join kokar.pcprodut p2 on p2.codprod = c.codprodmaster
             where c.codprodmaster = $codprod and metodo = $metodo
            order by numseq");
             return $ret;
@@ -150,8 +150,8 @@ class ContraTipoModel{
     }
     public static function deletar($id, $senha){
         $sql = new SqlOra();
-        if($senha!='kk22'):
-            echo 'Senha Incorreta!';
+        if($senha!='labkk@22'):
+            echo 'Senha Incorreta! Procure o T.I.';
             return;
         endif;
             try{
@@ -161,7 +161,7 @@ class ContraTipoModel{
                 $metodo = $ret['METODO'];
                 $itens = $sql->select("SELECT codprod, fracaoumida from paralelo.contratipoi c where c.id = $id");
                 foreach($itens as $i):
-                    echo $sql->update2("UPDATE homologa.pccomposicao c SET codprod = $produtoAntigo, dtultalter = sysdate 
+                    echo $sql->update2("UPDATE kokar.pccomposicao c SET codprod = $produtoAntigo, dtultalter = sysdate 
                     WHERE fracaoumida = :fracaoumida and codprodmaster = :codprod and codprod = $produtoNovo"
                     ,[':fracaoumida' => $i['FRACAOUMIDA'], ':codprod' => $i['CODPROD']]);
                     $sql->update2("UPDATE paralelo.contratipoi SET dtexclusao = to_date(sysdate) WHERE codprod = :linhaid and id = $id",[':linhaid' => $i['CODPROD']]);

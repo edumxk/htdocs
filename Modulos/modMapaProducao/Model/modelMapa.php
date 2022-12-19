@@ -8,175 +8,181 @@ class Mapa{
    
     
 
-    public static function novaProducao($codproducao, $codtanque, $dtproducao, $horaproducao, $codfun, $op){
-        $dtproducao = Formatador::formatarData($dtproducao);
+public static function novaProducao($codproducao, $codtanque, $dtproducao, $horaproducao, $codfun, $lote){
+    $dtproducao = Formatador::formatarData($dtproducao);
 
-        $sql = new sqlOra();
-        try{
-            $sql->insert("INSERT INTO  paralelo.mproducaoc (codproducao, codtanque, dtabertura, op, status, codfunc, dtproducao, horaabertura, horaproducao) 
-            values(:codproducao, :codtanque, to_char(sysdate,'dd/mm/yyyy'), :op, UPPER('A'), :codfun, :dtproducao, to_char(sysdate, 'hh24:mi:ss'), :horaproducao)",
-                [":codproducao"=>$codproducao, ":codtanque"=>$codtanque, ":op"=>$op, ":codfun"=>$codfun, ":dtproducao"=>$dtproducao, ":horaproducao"=>$horaproducao]);
-                return "OK";
-            }catch(Exception $e){
-                echo 'Exceção capturada: ',  $e->getMessage(), "\n";
-            }
-        return "FAIL";
-        //return 'teste';
-    }
+    $sql = new sqlOra();
+    try{
+        $sql->insert("INSERT INTO  paralelo.mproducaoc (codproducao, codtanque, dtabertura, status, codfunc, dtproducao, horaabertura, horaproducao, lote) 
+        values(:codproducao, :codtanque, to_char(sysdate,'dd/mm/yyyy'), UPPER('A'), :codfun, :dtproducao, to_char(sysdate, 'hh24:mi:ss'), :horaproducao, :lote)",
+            [":codproducao"=>$codproducao, ":codtanque"=>$codtanque, ":codfun"=>$codfun, ":dtproducao"=>$dtproducao, ":horaproducao"=>$horaproducao, ":lote"=>$lote]);
+            return "OK";
+        }catch(Exception $e){
+            echo 'Exceção capturada: ',  $e->getMessage(), "\n";
+        }
+    return "FAIL";
+    //return 'teste';
+}
 
-    public static function inserirItem($codproducao, $codprod, $qt, $codfun, $op){
+public static function inserirItem($codproducao, $codprod, $qt, $codfun, $lote, $op){
 
-        $sql = new sqlOra();
-        try{
-            $sql->insert("INSERT INTO  paralelo.mproducaoI (codproducao,codprod,qt,codfun,dtinclusao,op, horainclusao) 
-            values(:codproducao, :codprod, :qt, :codfun, to_char(sysdate,'dd/mm/yyyy'), :op, to_char(sysdate, 'hh24:mi:ss'))",
-                [":codproducao"=>$codproducao, ":codprod"=>$codprod, ":qt"=>$qt, ":codfun"=>$codfun, ":op"=>$op]);
-                return "OK";
-            }catch(Exception $e){
-                echo 'Exceção capturada: ',  $e->getMessage(), "\n";
-            }
-        return "FAIL";
-        //return 'teste';
-    }
-    public static function getTanque($codlinha){
-        $sql = new sqlOra(); 
-        try{
-            if($codlinha > 0 && $codlinha <= 5):   
-                $ret = $sql->select("SELECT LINHA || ' | '|| CAPACIDADE || 'KG' DESCRICAO, CODTANQUE, CODLINHA FROM(
-                    SELECT CASE WHEN CODLINHA = 1
-                           THEN 'TINTAS 5000' 
-                            WHEN CODLINHA = 2
-                           THEN 'TINTAS 2000'
-                             WHEN CODLINHA = 3
-                           THEN 'TEXTURAS'
-                             WHEN CODLINHA = 4
-                           THEN 'MASSAS'
-                             WHEN CODLINHA = 5
-                           THEN 'SOLVENTE'
-                              END AS LINHA,
-                              T.CODTANQUE, T.CODLINHA, T.CAPACIDADE FROM PARALELO.MTANQUES T
-                              WHERE CODLINHA = $codlinha
-                              ORDER BY CODLINHA, CAPACIDADE DESC, CODTANQUE)");
-            else:
-                $ret = $sql->select("SELECT LINHA || ' | '|| CAPACIDADE || 'KG' DESCRICAO, CODTANQUE, CODLINHA FROM(
-                    SELECT CASE WHEN CODLINHA = 1
-                           THEN 'TINTAS 5000' 
-                            WHEN CODLINHA = 2
-                           THEN 'TINTAS 2000'
-                             WHEN CODLINHA = 3
-                           THEN 'TEXTURAS'
-                             WHEN CODLINHA = 4
-                           THEN 'MASSAS'
-                             WHEN CODLINHA = 5
-                           THEN 'SOLVENTE'
-                              END AS LINHA,
-                              T.CODTANQUE, T.CODLINHA, T.CAPACIDADE FROM PARALELO.MTANQUES T
-                              ORDER BY CODLINHA, CAPACIDADE DESC, CODTANQUE)");
-            endif;
+    $sql = new sqlOra();
+    try{
+        $sql->insert("INSERT INTO  paralelo.mproducaoI (codproducao,codprod,qt,codfun,dtinclusao,lote, horainclusao, op) 
+        values(:codproducao, :codprod, :qt, :codfun, to_char(sysdate,'dd/mm/yyyy'), :lote, to_char(sysdate, 'hh24:mi:ss'), :op)",
+            [":codproducao"=>$codproducao, ":codprod"=>$codprod, ":qt"=>$qt, ":codfun"=>$codfun, ":lote"=>$lote, ":op"=>$op]);
+            return "OK";
+        }catch(Exception $e){
+            echo 'Exceção capturada: ',  $e->getMessage(), "\n";
+        }
+    return "FAIL";
+    //return 'teste';
+}
 
-            return $ret;
+public static function getTanque($codlinha){
+    $sql = new sqlOra(); 
+    try{
+        if($codlinha > 0 && $codlinha <= 5):   
+            $ret = $sql->select("SELECT LINHA || ' | '|| CAPACIDADE || 'KG' DESCRICAO, CODTANQUE, CODLINHA FROM(
+                SELECT CASE WHEN CODLINHA = 1
+                        THEN 'TINTAS 5000' 
+                        WHEN CODLINHA = 2
+                        THEN 'TINTAS 2000'
+                            WHEN CODLINHA = 3
+                        THEN 'TEXTURAS'
+                            WHEN CODLINHA = 4
+                        THEN 'MASSAS'
+                            WHEN CODLINHA = 5
+                        THEN 'SOLVENTE'
+                            END AS LINHA,
+                            T.CODTANQUE, T.CODLINHA, T.CAPACIDADE FROM PARALELO.MTANQUES T
+                            WHERE CODLINHA = $codlinha
+                            ORDER BY CODLINHA, CAPACIDADE DESC, CODTANQUE)");
+        else:
+            $ret = $sql->select("SELECT LINHA || ' | '|| CAPACIDADE || 'KG' DESCRICAO, CODTANQUE, CODLINHA FROM(
+                SELECT CASE WHEN CODLINHA = 1
+                        THEN 'TINTAS 5000' 
+                        WHEN CODLINHA = 2
+                        THEN 'TINTAS 2000'
+                            WHEN CODLINHA = 3
+                        THEN 'TEXTURAS'
+                            WHEN CODLINHA = 4
+                        THEN 'MASSAS'
+                            WHEN CODLINHA = 5
+                        THEN 'SOLVENTE'
+                            END AS LINHA,
+                            T.CODTANQUE, T.CODLINHA, T.CAPACIDADE FROM PARALELO.MTANQUES T
+                            ORDER BY CODLINHA, CAPACIDADE DESC, CODTANQUE)");
+        endif;
 
-            }catch(Exception $e){
-                echo 'Exceção capturada: ',  $e->getMessage(), "\n";
-            }
-            return "FAIL";
-    }
+        return $ret;
 
-    public static function getProducao($data){
-
-        $sql = new sqlOra(); 
-        try{
-            if($data >= date('d/m/y')):   
-                $ret = $sql->select("SELECT c.codproducao, t.codtanque, c.dtabertura, c.dtproducao,
-                m.linha , t.capacidade, m.operador, t.status statust, M.COD,
-                c.dtfecha ||' '||c.horafecha fechamento,
-                c.dtproducao||' '|| c.horaproducao producao, c.status, c.op, c.dtabertura||' '||c.horaabertura abertura 
-                from paralelo.mproducaoc c
-            right join paralelo.mtanques t on t.codtanque = c.codtanque
-            inner join paralelo.metasprodc m on m.cod = t.codlinha
-            WHERE 
-                ((c.dtfecha = :data and c.status = 'F') 
-                or (c.status != 'F' and c.dtabertura >= :data))
-                and c.dtexclusao is null     
-                order by c.dtfecha, c.horafecha, c.dtproducao, c.horaproducao
-                ",[":data"=>$data]);
-            else:
-                $ret = $sql->select("SELECT c.codproducao, t.codtanque, c.dtabertura, c.dtproducao,
-                m.linha , t.capacidade, m.operador, t.status statust, M.COD,
-                c.dtfecha ||' '||c.horafecha fechamento,
-                c.dtproducao||' '|| c.horaproducao producao, c.status, c.op, c.dtabertura||' '||c.horaabertura abertura 
-                from paralelo.mproducaoc c
-                right join paralelo.mtanques t on t.codtanque = c.codtanque
-                inner join paralelo.metasprodc m on m.cod = t.codlinha
-                WHERE (((c.dtfecha = :data and c.status = 'F') or c.status !='F' and c.dtabertura <= :data))and c.dtexclusao is null
-                order by c.dtfecha, c.horafecha, c.dtproducao, c.horaproducao
-                ",[":data"=>$data]);
-            endif;
-            $mapa = [];
-            if(sizeof($ret)>0):
-                foreach($ret as $r):
-                $m = new Mapa();
-                $m->codproducao = $r['CODPRODUCAO'];
-                $m->cod = $r['COD'];
-                $m->codtanque = $r['CODTANQUE'];
-                $m->capacidade = $r['CAPACIDADE'];
-                $m->producao = $r['PRODUCAO'];
-                $m->abertura = $r['ABERTURA'];
-                $m->fechamento = $r['FECHAMENTO'];
-                $m->dtproducao = $r['DTPRODUCAO'];
-                $m->dtabertura = $r['DTABERTURA'];
-                
-
-                switch ($r['STATUS']):
-                    case ('A'):
-                        $m->status = "ABERTURA/OP";
-                        break;
-                    case ('P'):
-                        $m->status = "PESAGEM";
-                        break;
-                    case ('D'):
-                        $m->status = "DISPERSÃO/BASE";
-                        break;
-                    case ('L'):
-                        $m->status = "LABORATÓRIO";
-                        break;
-                    case ('C'):
-                        $m->status = "COR";
-                        break;
-                    case ('E'):
-                        $m->status = "ENVASE";
-                        break;
-                    case ('B'):
-                        $m->status = "CORREÇÃO";
-                        break;
-                    case ('F'):
-                        $m->status = "FINALIZADO";
-                        break;
-                    case ('S'):
-                        $m->status = "AGUARDANDO";
-                        break;
-                endswitch;
-                array_push($mapa, $m);      
-            endforeach; 
-        endif;           
-                    
-            return $mapa;
         }catch(Exception $e){
             echo 'Exceção capturada: ',  $e->getMessage(), "\n";
         }
         return "FAIL";
+}
+
+public static function getProducao($data){
+
+    $sql = new sqlOra(); 
+    try{
+        if($data >= date('d/m/y')):   
+            $ret = $sql->select("SELECT c.codproducao, t.codtanque, c.dtabertura, c.dtproducao,
+            m.linha , t.capacidade, m.operador, t.status statust, M.COD, c.lote,
+            c.dtfecha ||' '||c.horafecha fechamento,
+            c.dtproducao||' '|| c.horaproducao producao, c.status, c.dtabertura||' '||c.horaabertura abertura ,
+            c.dtcadastro||' '||c.horaabertura dtcadastro 
+            from paralelo.mproducaoc c
+        right join paralelo.mtanques t on t.codtanque = c.codtanque
+        inner join paralelo.metasprodc m on m.cod = t.codlinha
+        WHERE 
+            ((c.dtfecha = :data and c.status = 'F') 
+            or (c.status != 'F' and c.dtabertura >= :data))
+            and c.dtexclusao is null     
+            order by c.dtfecha, c.horafecha, c.dtproducao, c.horaproducao
+            ",[":data"=>$data]);
+        else:
+            $ret = $sql->select("SELECT c.codproducao, t.codtanque, c.dtabertura, c.dtproducao,
+            m.linha , t.capacidade, m.operador, t.status statust, M.COD, c.lote,
+            c.dtfecha ||' '||c.horafecha fechamento,
+            c.dtproducao||' '|| c.horaproducao producao, c.status,  c.dtabertura||' '||c.horaabertura abertura,
+            c.dtcadastro||' '||c.horaabertura dtcadastro 
+            from paralelo.mproducaoc c
+            right join paralelo.mtanques t on t.codtanque = c.codtanque
+            inner join paralelo.metasprodc m on m.cod = t.codlinha
+            WHERE (((c.dtfecha = :data and c.status = 'F') or c.status !='F' and c.dtabertura <= :data))and c.dtexclusao is null
+            order by c.dtfecha, c.horafecha, c.dtproducao, c.horaproducao
+            ",[":data"=>$data]);
+        endif;
+        $mapa = [];
+        if(sizeof($ret)>0):
+            foreach($ret as $r):
+            $m = new Mapa();
+            $m->codproducao = $r['CODPRODUCAO'];
+            $m->cod = $r['COD'];
+            $m->linha = $r['LINHA'];
+            $m->codtanque = $r['CODTANQUE'];
+            $m->capacidade = $r['CAPACIDADE'];
+            $m->producao = $r['PRODUCAO'];
+            $m->abertura = $r['ABERTURA'];
+            $m->cadastro = $r['DTCADASTRO'];
+            $m->fechamento = $r['FECHAMENTO'];
+            $m->dtproducao = $r['DTPRODUCAO'];
+            $m->dtabertura = $r['DTABERTURA'];
+            $m->lote = $r['LOTE'];
+            
+
+            switch ($r['STATUS']):
+                case ('A'):
+                    $m->status = "ABERT/OP";
+                    break;
+                case ('P'):
+                    $m->status = "PESAGEM";
+                    break;
+                case ('D'):
+                    $m->status = "DISP/BASE";
+                    break;
+                case ('L'):
+                    $m->status = "LAB";
+                    break;
+                case ('C'):
+                    $m->status = "COR";
+                    break;
+                case ('E'):
+                    $m->status = "ENVASE";
+                    break;
+                case ('B'):
+                    $m->status = "CORREÇÃO";
+                    break;
+                case ('F'):
+                    $m->status = "FINALIZADO";
+                    break;
+                case ('S'):
+                    $m->status = "AGUARDANDO";
+                    break;
+            endswitch;
+            array_push($mapa, $m);      
+        endforeach; 
+    endif;           
+                
+        return $mapa;
+    }catch(Exception $e){
+        echo 'Exceção capturada: ',  $e->getMessage(), "\n";
     }
-    public static function getProducaoEditar($codproducao){
+    return "FAIL";
+}
+
+public static function getProducaoEditar($codproducao){
 
         $sql = new sqlOra(); 
         try{   
             $ret = $sql->select("SELECT c.codproducao, t.codtanque, t.status statust,
-            c.dtfecha, c.horafecha, c.dtproducao, c.horaproducao hrproducao, c.status,
-            c.dtfecha, c.horafecha
+            c.dtfecha, c.horafecha, c.dtproducao, c.horaproducao hrproducao, c.status, c.lote
             from paralelo.mproducaoc c
             right join paralelo.mtanques t on t.codtanque = c.codtanque
             inner join paralelo.metasprodc m on m.cod = t.codlinha
-            WHERE c.codproducao = :codproducao
+            WHERE c.codproducao = :codproducao and c.dtexclusao is null
             ",[":codproducao"=>$codproducao]);
             
         $mapa = [];
@@ -191,18 +197,19 @@ class Mapa{
                 $m->hrproducao = $r['HRPRODUCAO'];
                 $m->dtfecha = $r['DTFECHA'];
                 $m->hrfecha = $r['HORAFECHA'];
+                $m->lote = $r['LOTE'];
                 switch ($r['STATUS']):
                     case ('A'):
-                        $m->status = "ABERTURA/OP";
+                        $m->status = "ABERT/OP";
                         break;
                     case ('P'):
                         $m->status = "PESAGEM";
                         break;
                     case ('D'):
-                        $m->status = "DISPERSÃO/BASE";
+                        $m->status = "DISP/BASE";
                         break;
                     case ('L'):
-                        $m->status = "LABORATÓRIO";
+                        $m->status = "LAB";
                         break;
                     case ('C'):
                         $m->status = "COR";
@@ -220,7 +227,7 @@ class Mapa{
                         $m->status = "AGUARDANDO";
                         break;
                 endswitch;
-                array_push($mapa, $m);      
+                $mapa[]= $m;      
             endforeach; 
         endif;           
                     
@@ -230,24 +237,36 @@ class Mapa{
             echo 'Exceção capturada: ',  $e->getMessage(), "\n";
         }
         return "FAIL";
-    }
+}
 
-    public static function getLinhas(){
-        $sql = new sqlOra(); 
-        try{   
-            $ret = $sql->select("SELECT linha from paralelo.metasprodc");
-            return $ret;
-        }catch(Exception $e){
-            echo 'Exceção capturada: ',  $e->getMessage(), "\n";
-        }
-        return "FAIL";
-    }   
+
+public static function getLinhas(){
+    $sql = new sqlOra(); 
+    try{   
+        $ret = $sql->select("SELECT case when linha like 'TINTAS-2000'
+        then 0
+            when linha like 'TEXTURAS'
+            then 1
+                when linha like 'MASSAS'
+            then 2
+                when linha like 'TINTAS-5000'
+            then 3
+                when linha like 'SOLVENTES'
+            then 4 end as ordernacao, linha 
+            from paralelo.metasprodc c order by ordernacao");
+        return $ret;
+    }catch(Exception $e){
+        echo 'Exceção capturada: ',  $e->getMessage(), "\n";
+    }
+    return "FAIL";
+}   
+
 
 public static function getItem(){
 
     $sql = new sqlOra(); 
     try{   
-        $ret = $sql->select("SELECT i.codproducao, i.codprod, p.descricao produto,c.categoria, r.descricao cor, 'COD: '||i.codprod ||' | '||p.embalagem embalagem, 
+        $ret = $sql->select("SELECT i.codproducao, i.codprod, p.descricao produto,c.categoria, r.descricao cor, i.codprod ||' | '||p.embalagem embalagem, 
         I.QT, p.pesoliq PESO, p.litragem
          from paralelo.mproducaoi i
          inner join kokar.pcprodut p on i.codprod = p.codprod
@@ -275,6 +294,7 @@ public static function getItem(){
     }
     return "FAIL";
 }
+
 public static function getItemH(){
 
     $sql = new sqlOra(); 
@@ -284,14 +304,15 @@ public static function getItemH(){
         inner join kokar.pcprodut p on i.codprod = p.codprod
         left join kokar.pccor r on r.codcor = p.codcor
         inner join kokar.pccategoria c on c.codsec = p.codsec and c.codcategoria = p.codcategoria
+        where i.dtexclusao is null
         group by i.codproducao, c.categoria, r.descricao
-        order by codproducao");
+        order by codproducao, categoria desc");
         
         $item = [];
         if(sizeof($ret)>0):
             foreach($ret as $r):
             $m = new Mapa();
-            switch ($r['CATEGORIA']):
+            switch (utf8_encode($r['CATEGORIA'])):
                 case ('STANDARD FOSCO'):
                     $m->categoria = "STD FS";
                 break;
@@ -312,6 +333,9 @@ public static function getItemH(){
                 break;
                 case ('PREMIUM FOSCO'):
                     $m->categoria = "PREMIUM FS";
+                break;
+                case ('PISO PREMIUM'):
+                    $m->categoria = "PISO";
                 break;
                 case ('PREMIUM SEMIBRILHO'):
                     $m->categoria = "PREMIUM SB";
@@ -338,20 +362,27 @@ public static function getItemH(){
                     $m->categoria = "FUNDO PP";
                 break;
                 case ('ESMALTE SINT BRILHANTE'):
-                    $m->categoria = "ESM SINT";
+                    $m->categoria = "ESM SINT BR";
                 break;
                 case ('ESMALTE SINT FOSCO'):
                     $m->categoria = "ESM SINT FS";
                 break;
+                case ('FUNDO E ACABAMENTO'):
+                    $m->categoria = "FUND E ACAB";
+                break;
+                case ('FUNDO SINTÉTICO'):
+                    $m->categoria = "FUND SINT";
+                break;
                 
                 case($r['CATEGORIA']):
-                $m->categoria = $r['CATEGORIA'];
+                $m->categoria = utf8_encode($r['CATEGORIA']);
             endswitch;
             $m->cor = utf8_encode($r['COR']);
             $m->peso = $r['PESO'];
             $m->codproducao = $r['CODPRODUCAO'];
             array_push($item, $m); 
         endforeach; 
+
     endif;           
     return $item;
 
@@ -376,6 +407,7 @@ public static function getProduto($codigo){
         }
         return "FAIL";
 }
+
 public static function getProduto2(){
 
     $sql = new sqlOra(); 
@@ -392,6 +424,7 @@ public static function getProduto2(){
         }
         return "FAIL";
 }
+
 public static function cadastrar($array){
     $produtos = $array["produtos"];
     $sql = new sqlOra(); 
@@ -400,13 +433,14 @@ public static function cadastrar($array){
     $codproducao=1;
     $prodadd = 0;
     $dataini = $array["dataini"];
+    
     try{  
         foreach($produtos as $p):
             for($i=0; $i<3; $i++):
-                if($p[$i]['cod']>0 && $p[$i]['qt']>0){
+                if($p[$i]['codprod']>0 && $p[$i]['qt']>0){
                     $sql->insert("INSERT INTO  paralelo.mproducaoi (codproducao, codprod, qt, codfun, dtinclusao, horainclusao, status) 
                     values(:codproducao, :codprod, :qt, :codfun, to_char(sysdate,'dd/mm/yyyy'), to_char(sysdate, 'hh24:mi:ss'),:status)"
-                    ,[":codproducao"=>$codproducao, ":codprod"=>$p[$i]['cod'], ":qt"=>$p[$i]['qt'], ":codfun"=>$array["codfun"],":status"=> $array["status"] ]);
+                    ,[":codproducao"=>$codproducao, ":codprod"=>$p[$i]['codprod'], ":qt"=>$p[$i]['qt'], ":codfun"=>$array["codfun"],":status"=> $array["status"] ]);
                     $prodadd ++;
                 }
                 
@@ -414,15 +448,15 @@ public static function cadastrar($array){
         endforeach;
         if($prodadd>0){
             if($array["status"]=='F'){
-        $sql->insert("INSERT INTO  paralelo.mproducaoc 
-        (codproducao, codtanque, dtabertura, status, codfunc, dtproducao, horaabertura, horaproducao, dtfecha, horafecha) 
-        values(:codproducao, :codtanque, to_char(sysdate,'dd/mm/yyyy'), :status, :codfun, :dtproducao, to_char(sysdate, 'hh24:mi:ss'), :horaproducao, to_char(sysdate,'dd/mm/yyyy'), to_char(sysdate, 'hh24:mi:ss'))"
-        ,[":codproducao"=>$codproducao, ":codtanque"=>$array["codtanque"], ":status"=> $array["status"], ":codfun"=>$array["codfun"], ":dtproducao"=>Formatador::formatador2($array["dtprevisao"]), ":horaproducao"=>$array["hrprevisao"] ]);
+                $sql->insert("INSERT INTO  paralelo.mproducaoc 
+                    (codproducao, codtanque, dtabertura, status, codfunc, dtproducao, horaabertura, horaproducao, dtfecha, horafecha, lote, dtcadastro) 
+                    values(:codproducao, :codtanque, to_char(sysdate,'dd/mm/yyyy'), :status, :codfun, :dtproducao, to_char(sysdate, 'hh24:mi:ss'), :horaproducao, to_char(sysdate,'dd/mm/yyyy'), to_char(sysdate, 'hh24:mi:ss'), :lote, to_char(sysdate,'dd/mm/yyyy'))"
+                    ,[":codproducao"=>$codproducao, ":codtanque"=>$array["codtanque"], ":status"=> $array["status"], ":codfun"=>$array["codfun"], ":dtproducao"=>Formatador::formatador2($array["dtprevisao"]), ":horaproducao"=>$array["hrprevisao"], ":lote"=>$array["lote"] ]);
         }else{
             $sql->insert("INSERT INTO  paralelo.mproducaoc 
-        (codproducao, codtanque, dtabertura, status, codfunc, dtproducao, horaabertura, horaproducao, dtfecha, horafecha) 
-        values(:codproducao, :codtanque, :dataini, :status, :codfun, :dtproducao, to_char(sysdate, 'hh24:mi:ss'), :horaproducao, '', '')"
-        ,[":codproducao"=>$codproducao, ":codtanque"=>$array["codtanque"], ":dataini"=> $dataini,":status"=> $array["status"], ":codfun"=>$array["codfun"], ":dtproducao"=>Formatador::formatador2($array["dtprevisao"]), ":horaproducao"=>$array["hrprevisao"] ]);
+                (codproducao, codtanque, dtabertura, status, codfunc, dtproducao, horaabertura, horaproducao, dtfecha, horafecha, lote, dtcadastro) 
+                values(:codproducao, :codtanque, :dataini, :status, :codfun, :dtproducao, to_char(sysdate, 'hh24:mi:ss'), :horaproducao, '', '', :lote, to_char(sysdate,'dd/mm/yyyy'))"
+                ,[":codproducao"=>$codproducao, ":codtanque"=>$array["codtanque"], ":dataini"=> $dataini,":status"=> $array["status"], ":codfun"=>$array["codfun"], ":dtproducao"=>Formatador::formatador2($array["dtprevisao"]), ":horaproducao"=>$array["hrprevisao"], ":lote"=>$array["lote"] ]);
         }
         return "OK";
         }else {
@@ -434,6 +468,7 @@ public static function cadastrar($array){
         }
         return "FAIL";
 }
+
 public static function editar($array){
     $produtos = $array["produtos"];
     $sql = new sqlOra(); 
@@ -470,11 +505,12 @@ public static function editar($array){
                 dtproducao = :dtproducao,  
                 horaproducao = :horaproducao,
                 horafecha = :horafecha,  
-                dtfecha = :dtfecha
+                dtfecha = :dtfecha,
+                lote = :lote
                 WHERE codproducao = :codproducao
                 ",[":codproducao"=>$codproducao,":status"=>$array["status"], ":codtanque"=>$array["codtanque"],
                  ":codfun"=>$array["codfun"], ":dtproducao"=>Formatador::formatador2($array["dtprevisao"]),
-                  ":horaproducao"=>$array["hrprevisao"], ":dtfecha" => $dtfecha, ":horafecha" => $hrfecha]);
+                  ":horaproducao"=>$array["hrprevisao"], ":dtfecha" => $dtfecha, ":horafecha" => $hrfecha, ":lote"=>$array["lote"]]);
                 }else{
                     $sql->insert("UPDATE paralelo.mproducaoc
                     SET
@@ -485,9 +521,10 @@ public static function editar($array){
                     dtproducao = :dtproducao,  
                     horaproducao = :horaproducao,
                     horafecha = to_char(sysdate, 'hh24:mi:ss'),
-                    dtfecha = to_char(sysdate,'dd/mm/yyyy')
+                    dtfecha = to_char(sysdate,'dd/mm/yyyy'),
+                    lote = :lote
                     WHERE codproducao = :codproducao
-                    ",[":codproducao"=>$codproducao,":status"=>$array["status"], ":codtanque"=>$array["codtanque"], ":codfun"=>$array["codfun"], ":dtproducao"=>Formatador::formatador2($array["dtprevisao"]), ":horaproducao"=>$array["hrprevisao"] ]);
+                    ",[":codproducao"=>$codproducao,":status"=>$array["status"], ":codtanque"=>$array["codtanque"], ":codfun"=>$array["codfun"], ":dtproducao"=>Formatador::formatador2($array["dtprevisao"]), ":horaproducao"=>$array["hrprevisao"] , ":lote"=>$array["lote"]]);
                 }
         }else{
                 $sql->insert("UPDATE paralelo.mproducaoc
@@ -499,9 +536,10 @@ public static function editar($array){
                 dtproducao = :dtproducao,  
                 horaproducao = :horaproducao,
                 horafecha = '',
-                dtfecha = ''
+                dtfecha = '',
+                lote = :lote
                 WHERE codproducao = :codproducao
-                ",[":codproducao"=>$codproducao,":status"=>$array["status"], ":codtanque"=>$array["codtanque"], ":codfun"=>$array["codfun"], ":dtproducao"=>Formatador::formatador2($array["dtprevisao"]), ":horaproducao"=>$array["hrprevisao"] ]);
+                ",[":codproducao"=>$codproducao,":status"=>$array["status"], ":codtanque"=>$array["codtanque"], ":codfun"=>$array["codfun"], ":dtproducao"=>Formatador::formatador2($array["dtprevisao"]), ":horaproducao"=>$array["hrprevisao"] , ":lote"=>$array["lote"]]);
             }
         return "OK";
         }else {
@@ -513,6 +551,7 @@ public static function editar($array){
         }
         return "FAIL";
 }
+
 public static function alterarStatus($codproducao){
     $sql = new sqlOra(); 
     $status = $sql->select("SELECT status from paralelo.mproducaoc where codproducao = :codproducao",[":codproducao"=>$codproducao])[0]["STATUS"];
@@ -583,7 +622,7 @@ public static function excluir($codproducao, $codfun){
             ",[":codproducao"=>$codproducao, ":codfun"=>$codfun] );
             
             $sql->insert("UPDATE paralelo.mproducaoi SET
-             dtexclusao = to_char(sysdate,'dd/mm/yyyy'),
+             dtexclusao = to_char(sysdate,),
              WHERE codproducao = :codproducao
              ",[":codproducao"=>$codproducao] );
 
@@ -592,25 +631,60 @@ public static function excluir($codproducao, $codfun){
         echo 'Exceção capturada: ',  $e->getMessage(), "\n";
     }
     return "FAIL";
-    }
+}
+
 public static function linhas($valor){
     $sql = new sqlOra();
     try{
-        return $sql->select("select CODTANQUE, C.NOME , CAPACIDADE from paralelo.mtanques T
+        return $sql->select("SELECT CODTANQUE, C.NOME , CAPACIDADE from paralelo.mtanques T
         INNER JOIN PARALELO.METASPROD C ON C.COD = T.CODLINHA
-         where codlinha = (select codlinha from paralelo.mtanques where codtanque = $valor) ORDER BY CODTANQUE");
-     }catch(Exception $e){
+            where codlinha = (select codlinha from paralelo.mtanques where codtanque = $valor) ORDER BY CODTANQUE");
+        }catch(Exception $e){
         echo 'Exceção capturada: ',  $e->getMessage(), "\n";
     }
     return "FAIL";
-    }
+}
+
 public static function linhas2($valor){
     $sql = new sqlOra();
     try{
         return $sql->select("SELECT distinct t.CODTANQUE, C.NOME , CAPACIDADE from paralelo.mtanques T
         INNER JOIN PARALELO.METASPROD C ON C.COD = T.CODLINHA
-         where codlinha = (select mm.codlinha from paralelo.mproducaoc cc inner join paralelo.mtanques mm on mm.codtanque = cc.codtanque where cc.codproducao = $valor) ORDER BY CODTANQUE");
+         where codlinha = (select mm.codlinha from paralelo.mproducaoc cc 
+         inner join paralelo.mtanques mm on mm.codtanque = cc.codtanque 
+         where cc.codproducao = $valor) ORDER BY CODTANQUE");
      }catch(Exception $e){
+        echo 'Exceção capturada: ',  $e->getMessage(), "\n";
+    }
+    return "FAIL";
+}
+
+public static function getItemLote($lote){
+        
+        $sql = new sqlOra();
+        try{
+            $ret = $sql->select("SELECT distinct o.codprodmaster codprod, o.qtproduzir qt, l.qt qt_final, l.dtmxsalter dtapontamento
+            from kokar.pcopc o 
+            left join kokar.pclote l 
+            on l.numlote = o.numlote 
+            and l.codprod = o.codprodmaster
+            inner join kokar.pcprodut p on p.codprod = o.codprodmaster
+        where o.numlote =   '$lote' and posicao not in 'C' and p.codepto = 10000", []);
+        
+        $item = [];
+        if(sizeof($ret)>0):
+            foreach($ret as $r):
+            $m = new Mapa();
+            $m->codprod = $r['CODPROD'];
+            $m->qt = $r['QT'];
+            $m->qtFinal = $r['QT_FINAL'];
+            $m->dtApontamento = $r['DTAPONTAMENTO'];
+            array_push($item, $m); 
+        endforeach; 
+    endif;           
+    return $item;
+
+    }catch(Exception $e){
         echo 'Exceção capturada: ',  $e->getMessage(), "\n";
     }
     return "FAIL";

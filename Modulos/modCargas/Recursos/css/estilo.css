@@ -1,0 +1,48 @@
+.menu{
+    display: flex;
+    justify-content: space-between;
+}
+
+.navegacao{
+    width: 20%;
+}
+
+.perfil{
+    background-color: whitesmoke;
+    width: 20%;
+    padding: 5px 20px 5px 20px;
+    border-radius: 5px;
+}
+
+.cabecalho{
+    display: flex;
+    justify-content: space-between;
+
+}
+.cabecalho>div{
+    display: flex;
+}
+.btn-carga>div>button{
+    margin: 2px 5px;
+}
+.btn-status{
+    height: 28px;
+    margin: 2px 5px;
+}
+
+.status{
+    font-weight: bold;
+    font-size: 18px;
+    text-align: left;
+    justify-content: start;
+}
+
+.comCargas:mous{
+    background-color: aqua;
+}
+
+.nome-cabecalho{
+    font-size: 18px;
+    font-weight: bold;
+    margin: 2px 5px;
+}

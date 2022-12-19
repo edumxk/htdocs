@@ -118,6 +118,8 @@ session_start();
 									<option value="ISMAELDO">Ismaeldo</option>
 									<option value="JHONATHAN">Jhonathan</option>
 									<option value="EVANDRO">Evandro</option>
+									<option value="EVANDRO">Jose Manuel</option>
+									<option value="EVANDRO">Birajara</option>
 									<option value="TERCEIROS">Terceiros</option>
 								</optgroup>
 							</select>

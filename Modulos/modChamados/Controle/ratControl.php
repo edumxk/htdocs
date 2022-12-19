@@ -14,6 +14,13 @@
             RatControl::finalizar($_POST['query']);
         }
     }
+    if(isset($_POST['action'])){
+        if($_POST['action']=='enviar'){
+            $numrat =$_POST['query'];
+            Mailer::sendMail($numrat);
+            echo 'ok';
+        }
+    }
 
     #$numrat = 589;
     class RatControl{

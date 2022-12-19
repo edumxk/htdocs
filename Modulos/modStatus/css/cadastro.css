@@ -1,0 +1,124 @@
+html {
+    font-family: 'Roboto', sans-serif;
+}
+
+
+body{
+    background-color:#8599be;
+}
+
+.title h1{
+    font-size: 2.5em;
+}
+
+.mapa_linha_card{
+    display: block;
+    border: 1px solid #c3c6d1;
+    border-radius: 5px;
+    margin: auto;
+    padding: 3%;
+    width: 80%;
+    background-color:#dadce5;
+}
+
+#nome, #linhas{
+    margin: 0 0 15px 0;
+}
+
+.formulario div{
+    display: grid;
+    gap: 5px;
+}
+
+p{
+    margin: 8px auto;
+    text-align: center;
+}
+
+p.descricao{
+    height: 38px;
+}
+
+.mapa_linha_card h1, .title h1{
+    font-size: 2em;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.titulo-card{
+    font-size: 1em;
+    padding: 0;
+    margin: 0;
+    font-weight: 700;
+}
+
+.contador{
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+    background-color: #34406f;
+    color: #ffffff;
+    width: 140px;
+    margin: 8px auto;
+}
+
+button table, th, td{
+    
+    border: none !important;
+}
+
+
+.tbtanques2 {
+    width: 96%;
+    margin: 5px auto;
+    border: 3px solid #f0f0f0;
+    border-radius: 5px;
+    height: 150px;
+    max-height: 150px;
+}
+
+.mapa_linhas_producao{
+    display: grid;
+}
+
+#div5 .mapa_linhas_producao{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+}
+
+.lote, .form-control{
+    font-size: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+
+@media only screen and (max-width: 800px){
+    .mapa_linhas{
+        display: block;
+        text-align: center;
+        margin: auto;
+        width: 80%;
+    } 
+}
+
+@media only screen and (max-width: 550px){
+    html{
+        min-width: 375px;
+    }
+    .mapa_linhas{
+        width: 96%;
+    }
+}
+
+.modal-radio {
+    text-align: center;
+    font-size: 16px;
+}
+
+.modal-radio label.form-check {
+    font-weight: 700;
+    font-size: 20px;
+}

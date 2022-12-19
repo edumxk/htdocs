@@ -19,7 +19,7 @@ class SqlOra extends PDO{
         )
             ";
         $db_username = "PARALELO";
-        $db_password = "PARALELO";
+        $db_password = "strw4mxk";
 
         $this->conn = new PDO("oci:dbname=".$tns/*.";charset=UTF8"*/,$db_username,$db_password);
         $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

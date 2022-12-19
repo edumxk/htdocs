@@ -33,7 +33,7 @@ if(isset($_POST['action'])){
     if($_POST['action']=='buscaProd'){
         $codprod = $_POST['query'];
         $ret = Abastecimento::buscaProd($codprod);
-        if(intval($codprod)>0 and intval($codprod)<=3528){
+        if(intval($codprod)>0 and intval($codprod)<=9999){
         echo $ret[0]["DESCRICAO"];
         }else{
         echo '';

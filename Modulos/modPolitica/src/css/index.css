@@ -50,8 +50,6 @@
     height: 80px;
 }
 
-
-
 .principal{
     display: block;
     position: absolute;
@@ -129,11 +127,12 @@ vertical-align: middle;
     width: 100%;
     display: none;
     z-index: 0;
+    padding: 0 20px;
 }
 
 .principal__conteudo #clientes{
-    width: 95%;
-    margin: 10px auto;
+    width: 100%;
+    padding: 10px 0 0 0 ;
 }
 
 .principal__conteudo #clientes thead tr{
@@ -190,6 +189,11 @@ vertical-align: middle;
     height: calc(100% - 100px);
 }
 
+.modal-content.active{
+    left: 140px;
+    width: 75vw;
+    transition: all 0.2s ease;
+}
 .modal-backdrop.fade.show{
     z-index: -1;
 }

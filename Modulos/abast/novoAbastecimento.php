@@ -122,29 +122,29 @@ $numreq = ($numreq[0]['NUMREQ'] + 1);
 
                 <select name="Solicitante" id="solicitante">
                     <optgroup value="Base D'Agua" id="BASEAGUA" label="Base D'Agua">
-                        <option value="BASE D'AGUA">FRANCISCO IRLAN</option>
+                        <option value="BASE D'AGUA">EVERALDO</option>
+                        <option value="BASE D'AGUA">FRANCES</option>
                         <option value="BASE D'AGUA">FILIPI</option>
                         <option value="BASE D'AGUA">WILLIAS</option>
-                        <option value="BASE D'AGUA">FRANCES</option>
-                        <option value="BASE D'AGUA">WERMERSON</option>
+                        <option value="BASE D'AGUA">WANDERSON</option>
                     </optgroup>
                     <optgroup value="Base Solvente" id="BASESOLVENTE" label="Base Solvente">
                         <option value="BASE SOLVENTE">LEONARDO</option>
-                        <option value="BASE SOLVENTE">VENILSON</option>
                         <option value="BASE SOLVENTE">AKIRA</option>
-                        <option value="BASE SOLVENTE">WANDERSON</option>
+                        <option value="BASE SOLVENTE">RONALDO</option>
+                        <option value="BASE SOLVENTE">VENILSON</option>
                     </optgroup>
                     <optgroup value="Tunel" id="TUNEL" label="Túnel">                       
                         <option value="TUNEL">VALDEILSON</option>                        
                     </optgroup>
                     <optgroup value="LAB" id="LABORATORIO" label="Laboratório">
                         <option value="LABORATORIO">LEANDRO</option>
-                        <option value="LABORATORIO">MARCELO</option>
-                        <option value="LABORATORIO">EDUARDO</option>
                         <option value="LABORATORIO">ADALIU</option>
+                        <option value="LABORATORIO">EDUARDO</option>
+                        <option value="LABORATORIO">YARA</option>
                     </optgroup>
                     <optgroup value="ETE" id="ESTACAO DE TRATAMENTO" label="E.T.E.">
-                        <option value="E.T.E">MAURICIO</option>
+                        <option value="E.T.E">ALEXANDRE</option>
                     </optgroup>
                 </select>
                 <br><br>

@@ -240,7 +240,7 @@
 								</div>
 								<div class="col-md-2">
 									<div>
-										<b>Pintor:</b>
+										<b>Cliente:</b>
 									</div>
 								</div>
 								<div class="col-md-4">
@@ -250,7 +250,7 @@
 								</div>
 								<div class="col-md-2">
 									<div>
-										<b>Tel. Pintor:</b>
+										<b>Tel. Cliente:</b>
 									</div>
 								</div>
 								<div class="col-md-4">

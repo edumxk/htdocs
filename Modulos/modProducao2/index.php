@@ -11,9 +11,9 @@ if (isset($_GET['data1'],$_GET['data2'])) {
 $producaom = Producao::getProducao($dataini, $datafin, 10000);
 $dias = Producao::getDia($dataini, $datafin, 10000);
 $resumo = Producao::getProdMensal($dataini);
-$diasuteis = Producao::getDiasUteis(date('Y-m-01'), date('Y-m-t'), Producao::feriados());
+$diasuteis = Producao::getDiasUteis(date('Y-m-01'), date('Y-m-t'), Producao::feriados($dataini));
 $producaop = Producao::getEmProducao();
-$totalmes = Producao::getPesoM($dataini);
+$pesoTotal=[];
 $somam = 0;
 ?>
 <?php
@@ -124,7 +124,7 @@ date_default_timezone_set('America/Araguaina');
 							<?= $r->linha ?>
 						</td>
 						<td>
-						<?=number_format($r->qtProduzida,0,',','.')  ?>
+						<?php echo number_format($r->qtProduzida,0,',','.'); $pesoTotal[] = $r->qtProduzida;  ?>
 						</td>
 						<td>
 						<?php if($r->meta1>0){echo number_format($r->meta1*$diasuteis,0,',','.'); $somam+=$r->meta1*$diasuteis;}else{echo '42.000';} ?>
@@ -139,9 +139,9 @@ date_default_timezone_set('America/Araguaina');
 				<tfoot>
 					<tr style="background-color:darkslategrey; color:white">
 						<th style="text-align: center;">TOTAL</th>
-						<th style="text-align: center;"><?=number_format($totalmes[0]['PESOLIQ'],0,',','.')?></th>
+						<th style="text-align: center;"><?=number_format(array_sum($pesoTotal),0,',','.')?></th>
 						<th style="text-align: center;"><?=number_format($somam,0,',','.')?></th>
-						<th style="text-align: center;"><?=number_format(($totalmes[0]['PESOLIQ']/$somam)*100,2,',','.')?></th>
+						<th style="text-align: center;"><?=number_format((array_sum($pesoTotal)/$somam)*100,2,',','.')?></th>
 					</tr>
 				</tfoot>
 			</table>

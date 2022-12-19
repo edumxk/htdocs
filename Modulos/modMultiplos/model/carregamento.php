@@ -22,14 +22,14 @@ if(isset($_POST['action'])){
 		function desbloqueiaCar($numcar){
 			$sql = new SqlOra();
 			$ret = "";
-			$ret .= $sql->update("UPDATE kokar.pccarreg set numviasmapa = 0 where numcar = :numcar", array(":numcar"=>$numcar));
+			$ret .= $sql->update("UPDATE kokar.pccarreg set numviasmapa = 0, dt_cancel = '', dtfat = '' where numcar = :numcar", array(":numcar"=>$numcar));
 			return $ret;
 		}
 
 		function bloqueiaCar($numcar){
 			$sql = new SqlOra();
 			$ret = "";
-			$ret .= $sql->update("UPDATE kokar.pccarreg set numviasmapa = 1 where numcar = :numcar", array(":numcar"=>$numcar)); 
+			$ret .= $sql->update("UPDATE kokar.pccarreg set numviasmapa = 1, dt_cancel = '', dtfat = to_date(sysdate) where numcar = :numcar", array(":numcar"=>$numcar)); 
 			return $ret; 
 		}
 

@@ -9,12 +9,10 @@ require_once './control/controle.php';
     $clientes = Controle::getClientes();
     //$politicas2 = Controle::getPoliticas(271 ,2);
 ?>
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Políticas Comerciais</title>
@@ -58,21 +56,21 @@ require_once './control/controle.php';
                 <span class="tooltip">Página Inicial</span>
             </li>
             <li>
-                <a href="#">
+                <a href="copiarPolitica.php">
                     <i class='bx bx-message-rounded-edit'></i>
                     <span class="link-nome">Copiar Política</span>
                 </a>
                 <span class="tooltip">Copiar Política</span>
             </li>
             <li>
-                <a href="#">
+                <a href="historico.php">
                     <i class='bx bx-copy-alt'></i>
                     <span class="link-nome">Histórico</span>
                 </a>
                 <span class="tooltip">Histórico</span>
             </li>
             <li>
-                <a href="index.php">
+                <a href="#">
                     <i class='bx bx-merge'></i>
                     <span class="link-nome">Perfil Política</span>
                 </a>
@@ -82,23 +80,19 @@ require_once './control/controle.php';
         <div class="perfil-conteudo">
             <div class="perfil">
                 <div class="perfil-detalhes">
-                    <img src="/Recursos/src/imgfun/curr.jpg" alt="imagem de perfil">
+                    <!--<img src="./src/img/curr.jpg" alt="imagem de perfil">-->
                     <div class="nome-setor">
-                        <div class="nome">Eduardo Patrick</div>
-                        <div class="cargo">Desenvolvedor</div>
-                        <div class="setor">T.I.</div>
+                        <div class="nome"><?=$_SESSION['nome']?></div>
+                        <div class="cargo"><?=$_SESSION['cargo']?></div>
+                        <div class="setor"><?=$_SESSION['setor']?></div>
                     </div>
                 </div>
-                <a href="/homelab.php"><i class='bx bxs-log-out' id="sair"></i></a>
+                <a href="/home.php"><i class='bx bxs-log-out' id="sair"></i></a>
             </div>
         </div>
     </section>
     <section class="principal">
-        <div class="principal__filtros">
-            <div class="principal__filtros-caixa pesquisa">
-                <input id="busca" type="text" placeholder="Pesquisar...">
-            </div>
-        </div>
+       
         <div class="pagina__loader">
             <div class="loader"></div>
         </div> 
@@ -107,7 +101,7 @@ require_once './control/controle.php';
                 <thead>
                     <tr>
                         <th>Código</th>
-                        <th>Cliente</th>
+                        <th id="linha_cliente">Cliente</th>
                         <th>UF</th>
                         <th>RCA</th>
                         <th>Dias</th>
@@ -118,9 +112,9 @@ require_once './control/controle.php';
                 </thead>
                 <tbody>
                     <?php foreach($clientes as $c): ?>
-                    <tr class="linha">
+                    <tr class="linha" id="ln<?=$c->getCodcli()?>">
                         <td class="principal__conteudo__clientes-codcli"><?= $c->getCodcli()?></td>
-                        <td class="principal__conteudo__clientes-cliente"><?= $c->getCliente()?></td> 
+                        <td class="principal__conteudo__clientes-cliente"><?= utf8_encode($c->getCliente())?></td> 
                         <td class="principal__conteudo__clientes-uf"><?= $c->getUf()?></td>
                         <td class="principal__conteudo__clientes-rca"><?= $c->getRca()?></td>
                         <td class="principal__conteudo__clientes-dias"><?= $c->getDias()?></td>
@@ -135,25 +129,20 @@ require_once './control/controle.php';
          <!-- Modal de edição das politicas -->
         <div class="modal fade" id="modalPoliticas">
             <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h2 id="modal-titulo"></h2>
-                    <textarea id="modalObs" name="obs-cliente" cols="40" rows="3"></textarea>
-            
-                    <button type="button" id="close" onclick="fechar()">&times;</button>
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h2 id="modal-titulo"></h2>
+                        <textarea id="modalObs" name="obs-cliente" cols="40" rows="3"></textarea>
+                        <button type="button" id="close" onclick="fechar()">&times;</button>
+                        <button id="btn_desativar" type="button" class="btn btn-warning">Desativar</button>
+                        <button id="btn_ativar" type="button" class="btn btn-success">Ativar</button>
+                        <!-- <button id="btn_excluir" type="button" hidden class="btn btn-danger">Excluir</button> -->
+                        <button id="btn_criar" type="button" hidden class="btn btn-info">Criar</button>
+                        <button id="btn_salvar" type="submit" class="btn btn-primary">Salvar</button>
+                    </div>
                     
-                    
-                    <button id="btn_desativar" type="button" onclick="desativar()" class="btn btn-warning">Desativar</button>
-                    <button id="btn_ativar" type="button" onclick="ativar()" class="btn btn-success">Ativar</button>
-                    
-                    <button id="btn_excluir" type="button" hidden onclick="excluir()" class="btn btn-danger">Excluir</button>
-                    <button id="btn_criar" type="button" hidden onclick="criar()" class="btn btn-info">Criar</button>
-                    <button type="submit" onclick="salvar(4)" class="btn btn-primary">Salvar</button>
-                </div>
-                
-                <!-- Modal body -->
+                    <!-- Modal body -->
                     <div class="modal-body">
                         <div>
                             <table class="table" id="tbPoliticas">
@@ -163,7 +152,6 @@ require_once './control/controle.php';
                                         <th>Grupo</th>
                                         <th>Desconto</th>
                                         <th>Tabela</th>
-                                        
                                     </tr>
                                 </thead>
                                 <tbody id="dadosmodal">
@@ -177,15 +165,19 @@ require_once './control/controle.php';
                     <!-- Modal footer -->
                     <div class="modal-footer">
                         <button type="button" onclick="fechar()" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" onclick="salvar(4)" class="btn btn-primary" data-dismiss="modal">Salvar Alterações</button>
+                        <button id="btn_salvar2" type="submit" class="btn btn-primary" data-dismiss="modal">Salvar Alterações</button>
                     </div>
-            </div>
+                </div>
             </div>
         </div>
     </section>
 </body>
 <script src="./js/sidebar.js"></script>
 <script src="../js/jquery.tablesorter.js"></script>
+<script src="js/scriptsGerais.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+	<script type="text/javascript" charset="utf8"
+		src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 <script>
     function ver(codcli, numregiao){
         var modal = $('#modalPoliticas')
@@ -198,35 +190,46 @@ require_once './control/controle.php';
                     'numregiao': numregiao,
                 },
                 success: function(resposta) {
-                    arr = JSON.parse(resposta);
+                    console.log(resposta.length);
+                    if(resposta.length>0){
+                    
+                  
+                        arr = JSON.parse(resposta);
                     body = "";
                     status = arr[0][5];
                     arr.forEach(function(t){
-                        body += '<tr>'
+                        body += '<tr class="politica__linha">'
                                 +    '<td class="politica__grupo">'+t[0]+'</td>'
                                 +    '<td class="politica__descricao">'+t[1]+'</td>'
-                                +    '<td class="politica__desconto"><input class="desconto" onfocusout="attDesconto(this, '+parseFloat(t[3])+')" type="text" value="'+t[2]+'"></input></td>'
-                                +    '<td class="politica__tabela"><input class="tabela" type="text" disabled value="'+getTabela(parseFloat(t[2]), parseFloat(t[3]))+'"></input></td>'
+                                +    '<td class="politica__desconto"><input class="desconto" onfocusout="attDesconto(this, '+parseFloat(t[3])+')" type="text" value="'+parseFloat(t[2]).toFixed(6)+'"></input></td>'
+                                +    '<td class="politica__tabela"><input class="tabela" type="text" onfocusout="attValor(this, '+parseFloat(t[3])+')" value="'+getTabela(parseFloat(t[2]), parseFloat(t[3]))+'"></input></td>'
                                 +'</tr>'
                                 })
 
+                    $('#btn_salvar').removeAttr('onclick');
+                    $('#btn_salvar2').removeAttr('onclick');
+                    $('#btn_desativar').removeAttr('onclick');
+                    $('#btn_ativar').removeAttr('onclick');
+                    $('#btn_criar').removeAttr('onclick');
                     $('#dadosmodal').empty();
                     $('#modal-titulo').empty();
-                    $('#modal-titulo').append(arr[0][4]);
-                    $('#modalObs').text('Obs da ultima alteração de politica');
+                    $('#modal-titulo').append(codcli+' : '+arr[0][4]);
+                    $('#btn_salvar').attr('onClick', 'atualizaPolitica('+codcli+');');
+                    $('#btn_salvar2').attr('onClick', 'atualizaPolitica('+codcli+');');
+                    $('#btn_desativar').attr('onClick', 'desativar('+codcli+');');
+                    $('#btn_ativar').attr('onClick', 'ativar('+codcli+');');
+                    $('#btn_criar').attr('onClick', 'atualizaPolitica('+codcli+');');
                     $('#dadosmodal').append(body);
                     $('#dadosmodal').trigger("update", true);
-                    console.log("abrir modal");
                     switch(status){
                         case '1':
-                            console.log(status)
                             $('#btn_desativar').prop('hidden',false);
                             $('#btn_ativar').prop('hidden',true);
                             $('#btn_excluir').prop('hidden',false);
                             $('#btn_criar').prop('hidden',true);
                             break;
                         case '0':
-                                console.log(status)
+                              
                                 $('#btn_desativar').prop('hidden',true);
                                 $('#btn_ativar').prop('hidden',true);
                                 $('#btn_excluir').prop('hidden',true);
@@ -234,16 +237,35 @@ require_once './control/controle.php';
                                 
                                 break;
                         case '2':
-                            console.log(status)
+                           
                             $('#btn_desativar').prop('hidden',true);
                             $('#btn_ativar').prop('hidden',false);
                             $('#btn_excluir').prop('hidden',false);
                             $('#btn_criar').prop('hidden',true);
                             break;
                     }
-                    modal.modal('show');
+                    
+                }else
+                alert("Erro, procure o TI")
+            } 
+            
+                
+            }); 
+            $.ajax({
+                type: 'POST',
+                url: "control/controle.php",
+                data: {
+                    'action': 'getObs',
+                    'cliente': codcli,
+                },
+                success: function(resposta) {
+                    console.log(resposta);
+                    $('#modalObs').empty();
+                    $('#modalObs').val(resposta.replaceAll('\"', '' ));
+                    obsOriginal =  $('#modalObs').val();
                 }
-                }); 
+            })
+            modal.modal('show');
     }
 
     function fechar(){
@@ -251,106 +273,155 @@ require_once './control/controle.php';
     }
 
     function getTabela(desconto, tabela){
-        return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(((100-desconto)/100)*tabela);
+        return parseFloat(((100-desconto)/100)*tabela).toFixed(6);
     }
 
-    function salvar(){
-        //1° - Salvar log da politica alterada com a respectiva alteração.
-        let listaAlteracoes = [];
-        let pendencias = [];
+    function validarDesconto(referencia, tabela){
+        attDesconto(referencia, tabela);
+    }
 
-        let obsGeral = $('#modalObs').text();
-        let descontos = $('.desconto');
-        let novoDesconto = [];
-       
-        /* Validação para Salvar Politica */
-        descontos.each(function (){
-            let grupo = $(this).parent().parent().find('.politica__grupo').text();
-            let ref = $(this).val();
-            arr.forEach(function(t){ 
-                if(t[0]==grupo){
-                    novoDesconto.push({
-                        grupo: grupo,
-                        novo: ref,
-                        antigo: t[2]
-                    })
-                }
-            })
-        })
-        console.log(validarDesconto(novoDesconto))
-            
-/*
-arr.forEach(function(t){ 
-    if($(ref).prop('id').substr(3)==(t[0])){
-        if(t[2]!= novoDesconto){
-            
-            //inserindo alterações de desconto
-            listaAlteracoes.push( {
-                grupo: t[0], 
-                descAntigo: t[2], 
-                descNovo: novoDesconto
-            })
-            if($(ref).val().length < chars ){
-                let grupo = $(ref).parent().parent().find('.politica__descricao').text()
-                alert('Politica alterada com obs não preenchida: '+grupo);
-                pendencias.push(grupo);
-                listaAlteracoes = [];
+    function attValor(elemento, tabela){
+        let referencia = $(elemento).parent().parent().find('.politica__desconto').find('input');
+        let desconto = parseFloat((1 - (((elemento.value)/tabela)))*100);
+        $(referencia).val(desconto.toFixed(6));
+        validarDesconto(referencia, tabela);
+    }
+
+
+    function desativar(codcli){
+        let element = $('#ln'+codcli).children('.principal__conteudo__clientes-politica').children();
+        let codUser = <?= $_SESSION['coduser']?> 
+        $.ajax({
+            type: 'POST',
+            url: "control/controle.php",
+            data: {
+                'action': 'desativar',
+                'codcli': codcli,
+                'coduser': codUser,
+            },
+            success: function(resposta) {
+                element.text('INATIVA');
+                element.css('background-color', 'gold');
+                alert('Politica Desativada!')
             }
-        } 
-    }
-})
-*/
-    }
-
-    function validarDesconto(novoDesconto){
-        console.log('inicio')
-        let listaAlteracoes = [];
-        novoDesconto.forEach(function(d){
-            if(d.novo != d.antigo)
-            listaAlteracoes.push({
-                grupo:  d.grupo, 
-                descAntigo: d.antigo, 
-                descNovo: d.novo
-            })
         })
-        return listaAlteracoes;
+        fechar()
     }
 
-    function excluir(){
-
-    }
-
-    function desativar(){
-
+    function ativar(codcli){
+        let codUser = <?= $_SESSION['coduser']?> 
+        let element = $('#ln'+codcli).children('.principal__conteudo__clientes-politica').children();
+        
+        $.ajax({
+            type: 'POST',
+            url: "control/controle.php",
+            data: {
+                'action': 'ativar',
+                'codcli': codcli,
+                'coduser': codUser,
+            },
+            success: function(resposta) {
+                element.text('ATIVO');
+                element.css('background-color', '#00a000');
+                alert('Politica Ativa!')
+            }
+        })
+        fechar()
     }
 
     function attDesconto(linha, tabela){
         let grupo = $(linha).parent().parent().find('.politica__grupo').text();
         let desconto = parseFloat($(linha).val());
         let refTabela = $(linha).parent().parent().find('.tabela');
-        $(linha).val(parseFloat($(linha).val()));
-        //checar se o desconto foi alterado, se sim, atribuir requered.
+        $(linha).val(desconto.toFixed(6));
+        //checar se o desconto foi alterado.
         arr.forEach(function(i){
             if (i[0]==grupo && desconto != i[2]){
-                $('#obs'+grupo).prop('required',true);
-                $('#obs'+grupo).prop('hidden',false);
+               
                 if(desconto<0 || desconto>100 || isNaN(desconto)){
                     $(linha).val(i[2]);
-                    desconto = i[2];
-                    $('#obs'+grupo).prop('required',false);
-                    $('#obs'+grupo).prop('hidden',true);
+                    desconto = i[2].toFixed(6);
+                    
                 }
-            }if(i[0]==grupo && desconto == i[2]){
-                $('#obs'+grupo).prop('required',false);
-                $('#obs'+grupo).prop('hidden',true);
             }
         })
         
 
         refTabela.val(getTabela(desconto,tabela));
+        
     }
 
-    window.onload = function() {
+    function atualizaPolitica(codCli, obs){   
+        $('#btn_salvar').removeAttr('onclick');
+        $('#btn_salvar2').removeAttr('onclick'); 
+        let element = $('#ln'+codCli).children('.principal__conteudo__clientes-politica').children();      
+        let linha = $('.politica__linha');
+        let desconto = [];
+        let obsGeral = retira_acentos($('#modalObs').val());
+        let codUser = <?= $_SESSION['coduser']?> ;
+        
+        if(obsGeral != obsOriginal){
+            linha.each(function( i, element ){
+                
+                desconto.push({
+                    codGrupo: $(element).find('.politica__grupo').text(),
+                    percDesc: parseFloat($(element).find('.politica__desconto').find('input').val()),
+                    tabela: parseFloat($(element).find('.politica__tabela').find('input').val())
+                })
+            })
+            console.log(desconto);
+            $.ajax({
+                type: 'POST',
+                url: 'control/controle.php',
+                data: { 'action': 'atualizarPolitica', "desconto":desconto, "codCli": codCli, "obs": obsGeral, "codUser": codUser},
+                success: function (response) {
+                    console.log(response);
+                    element.text('ATIVO');
+                    element.css('background-color', '#00a000');
+                    alert("Politica Gravada!")
+                }
+            });
+        fechar()
+        }else{
+            alert('Altere a Observação para Salvar a Politica!!!')
+        }
+        
+    }
+    
+    $(document).ready(function () {
+		$('#clientes').DataTable({
+			"lengthMenu": [[50, 100, -1], [50, 100, "Todos"]],
+			"order": [[4, "asc"]],
+			"bInfo": false,
+
+			"language": {
+                "funcao":attTela(),
+				"sEmptyTable": "Nenhum registro encontrado",
+				"sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+				"sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+				"sInfoFiltered": "(Filtrados de _MAX_ registros)",
+				"sInfoPostFix": "",
+				"sInfoThousands": ".",
+				"sLengthMenu": "_MENU_ resultados por página",
+				"sLoadingRecords": "Carregando...",
+				"sProcessing": "Processando...",
+				"sZeroRecords": "Nenhum registro encontrado",
+				"sSearch": "Pesquisar",
+				"oPaginate": {
+					"sNext": "Próximo",
+					"sPrevious": "Anterior",
+					"sFirst": "Primeiro",
+					"sLast": "Último"
+				},
+				"oAria": {
+					"sSortAscending": ": Ordenar colunas de forma ascendente",
+					"sSortDescending": ": Ordenar colunas de forma descendente"
+				}
+			}
+		});
+	});
+
+    function attTela(){
         let botao = $('.btn__politica');
         let atividade = $('.btn__status');
 
@@ -373,6 +444,13 @@ arr.forEach(function(t){
             if($(this).text()=='INATIVO')
                 $(this).css('background-color', '#e04729');
         });
+
+        $('#linha_cliente').css('width', '35%');
+    }
+
+    window.onload = function() {
+        
+        attTela();
 
         $("#clientes").tablesorter();
         $("#tbPoliticas").tablesorter();
@@ -399,11 +477,12 @@ arr.forEach(function(t){
                 });
             }); 
         });
-    
         //carregamento da página
         $(".loader").toggle();
-        $(".pagina__loader").css('height', '90px');
+        $(".pagina__loader").css('height', '20px');
         $(".principal__conteudo").toggle();
     }
+
+    
 </script>
 </html>

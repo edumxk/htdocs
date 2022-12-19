@@ -69,7 +69,11 @@ class Carga{
                                     veiculo,
                                     TO_DATE(dtprevisao, 'DD/MM/YY')dtprevisao,
                                     TO_DATE(dtproducao, 'DD/MM/YY')dtproducao,
-                                    fechado
+                                    fechado,
+                                    TO_DATE(DTSAIDA, 'DD/MM/YY')dtsaida,
+                                    TO_DATE(DTFECHAMENTO, 'DD/MM/YY')dtfechamento,
+                                    c.STATUS
+                                    
                             from cargac c 
                             order by dtprevisao, nome desc"
         );
@@ -82,11 +86,33 @@ class Carga{
                 $p->nome = $r['NOME'];
                 $p->dtAbertura = $r['DTABERTURA'];
                 $p->veiculo = $r['VEICULO'];
+                $p->status = $r['STATUS'];
                 $ret = $p->getPesoValor();
                 $p->peso = $ret['peso'];
                 $p->valor = $ret['valor'];
                 $p->dtPrevisao = Formatador::formatarData($r['DTPREVISAO']);
                 $p->dtProducao = Formatador::formatarData($r['DTPRODUCAO']);
+                $p->dtSaida = Formatador::formatarData($r['DTSAIDA']);
+                $p->dtFechamento = Formatador::formatarData($r['DTFECHAMENTO']);
+                $p->dtPainel = $p->dtAbertura;
+               
+                /*
+                witch($p->status){
+                     case 'A':
+                        $p->dtPainel = $p->dtAbertura;
+                        break;
+                    case 'P':
+                        $p->dtPainel = $p->dtProducao;
+                        break;
+                    case 'S':
+                        $p->dtPainel = $p->dtProducao;
+                        break;
+                    case 'F':
+                        $p->dtPainel = $p->dtProducao;
+                        break;
+                }
+                   
+
                 /*if($r['NOME'] == 'RENACOR' || $r['NOME'] == 'RETIRA'){
                     $p->dtPrevisao = Formatador::formatarData(date('d/m/Y')); 
                 }else{

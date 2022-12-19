@@ -133,7 +133,7 @@ $produtos = ProdutoPesquisa::getProduto();
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Senha de Acesso</h5>
+                        <h3 class="modal-title">Senha de Acesso</h3>
                         <button type="button" class="btn-close" onclick="fechar()" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -146,10 +146,41 @@ $produtos = ProdutoPesquisa::getProduto();
                 </div>
             </div>
         </section>
+        <div class="modal fade" id="modal__formula" tabindex="-1" role="dialog" aria-labelledby="modal__formula-Title" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal__formula-Title">Fórmula</h5>
+                        <button type="button" class="btn-close" onclick="fechar2()" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <table id="tabela__formulas">
+                            <thead>
+                                <tr>
+                                    <th class="tabela__formulas-codprod">Codprod</th>
+                                    <th class="tabela__formulas-descricao">Descrição</th>
+                                    <th class="tabela__formulas-perc">Perc %</th>
+                                    <th class="tabela__formulas-seq">Sequência</th>
+                                    <th class="tabela__formulas-fracao">Fração</th>
+                                </tr>
+                            </thead>
+                            <tbody id="modal-dados">
+                                <tr>
+                                    <td colspan="6"> Fórmula não disponivel </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
-    <script src="/Recursos/js/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="./src/js/scripts.js"></script>
     <script src="./src/js/sidebar.js"></script>
     <script src="./src/js/relatorio.js"></script>
     

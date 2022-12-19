@@ -69,8 +69,12 @@ class PdfFinal{
         $pdf->SetFont('Arial','B',8);   $pdf->Cell(25,6,utf8_decode('SOLICITANTE:'),1,0,'',1);
         $pdf->SetFont('Arial','',8);    $pdf->Cell(40,6,$chamado->solicitante,1);
         $pdf->SetFont('Arial','',8);    $pdf->Cell(30,6,$chamado->telSolicitante,1);
-        
-        
+
+        $pdf->ln(6);
+
+        $pdf->SetFont('Arial','B',8);   $pdf->Cell(20,6,utf8_decode('CLIENTE:'),1,0,'',1);
+        $pdf->SetFont('Arial','',8);    $pdf->Cell(45,6,$chamado->pintor,1);
+        $pdf->SetFont('Arial','',8);    $pdf->Cell(30,6,$chamado->telPintor,1);
         $pdf->ln(12);
         
         //$pdf->ln(6);

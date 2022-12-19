@@ -1,16 +1,17 @@
 <?php
-    session_start();
     require_once("Controle/userControl.php");
     require_once("Controle/formatador.php");
-
-    if(!isset($_SESSION['coduser'])){
-        header("location: index.php");
-    }
+    
+    session_start();
+    //var_dump(isset($_POST['submit']));
+    
     if(!isset($_SESSION)){
         if($_SESSION==array())
         header("location: index.php");
+        else
+        echo 'bugou aqui';
     }
-
+    
     if(isset($_POST['novaSenha'])){
         //echo json_encode($_POST);
         $nome = $_POST['login'];
@@ -29,6 +30,7 @@
         $_SESSION['setor'] =    $user['user']['SETOR'];
         $_SESSION['codrca'] =   $user['user']['CODRCA'];
         $_SESSION['cargo'] =   $user['user']['CARGO'];
+        
         //$timeout = 7200; // Number of seconds until it times out.
 
         // Check if the timeout field exists.
@@ -50,6 +52,11 @@
         }elseif($user['user']['CODUSER']>=0 && $user['novo']==0){
             header("location:home.php");
         }
+    }
+
+    //var_dump($_SESSION);
+    if (!isset($_SESSION['coduser'])) {
+        header("location: index.php?msg=usuario-nao-logado");
     }
 
 ?>
@@ -74,7 +81,7 @@
     </head>
     <header>
         <div class="logo">
-            <img src="../../recursos/src/Logo-kokar5.png" alt="Logo Kokar" width="350">
+            <img src="/recursos/src/Logo-kokar5.png" alt="Logo Kokar" width="350">
         </div>
         <div class="usuario">
             <ul>
@@ -93,12 +100,10 @@
 				</li>
 			</ol>
 		</nav>
-
 			<div class="icones-titulo">
 				<h1 style="padding-bottom: 20px; padding-top: 20px">Módulos
 				</h1>
 			</div>
-
             <?php if($_SESSION['codsetor']<=5 || $_SESSION['codsetor']==101 || $_SESSION['codsetor']==12): //Se setores de 0 a 5?>
 			    <div class="icones">  
                     <h5 class="cartao-title">RAT</h5>
@@ -121,10 +126,6 @@
                         <button style="border: none; background: none" type="submit"><input class="botao" type="image" src="recursos/src/gift.png" height="140" width="140"/> </button>
                     </form>
                 </div>
-           
-
-
-                
             <?php endif?>
             
             <?php if($_SESSION['codsetor']<=0): //Apenas diretoria e comercial?>
@@ -170,7 +171,7 @@
             <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']==5 || $_SESSION['codsetor']==101 || $_SESSION['codsetor']==10): //Apenas diretoria e comercial?> 
                 <div class="icones">  
                     <h5 class="cartao-title">Políticas</h5>
-                    <input class="botao" onclick="window.location.href='modulos/modPolitica/clientes.php'" 
+                    <input class="botao" onclick="window.location.href='modulos/modPolitica/src/index.php'" 
                     type="image" src="recursos/src/politica.png" height="140" width="140"/> 
                 </div>
             <?php endif?>
@@ -199,7 +200,7 @@
                 </div>
             <?php endif?>
 
-            <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']==6 || $_SESSION['codsetor']==61 || $_SESSION['codsetor']==7 ||$_SESSION['codsetor']==12 || $_SESSION['codsetor']==2): //Apenas TI e comercial?>
+            <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']==6 || $_SESSION['codsetor']==61 || $_SESSION['codsetor']==7 || $_SESSION['codsetor']==71 ||$_SESSION['codsetor']==12 || $_SESSION['codsetor']==2): //Apenas TI e comercial?>
                 <div class="icones">      
                     <h5 class="cartao-title">Almoxarifado</h5>
                     <input class="botao" onclick="window.location.href='homea.php'" 
@@ -231,22 +232,43 @@
                 </div>
             <?php endif?>
 
-            <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']==6): //Apenas TI e comercial?>
+            <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']==6 || $_SESSION['codsetor']==71): //Apenas TI e comercial?>
                 <div class="icones">  
                     <h5 class="cartao-title">Mapa Produção</h5>
                     <input class="botao" onclick="window.location.href='modulos/modMapaProducao/index.php'" 
                     type="image" src="recursos/src/planejamento.png" height="140" width="140"/> 
                 </div>
             <?php endif?>
-
             
+            
+            <div class="icones">  
+                <h5 class="cartao-title">Resumo Produção</h5>
+                <input class="botao" onclick="window.location.href='modulos/modProducao2/INDEX.php'" 
+                type="image" src="recursos/src/producao2.png" height="140" width="140"/> 
+            </div>
+            
+            <?php if($_SESSION['codsetor']<=0): //Apenas TI e comercial?>
                 <div class="icones">  
-                    <h5 class="cartao-title">Resumo Produção</h5>
-                    <input class="botao" onclick="window.location.href='modulos/modProducao2/INDEX.php'" 
-                    type="image" src="recursos/src/producao2.png" height="140" width="140"/> 
+                    <h5 class="cartao-title">Email RAT</h5>
+                    <input class="botao" onclick="window.location.href='modulos/modChamados/recursos/email/testes.php'" 
+                    type="image" src="recursos/src/shipping.png" height="140" width="140"/> 
                 </div>
-  
-                               
+            <?php endif?>
+            <?php if($_SESSION['codsetor']<=1): //Apenas TI e comercial?>
+                <div class="icones">  
+                    <h5 class="cartao-title">BI teste</h5>
+                    <input class="botao" onclick="window.location.href='modulos/BI/index.php'" 
+                    type="image" src="recursos/src/planejamento.png" height="140" width="140"/> 
+                </div>
+            <?php endif?>
+            <?php if($_SESSION['codsetor']<=1): //Apenas TI e comercial?>
+                <div class="icones">  
+                    <h5 class="cartao-title">Status</h5>
+                    <input class="botao" onclick="window.location.href='modulos/modstatus/status.php'" 
+                    type="image" src="recursos/src/planejamento.png" height="140" width="140"/> 
+                </div>
+            <?php endif?>
+            
         </div>
 	<div class="complemento"></div>
 	<script src="recursos/js/jquery.min.js"></script>

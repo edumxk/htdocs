@@ -22,6 +22,10 @@
                 return 'DALMI';
             }else if(strrpos($nome, 'JEAN') === 0) {
                 return 'JEAN';
+            }else if(strrpos($nome, 'ALEX') === 0) {
+                return 'ALEXANDER';
+            }else if(strrpos($nome, 'HIGOR') === 0) {
+                return 'HIGOR';
             }else{
                 return $nome;
             }

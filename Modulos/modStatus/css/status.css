@@ -1,0 +1,165 @@
+html {
+    font-family: 'Roboto', sans-serif;
+}
+
+#div2 { 
+    grid-area: TINTAS2000; 
+}
+
+#div3 { 
+ 
+    grid-area: TEXTURAS; 
+}
+
+#div4 { 
+    grid-area: MASSAS; 
+}
+
+#div1 { 
+    grid-area: TINTAS5000; 
+}
+
+#div5 { 
+    display: block;
+    grid-area: SOLVENTES;
+}
+
+body{
+    background-color:#8599be;
+}
+
+.title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    padding: 10px;
+    margin: 5px;
+    font-size: 24px;
+    
+    border: 1px solid #dadce5;
+    border-radius: 5px;
+    background-color: #dadce5;
+    
+
+}
+
+.title h1{
+    font-size: 2.5em;
+}
+
+.mapa_linha_card{
+    border: 1px solid #c3c6d1;
+    border-radius: 5px;
+    margin: 5px;
+    min-height: 250px;
+    background-color:#dadce5;
+}
+
+p{
+    margin: 8px auto;
+    text-align: center;
+}
+
+p.descricao{
+    height: 38px;
+}
+
+.mapa_linha_card h1, .title h1{
+    font-size: 2em;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.titulo-card{
+    font-size: 1em;
+    padding: 0;
+    margin: 0;
+    font-weight: 700;
+}
+
+.contador{
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+    background-color: #34406f;
+    color: #ffffff;
+    width: 140px;
+    margin: 8px auto;
+}
+
+button table, th, td{
+    
+    border: none !important;
+}
+
+.mapa_linhas{
+    display: grid; 
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; 
+    grid-template-rows: 1fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+    'TINTAS2000 TINTAS2000 TEXTURAS TEXTURAS MASSAS MASSAS'
+    'TINTAS5000 TINTAS5000 SOLVENTES SOLVENTES SOLVENTES SOLVENTES'; 
+    
+}
+
+
+.tbtanques2 {
+    width: 96%;
+    margin: 5px auto;
+    border: 3px solid #f0f0f0;
+    border-radius: 5px;
+    height: 150px;
+    max-height: 150px;
+}
+
+.mapa_linhas_producao{
+    display: grid;
+}
+
+#div5 .mapa_linhas_producao{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+}
+
+@media only screen and (max-width: 800px){
+    .mapa_linhas{
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr; 
+        grid-gap: 10px;
+        align-items: center;
+        justify-content: center;
+        grid-template-areas: 
+        'TINTAS5000 TINTAS5000'
+        'TINTAS2000 TINTAS2000'
+        'TEXTURAS TEXTURAS'
+        'MASSAS MASSAS'
+        'SOLVENTES SOLVENTES'
+    } 
+    .mapa_linhas_producao{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media only screen and (max-width: 550px){
+    .mapa_linhas_producao{
+        grid-template-columns: 1fr !important;
+    }
+
+    html{
+        min-width: 375px;
+    }
+}
+
+.modal-radio {
+    text-align: center;
+    font-size: 16px;
+}
+
+.modal-radio label.form-check {
+    font-weight: 700;
+    font-size: 20px;
+}

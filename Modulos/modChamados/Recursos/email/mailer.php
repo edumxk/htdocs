@@ -14,16 +14,17 @@ class Mailer{
         // 1 = client messages
         // 2 = client and server messages
         $mail->SMTPDebug = 0;
-        $mail->Host = 'smtp.kokar.com.br';
+        $mail->Host = 'smtp.gmail.com';
         $mail->Port = 587;
         $mail->SMTPAuth = true;
-        $mail->Username = 'danfe@kokar.com.br';
-        $mail->Password = 'D@nfe@kokar2018';
+        $mail->Username = 'danfe.kokar@gmail.com';
+        $mail->Password = 'hlrnywgsktnbdztp';
         $mail->setFrom('danfe@kokar.com.br', 'Chamados Kokar');
         $mail->addReplyTo('eduardo.cavalcante@kokar.com.br', 'Kokar Tintas');
-
-        $mail->addAddress('eduardo.cavalcante@kokar.com.br', 'Kokar Tintas');
+        $mail->addAddress('eduardo.cavalcante@kokar.com.br', 'Eduardo Patrick');
         $mail->addAddress('valeria.cardoso@kokar.com.br', 'Valeria Cardoso');
+        $mail->addAddress('adriana.delmondes@kokar.com.br', 'Adriana Delmondes');
+        $mail->addAddress('amanda.evangelista@kokar.com.br', 'Amanda');
         //$mail->addAddress('pedrossc88@gmail.com', 'Kokar Tintas');
         $mail->Subject = utf8_decode('Autorização de RAT Nº'.$numrat.' - Sistema de Chamados Kokar');
         //Read an HTML message body from an external file, convert referenced images to embedded,

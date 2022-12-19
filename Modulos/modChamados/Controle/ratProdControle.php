@@ -14,6 +14,9 @@
         if($_POST['action']=='produto'){
             RatProdControle::getProduto($_POST['query']);
         }
+        if($_POST['action']=='produto2'){
+            RatProdControle::getProduto2($_POST['query']);
+        }
         if($_POST['action']=='produtoJson'){
             RatProdControle::getProdutoJson();
         }
@@ -92,8 +95,7 @@
                 $produto = ratProdDao::getProdutoByCod($key['codprod']);
                 $produto = $produto[0];
             }else{
-                
-                $produto = ratProdDao::getProdByLote($key['lote']);
+                $produto = ratProdDao::getProdByLote($key['lote'], $key['codprod'] );
             }
             
             
@@ -110,6 +112,33 @@
 
                 echo JSON_ENCODE($p);
             }
+        }
+        public static function getProduto2($key){
+  
+            $produto=[];
+            $produto2=[];
+     
+            $produto = ratProdDao::getProdByLote2($key['lote']);
+                foreach ($produto as $p){
+                    array_push($produto2, $p);
+                }
+            
+                $ret = [];
+            
+            if(sizeof($produto2)>0):
+                foreach($produto2 as $p2){
+                    $p = new Produto();
+                    $p->codprod = $p2['CODPROD'];
+                    $p->produto = utf8_encode($p2['PRODUTO']);
+                    $p->numlote = $p2['NUMLOTE'];
+                    $p->dtFabricacao = $p2['DATAFABRICACAO'];
+                    $p->dtValidade = $p2['DTVALIDADE'];
+                    $p->pVenda = ratProdDao::getPvendaByCod($key['codcli'], $p->codprod);
+                    array_push($ret, $p);
+                }
+            endif;
+                echo JSON_ENCODE($ret);
+            
         }
 
         /*BUSCA DE PRODUTO POR NOME EM ARQUIVO JSON PARA TYPEAHEAD*/
@@ -191,14 +220,14 @@
                 }
             
             }else{
-                $produto = ratProdDao::getProdByLote($key['numlote']);
+                $produto = ratProdDao::getProdByLote($key['numlote'], $key['codprod']);
                 $numrat = $key['numrat'];
                 $codprod = $produto['CODPROD'];
                 $numlote = $key['numlote'];
                 $qt = $key['qt'];
                 $dtFabricacao = $produto['DATAFABRICACAO'];
                 $dtValidade = $produto['DTVALIDADE'];
-                $pVenda = ratProdDao::getPvendaByLote($key['codcli'], $numlote);
+                $pVenda = ratProdDao::getPvendaByLote($key['codcli'], $numlote,  $codprod);
             }
 
 

@@ -31,7 +31,7 @@ main.active .conteudo{
   display: flex;
 }
 
-table{
+.conteudo__ultimos__tabela, .conteudo__produtos__tabela{
   box-shadow: 5px 5px 15px 1px black;
       margin-bottom: 50px;
       border-radius: 0 15px 15px 0;
@@ -58,7 +58,7 @@ table{
 }
 
 .conteudo .conteudo__produtos .conteudo__produtos__tabela{
-  width: 35vw;
+  width: 40vw;
 }
 
 tr td, tr th{
@@ -91,3 +91,36 @@ tr td, tr th{
   
   height: 23px;
 }
+
+.modal-body{
+  display: flex;
+  justify-content: center;
+}
+.modal-content{
+  width:65vw
+}
+.modal-title{
+  text-align: center;
+}
+
+.modal-header button:hover{
+  background-color: #15004e81;
+}
+
+.modal-body{
+  text-align: center;
+}
+
+#tabela__formulas{
+  width: 100%;
+}
+
+.tabela__formulas__dados-descricao{
+ text-align: left;
+ padding-left: 5px;
+}
+
+.tabela__formulas__dados-perc{
+  text-align: right;
+  padding-right: 35px;
+ }

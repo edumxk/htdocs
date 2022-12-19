@@ -141,7 +141,30 @@ class ratProdDao{
         );
     }
 
-    public static function getProdByLote($numlote){
+    public static function getProdByLote($numlote, $codprod){
+        $sql = new SqlOra();
+
+
+        $ret = $sql->select("SELECT p.codprod, 
+                p.descricao produto, 
+                l.numlote, 
+                l.datafabricacao, 
+                l.dtvalidade
+            FROM kokar.pcprodut p INNER JOIN kokar.pclote l ON p.codprod = l.codprod
+            --INNER JOIN kokar.pcopc o ON o.numlote = l.numlote
+            WHERE p.codepto = 10000
+            --and o.posicao in ('F')
+            and l.codprod = :codprod
+            and l.numlote = :numlote", array(":numlote"=>$numlote, ":codprod"=>$codprod)
+        );
+
+        if(sizeof($ret)>0){
+            return $ret[0];
+        }else{
+            return null;
+        }
+    }
+    public static function getProdByLote2($numlote){
         $sql = new SqlOra();
 
 
@@ -158,7 +181,7 @@ class ratProdDao{
         );
 
         if(sizeof($ret)>0){
-            return $ret[0];
+            return $ret;
         }else{
             return null;
         }
@@ -212,12 +235,12 @@ class ratProdDao{
         }
     }
     /**Clone da função anterior */
-    public static function getPvendaByLote($codcli, $numlote){
+    public static function getPvendaByLote($codcli, $numlote, $codprod){
         $sql = new SqlOra();
 
         $val = $sql->select("SELECT km.punit+nvl(km.vlfrete,0) as PVENDA
         from kokar.pcmov km 
-        where km.codprod = (select codprod from kokar.pclote l where l.numlote = :numlote) 
+        where km.codprod = (select codprod from kokar.pclote l where l.numlote = :numlote and codprod = $codprod) 
         and km.dtmov >= (select max(o.dtlanc) from kokar.pcopc o where o.numlote = :numlote and o.dtcancel is null) 
         and km.codoper = 'S'
         and km.codcli = :codcli

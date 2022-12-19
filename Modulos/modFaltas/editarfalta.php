@@ -4,6 +4,9 @@ session_start();
 $numft =  $_GET;
 $p = -1;
 $dados = daoFalta::getfalta($numft['numnota']);
+
+if(sizeof($dados)== 0)
+	header('location: home.php')
 ?>
 
 <!DOCTYPE html>
@@ -218,6 +221,8 @@ $dados = daoFalta::getfalta($numft['numnota']);
 											<optgroup id="motivof" label="Motivo">
 												<option value="FALTA">Falta</option>
 												<option value="AVARIA">Avaria</option>
+												<option value="RAT">RAT</option>
+												<option value="RAT">CTD</option>
 												<option value="OUTRO">Outro</option>
 											</optgroup>
 										</select>

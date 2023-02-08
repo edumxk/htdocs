@@ -19,7 +19,7 @@ class Rat{
                     rc.dirfinal,
                     rc.atec,
                     rc.adir
-            from ratc rc inner join kokar.pcclient kc on rc.codcli = kc.codcli
+            from paralelo.ratc rc inner join kokar.pcclient kc on rc.codcli = kc.codcli
             order by rc.numrat"
         );
     }
@@ -40,7 +40,7 @@ class Rat{
                             rc.dirfinal,
                             rc.atec,
                             rc.adir
-                    from ratc rc inner join kokar.pcclient kc on rc.codcli = kc.codcli
+                    from paralelo.ratc rc inner join kokar.pcclient kc on rc.codcli = kc.codcli
                     where dtencerramento between :de and :ate
                     order by rc.numrat",array(":de" => $de, ":ate" => $ate)
                 );
@@ -64,8 +64,8 @@ class Rat{
                             rc.atec,
                             rc.adir,
                             ri.numlote
-                    from ratc rc inner join kokar.pcclient kc on rc.codcli = kc.codcli
-                                 inner join rati ri on rc.numrat = ri.numrat
+                    from paralelo.ratc rc inner join kokar.pcclient kc on rc.codcli = kc.codcli
+                                 inner join paralelo.rati ri on rc.numrat = ri.numrat
                     where dtabertura between :de and :ate
                       and ri.numlote like :lote
                     order by rc.numrat",array(":de" => $de, ":ate" => $ate, ":lote" => $lote)
@@ -93,9 +93,9 @@ class Rat{
                     rc.atec,
                     rc.adir,
                     p.patologia
-            from ratc rc inner join kokar.pcclient kc on rc.codcli = kc.codcli
-                         inner join ratalab l on rc.numrat = l.numrat
-                         inner join ratpatologia p on l.codpatologia = p.codpatologia
+            from paralelo.ratc rc inner join kokar.pcclient kc on rc.codcli = kc.codcli
+                         inner join paralelo.ratalab l on rc.numrat = l.numrat
+                         inner join paralelo.ratpatologia p on l.codpatologia = p.codpatologia
             where rc.codcli = :codcli
             order by rc.numrat",array(":codcli" => $codcli)
         );
@@ -145,11 +145,11 @@ class Rat{
             from ratc rc inner join kokar.pcclient kc on rc.codcli = kc.codcli
                         inner join kokar.pcusuari ku on kc.codusur1 = ku.codusur
                         inner join kokar.pccidade kcd on kcd.codcidade = kc.codcidade
-                        left join ratuser u on rc.useraprova = u.coduser
-                        left join ratalab al on rc.numrat = al.numrat
-                        left join ratuser ul on al.coduser = ul.coduser
-                        left join ratrejeicao ru on ru.numrat = rc.numrat
-                        left join ratuser u2 on ru.coduser = u.coduser
+                        left join paralelo.ratuser u on rc.useraprova = u.coduser
+                        left join paralelo.ratalab al on rc.numrat = al.numrat
+                        left join paralelo.ratuser ul on al.coduser = ul.coduser
+                        left join paralelo.ratrejeicao ru on ru.numrat = rc.numrat
+                        left join paralelo.ratuser u2 on ru.coduser = u.coduser
             where rc.numrat = :numrat
             order by rc.numrat",array(":numrat" => $numrat)
         );

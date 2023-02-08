@@ -1,0 +1,60 @@
+header{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px 0 15px;
+}
+
+.usuario{
+    display: flex;
+    margin: 10px;
+    width: auto;
+}
+
+.usuario ul{
+    list-style-type: none;
+    text-align: left;
+}
+
+.title{
+    text-align: center;
+    font-size: 2rem;
+    border: 1px solid #eceeef;
+    background-color: #eceeef;
+    color: #292b2c;
+    border-radius: 5px 5px 0 0;
+}
+
+.principal{
+    padding: 0 15px;
+}
+
+.listagem{
+    border: 1px solid #eceeef;
+    background-color: #eceeef;
+    color: #292b2c;
+    border-radius: 0 0 5px 5px;
+    padding: 15px;
+}
+
+.modal-body{
+    min-height: 250px;
+}
+.modal_principal_editar{
+    display: flex;
+    justify-content: space-around;
+}
+
+
+.numero{
+    text-align: right;
+}
+
+@media only screen and (max-width: 550px){
+    .mapa{
+        grid-template-columns: 1fr !important;
+    }
+
+    html{
+        min-width: 375px;
+    }
+}

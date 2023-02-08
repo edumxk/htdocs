@@ -1,3 +1,34 @@
+<?php 
+require_once ($_SERVER["DOCUMENT_ROOT"] . '/Model/SqlOracle.php');
+
+$dados = new SqlOra();
+$json = $dados->select("SELECT codcli, 
+case when fantasia like '%*%'
+then cliente else
+c.fantasia end as name, d.nomecidade city, d.uf state,
+c.endercob||' '|| c.complementocob ||', '||c.cepcob address, c.telcob phone, c.emailnfe email 
+from kokar.pcclient c
+inner join kokar.pccidade d on d.codcidade = c.codcidade
+where c.dtexclusao is null and (c.dtultcomp > '01/01/2022')
+and c.consumidorfinal = 'N'");
+
+
+$ret = ['stores' => []];
+foreach($json as $j){
+    $ret['stores'][] = [
+    'name' => utf8_encode($j['NAME']),
+    'city' => utf8_encode($j['CITY']),
+    'state' => $j['STATE'],
+    'pin' => [
+        'address' => utf8_encode($j['ADDRESS']),
+        'phone' => utf8_encode($j['PHONE']),
+        'email' => utf8_encode($j['EMAIL'])]
+    ];
+}
+$json = json_encode($ret);
+echo($json);
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -7,11 +38,8 @@
     <title>BI Relatórios</title>
 </head>
 <body>
-    
-    <div class="nav" style="display: flex"><a style="display: flex" href="..\..\home.php">Voltar</a></div>
-    <div class="relatorio" >
-        <iframe title="Vendas_Diretoria" width="100%" style="height: 98vh;" src="https://app.powerbi.com/reportEmbed?reportId=80e25c4f-5138-4641-98d8-38cd3eacb6e3&autoAuth=true&ctid=6855a581-b7ef-4815-a96e-d82c0e803cf4" frameborder="0" allowFullScreen="true"></iframe>
-    </div>
-    
+
 </body>
 </html>
+
+

@@ -1,0 +1,83 @@
+.modal{
+    background-color: #34406f60;
+}
+
+.modal-content{
+     background-color: #8599be;
+     min-width: 900px;
+     color: white;
+    }
+.modal-header{
+    text-align: center;
+    
+    text-align: center;
+}
+.modal-header h1{
+    width: 100%;
+}
+.modal_principal-form{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 2px;
+}
+
+.modal_principal-form div{
+    background-color: #c3c6d1;
+    border-radius: 5px;
+    margin: 6px;
+}
+
+.form-previsao, .form-cabecalho{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 5px 0;
+}
+
+.form-previsao div label, .form-cabecalho div label, .form-peso, .form-peso, .form-peso span label{
+    font-size: 22px;
+}
+.form-status, .form-lote, .form-peso{
+    display: flex;
+    justify-content: center ;
+    align-items: center;
+    padding: 5px;
+}
+
+label{
+    margin: 0 2px 0 0;
+    font-size: 14px;
+}
+
+.form-produtos{
+    text-align: center;
+}
+
+.produto-title{
+    font-size: 22px;
+    padding: 0 0 10px 0
+}
+.produto-codigo input{
+    width: 100px;
+}
+
+.produto-descricao input{
+    text-align: left;
+    width: 100%;
+    font-size: 12px;
+    font-weight: 700;
+}
+.produto-qt input{
+    width: 100px;
+}
+
+
+@media only screen and (max-width: 991px){
+    .modal-content{
+        min-width: 600px;
+    }
+    .modal_principal-form{
+        grid-template-columns: 1fr 1fr;
+    }
+}

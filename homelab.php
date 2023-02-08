@@ -150,6 +150,14 @@
                     type="image" src="recursos/src/artigo.png" height="140" width="140"/> 
                 </div>
             <?php endif?>
+
+            <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']== 12): //Apenas TI e laboratorio?>
+			    <div class="icones">  
+                    <h5 class="cartao-title">Central OP - TI</h5>
+                    <input class="botao" onclick="window.location.href='/Modulos/modLancProducao/index.php'" 
+                    type="image" src="recursos/src/planejamento.png" height="140" width="140"/> 
+                </div>
+            <?php endif?>
             
         </div>
     <script src="recursos/js/jquery.min.js"></script>

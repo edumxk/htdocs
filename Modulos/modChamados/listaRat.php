@@ -6,6 +6,7 @@
 
 
 	$rat = ListaRatControl::getListaRat();
+	//echo json_encode($rat);
 
 ?>
 

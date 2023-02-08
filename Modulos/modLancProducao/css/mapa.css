@@ -1,0 +1,166 @@
+body{
+    background-color:#8599be;
+}
+.mapa_linhas{
+    padding: 0 0 20px 0;
+}
+
+.mapa_linha_card{
+    border: 1px solid #c3c6d1;
+    border-radius: 3px;
+    margin: 5px;
+    padding: 5px;
+    min-height: 295px;
+    background-color:#dadce5;
+}
+.mapa_linha_card h3{
+    text-align: center;
+}
+.mapa_linha_card h3 .btanque{
+    border: 1px solid #c3c6d1;
+    border-radius: 3px;
+
+    color: #34406f;
+}
+
+.mapa_linha_card h3 .btanque:hover{
+    background-color: #34406f;
+    color: white;
+    transition: 300ms;
+}
+
+span .btanque{
+    border-radius: 4px;
+    border: 1px solid #c3c6d1 ;
+}
+
+.titulo-card{
+    font-size: 12px;
+    padding: 0;
+    margin: 0;
+    font-weight: 700;
+}
+.tabela_produto{
+    font-size: 11px;
+}
+
+.contador{
+    font-size: 12px;
+    font-weight: 500;
+    background-color: #34406f;
+    color: #ffffff;
+}
+
+button table, th, td{
+    
+    border: none !important;
+}
+
+.TINTAS-2000 { 
+    grid-area: TINTAS2000; 
+}
+.TEXTURAS { 
+    grid-area: TEXTURAS; 
+}
+.MASSAS { 
+    grid-area: MASSAS; 
+}
+.TINTAS-5000 { 
+    grid-area: TINTAS5000; 
+}
+.SOLVENTES { 
+    grid-area: SOLVENTES;
+}
+
+.mapa_linhas{
+    display: grid; 
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; 
+    grid-template-rows: 1fr 1fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+    'TINTAS2000 TINTAS2000 TEXTURAS TEXTURAS MASSAS MASSAS'
+    'TINTAS5000 TINTAS5000 SOLVENTES SOLVENTES SOLVENTES SOLVENTES'; 
+    
+}
+
+.mapa_linhas_producao{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0px 0px; 
+    justify-self: center;
+  
+}
+
+.SOLVENTES{
+    display: grid;
+}
+
+.SOLVENTES .mapa_linhas_producao{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 0px 0px; 
+    justify-self: center;
+  
+}
+
+.resultado{
+    margin: 0 calc((100% - 1200px)/2) 0 calc((100% - 1200px)/2);
+}
+
+#tabelaresultado{
+    background-color: white;
+}
+#tabelaresultado th{
+    text-align: center;
+}
+#tabelaresultado td{
+    text-align: center;
+    font-size: 30px;
+}
+#tdnum{
+    text-align: left;
+    font-size: 30px;
+}
+#tabelar{
+    background-color: white;
+}
+#tabelaresultado 	table {
+font-family: Bold;
+background:#ffffff ;
+margin: 0 auto;
+border: solid 1px black;
+
+}
+
+.numeros {
+text-align: right;
+}
+
+.produto {
+text-align: left;
+}
+#tabelaresultado tfoot tr td{
+background:rgb(78, 78, 78);
+color:white;
+}
+
+#tabelaresultado tr:nth-child(even) {
+background:rgb(170, 170, 170);
+}
+#tabelaresultado td{
+width: auto;
+text-align: center;
+}
+
+#tabelaresultado .table-hover tbody tr:hover td {
+background: aqua;
+}
+#tabelaresultado thead tr th {
+background:rgb(78, 78, 78);
+color:white;
+text-align: center;
+}
+#tabelaresultado #coluna div{
+
+background-color: gray;
+}

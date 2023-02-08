@@ -18,15 +18,16 @@
 
             $setor = $_SESSION['codsetor'];
             $rat = Chamado::getListaRat();
+            
             //echo json_encode($rat);
             $lista = [];
 
             if(count($rat)>0){
                 foreach($rat as $chamado){
-                    //echo $chamado;
+                    //echo json_encode($chamado);
 
 
-                    if($chamado->dtEncerramento == null){
+                    if($chamado->dtEncerramento == null || $chamado->dtEncerramento == ''){
                         
                         //Se não encerrado;
                         if($chamado->prodFinal == 'N'){
@@ -65,6 +66,7 @@
                     }*/
 
                 }
+                //echo json_encode($lista);
                 return $lista;
             }else{
                 return null;

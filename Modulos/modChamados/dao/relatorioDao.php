@@ -138,7 +138,7 @@
         public static function getRatCategoria($de, $ate){
             $sql = new SqlOra();
     
-            return $sql->select("SELECT ct.categoria, sum(i.qt) qt, to_char(sum(i.pvenda*i.qt), '999999.99') as total
+            return $sql->select("SELECT ct.categoria,count(ct.categoria)numrats, sum(i.qt) qt, to_char(sum(i.pvenda*i.qt), '999999.99') as total
                 from ratc c inner join rati i on c.numrat = i.numrat
                             inner join kokar.pcprodut p on i.codprod = p.codprod
                             inner join kokar.pccategoria ct on ct.codsec = p.codsec 

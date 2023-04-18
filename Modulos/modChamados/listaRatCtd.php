@@ -77,20 +77,14 @@
 					Controle de Trocas e Devoluções
 				</div>
 			</div>
-
-
 			<div class="col-md-12" style="padding-top: 20px">
-				<div class="row">
-					<div class="col-md-6" style="padding-bottom: 20px">
-						<a class="btn btn-danger" href="listaCliente.php" role="button">Nova RAT</a>
-					</div>
-					<div class="col-md-3" style="padding-bottom: 20px">
+				<div class="nav-chamado">
+					<a class="btn btn-danger" href="listaCliente.php" role="button">Nova RAT</a>
+					<div>
 						<a class="btn btn-warning" href="listaRat.php" role="button">RAT's Pendentes</a>
 						<a class="btn btn-success" href="listaRatGeral.php" role="button">Todas as RAT's</a>
 					</div>
-					<div class="col-md-3" style="padding-bottom: 20px; allign: right">
-						<a class="btn btn-primary float-right" href="relatorio.php" role="button">Resultados</a>
-					</div>
+					<a class="btn btn-primary float-right" href="relatorio.php" role="button">Resultados</a>
 				</div>
 				<div class="col-md-12" style="padding-bottom: 20px">
 					<table id="table_id" class="display compact" style="width:100%">
@@ -121,13 +115,14 @@
 									<?php echo $r->numRat?>
 								</td>
 								<td style="text-align: center">
-									<?php echo $r->dtAbertura?>
+									
+									<?php $d = explode('/', $r->dtAbertura); echo ($d[2].'-'.$d[1].'-'.$d[0])?>
 								</td>
 								<td style="text-align: center">
 									<?php echo $r->codCli?>
 								</td>
 								<td>
-									<?php echo $r->cliente?>
+									<?php echo utf8_encode($r->cliente)?>
 								</td>
 								<td style="text-align: center">
 									<?php echo $r->pendencia?>
@@ -201,7 +196,7 @@
 	$(document).ready(function () {
 		$('#table_id').DataTable({
 			"lengthMenu": [[50, 100, -1], [50, 100,"Todos"]],
-			"order": [[ 0, "asc" ]],
+			"order": [[ 6, "desc" ]],
 			"bInfo": false,
 			"columns": [
 				null,

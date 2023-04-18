@@ -22,6 +22,16 @@
 	<link href="../../recursos/css/style.css" rel="stylesheet">
 	<link href="../../recursos/css/fawsome/css/all.css" rel="stylesheet">
 </head>
+<style>
+	.pagina__loader{
+		display: flex;
+		width: 100%;
+		height: calc(100vh - 80px);
+		align-items: center;
+		justify-content: center;
+		vertical-align: middle;
+	}
+</style>
 
 <body style="background-color: teal;">
 	<div class="header">
@@ -56,8 +66,10 @@
 			<div class="col-md-8">
 				<h1 style="padding-bottom: 20px; padding-top: 20px">Gerência de Chamados<small> - Listar Clientes</small></h1>
 			</div>
-
-				<div class="col-md-12" style="padding-botton: 40px">
+			<div class="pagina__loader">
+           		<div class="loader"></div>
+        	</div> 
+				<div class="col-md-12 principal__conteudo" style="padding-bottom: 40px; display: none">
 						<table  id="example" class="display compact" style="width:100%">
 							<thead>
 								<tr>
@@ -143,6 +155,17 @@
 			}
 		});
 	});
+
+
+	$(window).on('load', function () {
+		$(".loader").fadeOut("slow");
+		//adicionar delay para mostrar o conteudo
+		setTimeout(function () {
+			$(".pagina__loader").css('height', '0px');
+			$(".principal__conteudo").toggle();
+		}, 600);
+	});
 </script>
+
 
 </html>

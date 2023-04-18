@@ -32,7 +32,6 @@
 
         public static function getClienteByCod($codcli){
 
-            
             $cliente = NovaRatDao::getClienteByCod($codcli);
 
             if(count($cliente)>0){
@@ -48,14 +47,8 @@
                 $result['telRca'] = $row['TELEFONE1'];
 
                 return $result;
-            }else{
+            }else
                 return null;
-            }
-
-            $cliente = $json_str['cliente'][0];
-
-            return $cliente;
-
         }
 
         
@@ -128,18 +121,10 @@
         }*/
         
 
-
-
-
-
-
-
-
-
         public static function getNovoNumeroRat(){
             $numrat = NovaRatDao::getNovoNumeroRat();
 
-            $result;
+            $result = 0;
 
             if(count($numrat)>0){
                 $row = $numrat[0];

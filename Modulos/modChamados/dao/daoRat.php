@@ -24,6 +24,47 @@ class Rat{
         );
     }
 
+    public static function getClientes(){
+        $sql = new SqlOra();
+
+        return $sql->select(
+            "SELECT kc.codcli, kc.cliente
+            from kokar.pcclient kc
+            order by kc.cliente"
+        );
+    }
+
+    public static function alterarCliente($dados){
+        $codcli = $dados['codcli'];
+        $numrat = $dados['numrat'];
+        $sql = new SqlOra();
+        return $sql->update2(
+            "UPDATE paralelo.ratc
+            SET codcli = :codcli
+            WHERE numrat = :numrat",
+            array(
+                ":codcli" => $codcli,
+                ":numrat" => $numrat
+            )
+        );
+    }
+
+    public static function cancelarRat($numrat){
+        $sql = new SqlOra();
+        return $sql->update2(
+            "UPDATE paralelo.ratc
+            SET dtencerramento = to_date(sysdate),
+            atec = 'C',
+            acaofinal = 'S',
+            prodfinal = 'S',
+            alabfinal = 'S'
+            WHERE numrat = :numrat",
+            array(
+                ":numrat" => $numrat
+            )
+        );
+    }
+
     public static function getListaRatBusca($lote, $de, $ate){
         $sql = new SqlOra();
         if($lote == ''){
@@ -95,6 +136,7 @@ class Rat{
                     p.patologia
             from paralelo.ratc rc inner join kokar.pcclient kc on rc.codcli = kc.codcli
                          inner join paralelo.ratalab l on rc.numrat = l.numrat
+                         and l.id = (select max(id) from paralelo.ratalab where numrat = rc.numrat)
                          inner join paralelo.ratpatologia p on l.codpatologia = p.codpatologia
             where rc.codcli = :codcli
             order by rc.numrat",array(":codcli" => $codcli)
@@ -260,6 +302,21 @@ class Rat{
 
     }
 
+    public static function finalizarProdEspecial($dados){
+        $sql = new SqlOra();
+        $data =  date('Y/m/d h:m:s');
+        //converter data para string;
+ 
+        $step = 0;
+        //finalizar produto
+        $step = rat::finalizarProd($dados['numrat']);
+        if($step != null)
+            $step = rat::newALab($dados['numrat'],  $data, utf8_decode("VALIDADO PELO DPTO TÉCNICO"), $dados['patologia'], "N", $dados['coduser'], 'S');
+        //finalizar analise
+        if($step != null)
+        return rat::finalizarALab($dados['numrat']);
+    }
+
     public static function reabrirRat($numrat){
         $sql = new SqlOra();
         return $sql->insert("UPDATE ratc 
@@ -310,8 +367,6 @@ class Rat{
         
     }
 
-
-
     public static function finalizarALab($numrat){
         $sql = new SqlOra();
 
@@ -334,29 +389,6 @@ class Rat{
         );
     }
 
-
-    // public static function reabrirALab($numrat){
-    //     $sql = new SqlOra();
-
-    //     $numparecer = $sql->select("SELECT max(id)id from ratalab
-    //         where numrat = :numrat", array(":numrat"=>$numrat)
-    //     );
-
-    //     $np = $numparecer[0]['ID'];
-
-    //     $sql->insert("UPDATE ratalab 
-    //         set final = 'N'
-    //         where numrat = :numrat and id = :id",
-    //         array(":numrat"=>$numrat, ":id"=>$np)
-    //     );
-
-    //     return $sql->insert("UPDATE ratc 
-    //         set alabFinal = 'N'
-    //         where numrat = :numrat",
-    //         array(":numrat"=>$numrat)
-    // );
-    // }
-
     public static function finalizarAcao($numrat){
         $sql = new SqlOra();
         return $sql->insert("UPDATE ratc set acaofinal = 'S', dtacaofinal = sysdate
@@ -364,14 +396,6 @@ class Rat{
                 ":numrat"=>$numrat)
         );
     }
-
-    // public static function reabrirAcao($numrat){
-    //     $sql = new SqlOra();
-    //     return $sql->insert("UPDATE ratc set acaofinal = 'N', dtacaofinal = sysdate
-    //             where numrat = :numrat", array(
-    //             ":numrat"=>$numrat)
-    //     );
-    // }
 
     public static function setParecer($numrat, $parecer){
         $sql = new SqlOra();
@@ -389,24 +413,140 @@ class Rat{
                     ":numrat"=>$numrat,
                     ":dirfinal"=>$dirFinal)
             );
-        }else{
+        }else if($parecer == 'S'){
             return $sql->insert("UPDATE ratc 
                     set atec = :parecer
                     where numrat = :numrat", array(
                     ":parecer"=>$parecer, ":numrat"=>$numrat)
             );
         }
+        else if($parecer == 'C' ){
+            return $sql->insert("UPDATE ratc 
+                    set atec = :parecer,
+                        dirfinal = :dirfinal,
+                        dtencerramento = to_date(sysdate)
+                    where numrat = :numrat", array(
+                    ":parecer"=>$parecer,
+                    ":numrat"=>$numrat,
+                    ":dirfinal"=>$dirFinal)
+            );
+        }
+    }
 
+    public static function getFormularioC(){
+        $sql = new SqlOra();
 
+        try{
+            return $sql->select("SELECT c.idprincipal, textoprincipal FROM PARALELO.RATFORMULARIOCAD C
+            order by c.idprincipal", []);
+        }catch(Exception $e){
+            echo $e->getMessage();
+        }
 
     }
 
+    public static function getFormularioI(){
+        $sql = new SqlOra();
+
+        try{
+            return $sql->select("SELECT 
+            case when i.idprincipal is null
+              then p.idprincipal else i.idprincipal end as idprincipal, 
+            case when idopcao is null
+              then p.codpatologia else i.idopcao end as idopcao,
+            case when textoopcao is null
+              then p.patologia else textoopcao end as textoopcao
+            FROM PARALELO.RATFORMULARIOCADI I
+            full join paralelo.ratpatologia p on p.idprincipal = i.idprincipal
+            and p.codpatologia = i.idopcao
+                        order by case when i.idprincipal is null
+              then p.idprincipal else i.idprincipal end, case when idopcao is not null
+              then i.idopcao else p.codpatologia end, patologia", []);
+        }catch(Exception $e){
+            echo $e->getMessage();
+        }
+
+    }
+
+    public static function getFormularioRat($numrat){
+        $sql = new SqlOra();
+        $ret = [];
+        try{
+            $ret = [
+                $sql->select("SELECT * FROM PARALELO.RATFORMULARIOCONSULTA R where r.numrat = :numrat", [":numrat"=>$numrat]), 
+                $sql->select("SELECT * FROM PARALELO.RATFORMULARIOCLI R where r.numrat = :numrat", [":numrat"=>$numrat]) 
+            ];
+            if(count($ret[1]) > 0)
+                $ret[1][0]['NOME'] = utf8_encode($ret[1][0]['NOME']);
+            
+            return $ret;
 
 
 
+        }catch(Exception $e){
+            echo $e->getMessage();
+        }
 
+    }
+    
+    public static function getFormularioConsulta($numrat){
+        $sql = new SqlOra();
+        return $sql->select("SELECT * from (
+            select r.numrat, r.idprincipal, c.textoprincipal, 
+            r.idopcao, 
+            case when i.textoopcao is null 
+              then p.patologia else i.textoopcao end as textoopcao,
+                   l.nome, l.email, l.telefone
+                                FROM PARALELO.RATFORMULARIOCONSULTA r 
+                                left join PARALELO.RATFORMULARIOCLI l on l.numrat = r.numrat
+                                left join paralelo.ratformulariocad c on c.idprincipal = r.idprincipal
+                                left join paralelo.ratformulariocadi i on i.idopcao = r.idopcao
+                                and i.idprincipal = r.idprincipal
+                                full join paralelo.ratpatologia p on p.idprincipal = r.idprincipal
+                                and r.idopcao = p.codpatologia
+                                where r.numrat = :numrat)t
+            order by t.idprincipal", [":numrat"=>$numrat]);
 
+    }
 
+    public static function salvarForm($form, $tipo){
+        $sql = new SqlOra();
+        $ret = '';
+        if ($form['email'] == null)
+            $form['email'] = '';
+
+        if($tipo == 0){
+            foreach($form['selecoes'] as $f){
+
+               $ret .= $sql->insert("INSERT INTO PARALELO.RATFORMULARIOCONSULTA
+                    (numrat, idprincipal, idopcao, dthrultalter)
+                    values (:numrat, :idprincipal, :idopcao, to_char(sysdate, 'DD/MM/YYYY HH:mi:ss'))", 
+                    [":numrat"=>$f->numrat, ":idprincipal"=>$f->idPrincipal, ":idopcao"=>$f->idOpcao]);
+            }
+            $ret .='head: ';
+            $ret .=$sql->insert("INSERT INTO PARALELO.RATFORMULARIOCLI 
+                (numrat, nome, email, telefone, dthrultalter)
+                values (:numrat, :nome, :email, :telefone, to_char(sysdate, 'DD/MM/YYYY HH:mi:ss'))", 
+                [":numrat"=>$form['selecoes'][1]->numrat, ":nome"=>mb_strtoupper($form['nome']), ":email"=>$form['email'], ":telefone"=>$form['telefone']]);
+
+            return json_encode($ret);
+        }
+        else
+            foreach($form['selecoes'] as $f){
+
+                $ret = $sql->insert( " UPDATE PARALELO.RATFORMULARIOCONSULTA
+                    SET idopcao = :idopcao, dthrultalter = to_char(sysdate, 'DD/MM/YYYY HH:mi:ss')
+                    where numrat = :numrat and idprincipal = :idprincipal ", 
+                    [":numrat"=>$f->numrat, ":idprincipal"=>$f->idPrincipal, ":idopcao"=>$f->idOpcao]);
+            }
+                $sql->insert("UPDATE PARALELO.RATFORMULARIOCLI 
+                    SET nome = :nome, email = :email, telefone = :telefone, dthrultalter = to_char(sysdate, 'DD/MM/YYYY HH:mi:ss')
+                    where numrat = :numrat", 
+                    [":numrat"=>$form['selecoes'][1]->numrat, ":nome"=>utf8_decode($form['nome']), ":email"=>$form['email'], ":telefone"=>$form['telefone']]);
+            return $ret;
+        
+       
+    }
 
     ///OLD
     public static function getLista(){
@@ -435,8 +575,6 @@ class Rat{
 
     public static function setNovaRat($numrat, $codcli, $abertura, $problema, $solicitante, $telsolicitante, $pintor, $telpintor){
         $sql = new Sql();
-
-
         return $sql->insert("INSERT INTO ratc (numrat, codcli, dtabertura, problema, solicitante, solicitante_tel, pintor, pintor_tel)
             VALUES (:numrat, :codcli, :abertura, :problema, :solicitante, :telsolicitante, :pintor, :telpintor)",array(
                 ":numrat"=>$numrat,
@@ -449,24 +587,10 @@ class Rat{
                 ":telpintor"=>$telpintor           
             )
         );
-
     }
-
-    /*public static function getProdRat($numrat){
-
-        $sql = new Sql();
-
-        return $sql->select("SELECT i.codprod, p.produto, i.numlote, l.dtfabricacao, l.dtvalidade, p.pvenda, i.qt
-            from pcprodut p inner join rati i on p.codprod = i.codprod
-                            inner join pclote l on i.numlote = l.numlote
-            where i.numrat = :numrat and p.codepto = 10000", array(":numrat"=>$numrat)
-        );
-        
-    }*/
 
     public static function setProdRat($numrat, $codprod, $numlote, $qt){
         $sql = new Sql();
-
 
         $ret = $sql->select("SELECT count(codprod) cont from rati 
             where numrat = :numrat 
@@ -545,7 +669,6 @@ class Rat{
                 ":codusur"=>$codusur,
                 ":final"=>$final)
         );
-
     }
 
     public static function getPatologias(){
@@ -562,7 +685,7 @@ class Rat{
         ));
     }
 
-    public static function newPatologia($patologia){
+    public static function newPatologia($patologia, $dias){
         $sql = new SqlOra();
 
         $patologia = strtoupper($patologia);
@@ -570,12 +693,12 @@ class Rat{
 
         $cod = $sql->select("SELECT max(codpatologia) cod from ratpatologia");
 
-        return $sql->insert("INSERT into ratpatologia (codpatologia, patologia) values (:codpatologia, :patologia)",array(
+        return $sql->insert("INSERT into ratpatologia (codpatologia, patologia, previsaodias, idprincipal) values (:codpatologia, :patologia, :diasPatologia, 1)",array(
             ":codpatologia"=>$cod[0]['COD']+1,
-            ":patologia"=>$patologia
+            ":patologia"=>$patologia,
+            ":diasPatologia"=>$dias
         ));
     }
-
 
     public static function logAprova($codUser, $numRat, $acao){
         $pasta = $_SERVER["DOCUMENT_ROOT"] . "/Modulos/modChamados/Model/Log/";
@@ -583,8 +706,6 @@ class Rat{
         fwrite($myfile, "Usuario: ".$codUser." - Rat: ".$numRat." - ".utf8_encode("Ação: ").$acao);
         fclose($myfile);
     }
-
-    
 
 }
 

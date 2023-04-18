@@ -474,6 +474,37 @@ INNER JOIN
                    where teste  = 1", array(":carga"=>$codcli)  
         );
         return $ret;
-    } 
+    }
+    
+    public static function salvarChapa($dados){
+        $sql = new SqlOra();
+        $numcarga = $sql->select("SELECT numcarga from paralelo.cargachapa where numcarga = :numcarga", array(":numcarga"=>$dados['numcarga']));
+
+        if(isset($numcarga[0]['NUMCARGA'])){
+            if($numcarga[0]['NUMCARGA'] != null){
+                return $sql->update("UPDATE paralelo.cargachapa SET motorista = :motorista, placa = :placa, valor = :valor WHERE numcarga = :numcarga", array(
+                    ":numcarga"=>$dados['numcarga'],
+                    ":motorista"=>$dados['motorista'],
+                    ":placa"=>$dados['placa'],
+                    ":valor"=>$dados['valor']));
+                }
+                return $sql->insert("INSERT INTO paralelo.cargachapa(numcarga, motorista, placa, valor) VALUES(:numcarga, :motorista, :placa, :valor)", array(
+                    ":numcarga"=>$dados['numcarga'],
+                    ":motorista"=>$dados['motorista'],
+                    ":placa"=>$dados['placa'],
+                    ":valor"=>$dados['valor']));
+     
+        }else{
+            return 'erro';
+        }
+    }
+
+    public static function carregarChapa($numcarga){
+        $sql = new SqlOra();
+        $ret = $sql->select("SELECT * FROM paralelo.cargachapa WHERE numcarga = :numcarga", array(":numcarga"=>$numcarga));
+        return $ret[0];
+    }
+
+    
 }
 ?>

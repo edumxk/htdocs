@@ -15,7 +15,7 @@ $lista = [];
 
     <title>Revalidar Lotes</title>
 
-    <meta name="description" content="Lançamento de requisições de abastecimento">
+    <meta name="description" content="">
     <meta name="author" content="Eduardo Patrick">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -81,37 +81,22 @@ $lista = [];
         </section>
         <section class="home-conteudo"> 
           
-            <div id="abastecimento" class="principal_card">
-                <h2>Revalidar de Lote</h2>
+            <div class="principal_card">
+                <div class="form-group">
+                    <h2>Revalidar de Lote</h2>
+                    <div class="busca">
+                        <label for="numlote">Lote</label>
+                        <input  type="text" id="numlote">
+                        <button class="form-control btn btn-info" style="width:180px" onclick="buscaLote($('#numlote').val())">Buscar Lote</button>
+                   
 
-                <label for="numlote">Lote</label>
-                <input  type="text" id="numlote">
-                
-                <label for="tempo">Tempo</label>  
-                <select id="tempo">
-                        <optgroup id="tempo" label="Tempo">
-                            <option value="6">+ 6 meses</option>
-                            <option value="12">+ 12 meses</option>
-                        </optgroup>
-                </select>
-                <button class="btn btn-sm btn-success" onclick="revalidar()">
-                    Revalidar
-                </button>
-            </div>
-            
-            
-            <div id="abastecimento" class="principal_card-informacoes">
-                <div>
-                    <div>
-                        <spam>Informações</spam>
                     </div>
-                </div>
-                <div class="principal_card-dados">
-                    <div>
-                    <p id="vprod" value=""></p>
+                    <div id="vprod">
+               
                     </div>
                 </div>
             </div>
+           
         </section>
     </main>
 </body>
@@ -120,14 +105,20 @@ $lista = [];
 
 
 <script>
+    /*
     $('#numlote').keyup(()=>{
         buscaLote($('#numlote').val());
     })
+    */
 
     window.onload = function() {
         document.getElementById("numlote").focus();
     };
 
+    function revalidar2(numlote){
+        $('#numlote').val(numlote);
+        revalidar();
+    }
     function revalidar() {
         
         numlote = document.getElementById('numlote').value;
@@ -173,11 +164,59 @@ $lista = [];
             url: 'controller/controler.php',
             data: {
                 'action': 'buscaLote',
-                'query': numlote
+                'query': numlote+'%'
             },
             success: function(response) {
                 if(response.indexOf("Notice")== -1){
-                    document.getElementById("vprod").innerHTML = response;
+                    let html = '';
+                    response = JSON.parse(response);
+                    $('#vprod').html();
+                    //loop de impressão
+                    for(let i = 0; i < response.length; i++) {
+                       html += 
+                       `<table class="table table-striped table-bordered table-hover" style="font-size: 16px">
+                            <thead>
+                                <tr>
+                                    <th style='width: 5%'>Lote</th>
+                                    <th style='width: 25%'>Descrição</th>
+                                    <th style='width: 10%'>Validade</th>
+                                    <th style='width: 10%'>Tempo</th>
+                                    <th style='width: 15%'>User</th>
+                                    <th style='width: 15%'>Data</th>
+                                    <th style='width: 20%'colspan = '2'>Revalidar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td> ${response[i].numlote}</td>
+
+                                    <td > ${response[i].descricao}</td>
+
+                                    <td> ${response[i].val}</td>
+                              
+                                    <td> ${response[i].tempo} Meses</td>
+                                
+                                    <td> ${response[i].usuario}</td>
+                               
+                                    <td> ${response[i].dtrevalidacao}</td>
+
+                                    <td>
+                                        <select id="tempo" class="form-control" style="margin: 5px" >
+                                                <optgroup id="tempo" label="Tempo">
+                                                    <option value="6">+ 6 meses</option>
+                                                    <option value="12">+ 12 meses</option>
+                                                </optgroup>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <button class="form-control btn btn-sm btn-success" style="margin: 5px" onclick="revalidar2('${response[i].numlote}')">Revalidar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        `;
+                    }
+                    $('#vprod').html(html);
                 }
                 else{
                     document.getElementById("vprod").innerHTML = "LOTE Nº "+numlote+". NÃO EXISTE!";    

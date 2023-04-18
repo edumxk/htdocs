@@ -12,6 +12,14 @@ if(isset($_POST['action'])){
         $numop = $_POST['dataset'];
         echo json_encode(Controle::getAjustes($numop));
     }
+    if($_POST['action']=='getProduto'){
+        $codprod = $_POST['codprod'];
+        echo json_encode(Model::getProduto($codprod)) ;
+    }
+    if($_POST['action']=='addItem'){
+        $produtos = $_POST['dataset'];
+        echo json_encode(Model::addItem($produtos));
+    }
 }
 
 class Controle{
@@ -28,5 +36,9 @@ class Controle{
         $ret = Ajuste::novoAjusteLista($array);
         return $ret;
         
+    }
+
+    public static function getProdutos(){
+        return Model::getProdutos();
     }
 }

@@ -148,34 +148,7 @@
 				</div>
 				<div class="col-md-12">
 					<div class="row">
-						<div class="col-1">
-							<form >
-								<button type="submit" class="btn btn-sm btn-success" onclick="openpdf(<?php echo $ap['NUMRAT']?>)">
-									12 Meses
-								</button>
-							</form>
-						</div>
-						<div class="col-1">
-							<form >
-								<button type="submit" class="btn btn-sm btn-success" onclick="openpdf(<?php echo $ap['NUMRAT']?>)">
-									24 Meses
-								</button>
-							</form>
-						</div>
-						<div class="col-1">
-							<form >
-								<button type="submit" class="btn btn-sm btn-success" onclick="openpdf(<?php echo $ap['NUMRAT']?>)">
-									36 Meses
-								</button>
-							</form>
-						</div>
-						<div class="col-1">
-							<form >
-								<button type="submit" class="btn btn-sm btn-success" onclick="openpdf(<?php echo $ap['NUMRAT']?>)">
-									48 Meses
-								</button>
-							</form>
-						</div>
+						
 					</div>
 				</div>
 				<div class="col-md-12" style="padding-bottom: 20px" >
@@ -311,31 +284,37 @@
 								<table class="display compact" style="width:100%">
 									<thead style="border: 2px solid darkslategray">
 										<tr style="background-color: lightgray">
-											<th colspan="3" style="text-align: center">RAT POR CATEGORIA</th>
+											<th colspan="4" style="text-align: center">RAT POR CATEGORIA</th>
 										</tr>
 										<tr style="background-color: lightgray">
 											<th style="text-align: center">CATEOGORIA</th>
 											<th style="text-align: center; width: 100px">APROVADAS</th>
+											<th style="text-align: center; width: 100px">QTD</th>
 											<th style="text-align: center; width: 100px">VALOR</th>
 										</tr>
 									</thead>
 									<tbody style="border: 2px solid darkslategray">
 									<?php $totalRatCategoria = 0; 
 										$qtRatCategoria = 0;
+										$qtAprovadas = 0;
 										foreach($ratCategoria as $c):
 											?>
 										<tr onmouseover="listaHoverIn(this)" onmouseout="listaHoverOut(this)">
 											<td style="text-align: left; padding-left: 10px; font-size:11px"><?php echo utf8_encode($c['CATEGORIA'])?></td>
+											<td style="text-align: center"><?php echo $c['NUMRATS']?></td>
 											<td style="text-align: center"><?php echo $c['QT']?></td>
 											<td style="text-align: right"><?php echo number_format($c['TOTAL'],2,",",".")?></td>
 											<?php $totalRatCategoria += $c['TOTAL'];
-												$qtRatCategoria += $c['QT'];?>
+												$qtRatCategoria += $c['QT'];
+												$qtAprovadas += $c['NUMRATS'];
+												?>
 										</tr>
 									<?php endforeach?>
 									</tbody>
 									<tfoot style="border: 2px solid darkslategray">
 										<tr>
 											<td style="text-align: center">TOTAL</td>
+											<td style="text-align: center"><?php echo number_format($qtAprovadas,0,",",".")?></td>
 											<td style="text-align: center"><?php echo number_format($qtRatCategoria,0,",",".")?></td>
 											<td style="text-align: right"><?php echo number_format($totalRatCategoria,2,",",".")?></td>
 										</tr>

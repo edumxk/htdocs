@@ -26,6 +26,7 @@ $al->getALab($numrat);
 //$chamado->ATec = $at;
 $chamado->ALab = $al;
 
+$formulario = Formulario::getFormularioRat(Rat::getFormularioConsulta($_GET['numrat']));
 
 //echo json_encode($chamado->ATec);
 
@@ -204,7 +205,7 @@ $chamado->ALab = $al;
 
 						<div class="row">
 							<div class="col-md-12">
-								<div class="col-md-12">
+								<div class="col-md-12" >
 									<h5 style="text-align: center; padding-top:10px">Descrição do Problema</h5>
 								</div>
 								<div class="col-md-12">
@@ -215,6 +216,7 @@ $chamado->ALab = $al;
 							</div>
 						</div>
 
+						
 						<div class="row" style="padding-top: 20px">
 									<div class="col-md-12">
 										<table id="table_id" class="display compact">
@@ -232,7 +234,7 @@ $chamado->ALab = $al;
 											<tbody id="lista_json">
 												<?php foreach($chamado->produtos as $p) :?>
 												<tr>
-													<th scope="row" style="widht:50px" id="cellCod">
+													<th scope="row" style="width:50px" id="cellCod">
 														<?php echo $p->codprod?>
 													</th>
 													<td id="tbProduto">
@@ -268,8 +270,42 @@ $chamado->ALab = $al;
 										</table>
 									</div>
 								</div>
-					</div>
 
+
+					</div>
+					<?php if(count($formulario) > 0):?>			
+						<div class="row" >
+							<div class="col-md-12" >
+								<div class="col-md-12" id="secao">
+									<div style="text-align: center;">
+										Formulário de Atendimento
+									</div>
+								</div>
+								<div class="col-md-12" style="margin-top:15px">
+									<div class="form-group"> 
+										<span style="font-weight: bold;">NOME DO RECLAMANTE: </span>
+										<span> <?= mb_strtoupper($formulario[0]->nome) ?> </span>
+									</div>
+									<div class="form-group">
+										<span style="font-weight: bold;">E-MAIL: </span>
+										<span> <?= mb_strtoupper($formulario[0]->email) ?> </span>
+									</div>
+									<div class="form-group">
+										<span style="font-weight: bold;">TELEFONE: </span>
+										<span> <?= mb_strtoupper($formulario[0]->telefone) ?> </span>
+									</div>
+									
+										<?php foreach($formulario as $k => $form): ?>
+										<div class="form-group">
+
+											<span style="font-weight: bold;"><?= $form->textoPrincipal ?> : </span>
+											<span> <?= mb_strtoupper($form->textoOpcao) ?> </span>
+										</div>
+									<?php endforeach?>
+								</div>
+							</div>
+						</div>
+				    <?php endif; ?>
 					<!-------------------------------->
 					<div>
 						<p>
@@ -313,8 +349,9 @@ $chamado->ALab = $al;
 
 											<div class="col-md-6">
 												<h5>Nova Patologia:</h5>
-												<div class="input-group mb-3">
-													<input type="text" class="form-control" id="novaPatologia">
+												<div class="input-group mb-4">
+													<input type="text" class="form-control" id="novaPatologia" placeholder="Descrição da Patologia" style="width: 200px">
+													<input type="number" class="form-control" id="diasPatologia" placeholder="Dias úteis previsto">
 													<div class="input-group-append">
 														<button class="btn btn-outline-primary" type="button"  onclick="novaPatologia()">Incluir</button>
 													</div>
@@ -522,7 +559,7 @@ $chamado->ALab = $al;
 			var dataset = {"numrat":numrat,"data":data, "parecer":parecer, "patologia":patologia, "procedente":procedente, "codusur":codusur, "final":final};
 
 			//console.log(dataset);
-			if (parecer.length <= 500){
+			if (parecer.length <= 1000){
 				$.ajax({
 					type: 'POST',
 					url: 'controle/aLabControle.php',
@@ -585,13 +622,16 @@ $chamado->ALab = $al;
 
 	<script>
 		function novaPatologia(){
-			var patologia = $("#novaPatologia").val();
+			let patologia = $("#novaPatologia").val();
+			let diasPatologia = $("#diasPatologia").val();
+
 
 			if(patologia != ""){
 				$.ajax({
 					type: 'POST',
 					url: 'controle/aLabControle.php',
-					data: {'action': 'newPatologia', 'query':patologia},
+					data: {'action': 'newPatologia', 
+						'query':{'patologia': patologia, 'diasPatologia': diasPatologia }},
 					success: function(response){
 							console.log(response);
 						if(response == "existe"){

@@ -201,10 +201,11 @@ require_once './control/controle.php';
                         body += '<tr class="politica__linha">'
                                 +    '<td class="politica__grupo">'+t[0]+'</td>'
                                 +    '<td class="politica__descricao">'+t[1]+'</td>'
-                                +    '<td class="politica__desconto"><input class="desconto" onfocusout="attDesconto(this, '+parseFloat(t[3])+')" type="text" value="'+parseFloat(t[2]).toFixed(6)+'"></input></td>'
-                                +    '<td class="politica__tabela"><input class="tabela" type="text" onfocusout="attValor(this, '+parseFloat(t[3])+')" value="'+getTabela(parseFloat(t[2]), parseFloat(t[3]))+'"></input></td>'
-                                +'</tr>'
-                                })
+                                +    '<td class="politica__desconto"><input tabindex="1" class="desconto" onfocusout="attDesconto(this, '+parseFloat(t[3])+')" type="text" value="'+parseFloat(t[2]).toFixed(6)+'"></input></td>'
+                                +    '<td class="politica__tabela"><input tabindex="-1" class="tabela" type="text" onfocusout="attValor(this, '+parseFloat(t[3])+')" value="'+getTabela(parseFloat(t[2]), parseFloat(t[3]))+'"></input></td>'
+                                +'</tr>'    
+                            })
+                            
 
                     $('#btn_salvar').removeAttr('onclick');
                     $('#btn_salvar2').removeAttr('onclick');
@@ -244,6 +245,8 @@ require_once './control/controle.php';
                             $('#btn_criar').prop('hidden',true);
                             break;
                     }
+                    ordenaPolitica();
+                    modal.modal('show');
                     
                 }else
                 alert("Erro, procure o TI")
@@ -265,7 +268,6 @@ require_once './control/controle.php';
                     obsOriginal =  $('#modalObs').val();
                 }
             })
-            modal.modal('show');
     }
 
     function fechar(){
@@ -282,7 +284,13 @@ require_once './control/controle.php';
 
     function attValor(elemento, tabela){
         let referencia = $(elemento).parent().parent().find('.politica__desconto').find('input');
-        let desconto = parseFloat((1 - (((elemento.value)/tabela)))*100);
+        //se elemento valor contem virgula, trocar por ponto
+        if(elemento.value.includes(',')){
+            elemento.value = elemento.value.replace(',', '.');
+    }
+        let desconto = ((1 - (((elemento.value)/tabela)))*100);
+        console.log(desconto.toFixed(6));
+        
         $(referencia).val(desconto.toFixed(6));
         validarDesconto(referencia, tabela);
     }
@@ -331,17 +339,25 @@ require_once './control/controle.php';
 
     function attDesconto(linha, tabela){
         let grupo = $(linha).parent().parent().find('.politica__grupo').text();
-        let desconto = parseFloat($(linha).val());
+        let desconto = ($(linha).val());
         let refTabela = $(linha).parent().parent().find('.tabela');
+        //se desconto conter virgula, substituir por ponto.
+        if(desconto.includes(',')){
+            desconto = desconto.replace(',','.');
+        }
+        //parsefloat em desconto
+        desconto = parseFloat(desconto);
         $(linha).val(desconto.toFixed(6));
         //checar se o desconto foi alterado.
         arr.forEach(function(i){
             if (i[0]==grupo && desconto != i[2]){
                
-                if(desconto<0 || desconto>100 || isNaN(desconto)){
+                if(desconto<0 || desconto>80 || isNaN(desconto)){
                     $(linha).val(i[2]);
-                    desconto = i[2].toFixed(6);
-                    
+                    desconto = i[2];
+                    desconto = parseFloat(desconto);
+                    desconto = desconto.toFixed(6);
+                    alert('Desconto inválido! Entre 0 e 80%\nTabela: '+tabela+'\nDesconto: '+desconto+'\nValor: '+getTabela(desconto,tabela));
                 }
             }
         })
@@ -420,6 +436,16 @@ require_once './control/controle.php';
 			}
 		});
 	});
+    
+    function ordenaPolitica(){
+        //ordenar coluna 1
+
+        $("#tbPoliticas").tablesorter({
+            sortList: [[1,0]]
+        });
+
+
+    }
 
     function attTela(){
         let botao = $('.btn__politica');
@@ -453,7 +479,6 @@ require_once './control/controle.php';
         attTela();
 
         $("#clientes").tablesorter();
-        $("#tbPoliticas").tablesorter();
 
         //Pesquisa da tabela clientes
         $("#busca").on("keyup", function() {

@@ -17,6 +17,7 @@ $chamado = new Chamado();
 
 $chamado = $chamado->getRat($numrat);
 
+$formulario = Formulario::getFormularioRat(Rat::getFormularioConsulta($_GET['numrat']));
 
 //echo var_dump($chamado);
 
@@ -262,9 +263,43 @@ $chamado = $chamado->getRat($numrat);
 							</div>
 						</div>
 
-						<div class="row" style="padding-top:10px">
-							<div class="col-md-2">
-								<h5>Parecer Laboratorial:</h5> 
+						<?php if(count($formulario) > 0):?>			
+						<div class="row" >
+							<div class="col-md-12" >
+								<div class="col-md-12" id="secao">
+									<div style="text-align: center;">
+										Formulário de Atendimento
+									</div>
+								</div>
+								<div class="col-md-12" style="margin-top:15px">
+									<div class="form-group"> 
+										<span style="font-weight: bold;">NOME DO RECLAMANTE: </span>
+										<span> <?= mb_strtoupper($formulario[0]->nome) ?> </span>
+									</div>
+									<div class="form-group">
+										<span style="font-weight: bold;">E-MAIL: </span>
+										<span> <?= mb_strtoupper($formulario[0]->email) ?> </span>
+									</div>
+									<div class="form-group">
+										<span style="font-weight: bold;">TELEFONE: </span>
+										<span> <?= mb_strtoupper($formulario[0]->telefone) ?> </span>
+									</div>
+									
+										<?php foreach($formulario as $k => $form): ?>
+										<div class="form-group">
+
+											<span style="font-weight: bold;"><?= $form->textoPrincipal ?> : </span>
+											<span> <?= mb_strtoupper($form->textoOpcao) ?> </span>
+										</div>
+									<?php endforeach?>
+								</div>
+							</div>
+						</div>
+				    <?php endif; ?>
+
+						<div class="row form-group" style="padding-top:10px">
+							<div class="col-md-3">
+								<h5 style="font-weight: bold;">Parecer Laboratorial:</h5> 
 							</div>
 							<div class="col-md-6">
 								<?php if($chamado->ALab->conforme == 'P'):?> <h5>PENDENTE</h5>
@@ -275,28 +310,28 @@ $chamado = $chamado->getRat($numrat);
 								<?php endif?>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-md-2">
-								<h5>Patologia:</h5> 
+						<div class="row form-group">
+							<div class="col-md-3">
+								<h5 style="font-weight: bold;">Patologia:</h5> 
 							</div>
-							<div class="col-md-6">
-								<?php echo $chamado->ALab->patologia?>
+							<div class="col-md-6" >
+								<h5><?php echo $chamado->ALab->patologia?></h5>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-md-2">
-								<h5>Análise Laboratorial:</h5> 
+						<div class="row  form-group">
+							<div class="col-md-3">
+								<h5 style="font-weight: bold;">Análise Laboratorial:</h5> 
 							</div>
 							<div class="col-md-6">
-								<?php echo $chamado->ALab->parecer?>
+								<h5><?php echo $chamado->ALab->parecer?></h5>
 							</div>
 						</div>
 						<?php if($chamado->motivo !== null){
-							echo "<div class=\"row\">
-									<div class=\"col-md-2\">
-										<h5>Motivo Reprovação:</h5> 
+							echo "<div class=\"row  form-group\">
+									<div class=\"col-md-3\">
+										<h5 style=\"font-weight: bold;\">Motivo Reprovação:</h5> 
 									</div>
-									<div class=\"col-md-6\">$chamado->motivo
+									<h5><div class=\"col-md-6\">$chamado->motivo</h5>
 									</div>
 								</div>";
 							} 
@@ -345,16 +380,19 @@ $chamado = $chamado->getRat($numrat);
 														<option value="P">Pendente</option>
 														<option value="S">Reclamação Procedente</option>
 														<option value="N">Reclamação Não Procedente</option>
+														<option value="C">Cancelar Rat</option>
 														<?php endif?>
 														<?php if($chamado->ATec->procedente == 'S'):?>
 														<option value="P">Pendente</option>
 														<option value="S" selected>Reclamação Procedente</option>
 														<option value="N">Reclamação Não Procedente</option>
+														<option value="C">Cancelar Rat</option>
 														<?php endif?>
 														<?php if($chamado->ATec->procedente == 'N'):?>
 														<option value="P">Pendente</option>
 														<option value="S">Reclamação Procedente</option>
 														<option value="N" selected>Reclamação Não Procedente</option>
+														<option value="C">Cancelar Rat</option>
 														<?php endif?>
 													</select>
 												</div>
@@ -1030,15 +1068,15 @@ $chamado = $chamado->getRat($numrat);
 					alert("Situação do Parecer não informada!");
 				}else if(procedente == 'S'){
 					alert("Parecer positivo precisa de ação corretiva!")
-				}else if(procedente == 'N'){
+				}else if(procedente == 'N' || procedente == 'C'){
 					final = true;
 				}
-			}else{
+			}else {
 				if(procedente == 'P'){
 					alert("Situação do Parecer não informada!");
 				}else if(procedente == 'S'){
 					final = true;
-				}else if(procedente == 'N'){
+				}else if(procedente == 'N' || procedente == 'C'){
 					alert("Parecer negativo não pode ter ação corretiva!");
 				}
 			}

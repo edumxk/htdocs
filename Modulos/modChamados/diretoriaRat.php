@@ -15,6 +15,8 @@ $chamado = new Chamado();
 
 $chamado = Chamado::getRat($numrat);
 
+$formulario = Formulario::getFormularioRat(Rat::getFormularioConsulta($_POST['numrat']));
+
 //echo json_encode($chamado->produtos);
 
 ?>
@@ -285,7 +287,39 @@ $chamado = Chamado::getRat($numrat);
 
 
 					<!-------------------------------->
+					<?php if(count($formulario) > 0):?>			
+						<div class="row" >
+							<div class="col-md-12" >
+								<div class="col-md-12" id="secao">
+									<div style="text-align: center;">
+										Formulário de Atendimento
+									</div>
+								</div>
+								<div class="col-md-12" style="margin-top:15px">
+									<div class="form-group"> 
+										<span style="font-weight: bold;">NOME DO RECLAMANTE: </span>
+										<span> <?= mb_strtoupper($formulario[0]->nome) ?> </span>
+									</div>
+									<div class="form-group">
+										<span style="font-weight: bold;">E-MAIL: </span>
+										<span> <?= mb_strtoupper($formulario[0]->email) ?> </span>
+									</div>
+									<div class="form-group">
+										<span style="font-weight: bold;">TELEFONE: </span>
+										<span> <?= mb_strtoupper($formulario[0]->telefone) ?> </span>
+									</div>
+									
+										<?php foreach($formulario as $k => $form): ?>
+										<div class="form-group">
 
+											<span style="font-weight: bold;"><?= $form->textoPrincipal ?> : </span>
+											<span> <?= mb_strtoupper($form->textoOpcao) ?> </span>
+										</div>
+									<?php endforeach?>
+								</div>
+							</div>
+						</div>
+				    <?php endif; ?>
 					<div>
 						<p>
 					</div>
@@ -296,7 +330,7 @@ $chamado = Chamado::getRat($numrat);
 							<div class="col-md-12" id="secao" >
 								<div class="row">
 									<div class="col-md-12">
-										<div style="text-align: center">Aprovação</div>
+										<div style="text-align: center">Resultado</div>
 									</div>
 								</div>
 							</div>
@@ -321,29 +355,31 @@ $chamado = Chamado::getRat($numrat);
 											<div class="col-md-2">
 												<h5>Patologia:</h5> 
 											</div>
-											<div class="col-md-6">
-												<?php echo $chamado->ALab->patologia?>
+											<div class="col-md-10">
+											<h5><?php echo $chamado->ALab->patologia?></h5>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-md-2">
 												<h5>Análise Laboratorial:</h5> 
 											</div>
-											<div class="col-md-6">
-												<?php echo $chamado->ALab->parecer?>
+											<div class="col-md-10">
+												<h5><?php echo $chamado->ALab->parecer?></h5>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-md-2">
 												<h5>Parecer Técnico:</h5>
 											</div>
-											<div class="col-md-6">
+											<div class="col-md-10">
 												<h5>
 													<?php if($chamado->ATec == 'P'):?> PENDENTE
 													<?php endif?>
 													<?php if($chamado->ATec == 'S'):?> CHAMADO PROCEDENTE
 													<?php endif?>
 													<?php if($chamado->ATec == 'N'):?> CHAMADO NÃO PROCEDENTE
+													<?php endif?>
+													<?php if($chamado->ATec == 'C'):?> CHAMADO CANCELADO
 													<?php endif?>
 												</h5>	
 											</div>
@@ -352,7 +388,7 @@ $chamado = Chamado::getRat($numrat);
 											<div class="col-md-2">
 												<h5>Custo Total:</h5> 
 											</div>
-											<div class="col-md-6">
+											<div class="col-md-10">
 												<h5>R$ <?php echo number_format($chamado->getCorretivaTotal(),2,",",".")?></h5>
 											</div>
 										</div>

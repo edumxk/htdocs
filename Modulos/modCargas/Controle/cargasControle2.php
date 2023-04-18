@@ -94,6 +94,14 @@
                 echo 'sem pedidos';
             }
         }
+        if($_POST['action']=='carregarChapa'){
+            $numcarga = $_POST['query'];
+            echo json_encode(Carga::carregarChapa($numcarga));
+        }
+        if($_POST['action']=='valorChapa'){
+            $dados = $_POST['query'];
+            echo json_encode(Carga::salvarChapa($dados));
+        }
     }
 
     class CargasControle{
@@ -224,7 +232,12 @@
         }
 
         function getPendencias($numcarga){
-            echo json_encode(Carga::getPendencias($numcarga));
+            $dados = Carga::getPendencias($numcarga);
+            echo json_encode($dados);
+        }
+        public static function getPendenciasPdf($numcarga){
+            $dados = Carga::getPendencias($numcarga);
+            return $dados;
         }
 
         function getPendenciasPedido($numped){
@@ -314,6 +327,9 @@
 
         function getSaldoCarga($cargas){
             echo json_encode(Carga::getSaldoCarga($cargas));
+        }
+        public static function getPendenciasPdfConsolidado($cargas){
+            return Carga::getSaldoCarga($cargas);
         }
 
         function getDisponivel($carga){

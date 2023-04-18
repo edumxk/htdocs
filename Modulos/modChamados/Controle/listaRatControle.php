@@ -33,20 +33,20 @@
                         if($chamado->prodFinal == 'N'){
                             //Se produto final não lançado;
                             //Departamento Técnico
-                            if($setor == 0 || $setor == 3 || $setor == 2 || $setor == 12){
+                            if($setor == 0 || $setor == 1 || $setor == 3 || $setor == 2 || $setor == 12){
                                 /*Cod 2 (laboratorio) temporario enquanto jociel viaja*/
                                 array_push($lista, $chamado);
                             }
                         }elseif($chamado->alabFinal == 'N'){
                             //Se ALab é nulo ou "Não";
                             //Laboratório
-                            if($setor == 0 || $setor == 2 || $setor == 12){
+                            if($setor == 0 || $setor == 1 || $setor == 2 || $setor == 12){
                                 array_push($lista, $chamado);
                             }
                         }elseif($chamado->acaoFinal == 'N'){
                             //Se Ação Final não lançada;
                             //Departamento Técnico;
-                            if($setor == 0 || $setor == 3 || $setor == 2 || $setor == 12){
+                            if($setor == 0 || $setor == 1 || $setor == 3 || $setor == 2 || $setor == 12){
                                 /*Cod 2 (laboratorio) temporario enquanto jociel viaja*/
                                 array_push($lista, $chamado);
                             }
@@ -193,6 +193,5 @@
                 return $diff->format('%r%a');
             }
         }
-
     }
 ?>

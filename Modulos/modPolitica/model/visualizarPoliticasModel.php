@@ -67,17 +67,19 @@
         
             $ret = $sql->select("SELECT t1.codgrupo, t1.descricao, t1.codprod, t1.codgrupo,
                     nvl((select percdesc from kokar.pcdesconto d inner join kokar.pcdescontoitem di on d.coddesconto = di.coddesconto 
-                            where d.codcli = $codCli and di.valor_num = t1.codgrupo),0) percdesc,
+                            where d.codcli = :codCli and di.valor_num = t1.codgrupo),0) percdesc,
                     to_char(t.pvenda1-t.vlipi, '9999999.9999') tabela,
-                    nvl((select ativo from pcpoliticas where codcli = $codCli),0) ativo
+                    nvl((select ativo from pcpoliticas where codcli = :codCli),0) ativo
                 from 
                 (
                     select c.codgrupo, c.descricao, min(i.coditem) codprod 
                     from kokar.pcgruposcampanhac c inner join kokar.pcgruposcampanhai i on c.codgrupo = i.codgrupo
-                        
+                    where i.dtexclusao is null and c.dtexclusao is null    
                     group by c.codgrupo, c.descricao
-                    order by c.descricao
-                )t1 inner join kokar.pctabpr t on t.codprod = t1.codprod and t.numregiao = $numRegiao"
+                    
+                )t1 inner join kokar.pctabpr t on t.codprod = t1.codprod and t.numregiao = :numRegiao
+                order by t1.descricao",
+                array(":codCli"=>$codCli, ":numRegiao"=>$numRegiao)
             );
         
             

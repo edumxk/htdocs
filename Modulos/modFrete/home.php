@@ -20,7 +20,7 @@
                 </nav>
             </div>    
         </header>
-        <main>
+        <main style="width: 100vw;">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
@@ -30,12 +30,14 @@
                     </div>
                     <div class="col-md-12" style="text-align: center;">
                         <form action="index.php" method="get">
+                            <br>
+                            <br>
                             <label for="dataini" class="labeldata">Data Inicial</label>
                             <input type="date" name="dataini" value="<?=date('Y-m-01')?>">
                             <label for="datafin" class="labeldata">Data Final</label>
                             <input type="date" name="datafin" value="<?=date('Y-m-t')?>">
-                            <label for="placa" class="labeldata">Placa</label>
-                            <input type="text" placeholder="Falta implementar" name="placa">
+                            <!-- <label for="placa" class="labeldata">Placa</label>
+                            <input type="text" placeholder="Falta implementar" name="placa"> -->
                             <button type="submit">Buscar</button>
                         </form>
                     </div>

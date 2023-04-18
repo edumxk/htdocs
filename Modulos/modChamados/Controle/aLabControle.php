@@ -32,14 +32,15 @@
         }
 
         function newPatologia($key){
-            $newPat = $key;
+            $newPat = $key['patologia'];
+            $dias = $key['diasPatologia'];
             $arr = Rat::getPatologias();
             foreach($arr as $a){
                 if($a['PATOLOGIA']===strtoupper(utf8_decode($newPat))){
                     echo "existe";
                     exit();
                 }            }
-            echo Rat::newPatologia(strtoupper(utf8_decode($newPat)));
+            echo Rat::newPatologia(strtoupper(utf8_decode($newPat)),  $dias);
         }
 
         function setALab($key){

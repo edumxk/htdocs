@@ -39,6 +39,27 @@ header{
 .modal-body{
     min-height: 250px;
 }
+
+.modal-add-prod{
+    width: 60%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+}
+
+.modal-add-prod input {
+    margin: 10px 5px;
+}
+.modal-add-prod button{
+    height: 38px;
+    margin: 10px;
+}
+
+.modal-add-prod .codigo{
+    width: 120px;
+}
+
 .modal_principal_editar{
     display: flex;
     justify-content: space-around;

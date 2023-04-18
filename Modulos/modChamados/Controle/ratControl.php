@@ -20,6 +20,12 @@
             Mailer::sendMail($numrat);
             echo 'ok';
         }
+        if($_POST['action']=='alterarCliente'){
+            echo json_encode(Rat::alterarCliente($_POST['query']));
+        }
+        if($_POST['action']=='cancelarRat'){
+            echo json_encode(Rat::cancelarRat($_POST['query']));
+        }
     }
 
     #$numrat = 589;

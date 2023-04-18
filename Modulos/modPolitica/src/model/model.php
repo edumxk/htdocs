@@ -124,7 +124,7 @@ class ModelPoliticas{
                 (
                     select c.codgrupo, c.descricao, min(i.coditem) codprod 
                     from kokar.pcgruposcampanhac c inner join kokar.pcgruposcampanhai i on c.codgrupo = i.codgrupo
-                        
+                    where i.dtexclusao is null and c.dtexclusao is null    
                     group by c.codgrupo, c.descricao
                     order by c.descricao
                 )t1 inner join kokar.pctabpr t on t.codprod = t1.codprod and t.numregiao = $numRegiao

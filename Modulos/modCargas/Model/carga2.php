@@ -120,43 +120,46 @@ class Carga{
                 
         $sql = new SqlOra();
 
-        $ret = $sql->select("SELECT * from (SELECT codprod, descricao, qt,  qtdisp, TO_CHAR(peso-(qtdisp*pesobruto), '999999990.999')peso
-        from (
-        select ki.codprod, 
-                kp.descricao,
-                kp.pesobruto,
-                sum(ki.qt) qt,
-                sum (ki.qt*kp.pesobruto) peso,
-                ke.qtestger-ke.qtbloqueada-ke.qtreserv as qtdisp
-        from paralelo.cargai i 
-        inner join kokar.pcpedi ki on i.numped = ki.numped
-        inner join kokar.pcprodut kp on ki.codprod = kp.codprod
-        inner join kokar.pcest ke on ke.codprod = kp.codprod
-        where ki.posicao in ('P','B')-- and qt>ke.qtestger-ke.qtbloqueada-ke.qtreserv
-        and numcarga = :numcarga
-        group by ki.codprod, kp.pesobruto, kp.descricao, ke.qtestger-ke.qtbloqueada-ke.qtreserv
-        ) where qtdisp < qt 
-        order by descricao)t1
-        left join(
-select codprodp, qtprod, t3.codproducao, previsao, status from
-((select codprod codprodp, sum(qt) qtprod from paralelo.mproducaoi
-where status not in ('S','F') and dtexclusao is null
-group by codprod)t2       
-INNER JOIN
-( select distinct * from (
-   select  First_Value(li.codproducao) OVER (PARTITION BY li.codprod ORDER BY dtproducao, horaproducao) codproducao, codprod
-   from paralelo.mproducaoc lc
-   inner join paralelo.mproducaoi li on li.codproducao = lc.codproducao 
-   where lc.status not in ('S', 'F')and lI.dtexclusao is null
-   order by codprod, dtproducao, horaproducao)
- )t3 on t3.codprod = t2.codprodp)
- inner join(
-        select (replace(to_char(extract(day from dtproducao),'00')||'/'||
-        to_char(extract(month from dtproducao),'00'),' ','')||' - '|| horaproducao) previsao, codproducao, status
-        from paralelo.mproducaoc where status not in('F', 'B'))t4 on t4.codproducao = t3.codproducao
- )t5
- on t5.codprodp = t1.codprod  
- order by descricao",array(":numcarga"=>$numcarga)
+        $ret = $sql->select("SELECT * from (SELECT codprod, descricao, qt,  qtdisp, TO_CHAR(peso-(qtdisp*pesobruto), '999999990.999')peso,
+        numcarga, nome, dtsaida
+               from (
+               select ki.codprod, 
+                       kp.descricao,
+                       kp.pesobruto,
+                       sum(ki.qt) qt,
+                       sum (ki.qt*kp.pesobruto) peso,
+                       ke.qtestger-ke.qtbloqueada-ke.qtreserv as qtdisp,
+                       i.numcarga, c.nome, c.dtsaida
+               from paralelo.cargai i 
+               inner join kokar.pcpedi ki on i.numped = ki.numped
+               inner join kokar.pcprodut kp on ki.codprod = kp.codprod
+               inner join kokar.pcest ke on ke.codprod = kp.codprod
+               inner join paralelo.cargac c on c.numcarga = i.numcarga
+               where ki.posicao in ('P','B')-- and qt>ke.qtestger-ke.qtbloqueada-ke.qtreserv
+               and i.numcarga = :numcarga
+               group by ki.codprod, kp.pesobruto, kp.descricao, ke.qtestger-ke.qtbloqueada-ke.qtreserv, i.numcarga, c.nome, c.dtsaida
+               ) where qtdisp < qt 
+               order by descricao)t1
+               left join(
+       select codprodp, qtprod, t3.codproducao, previsao, status from
+       ((select codprod codprodp, sum(qt) qtprod from paralelo.mproducaoi
+       where status not in ('S','F') and dtexclusao is null
+       group by codprod)t2       
+       INNER JOIN
+       ( select distinct * from (
+          select  First_Value(li.codproducao) OVER (PARTITION BY li.codprod ORDER BY dtproducao, horaproducao) codproducao, codprod
+          from paralelo.mproducaoc lc
+          inner join paralelo.mproducaoi li on li.codproducao = lc.codproducao 
+          where lc.status not in ('S', 'F')and lI.dtexclusao is null
+          order by codprod, dtproducao, horaproducao)
+        )t3 on t3.codprod = t2.codprodp)
+        inner join(
+               select (replace(to_char(extract(day from dtproducao),'00')||'/'||
+               to_char(extract(month from dtproducao),'00'),' ','')||' - '|| horaproducao) previsao, codproducao, status
+               from paralelo.mproducaoc where status not in('F', 'B'))t4 on t4.codproducao = t3.codproducao
+        )t5
+        on t5.codprodp = t1.codprod  
+        order by descricao",array(":numcarga"=>$numcarga)
         );
 
         for($i=0; $i<sizeof($ret); $i++){
@@ -341,12 +344,18 @@ INNER JOIN
     {
         $sql = new SqlOra();
         $varCargas = "";
-        foreach ($cargas as $c) {
-            if (strlen($varCargas) == 0) {
-                $varCargas .= $c;
-            } else {
-                $varCargas .= ',' . $c;
+        if (is_string($cargas)) {
+            $varCargas = $cargas;
+        }
+        else{
+            foreach ($cargas as $c) {
+                if (strlen($varCargas) == 0) {
+                    $varCargas .= $c;
+                } else {
+                    $varCargas .= ',' . $c;
+                }
             }
+
         }
 
         $ret = $sql->select(
@@ -516,10 +525,52 @@ INNER JOIN
             }
             echo 'ok';
         }
-            
-        
-        
-        
     } 
+    public static function salvarChapa($dados){
+        $sql = new SqlOra();
+        $numcarga = $sql->select("SELECT numcarga from paralelo.cargachapa where numcarga = :numcarga", array(":numcarga"=>$dados['numcarga']));
+
+        if(isset($numcarga[0]['NUMCARGA'])){
+            if($numcarga[0]['NUMCARGA'] != null){
+                 
+                return $sql->update("UPDATE paralelo.cargachapa SET motorista = :motorista, placa = :placa, valor = :valor,
+                nomecarga = (select nome from cargac where numcarga = :numcarga),
+                dtsaida = (select dtsaida from cargac where numcarga = :numcarga)
+                WHERE numcarga = :numcarga", array(
+                    ":numcarga"=>$dados['numcarga'],
+                    ":motorista"=>mb_strtoupper($dados['motorista']),
+                    ":placa"=>mb_strtoupper($dados['placa']),
+                    ":valor"=> str_replace(',', '.', (str_replace('.', '', str_replace(' ', '',$dados['valor']))))
+                ));
+                }
+                return 'erro';
+        }else{
+           // return str_replace(',', '.', (str_replace('.', '', str_replace(' ', '',$dados['valor']))));
+            return $sql->insert("INSERT INTO paralelo.cargachapa(numcarga, motorista, placa, valor, nomecarga, dtsaida) VALUES(:numcarga, :motorista, :placa, :valor,
+             (select nome from cargac where numcarga = :numcarga and rownum = 1),
+             (select dtsaida from cargac where numcarga = :numcarga and rownum = 1)
+             )", array(
+                ":numcarga"=>$dados['numcarga'],
+                ":motorista"=>mb_strtoupper($dados['motorista']),
+                ":placa"=>mb_strtoupper($dados['placa']),
+                ":valor"=> str_replace(',', '.', (str_replace('.', '', str_replace(' ', '',$dados['valor']))))
+            ));
+        }
+    }
+
+    public static function carregarChapa($numcarga){
+        $sql = new SqlOra();
+        $ret = $sql->select("SELECT * FROM paralelo.cargachapa WHERE numcarga = :numcarga", array(":numcarga"=>$numcarga));
+        if(isset($ret[0])){
+            $ret[0]['MOTORISTA'] = mb_strtoupper($ret[0]['MOTORISTA']);
+            $ret[0]['PLACA'] = mb_strtoupper($ret[0]['PLACA']);
+            $ret[0]['VALOR'] = number_format($ret[0]['VALOR'], 2, ',', '.');
+
+
+            return $ret[0];
+        }else{
+            return 'sem registro';
+        }
+    }
 }
 ?>

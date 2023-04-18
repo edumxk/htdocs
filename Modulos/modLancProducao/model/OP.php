@@ -74,10 +74,14 @@ class OP{
             $op->numOP = $a['NUMOP'];
             $op->numLote = $a['NUMLOTE'];
             $op->qtProduzir = ($a['QTPRODUZIR']);
-            if( $op->qtAjuste != 0)
+            if( $op->qtAjuste != 0){
                 $op->qtPrevista = ($a['QTPRODUZIR']+$a['KGAJUSTE'])*(1 + $op->rendimentoAjuste);
-            else
+                if ($op->qtPrevista == 0){
+                    $op->qtPrevista = $op->qtProduzir;
+                }
+            }else{
                 $op->qtPrevista = ($a['QTPRODUZIR']*(1 + $op->rendimentoAjuste));
+            }
             $op->posicao = $a['POSICAO'];
             $op->dtInicio = $a['DTINICIO'];
             $op->dtFecha = $a['DTFECHA'];

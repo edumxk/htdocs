@@ -4,9 +4,12 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/modulos/modChamados/dao/daoRat.php');
 
 
 require_once("produto.php");
+require_once("despesa.php");
+require_once("cliente.php");
 require_once("aTec.php");
 require_once("aLab.php");
 require_once($_SERVER["DOCUMENT_ROOT"] . '/modulos/modChamados/dao/novaRatDao.php');
+require_once($_SERVER["DOCUMENT_ROOT"] . '/modulos/modChamados/dao/daoCtd.php');
 require_once($_SERVER["DOCUMENT_ROOT"] . '/modulos/modChamados/dao/ratProdDao.php');
 require_once($_SERVER["DOCUMENT_ROOT"] . '/modulos/modChamados/controle/ratProdControle.php');
 require_once($_SERVER["DOCUMENT_ROOT"] . '/modulos/modChamados/controle/corretivaControle.php');
@@ -53,13 +56,10 @@ class Chamado{
     public $coduserrejeicao;//CodUsuário responsável pela rejeição;
     public $userrejeicao;   //Nome Usupario responsável pela rejeição;
     public $motivo;         //Motivo da Rejeição    
-
-
     //Valores Calculados
     public $pendencia;
     public $valor;          //Valor de devolução/ Diferente de valor de correção.
 
-    
 
     public static function getListaRat(){
         $lista = Rat::getListaRat();
@@ -89,6 +89,7 @@ class Chamado{
         }
         return $retorno;
     }
+    
     public static function getListaRatBusca($lote, $de, $ate){
         $lista = Rat::getListaRatBusca($lote, $de, $ate);
 
@@ -149,7 +150,6 @@ class Chamado{
         return $retorno;
     }
 
-
     public function pendencia(){
         if($this->prodFinal == 'N'){
             $this->pendencia = 'PRODUTOS';
@@ -180,10 +180,10 @@ class Chamado{
         }elseif($this->ATec == 'N'){
             return 'NÃO PROCEDENTE';
         }
+        elseif($this->ATec == 'C'){
+            return 'CANCELADA';
+        }
     }
-    
-
-
 
     public function getValorTotal(){
         $vl = 0;
@@ -203,7 +203,6 @@ class Chamado{
         return $ret;
     }
 
-    
     public static function getRat($numrat){
         if($numrat ==""){
             return null;
@@ -282,8 +281,22 @@ class Chamado{
         }
     }
 
+    public function getClientes(){
+        $clientes = Rat::getClientes();
+        $ret = [];
+        foreach($clientes as $c){
+            $ret[] = new Cliente( ($c['CODCLI']), utf8_encode($c['CLIENTE']) );
+        }
+        return $ret;
+    }
 
+    public function getDespesas(){
+        return Ctd::getDespesas($this->numRat);
+    }
 
+    public function getCtd(){
+       return Ctd::getDadosCTD($this->numRat);
+    }
 
 
 }

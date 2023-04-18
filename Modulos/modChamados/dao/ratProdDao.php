@@ -88,6 +88,7 @@ class ratProdDao{
 
     public static function setProdRat($numrat, $codprod, $numlote, $qt, $datafabricacao, $dtvalidade, $pvenda){
         $sql = new SqlOra();
+        $id = 0;
 
         if($numlote==""){
             $numlote = 0;
@@ -214,10 +215,15 @@ class ratProdDao{
         if($ret[0]['NUMNOTA']==null){
             $sql = new SqlOra();
 
-            $val = $sql->select("select p.pvenda1 pvenda
-                from kokar.pctabpr p
-                where p.numregiao = (select l.numregiaocli from kokar.pcclient l where l.codcli = :codcli)
-                and p.codprod = :codprod", array(":codcli"=>$codcli, ":codprod"=>$codprod)
+            $val = $sql->select("SELECT pvenda * ((100 - desconto)/ 100) pvenda from (
+                SELECT p.pvenda1 pvenda, (select d.percdesc from kokar.pcdesconto d inner join
+                kokar.pcdescontoitem i on d.coddesconto = i.coddesconto
+                inner join kokar.pcgruposcampanhai ci on ci.codgrupo = i.valor_num
+                and ci.coditem = :codprod
+                where codcli = :codcli) desconto
+                        from kokar.pctabpr p
+                        where p.numregiao = (select l.numregiaocli from kokar.pcclient l where l.codcli = 1046)
+                        and p.codprod = :codprod)", array(":codcli"=>$codcli, ":codprod"=>$codprod)
             );
             return $val[0]['PVENDA'];
         }else{
@@ -247,8 +253,23 @@ class ratProdDao{
         and rownum = 1
         order by km.numnota desc", array(":numlote"=> $numlote,":codcli"=>$codcli)
         );
-
-        return $val[0]['PVENDA'];
+        
+        if($val[0]['PVENDA'] == 0 || $val[0]['PVENDA'] == null){
+        
+        $numnota = $sql->select ("SELECT max(numnota) numnota
+        from kokar.pcmov m inner join kokar.pcprodut p on m.codprod = p.codprod
+        where m.codcli = :codcli
+        and p.codcategoria in (select codcategoria from kokar.pcprodut where codprod = :codprod)
+        and p.embalagem in (select embalagem from kokar.pcprodut where codprod = :codprod)
+        and m.codoper in ('S','SB')", array(":codcli"=>$codcli, ":codprod"=>$codprod))[0]['NUMNOTA'];
+        
+        $val = $sql->select("SELECT max(case m.codoper when 'S' then m.punit when 'SB' then m.pbonific end) pvenda
+            from kokar.pcmov m inner join kokar.pcprodut p on m.codprod = p.codprod
+            where m.numnota = :numnota
+              and p.codcategoria in (select codcategoria from kokar.pcprodut where codprod = :codprod)
+              and p.embalagem in (select embalagem from kokar.pcprodut where codprod = :codprod)", array(":numnota"=> $numnota,":codprod"=>$codprod)) [0]['PVENDA'];
+        return $val;
+        }
     }
 
 
@@ -273,7 +294,6 @@ class ratProdDao{
         );
         return $ret[0];
     }
-    
 
 
 

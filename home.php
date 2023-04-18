@@ -176,7 +176,7 @@
                 </div>
             <?php endif?>
             
-            <?php if($_SESSION['codsetor']<=1): //Apenas diretoria e produção?>
+            <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']<=11): //Apenas diretoria e produção?>
                 <div class="icones">  
                     <h5 class="cartao-title">Frete</h5>
                     <input class="botao" onclick="window.location.href='modulos/modFrete/home.php'" 

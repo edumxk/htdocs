@@ -2,6 +2,7 @@
     require_once ($_SERVER["DOCUMENT_ROOT"] . '/modulos/modChamados/dao/ratProdDao.php');
     require_once ($_SERVER["DOCUMENT_ROOT"] . '/modulos/modChamados/dao/daoRat.php');
     require_once ($_SERVER["DOCUMENT_ROOT"] . '/modulos/modChamados/model/produto.php');
+    require_once ($_SERVER["DOCUMENT_ROOT"] . '/modulos/modChamados/model/formulario.php');
 
 
     if(isset($_POST['action'])){
@@ -25,8 +26,41 @@
         }
         if($_POST['action']=='delProdRat'){
             RatProdControle::delProdRat($_POST['query']);
-        }if($_POST['action']=='finalizarProd'){
+        }
+        if($_POST['action']=='finalizarProd'){
             RatProdControle::finalizarProd($_POST['query']);
+        }
+        if($_POST['action']=='finalizarProdEspecial'){
+            RatProdControle::finalizarProdEspecial($_POST['query']);
+        }
+        if($_POST['action']=='getForm'){
+            $ret = [];
+            $rat = Rat::getFormularioRat($_POST['query']);
+            $ret[] = Rat::getFormularioC();
+            $ret[] = Rat::getFormularioI();
+            $ret = Formulario::getFormulario($ret);
+
+            if(count($rat[0])==0){
+                echo json_encode($ret);
+                return;
+            }
+            foreach($ret as $r){
+                foreach($rat[0] as $a){
+                    foreach($r as $k => $v){
+                        if($v->idPrincipal == $a['IDPRINCIPAL'] && $v->idOpcao == $a['IDOPCAO'])
+                            $r[$k]->selected = $a['IDOPCAO'];
+                        if( $r[$k]->selected == null)
+                            $r[$k]->selected = 0;
+                        
+                    }
+                }
+            }
+            if(count($rat[1])>0)
+                $ret[] = $rat[1][0];
+            echo json_encode($ret);
+        }
+        if($_POST['action']=='salvarForm'){
+            echo json_encode(RatProdControle::salvarForm($_POST['query']));
         }
 
     }
@@ -75,7 +109,7 @@
         public static function getNovoNumeroRat(){
             $numrat = Rat::getNovoNumeroRat();
 
-            $result;
+            $result = 0;
 
             if(count($numrat)>0){
                 $row = $numrat[0];
@@ -154,16 +188,10 @@
 
         }
 
-
-
-
-
-
-
         /*PREENCHE TABELAS*/
         function getProdRat($key){
             $prodRat = RatProdDao::getProdRat($key);
-;
+
             $arr = [];
 
             for ($i = 0; $i < sizeof($prodRat); $i++){
@@ -240,8 +268,6 @@
             return RatProdDao::delProdRat($key['numrat'], $key['codprod'], $key['numlote']);
         }
 
-
-
         public static function setNovaRat($numrat, $codcli, $abertura, $problema, $solicitante, $telsolicitante, $pintor, $telpintor){
             
             return Rat::setNovaRat($numrat, $codcli, $abertura, $problema, $solicitante, $telsolicitante, $pintor, $telpintor);
@@ -251,8 +277,9 @@
         public static function finalizarProd($numrat){
             return Rat::finalizarProd($numrat);
         }
-
-
+        public static function finalizarProdEspecial($dados){
+            return Rat::finalizarProdEspecial($dados);
+        }
 
         /*PREENCHE AS CLASSES*/
         function getProdRatModel($key){
@@ -278,9 +305,15 @@
 
         }
 
-
+        public static function salvarForm($array){
+            $form = Formulario::getFormularioOpcoes($array);
+            $rat = Rat::getFormularioRat($array['numrat'])[0];
+            
+            if( count($rat) == 0 )
+                return rat::salvarForm($form, 0);
+            else
+                return rat::salvarForm($form, 1);
+        }
     }
-
-
 
 ?>

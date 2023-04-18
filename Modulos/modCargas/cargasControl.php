@@ -56,7 +56,6 @@ $totValorCarga = 0;
 	<link href="../../recursos/css/fawsome/css/all.css" rel="stylesheet">
 	<link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 
-
 </head>
 
 <body style="background-color: teal;width:100%">
@@ -389,11 +388,15 @@ $totValorCarga = 0;
 									<span> Peso: <?php echo number_format($c->peso, '2', ',', '.') ?> kg</span>
 								</div>
 								<div class="btn-carga">
+									<div>
+										<button type="button" style="width:35px; height:28px" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalCarga" onclick="openModalChapa(<?php echo $c->numcarga ?>)">
+											<i class='bx bxs-dollar-circle' style="font-size: 20px"></i>
+									</div>
 									<?php if ($c->status == 'A') : ?>
 										<div class="">
 											<button style="width:35px; height:28px" type="submit" class="btn btn-sm btn-success" value="<?php echo $c->numcarga ?>" onclick="travar(this)">
 												<!-- <img style="width:20px; height:20px" src="/Recursos/src/rca.png"> -->
-												<i class='bx bxs-lock-open'  style="font-size: 20px"></i>
+												<i class='bx bxs-lock-open' style="font-size: 20px"></i>
 											</button>
 										</div>
 									<?php else : ?>
@@ -684,19 +687,56 @@ $totValorCarga = 0;
 				</div>
 			</div>
 			<!-- FIM MODAL -->
+			<!-- INICIO MODAL PARA EDITAR CARGA -->
+			<div class="modal" tabindex="-1" role="dialog" id="modalEditarChapa">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Editar Valor de Chapa</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="row d-flex justify-content-center">
+								<div class="col-md-6">
+									<div class="col-md-12">
+										<label for="nomeMotorista">Motorista</label>
+										<input id="nomeMotorista" autocomplete="off">
+									</div>
+									<div class="col-md-12" style="padding-top:5px">
+										<label for="placaChapa">Placa</label>
+										<input id="placaChapa" autocomplete="off">
+									</div>
+									<div class="col-md-12" style="padding-top:5px">
+										<label for="valorChapa">Valor de Chapa</label>
+										<input id="valorChapa" autocomplete="off">
+										<input id="numCargaChapa" hidden type="text">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+							<button type="button" class="btn btn-primary" data-dismiss="modal" onClick="valorChapa()">Confirmar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- FIM MODAL -->
 			<!-- INICIO MODAL PARA VISUALIZAR PENDENCIAS -->
 			<div class="modal" tabindex="-1" role="dialog" id="modalVerPendencias">
 				<div class="modal-dialog modal-lg" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title">Pendencias da Carga</h5>
+							<h5 class="modal-title" id="tituloPendenciaCarga">PENDÊNCIAS</h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
 						<div class="modal-body">
 							<div class="row">
-								<div class="col-md-12" style="overflow:auto; height: 450px">
+								<div class="col-md-12" style="overflow:auto; max-height: 450px; min-height: 300px">
 									<table style="width:100%">
 										<thead>
 											<tr>
@@ -726,7 +766,10 @@ $totValorCarga = 0;
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-primary" data-dismiss="modal">Confirmar</button>
+							
+								<button type="button" class="btn btn-success" onclick="imprimir()">Imprimir</button>
+								<button type="button" class="btn btn-primary" data-dismiss="modal">Confirmar</button>
+							
 						</div>
 					</div>
 				</div>
@@ -738,14 +781,15 @@ $totValorCarga = 0;
 				<div class="modal-dialog modal-lg" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title">Pendencias do Pedido</h5>
+							<h5 class="modal-title" >Pendencias do Pedido</h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
 						<div class="modal-body">
 							<div class="row">
-								<div class="col-md-12" style="overflow:auto; height: 450px">
+								<div class="col-md-12" style="overflow:auto; max-height: 450px; min-height: 300px" id="div-tabela-pendencia">
+									<input type="text" hidden id="numcarPendencia">
 									<table style="width:100%">
 										<thead>
 											<tr>
@@ -790,7 +834,7 @@ $totValorCarga = 0;
 						</div>
 						<div class="modal-body">
 							<div class="row">
-								<div class="col-md-12" style="overflow:auto; height: 400px">
+								<div class="col-md-12" style="overflow:auto; max-height: 450px; min-height: 300px">
 									<table style="width:100%">
 										<thead>
 											<div>
@@ -837,7 +881,7 @@ $totValorCarga = 0;
 						</div>
 						<div class="modal-body">
 							<div class="row">
-								<div class="col-md-12" style="overflow:auto; height: 450px; ">
+								<div class="col-md-12" style="overflow:auto; max-height: 450px; min-height: 300px">
 									<table id="tblSaldoCarga" style="width:100%">
 										<thead>
 											<tr>
@@ -868,6 +912,7 @@ $totValorCarga = 0;
 							</div>
 						</div>
 						<div class="modal-footer">
+							<button type="button" class="btn btn-success" onclick="imprimirSaldoCargas()">Imprimir</button>
 							<button type="button" class="btn btn-primary" data-dismiss="modal">Confirmar</button>
 						</div>
 					</div>
@@ -976,6 +1021,23 @@ $totValorCarga = 0;
 		$("#valueRca").val(a)
 	}
 
+	function imprimir(){
+		let numcar = $('#numcarPendencia').val();
+
+		$.ajax({
+			type: 'POST',
+			url: 'controle/cargasControle2.php',
+			data: {
+				'action': 'getPendencias',
+				'query': numcar
+			},
+			success: function(response) {
+				arr = JSON.parse(response);
+				window.open('pendencias.php?action=pdf&numcar='+numcar, '_blank');
+			}
+		});
+	}
+
 	function getPendencias(elm) {
 		console.log(elm)
 		nome = elm
@@ -987,14 +1049,19 @@ $totValorCarga = 0;
 				'query': nome
 			},
 			success: function(response) {
-				console.log(response);
 				arr = JSON.parse(response);
+				if(arr.length <= 0){
+					$('#pendencias').empty();
+					$('#pendencias').append("<td colspan=7 style='padding: 8px'><h4 style='text-align: center'>Não há pendências para esta carga</h4></td>");
+					console.log('entrou');
+					$('#modalVerPendencias').modal('toggle');
+					return;
+				}
 
 				body = "";
 				$('#pendencias').text("");
 				peso = 0;
 				arr.forEach(function(t) {
-					console.log(t)
 					peso = peso + parseFloat(t['PESO']);
 					body += '<tr>' +
 						'<td style="width:40px; text-align:center">' + t['CODPROD'] + '</td>' +
@@ -1006,6 +1073,12 @@ $totValorCarga = 0;
 						'<td style="width:80px; text-align:center">' + t['PREVISAO'] + '</td>' +
 						'</tr>';
 				})
+				$('#numcarPendencia').val(nome);
+				if(arr.length > 0)
+					$('#tituloPendenciaCarga').text("PENDÊNCIAS - " + arr[0]['NOME']);
+				else
+					$('#tituloPendenciaCarga').text("PENDÊNCIAS ");
+				
 				$('#pendencias').empty();
 				$('#pendencias').append(body);
 				$('#pesoTotal').text("Peso da pendência " + parseFloat(peso).toFixed(2) + " kg");
@@ -1231,6 +1304,20 @@ $totValorCarga = 0;
 			}
 		});
 	}
+
+	function imprimirSaldoCargas(){
+		let arr = [];
+		let soma = 0;
+		var elements = document.getElementsByClassName("hid_id");
+		//var value = elements[0].value;
+		$(".chbResumo").find('input[type="checkbox"]:checked').each(function(c, elm) {
+			arr.push(elm.id)
+			soma += (parseFloat(elm.value));
+		});
+		//redirect para imprimir saldo de cargas enviando arr
+		window.open('pendencias.php?action=consolidado&soma='+soma+'&numcar='+arr, '_blank');
+	}
+
 	/* Função Ajax para somar cargas montadas selecionadas com checkbox */
 	function saldoCargas() {
 		arr = [];
@@ -1531,7 +1618,7 @@ $totValorCarga = 0;
 		// console.log('destravar '+$(elm).val())
 		c = confirm("Confirma a abertura dessa carga?");
 		senha = prompt("Senha:");
-		if (c && senha=='liberaproducao') {
+		if (c && senha=='open23') {
 			$.ajax({
 				type: 'POST',
 				url: 'controle/cargasControle2.php',
@@ -1549,6 +1636,74 @@ $totValorCarga = 0;
 		}else{
 			alert("Senha Incorreta ou Ação negada.")
 		}
+	}
+
+	function valorChapa(){
+		let numcarga = $('#numCargaChapa').val();
+		let valor = $('#valorChapa').val();
+		let motorista = $('#nomeMotorista').val();
+		let placa = $('#placaChapa').val();
+
+		if(valor == '' || motorista == '' || placa == ''){
+			alert('Preencha todos os campos');
+			return false;
+		}
+		//placa maximo 7 caracteres
+		if(placa.length > 7){
+			alert('Placa inválida, maximo 7 caracteres');
+			return false;
+		}
+		//motorista maximo 50 caracteres
+		if(motorista.length > 50){
+			alert('Nome do motorista inválido, maximo 50 caracteres');
+			return false;
+		}
+		//valor maximo 10 caracteres
+		if(valor.length > 10){
+			alert('Valor inválido, maximo 10 caracteres');
+			return false;
+		}
+
+		console.log(numcarga+' - '+valor+' - '+motorista+' - '+placa);
+		$.ajax({
+			type: 'POST',
+			url: 'controle/cargasControle2.php',
+			data: {
+				'action': 'valorChapa',
+				'query': {
+					'numcarga': numcarga,
+					'valor': valor,
+					'motorista': motorista,
+					'placa': placa
+				}
+			},
+			success: function(response) {
+				alert('Chapa atualizada com sucesso\nValor: '+valor+'\nMotorista: '+motorista+'\nPlaca: '+placa);
+			}
+		});
+	}
+
+	function openModalChapa(numcarga){
+		$('#numCargaChapa').val(numcarga);
+		$('#modalEditarChapa').modal('toggle');
+		carregarChapa(numcarga);
+	}
+
+	function carregarChapa(numcarga){
+		$.ajax({
+			type: 'POST',
+			url: 'controle/cargasControle2.php',
+			data: {
+				'action': 'carregarChapa',
+				'query': numcarga
+			},
+			success: function(response) {
+				response = JSON.parse(response)
+				$('#valorChapa').val(response.VALOR);
+				$('#nomeMotorista').val(response.MOTORISTA);
+				$('#placaChapa').val(response.PLACA);
+			}
+		});
 	}
 </script>
 <script src="/recursos/js/scripts.js"></script>

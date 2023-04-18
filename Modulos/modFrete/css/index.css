@@ -1,10 +1,16 @@
+html{
+  
+  width: fit-content;
+
+}
 header{
    background-color: blue; 
 }
+
 .caixa {
-    width: 940px;
-    position: relative;
-    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 img{
     display: inline;
@@ -12,9 +18,10 @@ img{
     width: auto;
 }
 nav{
-    position: absolute;
-    top: 45px;
-    right: 0;
+    display: inline;
+    margin: 0 0 0 15px;
+    top: 0px;
+    right: 0px;
 }
 nav li{
     display: inline;

@@ -57,7 +57,7 @@ class Pedido{
                  )ELSE BONIFICACAO END)ELSE EMPRESTIMO END)ELSE TROCA END AS MOV,
                  nvl(numcarga,0) numcarga, c1.conferencia
           from (
-                 SELECT kc.data, to_char(to_date(kc.hora||to_char(kc.minuto,'00'), 'hh24mi'),'hh24:mi') hora, kc.numped, kc.codusur, ku.nome, kc.codcli, kl.cliente, kl.consumidorfinal, kl.dtprimcompra, kc.posicao,
+                 SELECT distinct kc.data, to_char(to_date(kc.hora||to_char(kc.minuto,'00'), 'hh24mi'),'hh24:mi') hora, kc.numped, kc.codusur, ku.nome, kc.codcli, kl.cliente, kl.consumidorfinal, kl.dtprimcompra, kc.posicao,
                         to_char(round(sum(kp.pesobruto * ki.qt), 2), '999999.99') peso, pc.status,
                         sum(ki.pvenda * ki.qt) valor, round(sum(nvl(ki.st,0)),2) st, kl.usaivafontediferenciado, kl.calculast, kl.clientefontest, kl.isentodifaliquotas,
                         kd.nomecidade, kd.uf, kc.codpraca, kc.numcar, kpr.praca,REGEXP_COUNT(kpl.descricao,'/',1,'i')+1 qtparc, 
@@ -146,7 +146,7 @@ class Pedido{
                 $p->data = Formatador::formatarData($r['DATA']);
                 $p->hora = $r['HORA'];
                 $rca = $r['NOME'];
-                $p->rca = Pedido::ajustaRca($rca);
+                $p->rca = Pedido::ajustaRca($rca, $r['CODUSUR']);
                 $p->numped = $r['NUMPED'];
                 $p->numcar = $r['NUMCAR'];
                 $p->cod = $r['CODCLI'];
@@ -353,7 +353,8 @@ INNER JOIN
     }
 
 
-    public static function ajustaRca($nome){
+    public static function ajustaRca($nome, $codusur){
+        /*
         if(strpos($nome, 'KOKAR') !== false) {
             return '1 - KOKAR';
         }elseif(strpos($nome, 'WANDERLEI') !== false) {
@@ -382,7 +383,15 @@ INNER JOIN
             return '39 - HANNA';
         }else {
             return $nome;
+        }*/
+        //retorna codusur e primeiro nome
+        if($codusur == 45){
+            return '45 - PEPE';
         }
+        if($codusur == 44){
+            return '44 - CONDOR';
+        }
+        return $codusur . ' - ' . explode(' ', $nome)[0];
     }
 
     public static function getListaPedidosDist(){
@@ -467,7 +476,7 @@ INNER JOIN
                 $p->data = Formatador::formatarData($r['DATA']);
                 $p->hora = $r['HORA'];
                 $rca = $r['NOME'];
-                $p->rca = Pedido::ajustaRca($rca);
+                $p->rca = Pedido::ajustaRca($rca, $r['CODUSUR']);
                 $p->numped = $r['NUMPED'];
                 $p->numcar = $r['NUMCAR'];
                 $p->cod = $r['CODCLI'];

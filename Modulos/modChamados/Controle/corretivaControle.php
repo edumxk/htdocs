@@ -95,7 +95,7 @@
             if(sizeof($ret)>0){
                 $p = new Produto();
                 $p->codprod = $ret[0]['CODPROD'];
-                $p->produto = utf8_encode($ret[0]['DESCRICAO']);
+                $p->produto = utf8_encode(mb_strtoupper($ret[0]['DESCRICAO']));
 
                 echo JSON_ENCODE($p);
             }else{
@@ -110,7 +110,7 @@
             $numrat = $key['numrat'];
             $codcli = $key['codcli'];
             $custo = $key['custo'];
-            $obs = strtoupper($key['obs']);
+            $obs = utf8_decode(mb_strtoupper($key['obs']));
             $tipo = $key['tipo'];
         
             echo json_encode($key);
@@ -124,7 +124,7 @@
                 $c->numrat = $numrat;
                 $c->tipo = $acao;
                 $c->codprod = $prod[0]['CODPROD'];
-                $c->despesa = $prod[0]['DESCRICAO'];
+                $c->despesa = utf8_decode(mb_strtoupper($prod[0]['DESCRICAO']));
                 $c->qt = $key['qt'];
                 $pvenda = RatProdDao::getPvendaFromRatI($numrat, $codprod);
                 if($pvenda == 0){
@@ -133,7 +133,7 @@
                 
                 $c->valor = $pvenda;
                 $c->codcusto = $custo;
-                $c->obs = strtoupper($obs);
+                $c->obs = utf8_decode(mb_strtoupper($obs));
 
                 }
             }else{
@@ -144,11 +144,11 @@
                     $c->numrat = $numrat;
                     $c->tipo = $acao;
                     $c->codprod = $key['codprod'];
-                    $c->despesa = strtoupper($key['produto']);
+                    $c->despesa = utf8_decode(mb_strtoupper($key['produto']));
                     $c->qt = 1;
                     $c->valor = $key['qt'];
                     $c->codcusto = $custo;
-                    $c->obs = strtoupper($obs);
+                    $c->obs = utf8_decode(mb_strtoupper($obs));
                     }else{
                         $prod = CorretivaDao::getProdutoByNome($key['produto']);
                         
@@ -161,7 +161,7 @@
                         $pvenda = RatProdDao::getPvendaByCod($codcli, $c->codprod);
                         $c->valor = $pvenda;
                         $c->codcusto = $custo;
-                        $c->obs = strtoupper($obs);
+                        $c->obs = utf8_decode(mb_strtoupper($obs));
                     }
                 }else if($key['obs']!="" && $tipo=='2'){
                     $prod = CorretivaDao::getProduto($codprod);
@@ -170,11 +170,11 @@
                     $c->numrat = $numrat;
                     $c->tipo = $acao;
                     $c->codprod = 0;
-                    $c->despesa = strtoupper($key['produto']);
+                    $c->despesa = utf8_decode(mb_strtoupper($key['produto']));
                     $c->qt = 1;
                     $c->valor = $key['qt'];
                     $c->codcusto = $custo;
-                    $c->obs = strtoupper($obs);
+                    $c->obs = utf8_decode(mb_strtoupper($obs));
                 }
             }
 

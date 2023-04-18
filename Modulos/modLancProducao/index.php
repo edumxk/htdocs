@@ -10,7 +10,7 @@ if (!array_key_exists('coduser', $_SESSION)) {
 
 require_once './control/CentralOP.php';
 $listaOPs = Controle::getOP();
-
+$produtos = Controle::getProdutos();
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -43,6 +43,13 @@ $listaOPs = Controle::getOP();
             </ul>
         </div>		
     </header>
+    <datalist id="produtos">
+<?php
+    foreach($produtos as $produto): ?>
+        <option value="<?= $produto['CODPROD']; ?>" ><?= $produto['DESCRICAO']; ?></option>
+    <?php endforeach;?>
+    </datalist>
+
     <div class="col-md-12">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -98,7 +105,7 @@ $listaOPs = Controle::getOP();
 	</div>
 
 	<script src="../../recursos/js/jquery.min.js"></script>
-	<!-- INICIO MODAL PARA EDITAR CARGA -->
+	<!-- INICIO MODAL EDITAR OP -->
 	<div class="modal" tabindex="-1" role="dialog" id="modalEditar">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
@@ -109,7 +116,7 @@ $listaOPs = Controle::getOP();
 				</div>
 				<div class="modal-body">
 					<div class="modal_principal">
-                            <table class="table table-dark">
+                            <table class="table table-dark" id="table-produtos">
                                 <thead>
                                     <tr>
                                         <th>CODPROD</th>
@@ -153,13 +160,17 @@ $listaOPs = Controle::getOP();
 					</button>
 				</div>
 				<div class="modal-body">
-					<div class="modal_principal_editar form-group">
-                            <label for="codprod" class="col-sm-2 col-form-label col-form-label-sm">Código: </label>
-							<input class="form-control form-control-sm"  type="number" name="codprod" id="codprod" style="width: 60px">
-							<input class="form-control form-text text-muted" type="text" name="descricao" id="descricao">
-                            <label for="qtdProd">Qtd: </label>
-							<input class="form-control" type="number" name="qtdProd" id="qtdProd">
-                            <button class="btn btn-info" onclick="editarOP()" style="width: 160px">Adicionar</button>
+					<div class="form-group modal-add-prod">
+                        
+                        <input class="form-control codigo" placeholder="Código" tabindex="0" list="produtos" type="text" name="codprod" id="codprod">
+
+                        <input class="form-control form-text" tabindex="-1" placeholder="Produto" readonly type="text" name="descricao" id="descricao">
+
+                        <!-- <label for="qtdProd">Qtd: </label> -->
+                        <input class="form-control codigo"  tabindex="0" type="number" placeholder="Quantidade" name="qtdProd" id="qtdProd">
+                        <!-- <label for="estoque">Estoque: </label> -->
+                        <input class="form-control codigo" tabindex="-1" type="number" readonly placeholder="Estoque" name="estoque" id="estoque">
+                        <button class="btn btn-info" tabindex="0" onclick="addItem()">Adicionar</button>
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -176,72 +187,6 @@ $listaOPs = Controle::getOP();
 <script src="../../recursos/bootstrap4/js/bootstrap.bundle.min.js"></script>
 <script src="../../recursos/js/Chart.bundle.min.js"></script>
 <script type="text/javascript" src="/DataTables/datatables.min.js"></script>
-<script>
-
-// AÇÕES LIGADAS COM CONTROLE
-var modal = $("#modalEditar");
-var modal2 = $("#modalProdutos");
-	function editar(op, custo, qtProduzir, rendimento, custoajuste, custoTotal) {
-		let dataset = op;
-        let custotot = custo*qtProduzir;
-        let totqt = 0.0;
-		let totcusto = 0.0;
-        
-		$.ajax({
-				type: 'POST',
-				url: 'control/CentralOp.php', //Migrar para Controle Novo
-				data: {
-					'action': 'editar',
-					'dataset': dataset
-				},
-				success: function(response) {
-                    array = JSON.parse(response);
-                    produtos = ``;
-                    for (i = 0; i < array.length; i++) {
-                        
-                        totcusto = parseFloat(array[i].custo) + totcusto;
-                        totqt = parseFloat(array[i].qt) + totqt;
-                        let custoPrint =  calcularCustoUn(parseFloat(array[i].custo) , custoTotal , custoajuste); //calculo de parte de custo total
-                        produtos = produtos+
-                        `
-                        <tr>\n
-                            <td>${array[i].codProd}</td>\n
-                            <td>${array[i].descricao}</td>\n
-                            <td class="numero">${parseFloat(array[i].qt).toFixed(3)}</td>\n
-                            <td class="numero">${parseFloat(array[i].custo).toFixed(3)}</td>\n
-                            <td class="numero">${parseFloat(custoPrint*100).toFixed(3)}</td>\n
-                        </tr>\n
-                        `;
-                        
-                    }
-                    $('#modal-dados').html(produtos);
-                    $('#custo_qt').html(totqt.toFixed(3));
-                    $('#custo_tot').html(totcusto.toFixed(3));
-                    
-                    totcusto = calcularCusto(totcusto, custotot, totqt, qtProduzir, rendimento, custo )//calculo de custo total
-                    
-                    $('#custo_lanc').html((totcusto*100).toFixed(3));
-                    modal.modal('show');
-				}
-		});
-	}
-    function editarOP(codprod){
-        modal2.modal('show');
-    
-    }
-    function close(){
-        modal.modal('toggle'); 
-    }
-
-    function calcularCusto(custoajuste, custoprod, qtajuste, qttotal, rend, custo){
-        let totcusto = ((custoajuste+custoprod) / ((qtajuste + qttotal) * (1 + rend)));
-        return totcusto / custo -1;
-    }
-    function calcularCustoUn(custo, custoTotal, custoAjuste){
-        let totcusto =  ( custo / custoTotal ) * custoAjuste;
-        return totcusto;
-    }
-
-</script>
+<script src="js/script.js"></script>
 
 </HTML>

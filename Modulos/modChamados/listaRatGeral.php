@@ -99,17 +99,13 @@
 
 
 			<div class="col-md-12" style="padding-top: 20px">
-				<div class="row">
-				<div class="col-md-6" style="padding-bottom: 20px">
-						<a class="btn btn-danger" href="listaCliente.php" role="button">Nova RAT</a>
-					</div>
-					<div class="col-md-3" style="padding-bottom: 20px">
+				<div class="nav-chamado">
+					<a class="btn btn-danger" href="listaCliente.php" role="button">Nova RAT</a>
+					<div>
 						<a class="btn btn-warning" href="listaRat.php" role="button">RAT's Pendentes</a>
 						<a class="btn btn-success" href="listaRatCTD.php" role="button">RAT's Finalizadas</a>
 					</div>
-					<div class="col-md-3" style="padding-bottom: 20px; allign: right">
-						<a class="btn btn-primary float-right" href="relatorio.php" role="button">Resultados</a>
-					</div>
+					<a class="btn btn-primary float-right" href="relatorio.php" role="button">Resultados</a>
 				</div>
 				<div class="col-md-12">
 					<form method="post" autocomplete="off">

@@ -10,7 +10,7 @@ html,body {height:100%; width: 100%; font-size: small; font-family:  sans-serif;
     font-weight: 100;
 }
 
-#secao {
+#secao, .secao {
     text-align: center; 
     border-style: solid; 
     border-color: lightseagreen;
@@ -22,6 +22,14 @@ html,body {height:100%; width: 100%; font-size: small; font-family:  sans-serif;
     font-weight: bold;
     font-size: 18px;
 
+}
+
+.nav-chamado{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 20px;
 }
 
 .footer {

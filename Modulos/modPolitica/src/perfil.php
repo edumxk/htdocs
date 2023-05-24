@@ -29,13 +29,6 @@ require_once './control/controle.php';
         <div class="head__logo">
             <img src="/Recursos/src/Logo-Kokar5.png" alt="Logo da Kokar Tintas">
         </div>
-        <div class="head__navegacao">
-            <ul class="head__navegaca__lista">
-                <li class="head__navegaca__lista-itens"><a href="#">Home</a></li>
-                <li class="head__navegaca__lista-itens"><a href="#">Politicas</a></li>
-                <li class="head__navegaca__lista-itens"><a href="#">Perfil</a></li>
-            </ul>
-        </div>
     </header>
     <section class="menu">
         <div class="logo-conteudo">
@@ -89,233 +82,270 @@ require_once './control/controle.php';
         </div>
     </section>
     <section class="principal">
-        <div class="principal__filtros">
-            <div class="principal__filtros-caixa pesquisa">
-                <input id="busca" type="text" placeholder="Pesquisar...">
-            </div>
-        </div>
         <div class="pagina__loader">
             <div class="loader"></div>
         </div> 
-        <div class="principal__conteudo">
-            <div class="principal__conteudo-conteudo">
-                <div>
-                    <h1>Perfis Cadastrados</h1>
+        <div class="principal__conteudo container-fluid">
+            <div class="principal__conteudo-conteudo row">
+                <div class="col-12">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cadastro-perfil">Novo Perfil</button>
                 </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Código</th>
-                            <th>Descrição</th>
-                            <th>Representante</th>
-                            <th>Região</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tabela__itens">
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th colspan="5"> 
-                                <div class="controles">
-                                    <button onclick="controls.goTo(1)"><<</button>
-                                    <button onclick="controls.prev()"><</button>
-                                    <div class="botoes" id="botoes_num_pages"></div>
-                                    <button onclick="controls.next()">></button>
-                                    <button onclick="controls.goTo(999)">>></button>
-                                </div>
-                            </th>
-                        </tr>
-                    </tfoot>
-                </table>
+               <div class="col-lg-7 col-md-12">
+                    <h1>Perfil</h1> 
+                    <table class="table table-striped table-sm table-dark">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="">#</th>
+                                <th scope="col">Id</th>
+                                <th scope="col">Representante</th>
+                                <th scope="col">Descrição</th>
+                                <th scope="col">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="perfil-dados">
+                            <tr>
+                                <th scope="row" colspan="5" class="check-politica" style="text-align: center;"> 
+                                    <h1>Carregando ...</h1>
+                                </th>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th scope="col" colspan="5">
+                                    <button type="button" onclick="limparSelecaoPerfil()" class="btn btn-info">Limpar</button>
+                                   
+                                    <button type="button" class="btn btn-warning" onclick="editarPerfil()">Editar Perfil</button>
+
+                                    <button type="button" class="btn btn-danger" onclick="excluirPerfil()">Excluir </button>
+                                </th>
+                            </tr>
+                        </tfoot>
+                    </table>
+               </div>
+               <div class="col-lg-5 col-md-12">
+                    <h1>Clientes Sem Politica</h1>
+                    <table class="table table-sm table-striped table-dark">
+                        <thead>
+                            <tr>
+                                <th scope="col"><input class="form-check" type="checkbox" name="" id=""></th>
+                                <th scope="col">Rca</th>
+                                <th scope="col">Cod</th>
+                                <th scope="col">Cliente</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row"><input class="form-check" type="checkbox" name="" id=""></th>
+                                <td><span class="">Joildo</span></td>
+                                <td><span class="">231</span></td>
+                                <td><span class="">Fabiano Parafusos</span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><input class="form-check" type="checkbox" name="" id=""></th>
+                                <td><span class="">Joildo</span></td>
+                                <td><span class="">231</span></td>
+                                <td><span class="">Fabiano Parafusos</span></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th scope="col" colspan="4">
+                                    <button type="button" class="btn btn-success">Cadastrar Perfil</button>
+                                </th>
+                            </tr>
+                        </tfoot>
+                    </table>
+               </div>
             </div>
         </div>
     </section>
-</body>
-<script>
-    function listItems(items, pageActual, limitItems){
-        let result = [];
-        totalPage = state.totalPage
-        let count = ( pageActual * limitItems ) - limitItems;
-        let delimiter = count + limitItems;
-        //console.log(totalPage, count, delimiter)
+    <section class="modais">
+        <!-- Modal Body-->
+        <div class="modal fade" id="verPerfil" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                        <div class="modal-header">
+                                <h5 class="modal-title" id="modal-title">Ver Perfil</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="limparPolitica()" aria-label="Close"></button>
+                            </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <table class="table table-sm table-striped table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th scope="col">Código</th>
+                                        <th scope="col">Descrição</th>
+                                        <th scope="col">Desconto</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="modal-ver-dados">
+                                    <tr>
+                                        <th scope="row" colspan="3" class="check-politica" style="text-align: center;"> 
+                                            <h1>Carregando ...</h1>
+                                        </th>
+                                    </tr>
+                            </table>
 
-        if(pageActual <= totalPage){
-            for(let i=count; i<delimiter; i++){
-                if(items[i] != null){
-                    result.push(items[i]);
-                }
-                count++;
-            }
-        }
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="limparPolitica()" data-bs-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        return result;
-    }
 
-    function listarPagina(){
+        <!-- Modal Body -->
+        <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+        <div class="modal fade" id="cadastro-perfil" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitleId">Cadastro de Perfil</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="conteiner-fluid">
+                            <div class="row">
+                                <div class="col-lg-12 my-2">
+                                    <label for="cadastro-descricao">Descrição</label>
+                                    <input type="text" class="form-control" name="cadastro-descricao" id="cadastro-descricao" aria-describedby="cadastro-descricao" placeholder="">
+                                </div>
+                                <div class="col-lg-12 my-2">
+                                    <label for="cadastro-rca">Representante</label>
+                                    <select class="form-select" name="cadastro-rca" id="cadastro-rca" aria-label="Default select example">
+                                        <option selected value="0">Selecione um Representante</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-12 my-2">
+                                    <label class="sr-only" for="cadastro-cliente-id">Cliente Base (Opcional)</label>
+                                    <input type="text" class="form-control" readonly id="cadastro-cliente-id" placeholder="Razão Social ou Fantasia">
+                                    <input hidden type="text" class="form-control" readonly id="cadastro-cliente-descricao" placeholder="Razão Social ou Fantasia">
+                                    <!-- Limpar Cliente -->
+                                    <button hidden type="button" class="btn btn-danger" onclick="limparCliente()" id="cadastro-cliente-limpar">Limpar Cliente</button>
+                                    <button data-bs-toggle="modal" data-bs-target="#busca-cliente" class="btn btn-primary form-control my-2">Buscar</button>
+                                </div>
+                                <!-- div para cadastro-obs -->
+                                <div class="col-lg-12 my-2">
+                                    <label for="cadastro-obs">Descrição da Política</label>
+                                    <textarea class="form-control" name="cadastro-obs" id="cadastro-obs" rows="3"></textarea>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" onclick="criarPerfil()">Cadastrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         
-        let paginavel = listItems(dados.items, state.page, state.perPage);
-        console.log(paginavel)
-        let itens = [];
-        paginavel.forEach(function(i){
-            itens+= `<tr class="perfil_linhas">
-                                    <td>${i}</td>
-                                    <td>${i}</td>
-                                    <td>${i}</td>
-                                    <td>${i}</td>
-                                    <td><button onClick="historico.getHistorico(${i})">Ver</button></td>
-                            </tr>`;
-                })
-                document.getElementById('tabela__itens').innerHTML= itens ;
-    }    
+        <!-- Modal Body -->
+        <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+        <div class="modal fade" id="busca-cliente" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitleId">Busca de Cliente</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="modal" data-bs-target="#cadastro-perfil"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <label class="sr-only" for="cadastro-cliente-busca">Pesquisar</label>
+                                    <input type="text" class="form-control" id="cadastro-cliente-busca" placeholder="Razão Social ou Fantasia">
+                                    <button onclick="buscarCliente()" class="btn btn-primary form-control my-2">Buscar</button>
+                                </div>
+                                <div class="col-lg-12">
+                                   
+                                    <div class="table-responsive my-2">
+                                        <table class="table table-striped
+                                        table-hover	
+                                        table-borderless
+                                        table-primary
+                                        align-middle">
+                                            <thead class="table-light">
+                                                <caption>Clientes com Políticas Comerciais Ativas</caption>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>CÓDIGO</th>
+                                                    <th>RAZÃO SOCIAL</th>
+                                                    <th>CIDADE - UF</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody class="table-group-divider" id="busca-clientes-lista">
+                                                    <tr class="table-primary" >
+                                                        <th scope="row" class="check-politica text-center" colspan="4"> AGUARDANDO PESQUISA... </th>
+                                                    </tr>
+                                                </tbody>
+                                        </table>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" ddata-bs-dismiss="modal" aria-label="Close" data-bs-toggle="modal" data-bs-target="#cadastro-perfil">Cancelar</button>
+                        <button type="button" class="btn btn-primary" onclick="confirmarBusca()">Confirmar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    const dados = {
-        items: [1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0]
-                
-    }
+        <!-- Modal Editar Perfil -->
+        <!-- Modal Body -->
+        <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+        <div class="modal fade" id="modal-editar-perfil" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitleId">Editar Perfil</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <section class="mb-3">
+                            <div class="form-group">
+                                <label for="editar-perfil-descricao">Descricao</label>
+                                <input type="text" class="form-control" id="editar-perfil-descricao" placeholder="Descrição">
 
-    const perPage = 15;
+                                <label for="editar-perfil-obs">Obs</label>
+                                <textarea class="form-control" name="editar-perfil-obs" id="editar-perfil-obs" rows="3"></textarea>
+                            </div>
+                        </section>
+                        <div id="editar-perfil">
+                            <div class="table-responsive-md">
+                                <table class="table table-dark">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Código</th>
+                                            <th scope="col">Categoria</th>
+                                            <th scope="col">Desconto</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="editar-perfil-table">
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" onclick="confirmarEditarPerfil()">Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-     const state = {
-        page: 1,
-        perPage,
-        totalPage : Math.ceil( dados.items.length / perPage ),
-        maxVisibleButtons : 3,
-    }
-
-    const controls = {
-        next() {
-            if(state.page < state.totalPage)
-                state.page++
-            //console.log(state.page)
-            list.update()
-            button.update();
-        },
-        prev() {
-            if(state.page > 1 )
-                state.page--
-            //console.log(state.page)
-            list.update()
-            button.update();
-        },
-        goTo(page) {
-            state.page = +page;
-
-            if(page <= 1)
-                state.page = 1;
-
-            if(page >= state.totalPage)
-                state.page = state.totalPage;
-            //console.log(state.page);
-            list.update()
-            button.update();
-        },
-    }
-
-    const list = {
-        create(){
-            let item= dados.items
-        },
-        update(){
-            document.getElementById('tabela__itens').innerHTML ="<div></div>";
-            listarPagina(dados.items, state.page);
-        }
-
-    }
-
-    const button = {
-        element:  document.getElementById('botoes_num_pages'),
-        create(number) {
-            const button2 = document.createElement('button');
-            button2.innerHTML = number;
-
-            button2.addEventListener('click', (event)=>{
-                const page = event.target.innerText;
-
-                controls.goTo(page)
-            })
-            button.element.appendChild(button2); //
-        },
-        update() {
-            button.element.innerHTML = "";
-            const {maxLeft, maxRight} = button.calculateMaxVisible();
-            //console.log(maxLeft, maxRight)
-
-            for(let page = maxLeft; page <= maxRight; page ++)
-                button.create(page)
-            let btn = button.element.children;
-            
-            for(let cont = 0; cont < btn.length; cont ++){
-                if(btn[cont].innerText == state.page){
-                    btn[cont].style.backgroundColor = "red";
-                }
-            };
-
-        },
-        calculateMaxVisible() {
-            let maxLeft = (state.page - Math.floor(state.maxVisibleButtons/2))
-            let maxRight = (state.page + Math.floor(state.maxVisibleButtons/2))
-
-            if(maxLeft < 1){
-                maxLeft = 1;
-                maxRight = state.maxVisibleButtons
-            }
-            if(maxRight >= state.totalPage ){
-                maxLeft = state.totalPage - (state.maxVisibleButtons - 1)
-                maxRight = state.totalPage
-            }
-            if(maxLeft < 1)
-                maxLeft = 1
-            return {maxLeft, maxRight}
-        },
-        eventos() {
-            
-        }
-    }
-
-    function init(){
-        list.update()
-        button.update()
-    }
-
-        window.onload = function() {
-            let botao = $('.btn__politica');
-            let atividade = $('.btn__status');
-
-            //Pesquisa da tabela clientes
-            $("#busca").on("keyup", function() {
-                const valor = $(this).val().toUpperCase().split(' ');
-
-            $(".linha").each(function() {
-                const busca = $(this).text().toUpperCase();
-                let referencia = $(this);
-                let flag= 0;
-                valor.filter(function(element) {                            
-                    if (busca.indexOf(element) !== -1) {   // se for encontrado um valor nos dois arrays
-                        flag  ++;
-                    }else{
-                        flag = 0;
-                    }
-                    if(valor.length === flag){
-                        referencia.show()
-                    }else{
-                        referencia.hide()
-                    }
-                    });
-                }); 
-            });
-            //carregamento da página
-            $(".loader").toggle();
-            $(".pagina__loader").css('height', '60px');
-            $(".principal__conteudo").toggle();
-    }
-    init();
-</script>
+    </section>
+</body>
+<script src="./js/sidebar.js"></script>
+<script src="./js/scriptsGerais.js"></script>
+<script src="./js/perfil.js"></script>
 </html>

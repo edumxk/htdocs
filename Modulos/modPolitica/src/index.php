@@ -179,6 +179,10 @@ require_once './control/controle.php';
 	<script type="text/javascript" charset="utf8"
 		src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 <script>
+
+//definir variavel global codsetor
+    var codsetor = <?=$_SESSION['codsetor']?>;
+
     function ver(codcli, numregiao){
         var modal = $('#modalPoliticas')
         $.ajax({
@@ -338,6 +342,7 @@ require_once './control/controle.php';
     }
 
     function attDesconto(linha, tabela){
+        
         let grupo = $(linha).parent().parent().find('.politica__grupo').text();
         let desconto = ($(linha).val());
         let refTabela = $(linha).parent().parent().find('.tabela');
@@ -368,6 +373,11 @@ require_once './control/controle.php';
     }
 
     function atualizaPolitica(codCli, obs){   
+
+        if(codsetor > 1 && codsetor != 101){
+            alert('Você não tem permissão para alterar políticas comerciais!');
+            return;
+        }
         $('#btn_salvar').removeAttr('onclick');
         $('#btn_salvar2').removeAttr('onclick'); 
         let element = $('#ln'+codCli).children('.principal__conteudo__clientes-politica').children();      
@@ -375,6 +385,7 @@ require_once './control/controle.php';
         let desconto = [];
         let obsGeral = retira_acentos($('#modalObs').val());
         let codUser = <?= $_SESSION['coduser']?> ;
+
         
         if(obsGeral != obsOriginal){
             linha.each(function( i, element ){
@@ -389,7 +400,7 @@ require_once './control/controle.php';
             $.ajax({
                 type: 'POST',
                 url: 'control/controle.php',
-                data: { 'action': 'atualizarPolitica', "desconto":desconto, "codCli": codCli, "obs": obsGeral, "codUser": codUser},
+                data: { 'action': 'atualizarPolitica', "desconto":desconto, "codCli": codCli, "obs": obsGeral, "codUser": codUser, "codSetor": codsetor},
                 success: function (response) {
                     console.log(response);
                     element.text('ATIVO');

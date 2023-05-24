@@ -45,14 +45,8 @@
 	<link href="../../recursos/css/bootstrap.min.css" rel="stylesheet">
 	<link href="../../recursos/css/style.css" rel="stylesheet">
 	<link href="../../recursos/css/fawsome/css/all.css" rel="stylesheet">
-
-
 </head>
-
-
 <body style="background-color: teal;">
-
-
 	<div class="header">
 		<div class="row">
 			<div class="col-md-10" style="left: 100px; top:2px; display: inline-block; vertical-align: middle;">
@@ -68,10 +62,7 @@
             </div>
 		</div>
 	</div>
-
-
 	<div class="container" style="background-color: white; border-style: solid; border-width: 1px">
-
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item active" aria-current="page">
@@ -81,23 +72,18 @@
 			</ol>
 		</nav>
 		<div class="row">
-
-
 			<div class="col-md-8"><!-- ss-->
 				<h1 style="padding-bottom: 20px; padding-top: 20px">Gerência de Chamados
 					<small> - Lista de Todas as RAT's</small>
 				</h1>
 			</div>
 		</div>
-
 		<div class="row">
 			<div class="col-md-12">
 				<div class="col-md-12" id="secao">
 					Chamados
 				</div>
 			</div>
-
-
 			<div class="col-md-12" style="padding-top: 20px">
 				<div class="nav-chamado">
 					<a class="btn btn-danger" href="listaCliente.php" role="button">Nova RAT</a>
@@ -145,7 +131,6 @@
 						</div>
 					</form>
 				</div>
-				
 				<div class="col-md-12" style="padding-bottom: 20px">
 					<table id="table_id" class="display compact" style="width:100%">
 						<thead>
@@ -194,8 +179,6 @@
 									<?php echo $r->dtEncerramento?>
 								</td>
 								<td style="text-align: center" class="row">
-
-
 									<!-- <form class="col-sm-1" action="#" method="post"> -->
 									<div class="col-sm-1">
 
@@ -222,8 +205,6 @@
 	
 					</div>
 				</div>
-	
-	
 				<div class="col-md-12">
 					<div class="collapse" id="collapse2">
 						<div class="row" style="padding-bottom: 10px; height:250px">
@@ -244,10 +225,7 @@
 		</div>
 	</div>
 	<div class="header">
-
 	</div>
-
-
 	<script src="../../recursos/js/jquery.min.js"></script>
 	<script src="../../recursos/js/bootstrap.min.js"></script>
 	<script src="../../recursos/js/scripts.js"></script>
@@ -258,8 +236,6 @@
 
 <script>
 	$(document).ready(function () {
-
-
 		$('#table_id').DataTable({
 			"lengthMenu": [[50, 100, -1], [50, 100,"Todos"]],
 			"order": [[ 0, "asc" ]],
@@ -297,6 +273,4 @@
 		window.open("recursos/visualizarRat.php?numrat="+elm);
 	}
 </script> 
-
-
 </html>

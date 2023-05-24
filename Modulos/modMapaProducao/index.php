@@ -84,7 +84,7 @@ $produtosList = Controle::getProdutosLista();
 			?>
 				<div class="mapa_linha_card <?= $l ?>">
 					<h3>
-						<button type="button" onclick="openCadastro(this)" class="btanque" value="<?= $i ?>">
+						<button type="button" onclick="openCadastro(this)" class="btn btn-primary" value="<?= $i ?>">
 							<?= $l ?>
 						</button>
 					</h3>
@@ -318,6 +318,9 @@ $produtosList = Controle::getProdutosLista();
 </body>
 <script>
 	$(document).ready(function() {
+
+		//define a classe atrado como vermelho se a data de previsão for menor que a data atual
+
 		$(".atraso").each(function() {
 			previsao = $(this).get(0).id;
 			datap = previsao.split(' ')
@@ -329,6 +332,17 @@ $produtosList = Controle::getProdutosLista();
 				}
 
 			}
+			//define as datas em forma que pode ser comparado se uma é maior que a outra
+			datap = datap[0].split('-')
+			data = data.split('-')
+			datap = datap[0] + datap[1] + datap[2]
+			data = data[0] + data[1] + data[2]
+			//compara as datas
+			if (datap < data) {
+				$(this).css("background-color", "red"); //red
+			}
+
+			
 		})
 	});
 
@@ -553,6 +567,7 @@ $produtosList = Controle::getProdutosLista();
 			success: function(response) {
 				
 				if (response.match("ok")) {
+					alert("Cadastro realizado com Sucesso.");
 					location.reload() //Aqui vai chamar método de refresh da producao.
 				} else {
 					console.log('Erro desconhecido! Action: cadastrar, Erro: ' + response);

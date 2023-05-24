@@ -187,6 +187,4 @@ class Ctd{
             $dados = 0;
         return $dados +1;
     }
-
-
 }

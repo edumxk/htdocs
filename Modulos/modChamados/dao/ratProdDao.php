@@ -222,7 +222,7 @@ class ratProdDao{
                 and ci.coditem = :codprod
                 where codcli = :codcli) desconto
                         from kokar.pctabpr p
-                        where p.numregiao = (select l.numregiaocli from kokar.pcclient l where l.codcli = 1046)
+                        where p.numregiao = (select l.numregiaocli from kokar.pcclient l where l.codcli = :codcli)
                         and p.codprod = :codprod)", array(":codcli"=>$codcli, ":codprod"=>$codprod)
             );
             return $val[0]['PVENDA'];

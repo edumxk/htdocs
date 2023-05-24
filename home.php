@@ -136,7 +136,7 @@
                 </div>
             <?php endif?>
             
-            <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']==4 || $_SESSION['codsetor']==5 || $_SESSION['codsetor']==101 ): //Apenas diretoria, comercial?>
+            <?php if($_SESSION['codsetor']<=0 ): //Apenas diretoria, comercial?>
                 <div class="icones">  
                     <h5 class="cartao-title">Campanha</h5>
                     <input class="botao" onclick="window.location.href='modulos/modpoliticasEst/index.php'" 
@@ -176,7 +176,7 @@
                 </div>
             <?php endif?>
             
-            <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']<=11): //Apenas diretoria e produção?>
+            <?php if($_SESSION['codsetor']<=1): //Apenas diretoria e produção?>
                 <div class="icones">  
                     <h5 class="cartao-title">Frete</h5>
                     <input class="botao" onclick="window.location.href='modulos/modFrete/home.php'" 
@@ -200,7 +200,7 @@
                 </div>
             <?php endif?>
 
-            <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']==6 || $_SESSION['codsetor']==61 || $_SESSION['codsetor']==7 || $_SESSION['codsetor']==71 ||$_SESSION['codsetor']==12 || $_SESSION['codsetor']==2): //Apenas TI e comercial?>
+            <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']==6 || $_SESSION['codsetor']==61 || $_SESSION['codsetor']==7 || $_SESSION['codsetor']==71 || $_SESSION['codsetor']==2): //Apenas TI e comercial?>
                 <div class="icones">      
                     <h5 class="cartao-title">Almoxarifado</h5>
                     <input class="botao" onclick="window.location.href='homea.php'" 
@@ -216,7 +216,7 @@
                 </div>
             <?php endif?>
 
-            <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']==2 ||$_SESSION['codsetor']==12): //Apenas TI e comercial?>
+            <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']==2 || $_SESSION['codsetor']==12 || $_SESSION['codsetor']== 8): //Apenas TI e comercial?>
                 <div class="icones">  
                     <h5 class="cartao-title">Laboratório</h5>
                     <input class="botao" onclick="window.location.href='homelab.php'" 
@@ -254,14 +254,14 @@
                     type="image" src="recursos/src/shipping.png" height="140" width="140"/> 
                 </div>
             <?php endif?>
-            <?php if($_SESSION['codsetor']<=1): //Apenas TI e comercial?>
+            <?php if($_SESSION['codsetor']<=0): //Apenas TI e comercial?>
                 <div class="icones">  
                     <h5 class="cartao-title">BI teste</h5>
                     <input class="botao" onclick="window.location.href='modulos/BI/index.php'" 
                     type="image" src="recursos/src/planejamento.png" height="140" width="140"/> 
                 </div>
             <?php endif?>
-            <?php if($_SESSION['codsetor']<=1): //Apenas TI e comercial?>
+            <?php if($_SESSION['codsetor']<=0): //Apenas TI e comercial?>
                 <div class="icones">  
                     <h5 class="cartao-title">Status</h5>
                     <input class="botao" onclick="window.location.href='modulos/modstatus/status.php'" 

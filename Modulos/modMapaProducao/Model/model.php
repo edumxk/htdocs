@@ -1,7 +1,5 @@
 <?php
 
-use Model as GlobalModel;
-
     require_once ($_SERVER["DOCUMENT_ROOT"] . '/model/sqlOracle.php');
     require_once ($_SERVER["DOCUMENT_ROOT"] . '/controle/formatador.php');
     require_once ($_SERVER["DOCUMENT_ROOT"] . "/Modulos/modMapaProducao/controle/controle.php");
@@ -9,10 +7,11 @@ use Model as GlobalModel;
 class Model{
 
     public static function getProducaoFeed($data){
-
+        $dataFormatada = DateTime::createFromFormat('d/m/Y', $data)->format('Y-m-d');
+        
         $sql = new sqlOra(); 
         try{
-            if($data >= date('d/m/y')):   
+            if ($dataFormatada > date('Y-m-d')):   
                 $ret = $sql->select("SELECT c.codproducao, t.codtanque, c.dtabertura, c.dtproducao,
                 m.linha , t.capacidade, m.operador, t.status statust, M.COD, c.lote,
                 c.dtfecha ||' '||c.horafecha fechamento,
@@ -23,7 +22,8 @@ class Model{
             inner join paralelo.metasprodc m on m.cod = t.codlinha
             WHERE 
                 ((c.dtfecha = :data and c.status = 'F') 
-                or (c.status != 'F' and c.dtabertura >= :data))
+                or (c.status != 'F' and c.dtabertura >= :data)
+                or (c.status != 'F' and c.dtproducao >= &data))
                 and c.dtexclusao is null     
                 order by c.dtfecha, c.horafecha, c.dtproducao, c.horaproducao
                 ",[":data"=>$data]);
@@ -36,7 +36,11 @@ class Model{
                 from paralelo.mproducaoc c
                 right join paralelo.mtanques t on t.codtanque = c.codtanque
                 inner join paralelo.metasprodc m on m.cod = t.codlinha
-                WHERE (((c.dtfecha = :data and c.status = 'F') or c.status !='F' and c.dtabertura <= :data))and c.dtexclusao is null
+                WHERE (((c.dtfecha = :data and c.status = 'F') 
+                or c.status !='F' and c.dtproducao <= :data) 
+                
+                )
+                and c.dtexclusao is null
                 order by c.dtfecha, c.horafecha, c.dtproducao, c.horaproducao
                 ",[":data"=>$data]);
             endif;

@@ -98,6 +98,19 @@
             return explode($divisor, $string);
         }
 
+        // Função para substituir utf8_encode
+        public static function br_encode($string) {
+            
+            $string = mb_convert_encoding($string, 'ISO-8859-1', 'UTF-8');
+            return mb_strtoupper($string, 'ISO-8859-1'); 
+
+        }
+
+        // Função para substituir utf8_decode
+        public static function br_decode($string) {
+            return mb_convert_encoding($string, 'UTF-8', 'ISO-8859-1');
+        }
+
 
     }
 

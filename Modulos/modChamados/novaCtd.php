@@ -157,7 +157,7 @@
 									</div>
 									<div class="col-4 col-md-4 p-2">
 										<label for="solicitante" class="form-label">Solicitante</label>
-										<input type="text" class="form-control" id="solicitante" placeholder="Nome do Solicitante">
+										<input type="text" class="form-control" id="solicitante" name="name" placeholder="Nome do Solicitante">
 									</div>
 									<div class="col-4 col-md-4 p-2">
 										<label for="telsolicitante" class="form-label">Telefone Solicitante</label>
@@ -313,18 +313,15 @@
 				</div>
 			</div>
 			<!-- FIM MODAL -->
-
-
 			<script src="../../recursos/js/jquery.min.js"></script>
 			<script src="../../recursos/js/bootstrap.min.js"></script>
 			<script src="../../recursos/js/scripts.js"></script>
 			<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
 			<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-
-
 	</body>
 
 	<script>
+		var requisicao = false;
 		function salvarCtd() {
 			let numctd = "<?php echo $numctd ?>";
 			let codcli = "<?php echo $codcli ?>";
@@ -344,21 +341,22 @@
 				"emailSolicitante": emailSolicitante
 			};
 
-			console.log(dataset);
-
-			$.ajax({
-				type: 'POST',
-				url: 'controle/ctdControl.php',
-				data: {
-					'action': 'novaCtd',
-					'query': dataset
-				},
-				success: function(response) {
-					console.log(response);
-					//console.log('ratProd.php?nurmat='+numrat);
-					//$(location).attr('href', 'listaRat.php');
-				}
-			});
+			if(!requisicao){
+				$.ajax({
+					type: 'POST',
+					url: 'controle/ctdControl.php',
+					data: {
+						'action': 'novaCtd',
+						'query': dataset
+					},
+					success: function(response) {
+						console.log(response);
+						console.log('ratProd.php?nurmat='+numrat);
+						//$(location).attr('href', 'listaRat.php');
+					}
+				});
+			}
+			requisicao = true;
 		}
 
 		function modalConfirma() {

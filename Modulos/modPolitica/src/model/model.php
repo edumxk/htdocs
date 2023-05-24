@@ -1,6 +1,7 @@
 <?php
 date_default_timezone_set('America/Araguaina');
 require_once ($_SERVER["DOCUMENT_ROOT"] . '/model/sqlOracle.php');
+require_once ($_SERVER["DOCUMENT_ROOT"] . '/Controle/formatador.php');
 require_once ($_SERVER["DOCUMENT_ROOT"] . '/Modulos/modPolitica/src/model/Cliente.php');
 require_once ($_SERVER["DOCUMENT_ROOT"] . '/Modulos/modPolitica/src/model/Politica.php');
 
@@ -381,4 +382,141 @@ class ModelPoliticas{
 
         return $arr;
     }
+
+    //Buscar Perfis de Politicas de Desconto
+    public static function getPerfis(){
+        $sql = new SqlOra();
+        $arr = $sql->select("SELECT c.*, u.obs1 rca FROM PARALELO.POLPERFILC c 
+        inner join kokar.pcusuari u on u.codusur = c.rca");
+        return $arr;
+    }
+
+    public static function getPerfisItem($codPerfil){
+        $sql = new SqlOra();
+
+        try{
+            $arr = $sql->select("SELECT i.*, c.descricao FROM PARALELO.POLPERFILI i
+                                INNER JOIN KOKAR.PCGRUPOSCAMPANHAC c
+                                ON c.codgrupo = i.codgrupo
+                                WHERE codperfil = :codPerfil
+                                ORDER BY descricao", [':codPerfil' => $codPerfil]);
+        }catch(Exception $e){
+            $arr = [];
+            echo $e->getMessage();
+        }
+            if(count($arr) == 0)
+                return [];
+        return $arr;
+    }
+
+    public static function buscarCliente($descricao){
+        $descricao = str_replace(' ', '%', $descricao);
+        $sql = new SqlOra();
+        $arr = $sql->select("SELECT C.codcli, cliente, fantasia, D.NOMECIDADE || ' - ' || D.UF as cidadeUf FROM KOKAR.PCCLIENT C
+                            inner join KOKAR.Pccidade d on D.CODCIDADE = c.Codcidade
+                            inner join paralelo.pcpoliticas r on r.codcli = c.codcli AND R.ATIVO = 1
+                            WHERE (CLIENTE LIKE :descricao or FANTASIA LIKE :descricao) and c.dtexclusao is null
+                            ORDER BY CLIENTE", [':descricao' => '%'.mb_strtoupper($descricao).'%']);
+        return $arr;
+    }
+
+    public static function criarPerfil($dados){
+        $sql = new SqlOra();
+        $codPerfil = $sql->select("SELECT MAX(CODPERFIL)+1 CODPERFIL FROM PARALELO.POLPERFILC")[0]['CODPERFIL'];
+        
+        //verifica se $codPerfil é nulo
+        if($codPerfil == null){
+            $codPerfil = 1;
+        }
+        if($dados['codcli'] == null || $dados['codcli'] == ''){
+            $dados['codcli'] = 0;
+        }
+
+        try{
+            $arr = $sql->update2("INSERT INTO PARALELO.POLPERFILC (CODPERFIL, DESCRICAO, RCA, OBS, ATIVO, DATA, HORA, ORIGEM) 
+            VALUES (:codPerfil, :descricao, :rca, :obs, 1, TO_DATE(SYSDATE), TO_CHAR(SYSDATE, 'HH24:MI:SS'), :codcli)",
+                [':descricao' => $dados['descricao'],
+                ':codPerfil' => $codPerfil,
+                ':obs' => $dados['obs'],
+                ':rca' => $dados['rca'],
+                ':codcli' => $dados['codcli']]);
+
+        }catch(Exception $e){
+            echo 'Erro ao Criar Perfil, nenhum perfil adicionado';
+            return $e->getMessage();
+        }
+        if($dados['codcli'] != 0){
+            echo ModelPoliticas::copiarPolitica($codPerfil, $dados['codcli']);
+        }
+        if($arr == 1)
+            return 'Perfil Criado';
+        return 'Erro ao Criar Perfil, nenhum perfil adicionado';
+    }
+    
+    public static function getRca(){
+        $sql = new SqlOra();
+        
+        try{
+            $arr = $sql->select("SELECT codusur codrca, obs1 NOME FROM KOKAR.PCUSUARI U 
+            WHERE U.Dttermino IS NULL");
+        }catch(Exception $e){
+            echo 'Erro ao buscar RCAs';
+            return $e->getMessage();
+        }
+        return $arr;
+    }
+
+    public static function copiarPolitica($codPerfil, $codCli){
+        $sql = new SqlOra();
+        try{
+            $arr = $sql->update2("BEGIN
+                                        FOR d in (select i.valor_num codgrupo, percdesc from kokar.pcdesconto d
+                                            inner join kokar.pcdescontoitem i on i.coddesconto = d.coddesconto
+                                            where codcli = :codCli
+                                            order by valor_num) loop
+                                            
+                                            begin
+                                            insert into paralelo.polperfili
+                                            (codperfil, codgrupo, desconto)
+                                            values (:codPerfil, d.codgrupo, d.percdesc);
+                                            end;
+                                            
+                                            end loop;
+                                        end;", [':codCli' => $codCli, ':codPerfil' => $codPerfil]);
+        }catch(Exception $e){
+            echo 'Erro ao copiar politica para perfil';
+            return $e->getMessage();
+        }
+        return $arr;
+    }
+
+    public static function editarPoliticaPerfil($dados){
+
+        $sql = new SqlOra();
+        $ret = [];
+        try{
+            foreach($dados as $d){
+                $ret[] = $sql->update2("UPDATE paralelo.polperfili SET desconto = :desconto WHERE codperfil = :codperfil AND codgrupo = :codgrupo",
+                [':desconto' => $d['desconto'], ':codperfil' => $d['codPerfil'], ':codgrupo' => $d['codGrupo']]);
+            }
+        }catch(Exception $e){
+            echo 'Erro ao editar politica do perfil';
+            return $e->getMessage();
+        }
+        return $ret;
+
+    }
+
+    public static function excluirPoliticaPerfil($codPerfil){
+        $sql = new SqlOra();
+        try{
+            echo $sql->update2("DELETE FROM paralelo.polperfili WHERE codperfil = :codperfil", [':codperfil' => $codPerfil]);
+            echo $sql->update2("DELETE FROM paralelo.polperfilc WHERE codperfil = :codperfil", [':codperfil' => $codPerfil]);
+        }catch(Exception $e){
+            echo 'Erro ao excluir politica do perfil';
+            return $e->getMessage();
+        }
+        
+    }
+
 }

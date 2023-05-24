@@ -119,7 +119,7 @@
                 </div>
             <?php endif?>
             
-            <?php if($_SESSION['codsetor']<=0 || $_SESSION['codsetor']== 12): //Apenas TI e laboratorio?>
+            <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']== 12): //Apenas TI e laboratorio?>
 			    <div class="icones">  
                     <h5 class="cartao-title">Métodos</h5>
                     <input class="botao" onclick="window.location.href='/Modulos/Lab/modMetodo/index.php'" 
@@ -143,7 +143,7 @@
                 </div>
             <?php endif?>
 
-            <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']== 12): //Apenas TI e laboratorio?>
+            <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']== 12 || $_SESSION['codsetor'] == 8): //Apenas TI e laboratorio?>
 			    <div class="icones">  
                     <h5 class="cartao-title">Corrigir Laudos</h5>
                     <input class="botao" onclick="window.location.href='/Modulos/lab/modLaudo/laudo.php'" 

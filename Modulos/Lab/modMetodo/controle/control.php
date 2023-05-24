@@ -25,15 +25,24 @@
             $base = $_POST['dataset']['base'];
             $novo = $_POST['dataset']['novo'];
             $arr = (Metodo::tabela($base, $novo));
-            $cont = 0;
+            $cont = 1;
             $cont2 = 1;
             $ret='';
-            var_dump (($arr));
+            //var_dump (($arr));
             foreach($arr as $r){
                 
             if($r['CODPROD']==$novo){
+                if($r['METODO'] > $cont){
+                    for($i=$cont; $i<$r['METODO']; $i++){
+                        if($r['METODO'] > $i){
+                            $ret = $ret . "<option value='".$i."'>Metodo ".$i."</option><br>"; 
+                        }
+                    }
+                }
+                $cont++;
+                    
                     $ret = $ret . "<option disabled value='".strval($r['METODO'])."'>Metodo ".strval($r['METODO'])."</option><br>";
-                    $cont2 ++;
+                    $cont2 = $r['METODO'] + 1 ;
                 }
             }
             $ret = $ret . "<option value='".strval($cont2)."'>Metodo ".strval($cont2)."</option><br>";

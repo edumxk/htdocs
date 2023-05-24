@@ -12,12 +12,12 @@ class Metodo{
     public static function tabela($codprodbase, $codprodnovo){
         $sql = new sqlOra();
         try{
-            $teste = $sql->select("SELECT distinct c.codprodmaster codprod, c.metodo metodo
+            $teste = $sql->select("SELECT distinct c.codprodmaster codprod, to_number(c.metodo) metodo
             from kokar.pcprodut p
             inner join kokar.pccomposicao c on c.codprodmaster = p.codprod
             where c.codprodmaster = $codprodbase
             union
-            SELECT distinct c.codprodmaster codprod, c.metodo metodo
+            SELECT distinct c.codprodmaster codprod, to_number(c.metodo) metodo
             from kokar.pcprodut p
             inner join kokar.pccomposicao c on c.codprodmaster = p.codprod
             where c.codprodmaster = $codprodnovo

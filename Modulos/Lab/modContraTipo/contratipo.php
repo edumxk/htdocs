@@ -15,6 +15,8 @@ if (isset($_POST['codigo1']) && isset($_POST['codigo2'])) {
     $codprodDestino = $_POST['codigo2'];
     $metodo = $_POST['metodo'];
 } else {
+
+
 ?><script>
         if (confirm("Alguma coisa deu errado, confirme para ser redirecionado a pagina inicial ou cancele para sair")) {
             alert("Retornando a Contratipo")
@@ -25,6 +27,7 @@ if (isset($_POST['codigo1']) && isset($_POST['codigo2'])) {
         }
     </script> <?php
             }
+            
             $produtos = ContraTipoControle::getProdutos($codprodOrigem, $metodo);
             //var_dump($produtos);
             date_default_timezone_set('America/Araguaina');

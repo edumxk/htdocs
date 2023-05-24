@@ -84,7 +84,7 @@ class ContraTipoModel{
                 array_push($tempArr, $sql->select("SELECT rowid, codprodmaster, codprod, fracaoumida from kokar.pccomposicao WHERE codprodmaster = $i AND codprod = $produtoAntigo AND metodo = $metodo"));
                 $updateLinha = $sql->update("UPDATE kokar.pccomposicao c SET codprod = $produtoNovo, dtultalter = sysdate WHERE codprodmaster = $i AND codprod = $produtoAntigo AND metodo = $metodo",[]);
                 if($updateLinha!='ok')
-                    return $updateLinha  = 'erro: master:'.$i.' | prod: '.$produtoNovo.'| antigo: '.$produtoAntigo;
+                    return $updateLinha  = 'erro no produto Master: '.$i.' | Novo: '.$produtoNovo.'| Antigo: '.$produtoAntigo;
                 array_push($updateSQL, $i." - ".$updateLinha);
                  
             endforeach;

@@ -95,26 +95,29 @@ require_once './control/controle.php';
         <section class="principal__pesquisa">
             
             <div class="principal__pesquisa-tabela_ultimos">
-                <table id="historico">
+                <table class="table " id="historico">
                     <thead>
                         <tr class="historico_cabecalho">
-                                <th class="ultimos-cabecalho">Codcli</th>
-                                <th class="ultimos-cabecalho">Cliente</th>
-                                <th class="ultimos-cabecalho">Data Hora</th>
-                                <th class="ultimos-cabecalho">Registro</th>
-                                <th class="ultimos-cabecalho">Observação</th>
-                                <th class="ultimos-cabecalho">Visualizar</th>
+                                <th scope="col" class="ultimos-cabecalho">Codcli</th>
+                                <th scope="col" class="ultimos-cabecalho">Cliente</th>
+                                <th scope="col" class="ultimos-cabecalho">Data Hora</th>
+                                <th scope="col" class="ultimos-cabecalho">Registro</th>
+                                <th scope="col" class="ultimos-cabecalho">Observação</th>
+                                <th scope="col" class="ultimos-cabecalho">Visualizar</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach($dados2 as $d): ?>
                             <tr class="historico_linhas">
-                                        <td><?= $d['CODCLI'] ?></td>
+                                        <td scope="row" ><?= $d['CODCLI'] ?></td>
                                         <td><?= utf8_encode($d['CLIENTE']) ?></td>
                                         <td><?= $d['DATAHORA'] ?></td>
                                         <td><?= utf8_encode($d['NOME']) ?></td>
-                                        <td><textArea readonly cols=45 rows=3><?= utf8_encode($d['OBS'])?></textArea></td>
-                                        <td><button onClick="historico.getHistorico(<?= $d['CODHIST'] ?>)">Ver</button></td>
+                                        <td><textArea class="form-control" readonly cols=45 rows=3><?= utf8_encode($d['OBS'])?></textArea></td>
+                                        <td class="text-center row justify-content-between p-0 justify-content-center">
+                                            <button class="btn btn-success col" onClick="historico.getHistorico(<?= $d['CODHIST'] ?>)">Ver</button>
+                                            <button class="btn btn-warning col" onClick="historico.print(<?= $d['CODHIST'] ?>)">PDF</button>
+                                        </td>
                             </tr>
                         <?php endforeach ?>
                     </tbody>

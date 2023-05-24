@@ -92,7 +92,7 @@ button table, th, td{
 }
 
 .SOLVENTES{
-    display: grid;
+    display: block;
 }
 
 .SOLVENTES .mapa_linhas_producao{

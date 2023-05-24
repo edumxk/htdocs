@@ -572,7 +572,7 @@ $formulario = Formulario::getFormularioRat(Rat::getFormularioConsulta($_GET['num
 					}
 				});
 			}else{
-				alert('Parecer não pode ter mais de 500 caracteres. ('+parecer.length+')');
+				alert('Parecer não pode ter mais de 1000 caracteres. ('+parecer.length+')');
 			}
 		}
 

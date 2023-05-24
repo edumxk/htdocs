@@ -20,11 +20,12 @@ class Mailer{
         $mail->Username = 'danfe.kokar@gmail.com';
         $mail->Password = 'hlrnywgsktnbdztp';
         $mail->setFrom('danfe@kokar.com.br', 'Chamados Kokar');
-        $mail->addReplyTo('eduardo.cavalcante@kokar.com.br', 'Kokar Tintas');
-        $mail->addAddress('eduardo.cavalcante@kokar.com.br', 'Eduardo Patrick');
+        $mail->addReplyTo('departamento.tecnico@kokar.com.br', 'Kokar Tintas');
         $mail->addAddress('valeria.cardoso@kokar.com.br', 'Valeria Cardoso');
         $mail->addAddress('adriana.delmondes@kokar.com.br', 'Adriana Delmondes');
         $mail->addAddress('amanda.evangelista@kokar.com.br', 'Amanda');
+        $mail->addAddress('thiago.paes@kokar.com.br', 'Thiago');
+        $mail->addAddress('departamento.tecnico@kokar.com.br', 'Departamento Técnico');
         //$mail->addAddress('pedrossc88@gmail.com', 'Kokar Tintas');
         $mail->Subject = utf8_decode('Autorização de RAT Nº'.$numrat.' - Sistema de Chamados Kokar');
         //Read an HTML message body from an external file, convert referenced images to embedded,

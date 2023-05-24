@@ -443,7 +443,7 @@ class ProdDiaria{
         $ano = explode('-',$data)[0];
         return [
             $ano.'-01-01',
-            $ano.'-04-02',
+            $ano.'-04-07',
             $ano.'-04-21',
             $ano.'-05-01',
             $ano.'-09-07',

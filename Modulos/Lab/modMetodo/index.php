@@ -173,7 +173,7 @@ date_default_timezone_set('America/Araguaina');
 		dataset = {"base":base, "novo":novo, "metodobase":metodobase, "metodonovo":metodonovo} 
 		console.log(dataset);
 		c = confirm("Deseja realmente duplicar este método???");
-		if(c && base > 0 && base < 4000 && novo > 0 && novo < 4000 && base != novo)  {
+		if(c && base > 0 && base < 4000 && novo > 0 && novo < 4000)  {
 
 			$.ajax({
 				type: 'POST',

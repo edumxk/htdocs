@@ -117,6 +117,8 @@ require_once './control/controle.php';
                                     <button type="button" class="btn btn-warning" onclick="editarPerfil()">Editar Perfil</button>
 
                                     <button type="button" class="btn btn-danger" onclick="excluirPerfil()">Excluir </button>
+
+                                    <button type="button" class="btn btn-success" onclick="copiarPerfil()">Distribuir em Clientes</button>
                                 </th>
                             </tr>
                         </tfoot>
@@ -342,6 +344,72 @@ require_once './control/controle.php';
                 </div>
             </div>
         </div>
+  
+        <!-- Modal Body -->
+        <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+        <div class="modal fade" id="modal-distribuicao" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitleId">Distribuir Perfil em Clientes</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 m-3">
+                                    <h1 id="distribuicao-titulo">POLITICA DO TESTE</h1>
+                                </div>
+                                <div class="col-12 m-1">
+                                    <button type="button" class="m-1 btn btn-primary" data-bs-toggle="button" aria-pressed="false" autocomplete="off">Todos</button>
+                                    <button type="button" class="m-1 btn btn-secondary" data-bs-toggle="button" aria-pressed="false" autocomplete="off">Positivados</button>
+                                    <button type="button" class="m-1 btn btn-info" data-bs-toggle="button" aria-pressed="false" autocomplete="off">Ativos</button>
+                                    <button type="button" class="m-1 btn btn-warning" data-bs-toggle="button" aria-pressed="false" autocomplete="off">Sem Politica</button>
+                                </div>
+                                <div class="col-12 m-1">
+                                    <div class="table-responsive-lg">
+                                        <table class="table table-striped-columns
+                                        table-hover	
+                                        table-borderless
+                                        table-primary
+                                        align-middle">
+                                            <thead class="table-light">
+                                                <caption id="distribuicao-legenda">Clientes</caption>
+                                                <tr>
+                                                    <th> <input type="checkbox" class="form-check" name="" id="allcli"> </th>
+                                                    <th>Código</th>
+                                                    <th>Cliente</th>
+                                                    <th>Cidade/UF</th>
+                                                    <th>Dias UC</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody class="table-group-divider" id="distribuicao-dados">
+                                                    <tr class="table-primary" >
+                                                        <td scope="row"><input type="checkbox" class="form-check" name="" id="codcli-cli"></td>
+                                                        <td>3524</td>
+                                                        <td>JOAO TESTE DAS NEVES TESTADO</td>
+                                                        <td>Palmas - TO</td>
+                                                        <td>6</td>
+                                                    </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                    
+                                                </tfoot>
+                                        </table>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
     </section>
 </body>

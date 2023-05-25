@@ -47,7 +47,7 @@ function getPoliticaPerfil(codPerfil){
         },
         success: function(data){
             dados = JSON.parse(data);
-            console.log(dados);
+            //console.log(dados);
             //limpar modal-ver-dados
             $("#modal-ver-dados").html("");
             //preencher modal-ver-dados
@@ -92,7 +92,7 @@ function criarPerfil(){
         obs: obs
     }
 
-    console.log(dados);
+   // console.log(dados);
 
     $.ajax({
         url: "control/perfilController.php",
@@ -102,7 +102,7 @@ function criarPerfil(){
             dados: dados
         },
         success: function(data){
-            console.log(data);
+            //console.log(data);
             getPerfis();
             limparPerfil();
         }
@@ -292,6 +292,7 @@ function editarPerfil(){
             codPerfil: codPerfil
         },
         success: function(data){
+            
             dados = JSON.parse(data);
             //atualiza politica
             politica = dados;
@@ -372,26 +373,35 @@ function excluirPerfil(){
     codPerfil = codPerfil.substring(3);
     //pegar senha em um confirm para excluir perfil, tipo password
     let senha = prompt("Digite sua senha para confirmar a exclusão do perfil");
-
+    //limpa espaco no final de senha
+    senha = senha.trim();
     //excluir perfil
     $.ajax({
         url: "control/perfilController.php",
         type: "POST",
         data: {
-            action: "excluirPerfil",
+            action: "excluirPoliticaPerfil",
             codPerfil: codPerfil,
             senha: senha
         },
         success: function(data){
-            data = JSON.parse(data);
+            console.log(data);
             //checa se data é array
-            if(data[0] == 1){
-                alert("Perfil excluido com sucesso");
+            if(data == 1){
+                alert("Perfil excluido com sucesso!!!");
                 //renderiza tabela de perfis
                 getPerfis();
             }else{
-                alert(data);
+                console.log(data);
+                alert('Senha incorreta');
+                getPerfis();
             }
         }
     })
+}
+
+function copiarPerfil(){
+    //open modal modal-distribuicao
+    $('#modal-distribuicao').modal('show');
+
 }

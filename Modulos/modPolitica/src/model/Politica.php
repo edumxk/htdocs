@@ -1,4 +1,8 @@
 <?php
+
+//require formatador
+require_once ($_SERVER["DOCUMENT_ROOT"] . './Controle/Formatador.php');
+
 class Politica{
 public $codPerfil;
 public $desconto;
@@ -20,7 +24,9 @@ public $descricao;
         }
         if(is_array($dados) && count($dados)>0)
         foreach($dados as $d){
-            $arr[] = new Politica($d['CODPERFIL'], $d['CODGRUPO'], $d['DESCONTO'], utf8_encode($d['DESCRICAO']));
+            if(!isset($d['DESCONTO']) && isset($d['PERCDESC']))
+                $d['DESCONTO'] = $d['PERCDESC'];
+            $arr[] = new Politica($d['CODPERFIL'], $d['CODGRUPO'], $d['DESCONTO'], Formatador::br_decode($d['DESCRICAO']));
         }
         else return 'erro no addPoliticas';
         return $arr;

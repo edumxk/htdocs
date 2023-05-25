@@ -110,16 +110,15 @@ class ModelPoliticas{
         return $ret;
     }
 
-    public static function getPoliticas($codCli, $numRegiao){
+    public static function getPoliticas($codCli, $numRegiao, $codPerfil = null){
         $sql = new SqlOra();
         $ret = [];
-        $lista = [];
         try{
             $ret = $sql->select("SELECT t1.codgrupo, t1.descricao, t1.codprod,
                     nvl((select percdesc from kokar.pcdesconto d inner join kokar.pcdescontoitem di on d.coddesconto = di.coddesconto 
-                            where d.codcli = $codCli and di.valor_num = t1.codgrupo),0) percdesc,
+                            where d.codcli = :codCli and di.valor_num = t1.codgrupo),0) percdesc,
                     to_char(t.pvenda1-t.vlipi, '9999999.9999') tabela,
-                    nvl((select ativo from pcpoliticas where codcli = $codCli),0) ativo,
+                    nvl((select ativo from pcpoliticas where codcli = :codCli),0) ativo,
                     cl.cliente, cl.codcli
                 from 
                 (
@@ -128,12 +127,17 @@ class ModelPoliticas{
                     where i.dtexclusao is null and c.dtexclusao is null    
                     group by c.codgrupo, c.descricao
                     order by c.descricao
-                )t1 inner join kokar.pctabpr t on t.codprod = t1.codprod and t.numregiao = $numRegiao
-                inner join kokar.pcclient cl on cl.codcli = $codCli
-                "
-            );
+                )t1 inner join kokar.pctabpr t on t.codprod = t1.codprod and t.numregiao = :numRegiao
+                inner join kokar.pcclient cl on cl.codcli = :codCli
+                ", [ ':codCli' => $codCli, ':numRegiao' => $numRegiao ]);
+            
         }catch(Exception $e){
             echo 'Exceção capturada: ',  $e->getMessage(), "\n";
+        }
+        if($codPerfil != null){
+            foreach($ret as $k => $r){
+                $ret[$k]['CODPERFIL'] = $codPerfil;
+            }
         }
         return $ret;
     }
@@ -395,11 +399,11 @@ class ModelPoliticas{
         $sql = new SqlOra();
 
         try{
-            $arr = $sql->select("SELECT i.*, c.descricao FROM PARALELO.POLPERFILI i
-                                INNER JOIN KOKAR.PCGRUPOSCAMPANHAC c
-                                ON c.codgrupo = i.codgrupo
-                                WHERE codperfil = :codPerfil
-                                ORDER BY descricao", [':codPerfil' => $codPerfil]);
+                $arr = $sql->select("SELECT i.*, c.descricao FROM PARALELO.POLPERFILI i
+                                    INNER JOIN KOKAR.PCGRUPOSCAMPANHAC c
+                                    ON c.codgrupo = i.codgrupo
+                                    WHERE codperfil = :codPerfil
+                                    ORDER BY descricao", [':codPerfil' => $codPerfil]);
         }catch(Exception $e){
             $arr = [];
             echo $e->getMessage();
@@ -509,13 +513,15 @@ class ModelPoliticas{
 
     public static function excluirPoliticaPerfil($codPerfil){
         $sql = new SqlOra();
+        $ret=[];
         try{
-            echo $sql->update2("DELETE FROM paralelo.polperfili WHERE codperfil = :codperfil", [':codperfil' => $codPerfil]);
-            echo $sql->update2("DELETE FROM paralelo.polperfilc WHERE codperfil = :codperfil", [':codperfil' => $codPerfil]);
+            $ret[] = $sql->update2("DELETE FROM paralelo.polperfili WHERE codperfil = :codperfil", [':codperfil' => $codPerfil]);
+            $ret[] =  $sql->update2("DELETE FROM paralelo.polperfilc WHERE codperfil = :codperfil", [':codperfil' => $codPerfil]);
         }catch(Exception $e){
             echo 'Erro ao excluir politica do perfil';
             return $e->getMessage();
         }
+        return $ret;
         
     }
 

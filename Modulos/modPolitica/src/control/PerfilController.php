@@ -61,21 +61,32 @@ if(isset($_POST['action'])){
         }
 
         //envia para o banco a edição
-        echo json_encode($dados = ModelPoliticas::editarPoliticaPerfil($dados));
+        echo json_encode(ModelPoliticas::editarPoliticaPerfil($dados));
 
     }
 
     if($_POST['action']=='excluirPoliticaPerfil'){
         $codPerfil = $_POST['codPerfil'];
         $senha = $_POST['senha'];
-        //checa se dados é um array vazio
-        if(count($dados)==0 || $senha!='bucha'){
-            echo json_encode(['erro'=>'Preencha todos os campos']);
+        //checa senha
+        if($senha!='bucha'){
+            echo json_encode(['erro'=>'Senha Incorreta']);
+            return;
+        }
+        //checa se codPerfil é válido
+        if(!is_numeric($codPerfil)){
+            echo json_encode(['erro'=>'Código de Perfil Inválido']);
             return;
         }
 
         //envia para o banco a edição
-        echo json_encode($dados = ModelPoliticas::excluirPoliticaPerfil($codPerfil));
+        $dados = ModelPoliticas::excluirPoliticaPerfil($codPerfil);
+        if( count($dados)==2 && $dados[1]==1){
+           echo 1;
+           return;
+        }else
+            echo json_encode($dados);
+        echo 0;
 
     }
 
@@ -95,7 +106,11 @@ class PerfilController{
     }
 
     public static function getPoliticaPerfil($codPerfil){
-        return Politica::addPoliticas(ModelPoliticas::getPerfisItem($codPerfil));
+        $dados = Politica::addPoliticas(ModelPoliticas::getPerfisItem($codPerfil));
+        if(count($dados)>0)
+            return $dados;
+        $dados = Politica::addPoliticas(ModelPoliticas::getPoliticas(12,1,$codPerfil));
+        return $dados;
     }
 
     public static function criarPerfil($dados){

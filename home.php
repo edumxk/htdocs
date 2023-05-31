@@ -200,7 +200,7 @@
                 </div>
             <?php endif?>
 
-            <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']==6 || $_SESSION['codsetor']==61 || $_SESSION['codsetor']==7 || $_SESSION['codsetor']==71 || $_SESSION['codsetor']==2): //Apenas TI e comercial?>
+            <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']==6 || $_SESSION['codsetor']==8 || $_SESSION['codsetor']==61 || $_SESSION['codsetor']==7 || $_SESSION['codsetor']==71 || $_SESSION['codsetor']==2): //Apenas TI e comercial?>
                 <div class="icones">      
                     <h5 class="cartao-title">Almoxarifado</h5>
                     <input class="botao" onclick="window.location.href='homea.php'" 

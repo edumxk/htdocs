@@ -57,24 +57,11 @@ class pdf{
             $pdf->Cell(0,6,utf8_decode("R$ ".number_format($dados[0]['TOTAL'],2,',','.')), 1, 1, 'R', 1);
         }
 
-        /* {"CODPROD":"783",
-            "DESCRICAO":"TEXTURA TRADICIONAL 25KG AMARELO CANARIO",
-            "QT":"40",
-            "QTDISP":"0",
-            "PESO":"1031.720",
-            "CODPRODP":null,
-            "QTPROD":"",
-            "CODPRODUCAO":null,
-            "PREVISAO":"",
-            "STATUS":""}*/
-        //finalizar e imprimir
-        //imprimir dada e hora da impressao no rodape
         $pdf->SetFont('Arial','',8);
         $pdf->SetFillColor(200,220,255);
         $pdf->Cell(0,6,utf8_decode("Impresso em: ".date('d/m/Y H:i:s')), 1, 1, 'L', 1);
        
         $pdf->Output();
-
     }
 }
 
@@ -95,9 +82,8 @@ if(isset($_GET['action'])){
             $dados[$key]['PESO'] = $value['PESOPENDENTE'];
             $dados[$key]['TOTAL'] =  $_GET['soma'];
             
-
         }
         pdf::gerarPdf($dados);
     }
-
+    
 }

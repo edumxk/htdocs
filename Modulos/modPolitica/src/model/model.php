@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ALL & ~E_WARNING);
 date_default_timezone_set('America/Araguaina');
 require_once ($_SERVER["DOCUMENT_ROOT"] . '/model/sqlOracle.php');
 require_once ($_SERVER["DOCUMENT_ROOT"] . '/Controle/formatador.php');
@@ -70,6 +71,7 @@ class ModelPoliticas{
                     left join paralelo.pcpoliticas l
                         on l.codcli = c.codcli
                     where C.CODCLI not in (1,2,3,4)
+                    and c.dtexclusao is null
                     group by c.codcli,
                             c.cliente,
                             u.codusur,
@@ -117,7 +119,7 @@ class ModelPoliticas{
             $ret = $sql->select("SELECT t1.codgrupo, t1.descricao, t1.codprod,
                     nvl((select percdesc from kokar.pcdesconto d inner join kokar.pcdescontoitem di on d.coddesconto = di.coddesconto 
                             where d.codcli = :codCli and di.valor_num = t1.codgrupo),0) percdesc,
-                    to_char(t.pvenda1-t.vlipi, '9999999.9999') tabela,
+                            nvl(to_char(t.pvenda1-t.vlipi, '9999999.9999'),0) tabela,
                     nvl((select ativo from pcpoliticas where codcli = :codCli),0) ativo,
                     cl.cliente, cl.codcli
                 from 
@@ -339,7 +341,7 @@ class ModelPoliticas{
         values ((select max(codhist)+1 codhistnovo from paralelo.polhistc), 
         $destino, $codUser, TO_DATE(SYSDATE), '$hora', 'Politica Copiada do Cliente $cliente')";
         
-        $ret2 = $sql->insertDirect($arr3);
+        $sql->insertDirect($arr3);
         $arr = $sql->update2("
         DECLARE
         T      NUMBER;
@@ -399,10 +401,8 @@ class ModelPoliticas{
         $sql = new SqlOra();
 
         try{
-                $arr = $sql->select("SELECT i.*, c.descricao FROM PARALELO.POLPERFILI i
-                                    INNER JOIN KOKAR.PCGRUPOSCAMPANHAC c
-                                    ON c.codgrupo = i.codgrupo
-                                    WHERE codperfil = :codPerfil
+                $arr = $sql->select("SELECT c.codgrupo, c.descricao, :codPerfil codperfil, NVL(i.desconto,0) DESCONTO from (select * from KOKAR.PCGRUPOSCAMPANHAC where DTEXCLUSAO IS NULL)C
+                                    left join (select * from PARALELO.POLPERFILI WHERE codperfil = :codPerfil)i on i.codgrupo = c.codgrupo 
                                     ORDER BY descricao", [':codPerfil' => $codPerfil]);
         }catch(Exception $e){
             $arr = [];
@@ -419,8 +419,8 @@ class ModelPoliticas{
         $arr = $sql->select("SELECT C.codcli, cliente, fantasia, D.NOMECIDADE || ' - ' || D.UF as cidadeUf FROM KOKAR.PCCLIENT C
                             inner join KOKAR.Pccidade d on D.CODCIDADE = c.Codcidade
                             inner join paralelo.pcpoliticas r on r.codcli = c.codcli AND R.ATIVO = 1
-                            WHERE (CLIENTE LIKE :descricao or FANTASIA LIKE :descricao) and c.dtexclusao is null
-                            ORDER BY CLIENTE", [':descricao' => '%'.mb_strtoupper($descricao).'%']);
+                            WHERE (CLIENTE LIKE :descricao or FANTASIA LIKE :descricao or c.codcli in (:codCli) ) and c.dtexclusao is null
+                            ORDER BY CLIENTE", [':descricao' => '%'.mb_strtoupper($descricao).'%', ':codCli' => intval($descricao)]);
         return $arr;
     }
 
@@ -475,9 +475,10 @@ class ModelPoliticas{
         try{
             $arr = $sql->update2("BEGIN
                                         FOR d in (select i.valor_num codgrupo, percdesc from kokar.pcdesconto d
-                                            inner join kokar.pcdescontoitem i on i.coddesconto = d.coddesconto
-                                            where codcli = :codCli
-                                            order by valor_num) loop
+                                        inner join kokar.pcdescontoitem i on i.coddesconto = d.coddesconto
+                                        INNER JOIN KOKAR.PCGRUPOSCAMPANHAC C ON C.CODGRUPO = I.VALOR_NUM
+                                        where codcli = :codCli AND C.DTEXCLUSAO IS NULL
+                                        order by valor_num) loop
                                             
                                             begin
                                             insert into paralelo.polperfili
@@ -494,17 +495,53 @@ class ModelPoliticas{
         return $arr;
     }
 
-    public static function editarPoliticaPerfil($dados){
+    public static function editarPoliticaPerfil($dados, $descricao = null, $obs = null, $codPerfil = null){
 
         $sql = new SqlOra();
         $ret = [];
+        $politicas = [];
         try{
-            foreach($dados as $d){
-                $ret[] = $sql->update2("UPDATE paralelo.polperfili SET desconto = :desconto WHERE codperfil = :codperfil AND codgrupo = :codgrupo",
-                [':desconto' => $d['desconto'], ':codperfil' => $d['codPerfil'], ':codgrupo' => $d['codGrupo']]);
-            }
+            $politicas = $sql->select("SELECT * FROM PARALELO.POLPERFILI WHERE CODPERFIL = :codPerfil", [':codPerfil' => $codPerfil]);
+           
+                if(count($dados) > 0)
+                    foreach($dados as $k => $d){
+                        if(count($politicas) > 0){
+                            foreach($politicas as $p){
+                                if($p['CODGRUPO'] == $d['codGrupo']){
+                                    $dados[$k]['ativo'] = 1;
+                                }
+                            }
+                        }
+                    }
+                    foreach($dados as $d){
+                        if(isset($d['ativo'])){
+                            if($d['desconto']>0)
+                                $ret[] += $sql->update2("UPDATE paralelo.polperfili SET desconto = :desconto WHERE codperfil = :codperfil AND codgrupo = :codgrupo",
+                                [':desconto' => $d['desconto'], ':codperfil' => $d['codPerfil'], ':codgrupo' => $d['codGrupo']]);
+                            else
+                                $ret[] += $sql->update2("DELETE FROM paralelo.polperfili WHERE codperfil = :codperfil AND codgrupo = :codgrupo",
+                                [':codperfil' => $d['codPerfil'], ':codgrupo' => $d['codGrupo']]);
+                        }else{
+                            if($d['desconto']>0 && $d['desconto'] != null)
+                                $ret[] += $sql->update2("INSERT INTO paralelo.polperfili (codperfil, codgrupo, desconto) VALUES (:codperfil, :codgrupo, :desconto)",
+                                [':desconto' => $d['desconto'], ':codperfil' => $codPerfil, ':codgrupo' => $d['codGrupo']]);
+                            else
+                                $ret[] += $sql->update2("DELETE FROM paralelo.polperfili WHERE codperfil = :codperfil AND codgrupo = :codgrupo",
+                                [':codperfil' => $codPerfil, ':codgrupo' => $d['codGrupo']]);
+                        }
+                    }
+            
         }catch(Exception $e){
             echo 'Erro ao editar politica do perfil';
+            return $e->getMessage();
+        }
+        try{
+            if($descricao != null || $obs != null){
+                $ret[] += $sql->update2("UPDATE paralelo.polperfilc SET descricao = :descricao, obs = :obs where codperfil = :codperfil",
+                [':descricao' => $descricao, ':obs' => $obs, ':codperfil' => $codPerfil]);
+            }
+        }catch(Exception $e){
+            echo 'Erro ao editar obs e descricao do perfil';
             return $e->getMessage();
         }
         return $ret;
@@ -516,7 +553,7 @@ class ModelPoliticas{
         $ret=[];
         try{
             $ret[] = $sql->update2("DELETE FROM paralelo.polperfili WHERE codperfil = :codperfil", [':codperfil' => $codPerfil]);
-            $ret[] =  $sql->update2("DELETE FROM paralelo.polperfilc WHERE codperfil = :codperfil", [':codperfil' => $codPerfil]);
+            $ret[] = $sql->update2("DELETE FROM paralelo.polperfilc WHERE codperfil = :codperfil", [':codperfil' => $codPerfil]);
         }catch(Exception $e){
             echo 'Erro ao excluir politica do perfil';
             return $e->getMessage();
@@ -525,4 +562,242 @@ class ModelPoliticas{
         
     }
 
+    public static function buscarClienteRca($codPerfil, $filtro = null){
+        $sql = new SqlOra();
+        
+        //pega codRca do perfil;
+        $codRca = $sql->select("SELECT RCA FROM PARALELO.POLPERFILC WHERE CODPERFIL = :codPerfil", [':codPerfil' => $codPerfil])[0]['RCA'];
+
+        try{
+            if($filtro == null){
+                $arr = $sql->select("SELECT C.codcli, cliente, fantasia, D.NOMECIDADE || ' - ' || D.UF as cidadeUf, CASE WHEN DTULTCOMP IS NULL
+                THEN 'N/A' 
+                ELSE TO_CHAR(TO_DATE(SYSDATE) - TO_DATE(DTULTCOMP))END DIAS,
+                CASE WHEN R.ATIVO IS NULL THEN 'S/P' WHEN R.ATIVO = 1 THEN 'A' ELSE 'I' END STATUS
+                 FROM KOKAR.PCCLIENT C
+                                    inner join KOKAR.Pccidade d on D.CODCIDADE = c.Codcidade
+                                    left join paralelo.pcpoliticas r on r.codcli = c.codcli
+                                    WHERE c.codusur1 = :codRca and c.dtexclusao is null
+                                    ORDER BY CLIENTE", [':codRca' => $codRca]);
+            }else{
+                $arr = $sql->select("SELECT C.codcli, cliente, fantasia, D.NOMECIDADE || ' - ' || D.UF as cidadeUf FROM KOKAR.PCCLIENT C
+                                    inner join KOKAR.Pccidade d on D.CODCIDADE = c.Codcidade
+                                    WHERE c.codusur1 = :codRca and (CLIENTE LIKE :filtro or FANTASIA LIKE :filtro or c.codcli = :codCli or nomecidade like :filtro) and c.dtexclusao is null
+                                    ORDER BY CLIENTE", [':codRca' => $codRca, ':filtro' => '%'.mb_strtoupper($filtro).'%', ':codCli' => ($filtro)]);
+            }
+        }catch(Exception $e){
+            echo 'Erro ao buscar Clientes do RCAs';
+            return $e->getMessage();
+        }
+        return $arr;
+    }
+
+    public static function getPerfilDescricaoObs($codPerfil){
+        $sql = new SqlOra();
+        try{
+            $arr = $sql->select("SELECT DESCRICAO, OBS FROM PARALELO.POLPERFILC WHERE CODPERFIL = :codPerfil", [':codPerfil' => $codPerfil]);
+        }catch(Exception $e){
+            echo 'Erro ao buscar descrição e observação do perfil';
+            return $e->getMessage();
+        }
+        return $arr[0];
+    }
+
+    public static function copiarPerfil($codPerfil, $clientes, $usuario = null){
+        $sql = new SqlOra();
+        $hora = date('H:i:s');
+
+        $ret = [];
+        //criando cabeçalhos
+        foreach($clientes as $k => $c){
+            try{
+                $codHist = $sql->select("SELECT MAX(CODHIST)+1 CODHISTNOVO FROM PARALELO.POLHISTC")[0]['CODHISTNOVO'];
+                //cabeçalho
+                $ret[$k][] = $sql->insert("INSERT INTO paralelo.polhistc 
+                                    ( codhist, codcli, coduser, data, hora, obs) 
+                            values (:codHist, :codcli, :usuario, TO_DATE(SYSDATE), :hora, 'Politica Copiada do Perfil '|| :cliente)", 
+                            [':codcli' => $c['codcli'], ':usuario' => $usuario, ':hora' => $hora, ':cliente' => $codPerfil, ':codHist' => $codHist]);
+                
+                $ret[$k][] = $sql->update2("DECLARE 
+                CODIGODESC NUMBER;
+                BEGIN
+                  for d in( select t1.*, t2.*, g.descricao nomegrupo from(select codperfil, i.codgrupo, i.desconto descnovo from paralelo.polperfili i where codperfil = :codPerfil)t1
+                                      left join (select d.percdesc descant, valor_num, d.coddesconto, 0 tabela, d.descricao from kokar.pcdesconto d 
+                                      inner join kokar.pcdescontoitem di on di.coddesconto = d.coddesconto
+                                      where d.codcli = :codCli)t2
+                                      on t2.valor_num = t1.codgrupo
+                                      inner join kokar.pcgruposcampanhac g on g.codgrupo = t1.codgrupo
+                                      )loop
+                      begin
+                        
+                      if d.coddesconto is null
+                        then
+                        BEGIN
+                          SELECT MAX(CODDESCONTO)+1 INTO CODIGODESC FROM kokar.PCDESCONTO;
+                          
+                          INSERT INTO kokar.pcdesconto
+                                    (CODDESCONTO, CODCLI, PERCDESC, DTINICIO, DTFIM, 
+                                    BASECREDDEBRCA, UTILIZADESCREDE, CODFUNCLANC, DATALANC, 
+                                    CODFUNCULTALTER, DATAULTALTER, ORIGEMPED, APLICADESCONTO, CREDITASOBREPOLITICA, 
+                                    TIPO, ALTERAPTABELA, PRIORITARIA, QUESTIONAUSOPRIORITARIA, CODFILIAL, 
+                                    APENASPLPAGMAX, APLICADESCSIMPLESNACIONAL, PRIORITARIAGERAL, CONSIDERACALCGIROMEDIC, PERCDESCMAX, 
+                                    SYNCFV, QTDAPLICACOESDESC, QTMINESTPARADESC, TIPOCONTACORRENTE, PERCFORNEC, 
+                                    DESCRICAO, PERCCUSTFORNEC)
+                                VALUES (CODIGODESC, :codCli, d.descnovo, to_date(sysdate), '31/12/2098', 
+                                    'N', 'N', 32, sysdate, 
+                                    32, to_date(sysdate), 'O', 'S', 'N', 
+                                    'C', 'N', 'S', 'N', 1, 
+                                    'N', 'T', 'S', 'N', 0, 
+                                    'S', 0, 0, 'R', 0, 
+                                    ':codCli - '||d.nomegrupo, 0);
+                                    
+                           INSERT INTO kokar.pcdescontoitem i(i.coddesconto, i.tipo, i.valor_num) VALUES (CODIGODESC, 'GP', D.CODGRUPO);
+                           
+                           INSERT into paralelo.pcpoliticas (codcli, ativo, observacao)values(:codCli, 1, 'Primeira Política');
+                                
+                        end;
+                      end if;
+                          if d.coddesconto is null 
+                            then 
+                              d.coddesconto := CODIGODESC;
+                          end if;
+                        INSERT INTO PARALELO.POLHISTI I (CODHIST, CODGRUPO, DESCANT, DESCNOVO, TABELA, CODDESCONTO)
+                                VALUES(:codHist, D.CODGRUPO, D.DESCANT, D.DESCNOVO, :tabela, D.CODDESCONTO);
+                                 
+                                 UPDATE KOKAR.PCDESCONTO C SET C.PERCDESC = D.DESCNOVO
+                                WHERE CODDESCONTO = D.CODDESCONTO;
+                         END;
+                     END LOOP;
+                END;", 
+                            [':codPerfil' => $codPerfil, ':codCli' => $c['codcli'], ':codHist' => $codHist]); 
+            }catch(Exception $e){
+                echo 'Erro ao inserir historico de copia de perfil';
+                return $e->getMessage();
+            }
+
+        }
+        return $ret;
+    }
+
+    public static function getDadosPolitica($codPerfil, $codCli){
+        $sql = new SqlOra();
+        $dados = [];
+        try{
+            $dados = $sql->select("SELECT t1.*, t2.*, g.descricao nomegrupo, nvl(ta.tabela,0) tabela from(select codperfil, i.codgrupo, i.desconto descnovo, :codCli codCli from paralelo.polperfili i where codperfil = :codPerfil)t1
+            left join (select d.percdesc descant, valor_num, d.coddesconto, d.descricao from kokar.pcdesconto d 
+            inner join kokar.pcdescontoitem di on di.coddesconto = d.coddesconto
+            where d.codcli = :codCli)t2
+            on t2.valor_num = t1.codgrupo
+            inner join kokar.pcgruposcampanhac g on g.codgrupo = t1.codgrupo and g.dtexclusao is null
+            left join (SELECT TABELA*((PERCDESC/100)-1)*-1 TABELA, codgrupo FROM
+            (SELECT t1.codgrupo,                     
+            nvl((select percdesc from kokar.pcdesconto dd inner join kokar.pcdescontoitem di on dd.coddesconto = di.coddesconto 
+                  where dd.codcli = :codCli and di.valor_num = t1.codgrupo),0) percdesc,
+                  t.pvenda1-t.vlipi tabela from  (
+                  select cc.codgrupo, cc.descricao, min(ii.coditem) codprod 
+                  from kokar.pcgruposcampanhac cc inner join kokar.pcgruposcampanhai ii on cc.codgrupo = ii.codgrupo
+                  where cc.dtexclusao is null AND ii.dtexclusao is null
+                  group by cc.codgrupo, cc.descricao
+                  order by cc.descricao
+                  )t1 inner join kokar.pctabpr t on t.codprod = t1.codprod 
+                  inner join kokar.pcclient cl on cl.codcli = :codCli
+                  where t.pvenda > 0 AND t.numregiao = CL.NUMREGIAOCLI)A)TA
+                  on TA.CODGRUPO = t1.CODGRUPO
+                  where nvl(descnovo,0) != nvl(descant, 0)
+                  order by nomegrupo", [':codPerfil' => $codPerfil, ':codCli' => $codCli]);
+        }catch(Exception $e){
+            echo 'Erro ao buscar dados da política getDadosPolitica';
+            return $e->getMessage();
+        }
+        if(count($dados) == 0)
+            return null;
+        foreach($dados as $k => $d){
+            $dados[$k]['DESCRICAO'] = Formatador::br_decode($d['DESCRICAO']);
+            $dados[$k]['NOMEGRUPO'] = Formatador::br_decode($d['NOMEGRUPO']);
+        }
+        return $dados;
+    }
+
+    public static function distribuiPolitica($dados, $codUser = null){
+        $sql = new SqlOra();
+        $codDesconto = 0;
+        $codHist = 0;
+        $inserts = [];
+        $updates = [];
+        $flag1 = '';
+        //loop de iteração para propagar politica por cliente;
+        try{
+            if(count($dados) > 0):
+                foreach($dados as $dado){
+                    if($dado != null):
+                        foreach($dado as $d){
+                            if($codHist == 0)
+                                $codHist = $sql->select("SELECT MAX(CODHIST) codhist FROM PARALELO.POLHISTC")[0]['CODHIST'];
+                            
+                            if($d['CODDESCONTO'] == null){
+                                if($codDesconto == 0)
+                                    $codDesconto = $sql->select("SELECT MAX(CODDESCONTO)+1 coddesconto FROM KOKAR.PCDESCONTO")[0]['CODDESCONTO'];
+
+                                $inserts[] = "INTO kokar.pcdesconto (CODDESCONTO, CODCLI, PERCDESC, DTINICIO, DTFIM, BASECREDDEBRCA, UTILIZADESCREDE, CODFUNCLANC, DATALANC, CODFUNCULTALTER, DATAULTALTER, ORIGEMPED, APLICADESCONTO, CREDITASOBREPOLITICA, TIPO, ALTERAPTABELA, PRIORITARIA, QUESTIONAUSOPRIORITARIA, CODFILIAL, APENASPLPAGMAX, APLICADESCSIMPLESNACIONAL, PRIORITARIAGERAL, CONSIDERACALCGIROMEDIC, PERCDESCMAX, SYNCFV, QTDAPLICACOESDESC, QTMINESTPARADESC, TIPOCONTACORRENTE, PERCFORNEC, DESCRICAO, PERCCUSTFORNEC) VALUES (" . $codDesconto . ", " . $d["CODCLI"] . ", " . $d["DESCNOVO"] . ", to_date(sysdate), '31/12/2098', 'N', 'N', 1, sysdate, 1, to_date(sysdate), 'O', 'S', 'N', 'C', 'N', 'S', 'N', 1, 'N', 'T', 'S', 'N', 0, 'S', 0, 0, 'R', 0, '" . $d['CODCLI'] . " - " . $d['NOMEGRUPO'] . "', 0)";    
+                                
+                                $inserts[] = "INTO kokar.pcdescontoitem (coddesconto, tipo, valor_num) VALUES (" . $codDesconto . " , 'GP',  " . $d['CODGRUPO'] . ")";
+                                
+                                if($flag1 != $d['CODCLI']){
+                                    $codHist++;
+                                    $inserts[] = "INTO paralelo.pcpoliticas (codcli, ativo, observacao) VALUES (" . $d['CODCLI'] . ", 1, 'Primeira Política')";
+                                    $inserts[] = "INTO paralelo.polhistc (codhist, codcli, coduser, data, hora, obs) VALUES ($codHist, " . $d['CODCLI'] . ", $codUser, to_date(sysdate), to_char(sysdate, 'HH24:mi:ss'), 'Politica Inserida do Perfil ". $d["CODPERFIL"] ."')";
+                                }
+                                $inserts[] = "INTO paralelo.polhisti (codhist, codGrupo, descant, descnovo, tabela, coddesconto) VALUES ($codHist, " . $d['CODGRUPO'] . ", 0, " . $d['DESCNOVO'] . ", " . $d['TABELA'] . ", $codDesconto)";
+                                $flag1 = $d['CODCLI'];
+                                $codDesconto++;
+                            }else{
+                                if($d['DESCNOVO'] > 0)
+                                    $updates[] = "UPDATE KOKAR.PCDESCONTO C SET C.PERCDESC = " . $d['DESCNOVO'] . " WHERE CODDESCONTO = " . $d['CODDESCONTO'];
+                                else 
+                                    $updates[] = "UPDATE KOKAR.PCDESCONTO C SET C.DTFIM = to_date(sysdate) WHERE CODDESCONTO = " . $d['CODDESCONTO'];
+                                if($flag1 != $d['CODCLI']){
+                                    $codHist++;
+                                    $inserts[] = "INTO paralelo.polhistc (codhist, codcli, coduser, data, hora, obs) VALUES ($codHist, " . $d['CODCLI'] . ", $codUser, to_date(sysdate), to_char(sysdate, 'HH24:mi:ss'), 'Politica Inserida do Perfil ". $d["CODPERFIL"] ."')";
+                                }
+                                $inserts[] = "INTO paralelo.polhisti (codhist, codGrupo, descant, descnovo, tabela, coddesconto) VALUES ($codHist, " . $d['CODGRUPO'] . ", " . $d['DESCANT'] . ", " . $d['DESCNOVO'] . ", " . $d['TABELA'] . ", ". $d['CODDESCONTO'] . ")";
+                                $flag1 = $d['CODCLI'];
+                            }
+                        }
+                    endif;
+                }
+            endif;  
+        }catch(Exception $e){
+            echo 'Erro ao inserir politica distribuiPolitica';
+            return $e->getMessage();
+        }
+        return ['inserts' => $inserts, 'updates' => $updates];
+    }
+
+    public static function salvaDadosAlteracao($insert = null, $update = null){
+        $ret = ['inserts' => 0, 'updates' => 0];
+      
+        if($insert != null){
+            $sql = new SqlOra();
+            try{
+                foreach($insert as $i){
+                    $ret['inserts'] += $sql->insertDirect2("INSERT ALL " . $i . " SELECT * FROM dual");
+                }
+            }catch(Exception $e){
+                echo 'Erro ao inserir politica salvaDadosAlteracao';
+                return $e->getMessage();
+            }
+        }
+        if($update != null){
+            $sql = new SqlOra();
+            try{
+                foreach($update as $u){
+                    $ret['updates'] += $sql->updateDirect($u);
+                }
+            }catch(Exception $e){
+                echo 'Erro ao atualizar politica salvaDadosAlteracao';
+                return $e->getMessage();
+            }
+        }
+        return $ret;
+    }
 }

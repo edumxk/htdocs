@@ -120,7 +120,7 @@
         </div>
         <div class="row">
 
-            <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']==6 || $_SESSION['codsetor']==61 || $_SESSION['codsetor']==7 || $_SESSION['codsetor']==71|| $_SESSION['codsetor']==2): //Apenas TI e comercial?>
+            <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']==6 || $_SESSION['codsetor']==8 || $_SESSION['codsetor']==61 || $_SESSION['codsetor']==7 || $_SESSION['codsetor']==71|| $_SESSION['codsetor']==2): //Apenas TI e comercial?>
             <div class="col-md-3" style="padding-bottom:30px">
                 <div class="card" style="width: 18rem;">
                     <h5 class="card-title" style="text-align:center">Nova Requisição</h5>
@@ -132,7 +132,7 @@
             </div>
             <?php endif?>
 
-            <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']==6 || $_SESSION['codsetor']==7 || $_SESSION['codsetor']==71): //Apenas TI e comercial?>
+            <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']==6 || $_SESSION['codsetor']==8 || $_SESSION['codsetor']==7 || $_SESSION['codsetor']==71): //Apenas TI e comercial?>
             <div class="col-md-3" style="padding-bottom:30px">
                 <div class="card" style="width: 18rem;">
                     <h5 class="card-title" style="text-align:center">Lançamento de Requisição</Ri:a></h5>
@@ -144,7 +144,7 @@
             </div>
             <?php endif?>
             
-            <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']==6 ): //Apenas TI e comercial?>
+            <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']==6 || $_SESSION['codsetor']==8 ): //Apenas TI e comercial?>
             <div class="col-md-3" style="padding-bottom:30px">
                 <div class="card" style="width: 18rem;">
                     <h5 class="card-title" style="text-align:center">Controle de Resina</Ri:a></h5>

@@ -1,6 +1,7 @@
 <?php
 require_once './control/controle.php';
     session_start();
+    $setor = $_SESSION['codsetor'];
     if ($_SESSION['nome'] == null) {
         header("location:\..\..\home.php");
     }
@@ -28,6 +29,9 @@ require_once './control/controle.php';
     <header class="head">
         <div class="head__logo">
             <img src="/Recursos/src/Logo-Kokar5.png" alt="Logo da Kokar Tintas">
+        </div>
+        <div class="title__head">
+            <span>Administração de Perfil Comercial</span>
         </div>
     </header>
     <section class="menu">
@@ -77,7 +81,7 @@ require_once './control/controle.php';
                         <div class="setor"><?=$_SESSION['setor']?></div>
                     </div>
                 </div>
-                <a href="/homelab.php"><i class='bx bxs-log-out' id="sair"></i></a>
+                <a href="/home.php"><i class='bx bxs-log-out' id="sair"></i></a>
             </div>
         </div>
     </section>
@@ -87,19 +91,19 @@ require_once './control/controle.php';
         </div> 
         <div class="principal__conteudo container-fluid">
             <div class="principal__conteudo-conteudo row">
-                <div class="col-12">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cadastro-perfil">Novo Perfil</button>
+                <div class="col-12 mb-2">
+                    <button id="bnt-novo-perfil" type="button" class="btn btn-primary" <?php if($setor > 1 && $setor != 101):?>hidden<?php endif;?> data-bs-toggle="modal" data-bs-target="#cadastro-perfil">Novo Perfil</button>
                 </div>
-               <div class="col-lg-7 col-md-12">
-                    <h1>Perfil</h1> 
+               <div class="col-lg-12 col-md-12">
+                    
                     <table class="table table-striped table-sm table-dark">
                         <thead>
                             <tr>
-                                <th scope="col" class="">#</th>
-                                <th scope="col">Id</th>
+                                <th class="text-center" scope="col" class="">#</th>
+                                <th  scope="col">Id</th>
                                 <th scope="col">Representante</th>
                                 <th scope="col">Descrição</th>
-                                <th scope="col">Ações</th>
+                                <th class="text-center" scope="col">Ações</th>
                             </tr>
                         </thead>
                         <tbody id="perfil-dados">
@@ -111,53 +115,17 @@ require_once './control/controle.php';
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th scope="col" colspan="5">
-                                    <button type="button" onclick="limparSelecaoPerfil()" class="btn btn-info">Limpar</button>
-                                   
-                                    <button type="button" class="btn btn-warning" onclick="editarPerfil()">Editar Perfil</button>
-
-                                    <button type="button" class="btn btn-danger" onclick="excluirPerfil()">Excluir </button>
-
-                                    <button type="button" class="btn btn-success" onclick="copiarPerfil()">Distribuir em Clientes</button>
+                                <th scope="col" colspan="5" class="p-1">
+                                    <button type="button" onclick="limparSelecaoPerfil()" class="btn btn-info m-1">Limpar</button>
+                                    <button type="button" class="m-1 btn btn-warning" <?php if($setor > 1 && $setor != 101):?>hidden<?php endif;?> onclick="editarPerfil()">Editar Perfil</button>
+                                    <button type="button" class="m-1 btn btn-danger" <?php if($setor > 1 && $setor != 101):?>hidden<?php endif;?> onclick="excluirPerfil()">Excluir </button>
+                                    <button type="button" class="m-1 btn btn-success" onclick="copiarPerfil()">Distribuir em Clientes</button>
                                 </th>
                             </tr>
                         </tfoot>
                     </table>
                </div>
-               <div class="col-lg-5 col-md-12">
-                    <h1>Clientes Sem Politica</h1>
-                    <table class="table table-sm table-striped table-dark">
-                        <thead>
-                            <tr>
-                                <th scope="col"><input class="form-check" type="checkbox" name="" id=""></th>
-                                <th scope="col">Rca</th>
-                                <th scope="col">Cod</th>
-                                <th scope="col">Cliente</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row"><input class="form-check" type="checkbox" name="" id=""></th>
-                                <td><span class="">Joildo</span></td>
-                                <td><span class="">231</span></td>
-                                <td><span class="">Fabiano Parafusos</span></td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><input class="form-check" type="checkbox" name="" id=""></th>
-                                <td><span class="">Joildo</span></td>
-                                <td><span class="">231</span></td>
-                                <td><span class="">Fabiano Parafusos</span></td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th scope="col" colspan="4">
-                                    <button type="button" class="btn btn-success">Cadastrar Perfil</button>
-                                </th>
-                            </tr>
-                        </tfoot>
-                    </table>
-               </div>
+               
             </div>
         </div>
     </section>
@@ -167,13 +135,17 @@ require_once './control/controle.php';
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                         <div class="modal-header">
-                                <h5 class="modal-title" id="modal-title">Ver Perfil</h5>
+                                <h5 class="modal-title" id="modal-title">Política de Perfil</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="limparPolitica()" aria-label="Close"></button>
                             </div>
                     <div class="modal-body">
-                        <div class="container-fluid">
-                            <table class="table table-sm table-striped table-hover">
-                                <thead class="table-light">
+                        <div class="table-responsive my-2">
+                            <table class="table table-striped
+                                table-hover	
+                                table-borderless
+                                table-primary
+                                align-middle">
+                                    <thead class="table-light">
                                     <tr>
                                         <th scope="col">Código</th>
                                         <th scope="col">Descrição</th>
@@ -320,13 +292,17 @@ require_once './control/controle.php';
                             </div>
                         </section>
                         <div id="editar-perfil">
-                            <div class="table-responsive-md">
-                                <table class="table table-dark">
+                            <div class="table-responsive-lg">
+                                <table class="table table-striped-columns
+                                        table-hover	
+                                        table-borderless
+                                        table-primary
+                                        align-middle">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Código</th>
-                                            <th scope="col">Categoria</th>
-                                            <th scope="col">Desconto</th>
+                                            <th class="text-center" scope="col">CÓDIGO</th>
+                                            <th scope="col">CATEGORIA</th>
+                                            <th class="text-center" scope="col">DESCONTO</th>
                                         </tr>
                                     </thead>
                                     <tbody id="editar-perfil-table">
@@ -358,13 +334,17 @@ require_once './control/controle.php';
                         <div class="container">
                             <div class="row">
                                 <div class="col-12 m-3">
-                                    <h1 id="distribuicao-titulo">POLITICA DO TESTE</h1>
+                                    <h1 id="distribuicao-titulo">SELECIONE OS CLIENTES PARA PROPAGAR A NOVA POLÍTICA COMERCIAL</h1>
                                 </div>
-                                <div class="col-12 m-1">
-                                    <button type="button" class="m-1 btn btn-primary" data-bs-toggle="button" aria-pressed="false" autocomplete="off">Todos</button>
-                                    <button type="button" class="m-1 btn btn-secondary" data-bs-toggle="button" aria-pressed="false" autocomplete="off">Positivados</button>
-                                    <button type="button" class="m-1 btn btn-info" data-bs-toggle="button" aria-pressed="false" autocomplete="off">Ativos</button>
-                                    <button type="button" class="m-1 btn btn-warning" data-bs-toggle="button" aria-pressed="false" autocomplete="off">Sem Politica</button>
+                                <div class="col-7 p-1">
+                                    <button type="button" class="m-1 btn btn-primary" data-bs-toggle="button" aria-pressed="false" onclick="filtros(0)" autocomplete="off">Todos</button>
+                                    <button type="button" class="m-1 btn btn-secondary" data-bs-toggle="button" aria-pressed="false" autocomplete="off" onclick="filtros(1)">Novos</button>
+                                    <button type="button" class="m-1 btn btn-info" data-bs-toggle="button" aria-pressed="false" autocomplete="off" onclick="filtros(2)">Ativos</button>
+                                    <button type="button" class="m-1 btn btn-warning" data-bs-toggle="button" aria-pressed="false" autocomplete="off" onclick="filtros(3)">Sem Politica</button>
+                                </div>
+                                <div class="col-5 p-1"> 
+                                    <label for="distribuicao-cliente-busca">Pesquisa</label>
+                                    <input class="form-control" type="search" id="distribuicao-cliente-busca" placeholder="Digite a Razão Social">
                                 </div>
                                 <div class="col-12 m-1">
                                     <div class="table-responsive-lg">
@@ -374,23 +354,17 @@ require_once './control/controle.php';
                                         table-primary
                                         align-middle">
                                             <thead class="table-light">
-                                                <caption id="distribuicao-legenda">Clientes</caption>
+                                                <caption id="distribuicao-legenda">CLIENTES</caption>
                                                 <tr>
-                                                    <th> <input type="checkbox" class="form-check" name="" id="allcli"> </th>
-                                                    <th>Código</th>
-                                                    <th>Cliente</th>
-                                                    <th>Cidade/UF</th>
-                                                    <th>Dias UC</th>
+                                                    <th> <input type="checkbox" class="form-check" name="" onclick="selecionarTodos()" id="allcli"> </th>
+                                                    <th class="text-center">CÓDIGO</th>
+                                                    <th class="text-center">RAZÃO</th>
+                                                    <th class="text-center">CIDADE/UF</th>
+                                                    <th class="text-center">DIAS</th>
+                                                    <th class="text-center">STATUS</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody class="table-group-divider" id="distribuicao-dados">
-                                                    <tr class="table-primary" >
-                                                        <td scope="row"><input type="checkbox" class="form-check" name="" id="codcli-cli"></td>
-                                                        <td>3524</td>
-                                                        <td>JOAO TESTE DAS NEVES TESTADO</td>
-                                                        <td>Palmas - TO</td>
-                                                        <td>6</td>
-                                                    </tr>
                                                 </tbody>
                                                 <tfoot>
                                                     
@@ -403,14 +377,30 @@ require_once './control/controle.php';
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" onclick="distribuir()" id="btn-distribuir">Confirmar</button>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- Modal Body -->
+        <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+        <div class="modal fade" id="modal-load" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
 
+                    </div>
+                    <div class="modal-body text-center">
+                        <h2> Aguarde... Processando... </h2>
+                    </div>
+                    <div class="modal-footer">
+            
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 </body>
 <script src="./js/sidebar.js"></script>

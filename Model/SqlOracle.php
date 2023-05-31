@@ -90,13 +90,20 @@ class SqlOra extends PDO{
             return 'Erro: ' . $e->getMessage();
         }
     }
+    public function insertDirect2($query){
+        try{
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            return $stmt->rowCount();
+        }catch(PDOException $e) {
+            return 'Erro: ' . $e->getMessage();
+        }
+    }
 
     public function delete($query, $params){
         try{
             $stmt = $this->conn->prepare($query);
             $stmt->execute($params);
-            
-            
             return 'ok';
         }catch(PDOException $e) {
             return 'Error: ' . $e->getMessage();
@@ -108,12 +115,9 @@ class SqlOra extends PDO{
         try{
             $stmt = $this->conn->prepare($query);
             $stmt->execute($params);
-            
-            
             return 'ok';
         }catch(PDOException $e) {
             return 'Error de Update: ' . $e->getMessage();
-            return 'erro de Update';
         }
     }
 
@@ -121,12 +125,19 @@ class SqlOra extends PDO{
         try{
             $stmt = $this->conn->prepare($query);
             $stmt->execute($params);
-            
-            
             return  $stmt->rowCount();
         }catch(PDOException $e) {
             return 'Error de Update: ' . $e->getMessage();
-            return 'erro de Update';
+        }
+    }
+
+    public function updateDirect($query){
+        try{
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            return $stmt->rowCount();
+        }catch(PDOException $e) {
+            return ['Error de Update: ' => $e->getMessage()];
         }
     }
 

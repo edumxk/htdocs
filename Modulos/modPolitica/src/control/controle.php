@@ -66,7 +66,7 @@ class Controle{
         $politicas = ModelPoliticas::getPoliticas($cliente, $numregiao); 
         $saida = [];
         foreach($politicas as $p):
-            if($p["TABELA"] > 0){
+            if($p["TABELA"] >= 0){
             array_push( $saida, [ $p["CODGRUPO"],  utf8_encode($p["DESCRICAO"]),  $p["PERCDESC"],
               $p["TABELA"], utf8_encode($p['CLIENTE']), $p['ATIVO'] ] );
             }

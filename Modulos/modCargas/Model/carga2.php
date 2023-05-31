@@ -516,7 +516,7 @@ class Carga{
         SELECT i.numcarga numcarga2 , c.numped numped2, dtlibera, c.posicao
         FROM paralelo.cargai i
         right join kokar.pcpedc c on c.numped = i.numped
-         WHERE posicao in ('L', 'M')
+         WHERE posicao in ('L', 'M', 'P', 'C', 'B')
         and c.dtlibera is not null)t2 on t2.numped2 = T1.NUMPEDORIG",[]);
 
         if(sizeof($numped)> 0){

@@ -31,12 +31,8 @@ require_once './control/controle.php';
         <div class="head__logo">
             <img src="/Recursos/src/Logo-Kokar5.png" alt="Logo da Kokar Tintas">
         </div>
-        <div class="head__navegacao">
-            <ul class="head__navegaca__lista">
-                <li class="head__navegaca__lista-itens"><a href="#">Home</a></li>
-                <li class="head__navegaca__lista-itens"><a href="#">Politicas</a></li>
-                <li class="head__navegaca__lista-itens"><a href="#">Clientes</a></li>
-            </ul>
+        <div class="title__head">
+            <span>Copiar Políticas</span>
         </div>
        
     </header>
@@ -70,7 +66,7 @@ require_once './control/controle.php';
                 <span class="tooltip">Histórico</span>
             </li>
             <li>
-                <a href="#">
+                <a href="perfil.php">
                     <i class='bx bx-merge'></i>
                     <span class="link-nome">Perfil Política</span>
                 </a>

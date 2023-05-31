@@ -32,12 +32,8 @@ require_once './control/controle.php';
         <div class="head__logo">
             <img src="/Recursos/src/Logo-Kokar5.png" alt="Logo da Kokar Tintas">
         </div>
-        <div class="head__navegacao">
-            <ul class="head__navegaca__lista">
-                <li class="head__navegaca__lista-itens"><a href="#">Home</a></li>
-                <li class="head__navegaca__lista-itens"><a href="#">Politicas</a></li>
-                <li class="head__navegaca__lista-itens"><a href="#">Histórico</a></li>
-            </ul>
+        <div class="title__head">
+            <span>Histórico de Alterações</span>
         </div>
     </header>
     <section class="menu">
@@ -70,7 +66,7 @@ require_once './control/controle.php';
                 <span class="tooltip">Histórico</span>
             </li>
             <li>
-                <a href="#">
+                <a href="perfil.php">
                     <i class='bx bx-merge'></i>
                     <span class="link-nome">Perfil Política</span>
                 </a>
@@ -93,17 +89,20 @@ require_once './control/controle.php';
     </section>
     <section class="principal">
         <section class="principal__pesquisa">
-            
-            <div class="principal__pesquisa-tabela_ultimos">
-                <table class="table " id="historico">
-                    <thead>
-                        <tr class="historico_cabecalho">
-                                <th scope="col" class="ultimos-cabecalho">Codcli</th>
-                                <th scope="col" class="ultimos-cabecalho">Cliente</th>
-                                <th scope="col" class="ultimos-cabecalho">Data Hora</th>
-                                <th scope="col" class="ultimos-cabecalho">Registro</th>
-                                <th scope="col" class="ultimos-cabecalho">Observação</th>
-                                <th scope="col" class="ultimos-cabecalho">Visualizar</th>
+
+            <div class="table-responsive my-2 principal__pesquisa-tabela_ultimos">
+                <table id="historico" class="table table-striped
+                    table-hover	
+                    table-borderless
+                    table-primary
+                    align-middle">
+                        <thead class="table-light historico_cabecalho">
+                            <th scope="col" class="ultimos-cabecalho">Codcli</th>
+                            <th scope="col" class="ultimos-cabecalho">Cliente</th>
+                            <th scope="col" class="ultimos-cabecalho">Data Hora</th>
+                            <th scope="col" class="ultimos-cabecalho">Registro</th>
+                            <th scope="col" class="ultimos-cabecalho">Observação</th>
+                            <th scope="col" class="ultimos-cabecalho">Visualizar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -114,9 +113,9 @@ require_once './control/controle.php';
                                         <td><?= $d['DATAHORA'] ?></td>
                                         <td><?= utf8_encode($d['NOME']) ?></td>
                                         <td><textArea class="form-control" readonly cols=45 rows=3><?= utf8_encode($d['OBS'])?></textArea></td>
-                                        <td class="text-center row justify-content-between p-0 justify-content-center">
-                                            <button class="btn btn-success col" onClick="historico.getHistorico(<?= $d['CODHIST'] ?>)">Ver</button>
-                                            <button class="btn btn-warning col" onClick="historico.print(<?= $d['CODHIST'] ?>)">PDF</button>
+                                        <td class="text-center">
+                                            <button class="btn btn-success col m-1" onClick="historico.getHistorico(<?= $d['CODHIST'] ?>)">Ver</button>
+                                            <button class="btn btn-warning col m-1" onClick="historico.print(<?= $d['CODHIST'] ?>)">PDF</button>
                                         </td>
                             </tr>
                         <?php endforeach ?>
@@ -140,8 +139,12 @@ require_once './control/controle.php';
                 <!-- Modal body -->
                     <div class="modal-body">
                         <div>
-                            <table class="table" id="tbPoliticas">
-                                <thead class="thead-dark">
+                            <table class="table table-striped
+                                            table-hover	
+                                            table-borderless
+                                            table-primary
+                                            align-middle" id="tbPoliticas">
+                                <thead class="thead-dark table-light">
                                     <tr>
                                         <th>Código</th>
                                         <th>Grupo</th>

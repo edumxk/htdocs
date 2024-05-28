@@ -177,7 +177,7 @@ public static function getProducaoEditar($codproducao){
 
         $sql = new sqlOra(); 
         try{   
-            $ret = $sql->select("SELECT c.codproducao, t.codtanque, t.status statust,
+            $ret = $sql->select("SELECT c.codproducao, t.codtanque, t.status statust, c.dtabertura, c.horaabertura hrabertura,
             c.dtfecha, c.horafecha, c.dtproducao, c.horaproducao hrproducao, c.status, c.lote
             from paralelo.mproducaoc c
             right join paralelo.mtanques t on t.codtanque = c.codtanque
@@ -195,6 +195,8 @@ public static function getProducaoEditar($codproducao){
                 $m->statusp = $r['STATUS'];
                 $m->dtproducao = $r['DTPRODUCAO'];
                 $m->hrproducao = $r['HRPRODUCAO'];
+                $m->dtabertura = $r['DTABERTURA'];
+                $m->hrabertura = $r['HRABERTURA'];
                 $m->dtfecha = $r['DTFECHA'];
                 $m->hrfecha = $r['HORAFECHA'];
                 $m->lote = $r['LOTE'];
@@ -266,12 +268,13 @@ public static function getItem(){
 
     $sql = new sqlOra(); 
     try{   
-        $ret = $sql->select("SELECT i.codproducao, i.codprod, p.descricao produto,c.categoria, r.descricao cor, i.codprod ||' | '||p.embalagem embalagem, 
+        $ret = $sql->select("SELECT i.codproducao, i.codprod, p.descricao produto, l.descricao categoria, r.descricao cor, i.codprod ||' | '||p.embalagem embalagem, 
         I.QT, p.pesoliq PESO, p.litragem
          from paralelo.mproducaoi i
          inner join kokar.pcprodut p on i.codprod = p.codprod
          left join kokar.pccor r on r.codcor = p.codcor
          inner join kokar.pccategoria c on c.codsec = p.codsec and c.codcategoria = p.codcategoria
+         inner join kokar.pclinhaprod l on l.codlinha = p.codlinhaprod
          order by codproducao, embalagem");
         
         $item = [];

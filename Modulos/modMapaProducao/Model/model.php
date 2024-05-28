@@ -21,9 +21,9 @@ class Model{
             right join paralelo.mtanques t on t.codtanque = c.codtanque
             inner join paralelo.metasprodc m on m.cod = t.codlinha
             WHERE 
-                ((c.dtfecha = :data and c.status = 'F') 
-                or (c.status != 'F' and c.dtabertura >= :data)
-                or (c.status != 'F' and c.dtproducao >= &data))
+                ((c.dtfecha = &data and c.status = 'F') 
+                or (c.status != 'F' and c.dtabertura between &data and c.dtabertura and c.dtabertura <= &data )
+                or (c.status != 'F' and c.dtproducao <= &data and c.dtproducao >= &data)) 
                 and c.dtexclusao is null     
                 order by c.dtfecha, c.horafecha, c.dtproducao, c.horaproducao
                 ",[":data"=>$data]);
@@ -190,16 +190,17 @@ class Model{
             $ret = $sql->select("SELECT codproducao, categoria, cor, sum(peso) peso from (
                 select codproducao, categoria, cor, case when pesoformula > 0 then pesoformula
                 else peso end as peso from(
-                SELECT DISTINCT i.codproducao, c.categoria, r.descricao cor, round(sum(i.qt*p.pesoliq),0)peso, round(sum(i.qt*cp.qt),0)pesoformula
+                SELECT DISTINCT i.codproducao, l.descricao categoria, r.descricao cor, round(sum(i.qt*p.pesoliq),0)peso, round(sum(i.qt*cp.qt),0)pesoformula
                             from paralelo.mproducaoi i
                             inner join kokar.pcprodut p on i.codprod = p.codprod
                             left join kokar.pccor r on r.codcor = p.codcor
                             inner join kokar.pccategoria c on c.codsec = p.codsec and c.codcategoria = p.codcategoria
+                            inner join kokar.pclinhaprod l on l.codlinha = p.codlinhaprod
                             left join kokar.pcopc o on o.numop = i.op
                             left join (select c1.codprodmaster, c1.qt, c1.metodo from kokar.pccomposicao c1 
                                 inner join kokar.pcprodut p1 on c1.codprod = p1.codprod and p1.codepto = 10001 and p1.codsec IN (10012, 10013))cp
                                 on cp.codprodmaster = o.codprodmaster and cp.metodo = o.metodo
-                            group by i.codproducao, c.categoria, r.descricao, cp.qt
+                            group by i.codproducao, l.descricao, r.descricao, cp.qt
                             order by codproducao))
                             group by codproducao, categoria, cor
                             order by codproducao desc");
@@ -257,10 +258,10 @@ class Model{
                     case ('FUNDO PREPARADOR'):
                         $m->categoria = "FUNDO PP";
                     break;
-                    case ('ESMALTE SINT BRILHANTE'):
+                    case ('ESMALTE STD BRILHANTE'):
                         $m->categoria = "ESM SINT BR";
                     break;
-                    case ('ESMALTE SINT FOSCO'):
+                    case ('ESMALTE STD FOSCO'):
                         $m->categoria = "ESM SINT FS";
                     break;
                     case ('FUNDO E ACABAMENTO'):
@@ -661,7 +662,8 @@ class Model{
                 echo $sql->insert("UPDATE paralelo.mproducaoc SET dtproducao = to_date('$dados->dtPrevisao'), horaproducao = '$dados->hrPrevisao' where codproducao = $dados->codProducao ",[]);
             elseif($tipo == 'fechamento')
                 echo $sql->insert("UPDATE paralelo.mproducaoc SET dtfecha = to_date('$dados->dtFecha'), horafecha = '$dados->hrFecha' where codproducao = $dados->codProducao ", []);
-          
+            elseif($tipo == 'abertura')
+                echo $sql->insert("UPDATE paralelo.mproducaoc SET dtabertura = to_date('$dados->dtAbertura'), horaabertura = '$dados->hrAbertura' where codproducao = $dados->codProducao ", []);
         }catch(Exception $e){
             echo 'Exceção capturada: ',  $e->getMessage(), "\n";
         }

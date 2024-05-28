@@ -33,6 +33,7 @@
         public static function getCorretiva($numrat){
             /*Função retorna um array de Ações em formato JSON para a view*/
             $ret = CorretivaDao::getCorretiva($numrat);
+            //var_dump($ret);
             $acoes = [];
             $total = 0;
 
@@ -57,6 +58,7 @@
                 }
             }
 
+        
 
             $total = number_format($total, 2, ',', '.');
             $arr = ["acoes"=>$acoes, "total"=>$total];

@@ -186,15 +186,16 @@
                 }
             }
 
-            if($_SESSION['codsetor'] == 0 || $_SESSION['codsetor'] == 2 || $_SESSION['codsetor'] == 12){
+            if($_SESSION['codsetor'] == 0 || $_SESSION['codsetor'] == 8 || $_SESSION['codsetor'] == 12 || $_SESSION['codsetor'] == 3 ){
                 switch ($tipo) {
                     case 'finalALab':
                         echo Rat::finalizarALab($numrat);
                         break;
                 }
             }
+
             //aprovar rat diretoria/quimico
-            if($_SESSION['codsetor'] == 0 || $_SESSION['codsetor'] == 12 || $_SESSION['codsector'] == 1){
+            if($_SESSION['codsetor'] == 0 || $_SESSION['codsetor'] == 12 || $_SESSION['codsector'] == 1 || $_SESSION['codsetor'] == 3){
                 if($tipo == 'reabrir') {
                     Rat::reabrirRat($numrat);
                     Rat::logAprova($_SESSION['coduser'], $numrat, $tipo);

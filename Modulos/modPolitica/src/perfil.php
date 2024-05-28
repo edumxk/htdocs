@@ -50,13 +50,6 @@ require_once './control/controle.php';
                 <span class="tooltip">Página Inicial</span>
             </li>
             <li>
-                <a href="copiarPolitica.php">
-                    <i class='bx bx-message-rounded-edit'></i>
-                    <span class="link-nome">Copiar Política</span>
-                </a>
-                <span class="tooltip">Copiar Política</span>
-            </li>
-            <li>
                 <a href="historico.php">
                     <i class='bx bx-copy-alt'></i>
                     <span class="link-nome">Histórico</span>
@@ -92,7 +85,7 @@ require_once './control/controle.php';
         <div class="principal__conteudo container-fluid">
             <div class="principal__conteudo-conteudo row">
                 <div class="col-12 mb-2">
-                    <button id="bnt-novo-perfil" type="button" class="btn btn-primary" <?php if($setor > 1 && $setor != 101):?>hidden<?php endif;?> data-bs-toggle="modal" data-bs-target="#cadastro-perfil">Novo Perfil</button>
+                    <button id="bnt-novo-perfil" type="button" class="btn btn-primary" <?php if($setor > 1 && $setor != 101 && $setor != 5):?>hidden<?php endif;?> data-bs-toggle="modal" data-bs-target="#cadastro-perfil">Novo Perfil</button>
                 </div>
                <div class="col-lg-12 col-md-12">
                     
@@ -117,7 +110,7 @@ require_once './control/controle.php';
                             <tr>
                                 <th scope="col" colspan="5" class="p-1">
                                     <button type="button" onclick="limparSelecaoPerfil()" class="btn btn-info m-1">Limpar</button>
-                                    <button type="button" class="m-1 btn btn-warning" <?php if($setor > 1 && $setor != 101):?>hidden<?php endif;?> onclick="editarPerfil()">Editar Perfil</button>
+                                    <button type="button" class="m-1 btn btn-warning" <?php if($setor > 1 && $setor != 5 && $setor != 101):?>hidden<?php endif;?> onclick="editarPerfil()">Editar Perfil</button>
                                     <button type="button" class="m-1 btn btn-danger" <?php if($setor > 1 && $setor != 101):?>hidden<?php endif;?> onclick="excluirPerfil()">Excluir </button>
                                     <button type="button" class="m-1 btn btn-success" onclick="copiarPerfil()">Distribuir em Clientes</button>
                                 </th>
@@ -324,7 +317,7 @@ require_once './control/controle.php';
         <!-- Modal Body -->
         <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
         <div class="modal fade" id="modal-distribuicao" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalTitleId">Distribuir Perfil em Clientes</h5>
@@ -360,6 +353,7 @@ require_once './control/controle.php';
                                                     <th class="text-center">CÓDIGO</th>
                                                     <th class="text-center">RAZÃO</th>
                                                     <th class="text-center">CIDADE/UF</th>
+                                                    <th class="text-center">PRAÇA</th>
                                                     <th class="text-center">DIAS</th>
                                                     <th class="text-center">STATUS</th>
                                                 </tr>
@@ -378,25 +372,34 @@ require_once './control/controle.php';
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary" onclick="distribuir()" id="btn-distribuir">Confirmar</button>
+                        <button type="button" class="btn btn-primary" onclick="openModalConfirm()">Confirmar</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Modal Body -->
-        <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+        <div class="modal fade" id="modal-dtfim" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                
+                    <div class="mt-5 modal-body text-center">
+                        <label class="mb-2" for="data-final-politica">Data Final: </label>
+                        <input type="date" class="form-control" id="data-final-politica">
+                    </div>
+                    <div class="modal-body d-flex justify-content-between">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <input type="button" class="btn btn-primary" value="Confirmar" id="btn-distribuir" onclick="distribuir()">
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
         <div class="modal fade" id="modal-load" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
-
-                    </div>
                     <div class="modal-body text-center">
                         <h2> Aguarde... Processando... </h2>
-                    </div>
-                    <div class="modal-footer">
-            
                     </div>
                 </div>
             </div>

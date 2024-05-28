@@ -12,17 +12,17 @@ $codsetor = $_SESSION['codsetor'];
 if(isset($_POST['action'])){
     if($_POST['action']=='getPerfis'){
         $dados = PerfilController::getPerfis(); 
-        echo json_encode($dados);
+        echo json_encode($dados, JSON_UNESCAPED_UNICODE);
     }
     if($_POST['action']=='getPoliticaPerfil'){
         $dados = PerfilController::getPoliticaPerfil($_POST['codPerfil']); 
-        echo json_encode($dados);
+        echo json_encode($dados, JSON_UNESCAPED_UNICODE);
     }
     if($_POST['action']=='criarPerfil'){
         $dados = $_POST['dados'];
         $perfil = [];
         
-        if($codsetor == 101 || $codsetor <= 1){
+        if($codsetor == 101 || $codsetor <= 1 || $codsetor == 5){
             //continue
         }else{
             echo json_encode(['erro'=>'Você não tem permissão para criar um perfil']); 
@@ -41,7 +41,7 @@ if(isset($_POST['action'])){
         $perfil['codcli'] = intval($dados['codcli']);
 
         $dados = ModelPoliticas::criarPerfil($perfil); 
-        echo json_encode($dados);
+        echo json_encode($dados, JSON_UNESCAPED_UNICODE);
     }
 
     if($_POST['action']=='buscarCliente'){
@@ -51,7 +51,7 @@ if(isset($_POST['action'])){
             return;
         } 
         $dados = PerfilController::buscarCliente(Formatador::br_encode($descricao)); 
-        echo json_encode($dados);
+        echo json_encode($dados, JSON_UNESCAPED_UNICODE);
     }
 
     if($_POST['action']=='getRca'){
@@ -60,7 +60,7 @@ if(isset($_POST['action'])){
         foreach($dados as $d){
             $rca[] = ['codrca'=>$d['CODRCA'], 'nome'=>utf8_decode($d['NOME'])];
         }
-        echo json_encode($rca);
+        echo json_encode($rca, JSON_UNESCAPED_UNICODE);
     }
 
     if($_POST['action']=='editarPoliticaPerfil'){
@@ -81,7 +81,7 @@ if(isset($_POST['action'])){
         $obs = Formatador::br_encode($obs);
         //var_dump($dados);
         //return;
-        echo json_encode(ModelPoliticas::editarPoliticaPerfil($dados, $descricao, $obs, $codPerfil));
+        echo json_encode(ModelPoliticas::editarPoliticaPerfil($dados, $descricao, $obs, $codPerfil), JSON_UNESCAPED_UNICODE);
 
     }
 
@@ -89,7 +89,7 @@ if(isset($_POST['action'])){
         $codPerfil = $_POST['codPerfil'];
         $senha = $_POST['senha'];
         //checa senha
-        if($senha!='bucha'){
+        if($senha!='kokar@2024'){
             echo json_encode(['erro'=>'Senha Incorreta']);
             return;
         }
@@ -105,7 +105,7 @@ if(isset($_POST['action'])){
            echo 1;
            return;
         }else
-            echo json_encode($dados);
+            echo json_encode($dados, JSON_UNESCAPED_UNICODE);
         echo 0;
 
     }
@@ -119,13 +119,14 @@ if(isset($_POST['action'])){
             $filtro = null;
         
         if(!is_numeric($codPerfil)){
-            echo json_encode(['erro'=>'Código de Perfil Inválido']);
+            echo json_encode(['erro'=>'Código de Perfil Inválido'], JSON_UNESCAPED_UNICODE);
             return;
         }
 
 
         $clientes = PerfilController::buscarClienteRca($codPerfil, $filtro);
-        echo json_encode($clientes);
+        //var_dump($clientes);
+        echo json_encode($clientes, JSON_UNESCAPED_UNICODE);
     }
 
     if($_POST['action']=='getPerfil-descricao-obs'){
@@ -137,13 +138,21 @@ if(isset($_POST['action'])){
         $dados = ModelPoliticas::getPerfilDescricaoObs($codPerfil);
         //cria um array com os dados
         $dados = ['descricao'=>Formatador::br_decode($dados['DESCRICAO']), 'obs'=>Formatador::br_decode($dados['OBS'])];
-        echo json_encode($dados);
+        echo json_encode($dados, JSON_UNESCAPED_UNICODE);
     }
 
     if($_POST['action']=='copiarPerfil'){
         $codPerfil = $_POST['codPerfil'];
         $clientes = $_POST['clientes'];
         $usuario = $_SESSION['coduser'];
+        $dtfim = $_POST['dtfim'];
+
+        //formatar dtfim para o formato do banco
+        if($dtfim != '' && $dtfim != null)
+            $dtfim = Formatador::formatador2($dtfim);
+        else
+            $dtfim = null;
+
         //enviar requisição uma unica vez, checar token
 
         if(!is_array($clientes)){
@@ -156,7 +165,7 @@ if(isset($_POST['action'])){
             echo 'ok';
             return;
         }
-        echo json_encode($dados);
+        echo json_encode($dados, JSON_UNESCAPED_UNICODE);
     }
 
 }
@@ -216,6 +225,7 @@ class PerfilController{
   
         if(count($dados)>0 && is_array($dados)){
             $retorno = ModelPoliticas::distribuiPolitica($dados, $usuario);
+            //echo json_encode($retorno, JSON_UNESCAPED_UNICODE);
             return ModelPoliticas::salvaDadosAlteracao($retorno['inserts'], $retorno['updates']);
         }
     }

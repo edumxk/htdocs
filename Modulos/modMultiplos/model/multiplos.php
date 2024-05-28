@@ -1,6 +1,7 @@
 <?php
     require_once ($_SERVER["DOCUMENT_ROOT"] . '/model/sqlOracle.php');
-
+    //redirecionar para maintence.php
+    
 
     if(isset($_POST['action'])){
         if($_POST['action']=='ajusta'){

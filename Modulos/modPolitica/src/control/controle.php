@@ -21,8 +21,6 @@ if(isset($_POST['action'])){
         $obs = $_POST['obs'];
         $codUser = $_POST['codUser'];
         $codSetor = $_POST['codSetor'];
-        if($codSetor > 1 && $codSetor != 101)
-           return;
         echo json_encode(ModelPoliticas::atualizarPolitica($codCli, $listaGrupo, $obs, $codUser));
     }
     if($_POST['action']=='buscaAlteracoes'){

@@ -1,0 +1,12 @@
+RewriteEngine On
+
+# Remover a extensão .php das URLs
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+<Directory "Modulos">
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Require all granted
+</Directory>

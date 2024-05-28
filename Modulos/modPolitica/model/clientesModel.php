@@ -46,12 +46,10 @@
                 // echo json_encoe($ret[$i]['CLIENTE'] ;
                 $ret[$i]['CLIENTE'] = utf8_encode($ret[$i]['CLIENTE']);
                 $ret[$i]['NOMECIDADE'] = utf8_encode($ret[$i]['NOMECIDADE']);
-                $ret[$i]['NOMERCA'] = Clientes::nomeRca($ret[$i]['NOMERCA']);
+                $ret[$i]['NOMERCA'] = mb_convert_encoding(Clientes::nomeRca($ret[$i]['NOMERCA']), 'UTF-8');
             }
             return $ret;
         }
-
-
         public function getClientesAtivos(){
 
             $sql = new SqlOra();
@@ -77,7 +75,7 @@
                 // echo json_encoe($ret[$i]['CLIENTE'] ;
                 $ret[$i]['CLIENTE'] = utf8_encode($ret[$i]['CLIENTE']);
                 $ret[$i]['NOMECIDADE'] = utf8_encode($ret[$i]['NOMECIDADE']);
-                $ret[$i]['NOMERCA'] = Clientes::nomeRca($ret[$i]['NOMERCA']);
+                $ret[$i]['NOMERCA'] = mb_convert_encoding(Clientes::nomeRca($ret[$i]['NOMERCA']), 'UTF-8');
             }
             return $ret;
         }
@@ -118,7 +116,7 @@
                 // echo json_encoe($ret[$i]['CLIENTE'] ;
                 $ret[$i]['CLIENTE'] = utf8_encode($ret[$i]['CLIENTE']);
                 $ret[$i]['NOMECIDADE'] = utf8_encode($ret[$i]['NOMECIDADE']);
-                $ret[$i]['NOMERCA'] = Clientes::nomeRca($ret[$i]['NOMERCA']);
+                $ret[$i]['NOMERCA'] = mb_convert_encoding(Clientes::nomeRca($ret[$i]['NOMERCA']), 'UTF-8');
             }
             return $ret;
         }

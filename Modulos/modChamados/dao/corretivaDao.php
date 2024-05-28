@@ -7,7 +7,7 @@ class CorretivaDao{
     public static function getCorretiva($numrat){
         $sql = new SqlOra();
 
-        $ret = $sql->select("SELECT c.numrat, u.codcusto, u.custo, c.tipo,  c.codprod, c.despesa, to_number(c.qt) qt, to_char(c.valor, '9999.99') valor, c.obs
+        $ret = $sql->select("SELECT c.numrat, u.codcusto, u.custo, c.tipo,  c.codprod, c.despesa, to_number(c.qt) qt, (c.valor) valor, c.obs
             FROM ratcorretivai c inner join ratcusto u on c.codcusto = u.codcusto
             WHERE c.numrat = :numrat",
                 array(":numrat"=>$numrat)

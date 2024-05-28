@@ -40,7 +40,7 @@
                         }elseif($chamado->alabFinal == 'N'){
                             //Se ALab é nulo ou "Não";
                             //Laboratório
-                            if($setor == 0 || $setor == 1 || $setor == 2 || $setor == 12){
+                            if($setor == 0 || $setor == 1 || $setor == 8 || $setor == 12 || $setor == 3){
                                 array_push($lista, $chamado);
                             }
                         }elseif($chamado->acaoFinal == 'N'){
@@ -53,7 +53,7 @@
                         }elseif($chamado->dirFinal == 'N'){
                             //Se Analise de Diretoria não Realizada;
                             //Diretoria;
-                            if($setor == 0 || $setor == 1 || $setor == 12 || $setor == 4){
+                            if($setor == 0 || $setor == 1 || $setor == 12 || $setor == 4 || $setor == 3){
                                 array_push($lista, $chamado);
                             }
                         }

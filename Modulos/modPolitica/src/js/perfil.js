@@ -102,7 +102,7 @@ function criarPerfil(){
             dados: dados
         },
         success: function(data){
-            //console.log(data);
+            console.log(data);
             getPerfis();
             limparPerfil();
         }
@@ -294,7 +294,7 @@ function editarPerfil(){
         },
         success: function(data){
             dados = JSON.parse(data);
-            console.log(dados);
+            //console.log(dados);
             //preencher cadastro-descricao e cadastro-obs
             $("#editar-perfil-descricao").val(dados.descricao);
             $("#editar-perfil-obs").val(dados.obs);
@@ -372,7 +372,7 @@ function confirmarEditarPerfil(){
             codPerfil: codPerfil
         },
         success: function(data){
-            console.log(data);
+           // console.log(data);
             data = JSON.parse(data);
             //checa se data é array
             if(data[0] == 1){
@@ -397,7 +397,8 @@ function confirmarEditarPerfil(){
 }
 
 function excluirPerfil(){
-
+    //alert("Exclusão desabilitada")
+    //return;
     //verificar se algum perfil foi selecionado
     if($("input[name='codPerfil-radio']:checked").length == 0){
         alert("Selecione um perfil");
@@ -423,13 +424,13 @@ function excluirPerfil(){
         success: function(data){
             console.log(data);
             //checa se data é array
-            if(data == 1){
-                alert("Perfil excluido com sucesso!!!");
+            if(data.erro == 'Senha Incorreta'){
+                alert('Senha incorreta');
                 //renderiza tabela de perfis
                 getPerfis();
             }else{
-                console.log(data);
-                alert('Senha incorreta');
+                alert("Perfil excluido com sucesso!!!");
+                //console.log(data);
                 getPerfis();
             }
         }
@@ -438,6 +439,7 @@ function excluirPerfil(){
 
 function copiarPerfil(){
     let codPerfil = $("input[name='codPerfil-radio']:checked").attr("id");
+    let sgv = "";
     //limpar 3 primeiros caracteres de codperfil
     codPerfil = codPerfil.substring(3);
     //verificar se algum perfil foi selecionado
@@ -458,17 +460,33 @@ function copiarPerfil(){
         },
         success: function(data){
             $("#distribuicao-dados").html("");
+            //console.log(data);
+            if(data == null || data == "" || data == "[]"){
+                alert("Nenhum cliente encontrado");
+                return;
+            }
+                
             JSON.parse(data).forEach(element => {
+                if(element.atividade == 6){
+                 element.atividade=69999;
+                    sgv = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-gear" viewBox="0 0 16 16">
+                    <path d="M7.293 1.5a1 1 0 0 1 1.414 0L11 3.793V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3.293l2.354 2.353a.5.5 0 0 1-.708.708L8 2.207l-5 5V13.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 2 13.5V8.207l-.646.647a.5.5 0 1 1-.708-.708L7.293 1.5Z"/>
+                    <path d="M11.886 9.46c.18-.613 1.048-.613 1.229 0l.043.148a.64.64 0 0 0 .921.382l.136-.074c.561-.306 1.175.308.87.869l-.075.136a.64.64 0 0 0 .382.92l.149.045c.612.18.612 1.048 0 1.229l-.15.043a.64.64 0 0 0-.38.921l.074.136c.305.561-.309 1.175-.87.87l-.136-.075a.64.64 0 0 0-.92.382l-.045.149c-.18.612-1.048.612-1.229 0l-.043-.15a.64.64 0 0 0-.921-.38l-.136.074c-.561.305-1.175-.309-.87-.87l.075-.136a.64.64 0 0 0-.382-.92l-.148-.044c-.613-.181-.613-1.049 0-1.23l.148-.043a.64.64 0 0 0 .382-.921l-.074-.136c-.306-.561.308-1.175.869-.87l.136.075a.64.64 0 0 0 .92-.382l.045-.148ZM14 12.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0Z"/>
+                  </svg>`;
+                }else
+                    sgv = "";
                 //preenche clientes no distribuicao-dados na tabela de clientes
                 $("#distribuicao-dados").append(`
                 <tr class="table-primary">
                     <td scope="row"><input type="checkbox" class="form-check" name="" id="m${element.codcli}"></td>
                     <td>${element.codcli}</td>
-                    <td>${element.razao}</td>
+                    <td>${element.razao}<span hidden>${element.atividade}</span>${sgv}</td>
                     <td>${element.cidadeUf}</td>
+                    <td>${element.praca}</td>
                     <td class="text-center">${element.dias}</td>
                     <td class="text-center">${element.status}</td>
-                 </tr>`)
+                 </tr>`);
+                 //console.log(sgv);
                 });
 
 
@@ -480,11 +498,13 @@ function copiarPerfil(){
 }
 
 function filtros(id){
+    let count = 0;
     //se id for 0, filtro de todos os clientes
     if(id == 0){
         $("#distribuicao-dados").find("tr").each(function(){
             $(this).show();
         })
+        count = $("#distribuicao-dados").find("tr").length;
     }
 
     //se id for 1, filtro de clientes com dias N/A
@@ -493,11 +513,17 @@ function filtros(id){
             $(this).show();
         })
         $("#distribuicao-dados").find("tr").each(function(){
-            if($(this).find("td").eq(4).text() != "N/A"){
+            if($(this).find("td").eq(5).text() != "N/A"){
                 $(this).hide();
+            }else
+            {
+                count ++;
             }
 
         })
+        //conta a quantidade de clientes no filtro
+        
+
     }
     //se id for 2, filtro de clientes com dias menor que 90
     if(id == 2){
@@ -505,15 +531,21 @@ function filtros(id){
             $(this).show();
         })
         $("#distribuicao-dados").find("tr").each(function(){
-            dias = $(this).find("td").eq(4).text()
+            dias = $(this).find("td").eq(5).text()
             if(dias != "N/A"){
                 //converte dias em numero
                 dias = parseInt(dias);
                 if(dias >= 90){
                     $(this).hide();
+                }else
+                {
+                    count ++;
                 }
             }else if(dias == "N/A"){
                 $(this).hide();
+            }else
+            {
+                count ++;
             }
         })
     }
@@ -523,20 +555,34 @@ function filtros(id){
             $(this).show();
         })
         $("#distribuicao-dados").find("tr").each(function(){
-            if($(this).find("td").eq(5).text() != "S/P"){
+            if($(this).find("td").eq(6).text() != "S/P"){
                 $(this).hide();
+            }
+            else
+            {
+                count ++;
             }
         })
     }
+    if(count == 0)
+        $("#distribuicao-legenda").html(`NENHUM CLIENTE`);
+        else{
+            if(count == 1)
+                $("#distribuicao-legenda").html(`${count} CLIENTE`);
+            else
+                $("#distribuicao-legenda").html(`${count} CLIENTES`);
+        }
 }
 
 function pesquisa(){
     let pesquisa = $("#distribuicao-cliente-busca").val();
+    let count = 0;
     //se pesquisa for vazio, mostra todos os clientes
     if(pesquisa == ""){
         $("#distribuicao-dados").find("tr").each(function(){
             $(this).show();
         })
+        count = $("#distribuicao-dados").find("tr").length;
     }
     //se pesquisa for diferente de vazio, mostra clientes que contem pesquisa
     else{
@@ -545,12 +591,27 @@ function pesquisa(){
         })
         $("#distribuicao-dados").find("tr").each(function(){
             //transforma pesquisa e razao em maiusculo e considerar espacos como busca com mais parametros
-            if($(this).find("td").eq(2).text().toUpperCase().indexOf(pesquisa.toUpperCase()) == -1){
+            if(
+             $(this).find("td").eq(2).text().toUpperCase().indexOf(pesquisa.toUpperCase()) == -1
+            && $(this).find("td").eq(3).text().toUpperCase().indexOf(pesquisa.toUpperCase()) == -1
+            && $(this).find("td").eq(4).text().toUpperCase().indexOf(pesquisa.toUpperCase()) == -1
+            && $(this).find("td").eq(1).text().toUpperCase().indexOf(parseInt(pesquisa)) == -1){
                 $(this).hide();
+            }else
+            {
+                count ++;
             }
 
         })
     }
+    if(count == 0)
+        $("#distribuicao-legenda").html(`NENHUM CLIENTE`);
+        else{
+            if(count == 1)
+                $("#distribuicao-legenda").html(`${count} CLIENTE`);
+            else
+                $("#distribuicao-legenda").html(`${count} CLIENTES`);
+        }
 }
 
 //inserir ação no enter da pesquisa
@@ -585,6 +646,14 @@ function distribuir(){
     let codPerfil = $("input[name='codPerfil-radio']:checked").attr("id");
     //limpar 3 primeiros caracteres de codperfil
     codPerfil = codPerfil.substring(3);
+    let dtfim = $("#data-final-politica").val();
+    let hoje  = new Date();
+
+    if (new Date(dtfim) < hoje) {
+        alert("A data inserida não pode ser menor que a data atual.");
+        clicks = 0;
+        return;
+    }
 
     //Armazena todos os clientes selecionados em distribuicao-dados
     let clientes = [];
@@ -603,6 +672,7 @@ function distribuir(){
     //se nenhum cliente foi selecionado, retorna
     if(clientes.length == 0){
         alert("Selecione pelo menos um cliente");
+        clicks = 0;
         return;
     }
     if(clicks > 1){
@@ -610,49 +680,53 @@ function distribuir(){
         return;
     }
     //desabilita botao btn-distribuir
-    $("#btn-distribuir").prop("disabled", true);
+   
 
     //envia dados para control/perfilController.php
-    
     if(confirm("Deseja copiar os clientes selecionados para o perfil " + codPerfil + "?\n\n***Essa ação não poderá ser desfeita!***\nVocê está tentando inserir "+ clientes.length +" politicas \n\nTempo estimado: " + (clientes.length * 2.1).toFixed(2) + " segundos. Aguarde o Processo Finalizar!")){
         //abre load-modal
         $('#modal-load').modal('show');
- 
         $.ajax({
             url: "control/perfilController.php",
             type: "POST",
             data: {
                 action: "copiarPerfil",
                 codPerfil: codPerfil,
-                clientes: clientes
+                clientes: clientes,
+                dtfim: dtfim
             },
             success: function(data){
                 console.log(data);
                 if(data=='ok'){
-                    $('#modal-load').modal('hide');
+                    $('#modal-load').modal('show');
+                    $('#modal-dtfim').modal('hide');
                     $('#modal-distribuicao').modal('hide');
-                    $("#btn-distribuir").prop("disabled", false);
                     clicks = 0;
                     alert("Clientes copiados com sucesso");
                 }else{
+                    //console.log(data);
                     data = JSON.parse(data);
                     if(data.inserts == 0 && data.updates == 0){
-                        alert("Nenhuma politica foi alterada, desconto já existente com mesmo valor");
-                        $('#modal-load').modal('hide');
-                        $("#btn-distribuir").prop("disabled", false);
+                        $('#modal-load').modal('show');
+                        console.log('esconder modal load');
+                        $('#modal-dtfim').modal('hide');
                         clicks = 0;
+                        alert("Nenhuma politica foi alterada, desconto ou data final com mesmo valor");
                     }else{
-                        $('#modal-load').modal('hide');
-                        $("#btn-distribuir").prop("disabled", false);
+                        $('#modal-load').modal('show');
+                        console.log('esconder modal load');
+                        $('#modal-dtfim').modal('hide');
+                        
                         clicks = 0;
                         alert("Erro ao copiar clientes\n\nErro: " + data);
                     }
                 }
+                
             }
         })
     }
     else{
-        $("#btn-distribuir").prop("disabled", false);
+        
         clicks = 0;
         return;
     }
@@ -660,3 +734,6 @@ function distribuir(){
 
 //funcções de checar permições de perfil
 
+function openModalConfirm(){
+    $('#modal-dtfim').modal('show');
+}

@@ -52,9 +52,18 @@ class Controle{
     static function getProducao($dados){
         
         $produtos = Controle::getProduto($dados['produtos']);
+        if(isset($dados['dtabertura']))
+            $dados['dataini'] = Formatador::formatador2($dados['dtabertura']);
 
-        return new Producao( $dados['codproducao'], $dados['categoria'], $dados['codtanque'], $produtos,
-        $dados['status'], $dados['lote'], '', $dados['dataini'], '',  Formatador::formatador2($dados['dtfecha']), $dados['hrfecha'],  Formatador::formatador2($dados['dtprevisao']),  $dados['hrprevisao'], $dados['codfun'] );
+        if(isset($dados['hrabertura']))
+            return new Producao( $dados['codproducao'], $dados['categoria'], $dados['codtanque'], $produtos,
+                $dados['status'], $dados['lote'], '', $dados['dataini'], $dados['hrabertura'],  Formatador::formatador2($dados['dtfecha']),
+                $dados['hrfecha'],  Formatador::formatador2($dados['dtprevisao']),  $dados['hrprevisao'], $dados['codfun'] );
+        else{
+            return new Producao( $dados['codproducao'], $dados['categoria'], $dados['codtanque'], $produtos,
+                $dados['status'], $dados['lote'], '', $dados['dataini'], '',  Formatador::formatador2($dados['dtfecha']),
+                $dados['hrfecha'],  Formatador::formatador2($dados['dtprevisao']),  $dados['hrprevisao'], $dados['codfun'] );
+        }
     }
 
     static function getProduto($dados){
@@ -97,6 +106,13 @@ class Controle{
 
             Model::updateDatas($dados, 'previsao');
             echo "\nUpdate Previsao: Mapa: $dados->dtPrevisao $dados->hrPrevisao | Banco: $banco->dtPrevisao $banco->hrPrevisao \n\n";
+
+        }
+
+        if( $dados->dtAbertura != $banco->dtAbertura ){ //Alterar somente a data de Abertura. 
+
+            Model::updateDatas($dados, 'abertura');
+            echo "\nUpdate Abertura: Mapa: $dados->dtAbertura | Banco: $banco->dtAbertura \n\n";
 
         }
 
@@ -169,7 +185,7 @@ class Controle{
         return ($arr);
     }
 
-    static function getProducaoEditar($codproducao){
+    static function getProducaoE($codproducao){
         $head = Model::getProducaoEditar($codproducao);
         $lote = $head[0]->lote;
         $produtos = Model::getItemLote($codproducao, $lote);

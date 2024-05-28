@@ -246,8 +246,8 @@ class ratProdDao{
 
         $val = $sql->select("SELECT km.punit+nvl(km.vlfrete,0) as PVENDA
         from kokar.pcmov km 
-        where km.codprod = (select codprod from kokar.pclote l where l.numlote = :numlote and codprod = $codprod) 
-        and km.dtmov >= (select max(o.dtlanc) from kokar.pcopc o where o.numlote = :numlote and o.dtcancel is null) 
+        where km.codprod = (select codprod from kokar.pclote l where l.numlote = ':numlote' and codprod = $codprod) 
+        and km.dtmov >= (select max(o.dtlanc) from kokar.pcopc o where o.numlote = ':numlote' and o.dtcancel is null) 
         and km.codoper = 'S'
         and km.codcli = :codcli
         and rownum = 1
@@ -293,6 +293,21 @@ class ratProdDao{
             where p.descricao = :produto", array(":produto"=>$produto)
         );
         return $ret[0];
+    }
+
+    public static function getProdutos(){
+        $sql = new SqlOra();
+
+        $ret = $sql->select("SELECT codprod, descricao from kokar.pcprodut p where p.codepto = 10000 and p.dtexclusao is null order by p.codprod");
+
+            foreach($ret as $key => $value){
+                $ret[$key]['DESCRICAO'] = utf8_encode($value['DESCRICAO']);
+            }
+
+            $ret = json_encode($ret, JSON_UNESCAPED_UNICODE);
+
+        //atualizar para retornar um array de produtos
+        return $ret;
     }
 
 

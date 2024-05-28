@@ -1,8 +1,8 @@
-<?php
+﻿<?php
 
 require_once './control/controle.php';
     session_start();
-
+    //header("location:index.php");
     if ($_SESSION['nome'] == null) {
         header("location:\..\..\home.php");
     }
@@ -50,13 +50,6 @@ require_once './control/controle.php';
                     <span class="link-nome">Página Inicial</span>
                 </a>
                 <span class="tooltip">Página Inicial</span>
-            </li>
-            <li>
-                <a href="copiarPolitica.php">
-                    <i class='bx bx-message-rounded-edit'></i>
-                    <span class="link-nome">Copiar Política</span>
-                </a>
-                <span class="tooltip">Copiar Política</span>
             </li>
             <li>
                 <a href="historico.php">

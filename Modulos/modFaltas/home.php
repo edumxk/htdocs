@@ -120,7 +120,7 @@
         </div>
         <div class="row">
 
-            <?php if($_SESSION['codsetor']>=1 || $_SESSION['codsetor']==4 || $_SESSION['codsetor']==5 || $_SESSION['codsetor']==10): //Apenas TI e comercial?>
+            <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']==4 || $_SESSION['codsetor']==5 || $_SESSION['codsetor']==10): //Apenas TI e comercial?>
             <div class="col-md-3" style="padding-bottom:30px">
                 <div class="card" style="width: 18rem;">
                     <h5 class="card-title" style="text-align:center">Nova Falta</h5>
@@ -132,7 +132,7 @@
             </div>
             <?php endif?>
             
-            <?php if($_SESSION['codsetor']>=1 || $_SESSION['codsetor']==4 || $_SESSION['codsetor']==5 || $_SESSION['codsetor']==10): //Apenas TI e comercial?>
+            <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']==4 || $_SESSION['codsetor']==5 || $_SESSION['codsetor']==10): //Apenas TI e comercial?>
             <div class="col-md-3" style="padding-bottom:30px">
                 <div class="card" style="width: 18rem;">
                     <h5 class="card-title" style="text-align:center">Editar Falta</Ri:a></h5>

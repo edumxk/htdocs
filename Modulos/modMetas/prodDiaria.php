@@ -44,7 +44,7 @@ $diasuteish =  ProdDiaria::getDiasUteis(ProdDiaria::getPrimeiroDiaMes($data),  $
 $producaodia = 0;
 //echo (ProdDiaria::getUltimoDiaMes($data));
 //echo $diasuteis. ' - ' . $diasuteish;
-
+echo $diasuteis;
 
 foreach ($resumo as $r) {
     if ($r->cod != 6) {

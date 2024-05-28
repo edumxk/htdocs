@@ -20,30 +20,32 @@ class Revalidacao
 
                 $letra = chr(ord($letra) + 1);
                 
-                $ret[] = $sql->insert("INSERT into paralelo.lotehistorico (codrev, numlote, dtfab, dtval, tempo, usuario, novonumlote, dtrev)
+                $ret[] = $sql->insert("INSERT into paralelo.lotehistorico (codrev, numlote, dtfab, dtval, tempo, usuario, novonumlote, dtrev, codprod)
                 values ((SELECT MAX(CODREV)+1 FROM PARALELO.LOTEHISTORICO), :numlote2, 
-                (SELECT DATAFABRICACAO FROM KOKAR.PCLOTE WHERE NUMLOTE = :numlote2), 
-                (SELECT DTVALIDADE FROM KOKAR.PCLOTE WHERE NUMLOTE = :numlote2)
+                (SELECT max(DATAFABRICACAO) FROM KOKAR.PCLOTE WHERE NUMLOTE = :numlote2 and codprod = :codprod), 
+                (SELECT  max(DTVALIDADE) FROM KOKAR.PCLOTE WHERE NUMLOTE = :numlote2 and codprod = :codprod)
                 , :tempo, :usuario, :numlote,
-                to_date(sysdate))", array(
+                to_date(sysdate), :codprod)", array(
                     ":numlote" => $num.$letra,
                     ":numlote2" => $lista['numlote'],
                     ":tempo" => $lista['tempo'],
-                    ":usuario" => $lista['usuario']));
+                    ":usuario" => $lista['usuario'],
+                    ":codprod" => $lista['codprod']));
             }
             //echo json_encode(["numlote" => $num.$letra, "numlote2" => $lista['numlote'], "tempo" => $lista['tempo'], "usuario" => $lista['usuario']]);
         }else{
             
-            $ret[] = $sql->insert("INSERT into paralelo.lotehistorico (codrev, numlote, dtfab, dtval, tempo, usuario, novonumlote, dtrev)
-            values ((SELECT MAX(CODREV)+1 FROM PARALELO.LOTEHISTORICO), :numlote, (SELECT DATAFABRICACAO FROM KOKAR.PCLOTE WHERE NUMLOTE = :numlote), 
-            (SELECT DTVALIDADE FROM KOKAR.PCLOTE WHERE NUMLOTE = :numlote), :tempo, :usuario, :numlote||'A', (SELECT TO_DATE(SYSDATE) FROM DUAL))", array(   
+            $ret[] = $sql->insert("INSERT into paralelo.lotehistorico (codrev, numlote, dtfab, dtval, tempo, usuario, novonumlote, dtrev, codprod)
+            values ((SELECT MAX(CODREV)+1 FROM PARALELO.LOTEHISTORICO), :numlote, (SELECT  max(DATAFABRICACAO) FROM KOKAR.PCLOTE WHERE NUMLOTE = :numlote and codprod = :codprod), 
+            (SELECT max(DTVALIDADE) FROM KOKAR.PCLOTE WHERE NUMLOTE = :numlote and codprod = :codprod), :tempo, :usuario, :numlote||'A', (SELECT TO_DATE(SYSDATE) FROM DUAL), :codprod)", array(   
                 ":numlote" => $lista['numlote'],
                 ":tempo" => $lista['tempo'],
-                ":usuario" => $lista['usuario']));
+                ":usuario" => $lista['usuario'],
+                ":codprod" => $lista['codprod']));
         }
         if($ret[0] == 'ok'){
-            return $sql->select("SELECT kokar.revalidarlote(:numlote, :tempo, (SELECT novonumlote from paralelo.lotehistorico where numlote = :numlote)) from dual",
-            [":numlote" =>  $lista['numlote'], ":tempo" => $lista['tempo']]);
+            return $sql->select("SELECT kokar.revalidarlote(:numlote, :tempo, (SELECT max(novonumlote) from paralelo.lotehistorico where numlote = :numlote and codprod = :codprod)) from dual",
+            [":numlote" =>  $lista['numlote'], ":tempo" => $lista['tempo'], ":codprod" => $lista['codprod']]);
         }else{
             return 'Algo deu errado';
         }
@@ -57,9 +59,9 @@ class Revalidacao
               tempo
              , H.DTFAB, h.dtval, h.usuario, H.DTREV
             from kokar.pclote l 
-                left join paralelo.lotehistorico h on h.novonumlote = l.numlote
+                left join paralelo.lotehistorico h on h.novonumlote = l.numlote --and h.codprod = l.codprod
                 left join kokar.pcprodut p on p.codprod = l.codprod
                 where l.numlote LIKE :numlote 
-                order by H.novonumlote, l.numlote", [":numlote" => $numlote]);
+                order by l.codprod, H.novonumlote, l.numlote", [":numlote" => $numlote]);
     }
 }

@@ -8,7 +8,8 @@ if(isset($_POST['action'])){
         $numlote = $_POST['query']['numlote'];
         $tempo = $_POST['query']['tempo'];
         $usuario = $_POST['query']['usuario'];
-        $lista = ['numlote'=>strval($numlote), 'tempo'=>$tempo, 'usuario'=>$usuario];
+        $codprod = $_POST['query']['codprod'];
+        $lista = ['numlote'=>strval($numlote), 'tempo'=>$tempo, 'usuario'=>$usuario, 'codprod'=>$codprod];
         var_dump(Revalidacao::revalidar($lista));
     }
     

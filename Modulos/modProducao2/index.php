@@ -223,7 +223,7 @@ date_default_timezone_set('America/Araguaina');
 				<tfoot>
 					<tr>
 						<td colspan="4" style="text-align:right; padding-right:10px">
-								TOTAIS
+							TOTAIS
 						</td>
 						<td class="numeros">
 							<?= number_format(array_sum($arr[0]),2,',','.') ?>

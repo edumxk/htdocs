@@ -111,7 +111,7 @@
 				</h1>
 			</div>
 
-            <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']==2 || $_SESSION['codsetor']== 12): //Apenas TI e laboratorio?>
+            <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']==2 || $_SESSION['codsetor']== 12 || $_SESSION['codsetor'] == 8): //Apenas TI e laboratorio?>
 			    <div class="icones">  
                     <h5 class="cartao-title">Revalidar Lote</h5>
                     <input class="botao" onclick="window.location.href='/Modulos/Lab/modRevalidacao/revalidacao.php'" 

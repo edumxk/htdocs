@@ -15,7 +15,7 @@ if (isset($_GET['rca'])) {
 }
 
 $data = date("Y-m-d", time() - (15 * 24 * 60 * 60));
-//echo $data;
+
 $ret = CargasControle::getPedidosView($buscaRca);
 
 
@@ -132,7 +132,7 @@ $totValorCarga = 0;
 								</select>
 							</div>
 							<div class="col-sm-1">
-								<form action="cargasView.php" method="get">
+								<form action="" method="get">
 									<button style="width: 100%" type="submit" name="rca" class="btn btn-sm btn-success" id="valueRca" value="">BUSCAR</button>
 								</form>
 							</div>
@@ -183,6 +183,7 @@ $totValorCarga = 0;
 									<th style="text-align: center; font-size:10px; ">CIDADE</th>
 									<th style="text-align: center; font-size:10px; ">UF</th>
 									<th style="text-align: center; font-size:10px; ">OBS</th>
+									<th style="text-align: center; font-size:10px; ">TV</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -203,6 +204,8 @@ $totValorCarga = 0;
 										<td style="text-align: left; padding-left: 10px"><?php echo $p->cidade ?></td>
 										<td style="text-align: center"><?php echo $p->uf ?></td>
 										<td style="text-align: center"><?php echo $p->obs ?></td>
+										<td style="text-align: center"><?php echo $p->tv ?></td>
+										
 									</tr>
 								<?php endforeach ?>
 							</tbody>
@@ -451,6 +454,8 @@ $totValorCarga = 0;
 											<th style="text-align: center; font-size:10px; width: 12%">CIDADE</th>
 											<th style="text-align: center; font-size:10px; width: 2%">UF</th>
 											<th style="text-align: center; font-size:10px; width: 2%">OBS</th>
+											<th style="text-align: center; font-size:10px; width: 2%">TV</th>
+											<th style="text-align: center; font-size:10px; width: 2%">CRED</th>
 											<th style="text-align: center; font-size:10px">#</th>
 										</tr>
 									</thead>
@@ -462,11 +467,7 @@ $totValorCarga = 0;
 												} else {
 												} ?>
 												<tr onmouseover="listaHoverIn(this)" onmouseout="listaHoverOut(this)">
-													<?php if ($p->obs == 'SD' && strtotime(Formatador::dataFormatUs2($p->data)) <= strtotime($data)) { ?>
-														<td style="text-align: center; background-color:tomato"><?php echo $p->data; ?></td>
-													<?php } else { ?>
-														<td style="text-align: center"><?php echo $p->data; ?></td>
-													<?php } ?>
+													<td class="data-pedido" style="text-align: center"><?php echo $p->data; ?></td>
 													<td style="text-align: center"><?php echo $p->hora; ?></td>
 													<td style="text-align: left; padding-left: 10px"><?php echo $p->rca ?></td>
 													<td style="text-align: right; padding-right: 10px" id="montNumped"><?php echo $p->numped ?></td>
@@ -542,8 +543,10 @@ $totValorCarga = 0;
 													<td style="text-align: left; padding-left: 10px"><?php echo $p->cidade ?></td>
 													<td style="text-align: center"><?php echo $p->uf ?></td>
 													<td style="text-align: center"><?php echo $p->obs ?></td>
+													<td style="text-align: center"><?php echo $p->tv ?></td>
+													<td style="text-align: center"><?php echo number_format($p->credito, '2', ',', '.');?></td>
 													<td style="text-align: center">
-														<button type="submit" style="font-size:5px" class="btn-danger btn-xs" value="' + iprod['numped'] + '" onclick="setSemCarga(this)">
+														<button type="submit" style="font-size:5px" class="btn-danger btn-xs" value="' + iprod['numped'] + '" onclick="setSemCarga(this,'<?= $_SESSION['codsetor'] ?>')">
 															<i class="fas fa-trash"></i>
 														</button>
 													</td>
@@ -968,8 +971,22 @@ $totValorCarga = 0;
 
 		});
 
+		$(".data-pedido").each(function() {
+			let dataPedido = new Date($(this).text().split("/").reverse().join("-"))-0;
+			let data= {	
+						10 : new Date() - 10 * 24 * 60 * 60 * 1000,
+						7 : new Date() - 7 * 24 * 60 * 60 * 1000,
+						5 : new Date() - 5 * 24 * 60 * 60 * 1000
+					};
 
-
+			if(dataPedido < data[10]){
+				$(this).css("background-color", "tomato");
+			}else if(dataPedido <= data[7]){
+				$(this).css("background-color", "orange");
+			}else if(dataPedido <= data[5]){
+				$(this).css("background-color", "yellow");
+			}
+		})
 
 		$(".pos").each(function() {
 			pos = $(this).text()
@@ -983,8 +1000,8 @@ $totValorCarga = 0;
 			} else if (pos == "M") {
 				$(this).css("background-color", "lightblue");
 			}
-
 		});
+
 		$(".table_pedidos").tablesorter({
 			dateFormat: 'mmddYYYY',
 			headers: {
@@ -994,6 +1011,7 @@ $totValorCarga = 0;
 				}
 			}
 		});
+		
 		var btn = $(".btn-status");
 		btn.each(function(i) {
 			switch (this.children[0].innerHTML) {
@@ -1040,7 +1058,8 @@ $totValorCarga = 0;
 
 	function getPendencias(elm) {
 		console.log(elm)
-		nome = elm
+		let nome = elm
+		let tr = '';
 		$.ajax({
 			type: 'POST',
 			url: 'controle/cargasControle2.php',
@@ -1063,7 +1082,11 @@ $totValorCarga = 0;
 				peso = 0;
 				arr.forEach(function(t) {
 					peso = peso + parseFloat(t['PESO']);
-					body += '<tr>' +
+					if(t['IS_LINHA'] == '*' || t['IS_LINHA'] == 'FL')
+						tr = '<tr style="background-color: red; color: white;">';
+					else
+						tr = '<tr>';
+					body += tr  +
 						'<td style="width:40px; text-align:center">' + t['CODPROD'] + '</td>' +
 						'<td style="padding-left:10px">' + t['DESCRICAO'] + '</td>' +
 						'<td style="width:40px; text-align:center">' + t['QT'] + '</td>' +
@@ -1230,11 +1253,11 @@ $totValorCarga = 0;
 <script>
 	//SCRIPT DE AÇÃO COM O BANCO DE DADOS.
 
-	function setSemCarga(elm) {
+	function setSemCarga(elm, codsetor = null) {
 		numped = $(elm).parent().parent().find('#montNumped').text();
 		status = $(elm).parent().parent().parent().parent().parent().parent().parent().find('.btn-status').text();
-		console.log(status)
-		if (status[0] == 'A') {
+		pos = $(elm).parent().parent().find('.pos').text();
+		if ((status[0] == 'A' || pos == 'L' || pos == 'M') && (codsetor <= 1 || codsetor == 5 || codsetor == 101)) {
 			$.ajax({
 				type: 'POST',
 				url: 'controle/cargasControle2.php',
@@ -1250,7 +1273,7 @@ $totValorCarga = 0;
 				}
 			});
 		} else {
-			alert("Carga está fechada!")
+			alert("Carga está fechada! Ou você não tem permissão")
 		}
 
 	}
@@ -1342,9 +1365,9 @@ $totValorCarga = 0;
 					$('#saldoCarga').text("");
 					pesoTotalPen = 0;
 					arr.forEach(function(t) {
-						if (t['PROMO'] == t['CODPROD']) {
-							body += '<tr style="font-size: 13px">' +
-								'<td style="width:40px; text-align:center; background-color: yellow">' + t['CODPROD'] + '</td>' +
+						if (t['IS_LINHA'] == '*' || t['IS_LINHA'] == 'FL') {
+							body += '<tr style="font-size: 13px; background-color: red; color: white">' +
+								'<td style="width:40px; text-align:center;">' + t['CODPROD'] + '</td>' +
 								'<td style="padding-left:10px">' + t['DESCRICAO'] + '</td>' +
 								'<td style="width:60px; text-align:center">' + t['QT'] + '</td>' +
 								'<td style="width:60px; text-align:center">' + t['QTEST'] + '</td>' +
@@ -1618,7 +1641,7 @@ $totValorCarga = 0;
 		// console.log('destravar '+$(elm).val())
 		c = confirm("Confirma a abertura dessa carga?");
 		senha = prompt("Senha:");
-		if (c && senha=='open23') {
+		if (c && senha=='asjdaskjh$%asd6665') {
 			$.ajax({
 				type: 'POST',
 				url: 'controle/cargasControle2.php',

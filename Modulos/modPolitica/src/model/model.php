@@ -118,14 +118,18 @@ class ModelPoliticas{
         try{
             $ret = $sql->select("SELECT t1.codgrupo, t1.descricao, t1.codprod,
                     nvl((select percdesc from kokar.pcdesconto d inner join kokar.pcdescontoitem di on d.coddesconto = di.coddesconto 
-                            where d.codcli = :codCli and di.valor_num = t1.codgrupo),0) percdesc,
+                            where d.codcli = :codCli and di.valor_num = t1.codgrupo
+                            and d.descricao like :codcli||'%'),0) percdesc,
+                            nvl((select distinct dtfim from kokar.pcdesconto d inner join kokar.pcdescontoitem di on d.coddesconto = di.coddesconto 
+                            where d.codcli = :codCli and di.valor_num = t1.codgrupo
+                             and d.descricao like :codcli||'%'),sysdate) dtfim,
                             nvl(to_char(t.pvenda1-t.vlipi, '9999999.9999'),0) tabela,
-                    nvl((select ativo from pcpoliticas where codcli = :codCli),0) ativo,
+                    nvl((select ativo from paralelo.pcpoliticas where codcli = :codCli),0) ativo,
                     cl.cliente, cl.codcli
                 from 
                 (
                     select c.codgrupo, c.descricao, min(i.coditem) codprod 
-                    from kokar.pcgruposcampanhac c inner join kokar.pcgruposcampanhai i on c.codgrupo = i.codgrupo
+                    from kokar.pcgruposcampanhac c inner join kokar.pcgruposcampanhai i on c.codgrupo = i.codgrupo and c.tipo = 'GP'
                     where i.dtexclusao is null and c.dtexclusao is null    
                     group by c.codgrupo, c.descricao
                     order by c.descricao
@@ -152,8 +156,8 @@ class ModelPoliticas{
         $lista = [];
         $descontos = $sql->select("SELECT c.codgrupo GP, a.coddesconto, percdesc, c.descricao from (SELECT round(i.valor_num,0) GP , i.coddesconto, d.percdesc
         from kokar.pcdesconto d inner join kokar.pcdescontoitem i on d.coddesconto = i.coddesconto
-        where d.codcli = :codCli)a
-        right join kokar.pcgruposcampanhac c on c.codgrupo = a.GP
+        where d.codcli = :codCli and REGEXP_LIKE(SUBSTR(descricao, 1, 1), '^[0-9]$'))a
+        right join kokar.pcgruposcampanhac c on c.codgrupo = a.GP and c.tipo = 'GP'
         order by GP",
             array(":codCli"=>$codCli)
         );
@@ -216,7 +220,7 @@ class ModelPoliticas{
         $sql = new SqlOra();
         
         return $sql->select("SELECT c.codhist, c.codgrupo, g.descricao, c.descant, c.descnovo, c.tabela from paralelo.polhisti c
-        inner join kokar.pcgruposcampanhac g on g.codgrupo = c.codgrupo
+        inner join kokar.pcgruposcampanhac g on g.codgrupo = c.codgrupo and g.tipo = 'GP'
         where codhist = $id
         order by codhist, descricao");
     }
@@ -300,7 +304,7 @@ class ModelPoliticas{
         $hora = date('H:i:s');
     
         $arr1 = "UPDATE paralelo.pcpoliticas SET ATIVO = 2 where codcli = $codCli";
-        $arr2 = "UPDATE kokar.pcdesconto SET dtfim = TO_DATE(SYSDATE)-1 where codcli = $codCli";
+        $arr2 = "UPDATE kokar.pcdesconto SET dtfim = TO_DATE(SYSDATE)-1 where codcli = $codCli and REGEXP_LIKE(SUBSTR(descricao, 1, 1), '^[0-9]$')";
         $arr3 = "INSERT into paralelo.polhistc ( codhist, codcli, coduser, data, hora, obs) values ((select max(codhist)+1 codhistnovo from paralelo.polhistc), $codCli, $codUser, TO_DATE(SYSDATE), '$hora', 'Politica Desativada!') ";
         
         return(
@@ -316,7 +320,7 @@ class ModelPoliticas{
 
     
         $arr1 = "UPDATE paralelo.pcpoliticas SET ATIVO = 1 where codcli = $codCli";
-        $arr2 = "UPDATE kokar.pcdesconto SET dtfim = '31/12/2098' where codcli = $codCli";
+        $arr2 = "UPDATE kokar.pcdesconto SET dtfim = '31/12/2098' where codcli = $codCli and REGEXP_LIKE(SUBSTR(descricao, 1, 1), '^[0-9]$')";
         $arr3 = "INSERT INTO polhistc ( codhist, codcli, coduser, data, hora, obs) values ( (select max(codhist)+1 codhistnovo from paralelo.polhistc), $codCli, $codUser, TO_DATE(sysdate), '$hora', 'Politica Ativada!')";
         return(
         $sql->insertDirect($arr1).
@@ -350,7 +354,7 @@ class ModelPoliticas{
             FOR T IN (
                 SELECT d.CODDESCONTO, I.VALOR_NUM, PERCDESC FROM KOKAR.PCDESCONTO D 
                 INNER JOIN KOKAR.PCDESCONTOITEM I ON I.CODDESCONTO = D.CODDESCONTO
-                inner join kokar.pcgruposcampanhac c on c.codgrupo = i.valor_num
+                inner join kokar.pcgruposcampanhac c on c.codgrupo = i.valor_num and c.tipo = 'GP'
                 WHERE D.CODCLI =:origem and  c.dtexclusao is null
                 ) LOOP  
                 
@@ -358,19 +362,19 @@ class ModelPoliticas{
                 VALUES((SELECT MAX(CODHIST) FROM PARALELO.POLHISTC) , T.VALOR_NUM,
 
                 (select d1.percdesc from kokar.pcdesconto d1 inner join kokar.pcdescontoitem di on d1.coddesconto = di.coddesconto 
-                where d1.codcli = :destino and di.valor_num =  T.VALOR_NUM),
+                where d1.codcli = :destino and di.valor_num =  T.VALOR_NUM and d1.dtfim >= '01/01/2099'),
                  
                 T.PERCDESC, 
                  
-                 (SELECT TABELA*((PERCDESC/100)-1)*-1 TABELA FROM(
-         SELECT t1.codgrupo,                     
+                (SELECT TABELA*((PERCDESC/100)-1)*-1 TABELA FROM(
+                SELECT t1.codgrupo,                     
                     nvl((select percdesc from kokar.pcdesconto d inner join kokar.pcdescontoitem di on d.coddesconto = di.coddesconto 
-                            where d.codcli = :destino and di.valor_num = t1.codgrupo),0) percdesc,
+                            where d.codcli = :destino and di.valor_num = t1.codgrupo and d.dtfim >= '01/01/2099' ),0) percdesc,
                     t.pvenda1-t.vlipi tabela
                 from 
                 (
                     select c.codgrupo, c.descricao, min(i.coditem) codprod 
-                    from kokar.pcgruposcampanhac c inner join kokar.pcgruposcampanhai i on c.codgrupo = i.codgrupo
+                    from kokar.pcgruposcampanhac c inner join kokar.pcgruposcampanhai i on c.codgrupo = i.codgrupo and c.tipo = 'GP'
                     group by c.codgrupo, c.descricao
                     order by c.descricao
                 )t1 inner join kokar.pctabpr t on t.codprod = t1.codprod 
@@ -393,7 +397,9 @@ class ModelPoliticas{
     public static function getPerfis(){
         $sql = new SqlOra();
         $arr = $sql->select("SELECT c.*, u.obs1 rca FROM PARALELO.POLPERFILC c 
-        inner join kokar.pcusuari u on u.codusur = c.rca");
+        inner join kokar.pcusuari u on u.codusur = c.rca
+        where c.ativo = 1
+        order by c.codperfil, c.descricao");
         return $arr;
     }
 
@@ -401,7 +407,7 @@ class ModelPoliticas{
         $sql = new SqlOra();
 
         try{
-                $arr = $sql->select("SELECT c.codgrupo, c.descricao, :codPerfil codperfil, NVL(i.desconto,0) DESCONTO from (select * from KOKAR.PCGRUPOSCAMPANHAC where DTEXCLUSAO IS NULL)C
+                $arr = $sql->select("SELECT c.codgrupo, c.descricao, :codPerfil codperfil, NVL(i.desconto,0) DESCONTO from (select * from KOKAR.PCGRUPOSCAMPANHAC where DTEXCLUSAO IS NULL and tipo = 'GP')C
                                     left join (select * from PARALELO.POLPERFILI WHERE codperfil = :codPerfil)i on i.codgrupo = c.codgrupo 
                                     ORDER BY descricao", [':codPerfil' => $codPerfil]);
         }catch(Exception $e){
@@ -476,8 +482,10 @@ class ModelPoliticas{
             $arr = $sql->update2("BEGIN
                                         FOR d in (select i.valor_num codgrupo, percdesc from kokar.pcdesconto d
                                         inner join kokar.pcdescontoitem i on i.coddesconto = d.coddesconto
-                                        INNER JOIN KOKAR.PCGRUPOSCAMPANHAC C ON C.CODGRUPO = I.VALOR_NUM
+                                        INNER JOIN KOKAR.PCGRUPOSCAMPANHAC C ON C.CODGRUPO = I.VALOR_NUM and c.tipo = 'GP'
                                         where codcli = :codCli AND C.DTEXCLUSAO IS NULL
+                                        and d.dtfim >='01/jan/2098'
+                                        and REGEXP_LIKE(SUBSTR(d.descricao, 1, 1), '^[0-9]$')
                                         order by valor_num) loop
                                             
                                             begin
@@ -552,8 +560,8 @@ class ModelPoliticas{
         $sql = new SqlOra();
         $ret=[];
         try{
-            $ret[] = $sql->update2("DELETE FROM paralelo.polperfili WHERE codperfil = :codperfil", [':codperfil' => $codPerfil]);
-            $ret[] = $sql->update2("DELETE FROM paralelo.polperfilc WHERE codperfil = :codperfil", [':codperfil' => $codPerfil]);
+            $ret[] = $sql->update2("UPDATE PARALELO.POLPERFILC SET ATIVO = 0 WHERE CODPERFIL = :codperfil", [':codperfil' => $codPerfil]);
+
         }catch(Exception $e){
             echo 'Erro ao excluir politica do perfil';
             return $e->getMessage();
@@ -570,20 +578,22 @@ class ModelPoliticas{
 
         try{
             if($filtro == null){
-                $arr = $sql->select("SELECT C.codcli, cliente, fantasia, D.NOMECIDADE || ' - ' || D.UF as cidadeUf, CASE WHEN DTULTCOMP IS NULL
+                $arr = $sql->select("SELECT C.codcli, cliente, fantasia, D.NOMECIDADE || ' - ' || D.UF as cidadeUf, p.praca praca, c.codatv1 atividade, CASE WHEN DTULTCOMP IS NULL
                 THEN 'N/A' 
                 ELSE TO_CHAR(TO_DATE(SYSDATE) - TO_DATE(DTULTCOMP))END DIAS,
                 CASE WHEN R.ATIVO IS NULL THEN 'S/P' WHEN R.ATIVO = 1 THEN 'A' ELSE 'I' END STATUS
                  FROM KOKAR.PCCLIENT C
                                     inner join KOKAR.Pccidade d on D.CODCIDADE = c.Codcidade
                                     left join paralelo.pcpoliticas r on r.codcli = c.codcli
+                                    inner join kokar.pcpraca p on p.codpraca = c.codpraca
                                     WHERE c.codusur1 = :codRca and c.dtexclusao is null
                                     ORDER BY CLIENTE", [':codRca' => $codRca]);
             }else{
-                $arr = $sql->select("SELECT C.codcli, cliente, fantasia, D.NOMECIDADE || ' - ' || D.UF as cidadeUf FROM KOKAR.PCCLIENT C
+                $arr = $sql->select("SELECT C.codcli, cliente, fantasia, D.NOMECIDADE || ' - ' || D.UF as cidadeUf, p.praca praca, c.codatv1 atividade FROM KOKAR.PCCLIENT C
                                     inner join KOKAR.Pccidade d on D.CODCIDADE = c.Codcidade
-                                    WHERE c.codusur1 = :codRca and (CLIENTE LIKE :filtro or FANTASIA LIKE :filtro or c.codcli = :codCli or nomecidade like :filtro) and c.dtexclusao is null
-                                    ORDER BY CLIENTE", [':codRca' => $codRca, ':filtro' => '%'.mb_strtoupper($filtro).'%', ':codCli' => ($filtro)]);
+                                    inner join kokar.pcpraca p on p.codpraca = c.codpraca
+                                    WHERE c.codusur1 = :codRca and (CLIENTE LIKE :filtro or FANTASIA LIKE :filtro or c.codcli = number(:codCli) or nomecidade like :filtro) and c.dtexclusao is null
+                                    ORDER BY CLIENTE", [':codRca' => $codRca, ':filtro' => '%'.mb_strtoupper($filtro).'%', ':codCli' => intval($filtro)]);
             }
         }catch(Exception $e){
             echo 'Erro ao buscar Clientes do RCAs';
@@ -626,7 +636,7 @@ class ModelPoliticas{
                                       inner join kokar.pcdescontoitem di on di.coddesconto = d.coddesconto
                                       where d.codcli = :codCli)t2
                                       on t2.valor_num = t1.codgrupo
-                                      inner join kokar.pcgruposcampanhac g on g.codgrupo = t1.codgrupo
+                                      inner join kokar.pcgruposcampanhac g on g.codgrupo = t1.codgrupo and g.tipo = 'GP'
                                       )loop
                       begin
                         
@@ -686,16 +696,16 @@ class ModelPoliticas{
             $dados = $sql->select("SELECT t1.*, t2.*, g.descricao nomegrupo, nvl(ta.tabela,0) tabela from(select codperfil, i.codgrupo, i.desconto descnovo, :codCli codCli from paralelo.polperfili i where codperfil = :codPerfil)t1
             left join (select d.percdesc descant, valor_num, d.coddesconto, d.descricao from kokar.pcdesconto d 
             inner join kokar.pcdescontoitem di on di.coddesconto = d.coddesconto
-            where d.codcli = :codCli)t2
+            where d.codcli = :codCli and d.descricao not like '%BLACK%')t2
             on t2.valor_num = t1.codgrupo
-            inner join kokar.pcgruposcampanhac g on g.codgrupo = t1.codgrupo and g.dtexclusao is null
+            inner join kokar.pcgruposcampanhac g on g.codgrupo = t1.codgrupo and g.dtexclusao is null and g.tipo = 'GP'
             left join (SELECT TABELA*((PERCDESC/100)-1)*-1 TABELA, codgrupo FROM
             (SELECT t1.codgrupo,                     
             nvl((select percdesc from kokar.pcdesconto dd inner join kokar.pcdescontoitem di on dd.coddesconto = di.coddesconto 
-                  where dd.codcli = :codCli and di.valor_num = t1.codgrupo),0) percdesc,
+                  where dd.codcli = :codCli and di.valor_num = t1.codgrupo and dd.dtfim >= to_date('01/jan/2098')),0) percdesc,
                   t.pvenda1-t.vlipi tabela from  (
                   select cc.codgrupo, cc.descricao, min(ii.coditem) codprod 
-                  from kokar.pcgruposcampanhac cc inner join kokar.pcgruposcampanhai ii on cc.codgrupo = ii.codgrupo
+                  from kokar.pcgruposcampanhac cc inner join kokar.pcgruposcampanhai ii on cc.codgrupo = ii.codgrupo and cc.tipo = 'GP'
                   where cc.dtexclusao is null AND ii.dtexclusao is null
                   group by cc.codgrupo, cc.descricao
                   order by cc.descricao

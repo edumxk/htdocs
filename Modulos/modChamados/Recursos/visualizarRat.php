@@ -111,8 +111,17 @@ if($chamado->ALab != null){
 
     $pdf->SetFillColor(200,200,200);
 
-    $pdf->SetFont('Arial','B',8);   $pdf->Cell(35,6,utf8_decode('DESC. PROBLEMA:'),1,0,'',1);
-    $pdf->SetFont('Arial','',8);    $pdf->Cell(0,6,utf8_decode($chamado->problema),1,1,'L');
+      
+    
+   // $pdf->Cell(0,6,utf8_decode($chamado->problema),1,1,'L');
+    if(strlen($chamado->problema) > 88){
+        $pdf->SetFont('Arial','B',8);   $pdf->MultiCell(0,6,utf8_decode('DESC. PROBLEMA:'),1,'',1);
+        $pdf->SetFont('Arial','',8); $pdf->SetFont('Arial','',8);    $pdf->MultiCell(0,6,utf8_decode($chamado->problema),1,'L');
+    }else{
+        $pdf->SetFont('Arial','B',8);   $pdf->Cell(35,6,utf8_decode('DESC. PROBLEMA:'),1,0,'',1);
+        $pdf->SetFont('Arial','',8); $pdf->SetFont('Arial','',8);    $pdf->Cell(0,6,utf8_decode($chamado->problema),1,1,'L');
+    }
+
 
 
     $pdf->SetFont('Arial','B',8);   $pdf->Cell(35,6,utf8_decode('PATOLOGIA:'),1,0,'',1);

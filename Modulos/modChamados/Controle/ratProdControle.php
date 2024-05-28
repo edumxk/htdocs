@@ -178,8 +178,19 @@
         /*BUSCA DE PRODUTO POR NOME EM ARQUIVO JSON PARA TYPEAHEAD*/
         public static function getProdutoJson(){
 
-            $json_file = file_get_contents("http://localhost/recursos/json/produto.json"); 
+            //verifica a data do arquivo da ultima alteração
+            $file = $_SERVER["DOCUMENT_ROOT"] . '/recursos/json/produto.json';
+            $filetime = filemtime($file);
+            $now = time();
+            $diff = $now - $filetime;
 
+            if($diff > 604800){
+                $produtos = ratProdDao::getProdutos();
+                file_put_contents($_SERVER["DOCUMENT_ROOT"] . '/recursos/json/produto.json', $produtos);
+            }
+            //retorna o arquivo json
+            $json_file = file_get_contents($_SERVER["DOCUMENT_ROOT"] . '/recursos/json/produto.json'); 
+            
             $json_str = json_decode($json_file, true);
             
 

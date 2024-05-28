@@ -160,7 +160,7 @@
                 </div>
             <?php endif?>
             
-            <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']==4 || $_SESSION['codsetor']==5 || $_SESSION['codsetor']==101 || $_SESSION['codsetor']==11): //Apenas diretoria e comercial?>
+            <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor']==4 || $_SESSION['codsetor']==5 || $_SESSION['codsetor']==101 || $_SESSION['codsetor']==11 || $_SESSION['coduser']==42): //Apenas diretoria e comercial?>
                 <div class="icones">  
                     <h5 class="cartao-title">Faturamento</h5>
                     <input class="botao" onclick="window.location.href='modulos/modrelatorio/painelVendas.php'" 
@@ -176,7 +176,7 @@
                 </div>
             <?php endif?>
             
-            <?php if($_SESSION['codsetor']<=1): //Apenas diretoria e produção?>
+            <?php if($_SESSION['codsetor']<=1 || $_SESSION['codsetor'] == 14 || $_SESSION['coduser'] == 15): //Apenas diretorian RH e Wesley Sanzio?>
                 <div class="icones">  
                     <h5 class="cartao-title">Frete</h5>
                     <input class="botao" onclick="window.location.href='modulos/modFrete/home.php'" 

@@ -95,8 +95,10 @@ class Producao{
                       AND O.CODPRODMASTER = P.CODPROD
                    ))a        
                    left join
-                            (select c1.codprodmaster, c1.qt PESOLIQ, c1.metodo from kokar.pccomposicao c1 
-                            inner join kokar.pcprodut p1 on c1.codprod = p1.codprod and p1.codepto = 10001 and p1.codsec IN (10012, 10013))cp
+                            (select c1.codprodmaster, sum(c1.qt )PESOLIQ, c1.metodo from kokar.pccomposicao c1 
+                            inner join kokar.pcprodut p1 on c1.codprod = p1.codprod and p1.codepto != 10002 and p1.codsec not IN (10015)
+                            --where c1.codprodmaster =  2826 and metodo =2
+                            group by c1.codprodmaster, c1.metodo)cp
                             on cp.codprodmaster = a.codprodmaster and cp.metodo = a.metodo
                    
                    ORDER BY DTFECHA, HORA",
@@ -120,7 +122,7 @@ class Producao{
                   from paralelo.mproducaoc c
                   right join paralelo.mtanques t on t.codtanque = c.codtanque
                   inner join paralelo.metasprodc m on m.cod = t.codlinha
-                  WHERE ((c.status !='F' and c.dtabertura <=  sysdate))and c.dtexclusao is null
+                  WHERE c.status not in ('F') and c.dtexclusao is null
                   order by c.dtfecha, c.dtproducao, c.horaproducao)t1
                   inner join(                  
                   SELECT i.codproducao, i.codprod, p.descricao produto,c.categoria, r.descricao cor, 'COD: '||i.codprod ||' | '||p.embalagem embalagem, 
@@ -129,6 +131,7 @@ class Producao{
                           inner join kokar.pcprodut p on i.codprod = p.codprod
                           left join kokar.pccor r on r.codcor = p.codcor
                           inner join kokar.pccategoria c on c.codsec = p.codsec and c.codcategoria = p.codcategoria
+                          where i.dtexclusao is null
                           order by codproducao, embalagem)t2 on t1.codproducao = t2.codproducao
                           where status not in ('S')");
             

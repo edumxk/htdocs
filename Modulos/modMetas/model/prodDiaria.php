@@ -57,7 +57,7 @@ class ProdDiaria{
             (select c1.codprodmaster, c1.qt, c1.metodo from kokar.pccomposicao c1 
             inner join kokar.pcprodut p1 on c1.codprod = p1.codprod and p1.codepto = 10001 and p1.codsec IN (10012, 10013))cp
             on cp.codprodmaster = c.codprodmaster and cp.metodo = c.metodo
-            left join paralelo.agrupamentosa a on a.codcategoria = p.codcategoria
+            left join paralelo.agrupamentosa a on a.codcategoria = p.codlinhaprod
             where extract (month from c.dtfecha) = extract (month from to_date(:dtFecha))
             and extract (year from c.dtfecha) = extract (year from to_date(:dtFecha))
               and c.posicao = 'F' 
@@ -165,21 +165,20 @@ class ProdDiaria{
                 SELECT codprod, descricao, qt, peso_padrao_formula, qt * peso_padrao_formula pesoliq,
                 unidade, categoria, codcategoria, numlote, numop, tipo, dtfecha
                 from (select c.codprodmaster codprod, p.descricao, p.codepto,
-                p.codsec, p.codcategoria, g.categoria, c.numlote, c.numop,dtfecha,
+                p.codsec, p.codlinhaprod codcategoria, g.descricao categoria, c.numlote, c.numop,dtfecha,
                 c.metodo, cp.qt peso_padrao_formula, p.unidade,
                 case when c.qtproduzida is null then
                   c.qtproduzir else c.qtproduzida end as qt, a.tipo
                 from kokar.pcopc c
                 inner join kokar.pcprodut p on
                 p.codprod = c.codprodmaster
-                inner join kokar.pccategoria g on
-                g.codcategoria = p.codcategoria
-                and g.codsec = p.codsec
+                inner join kokar.pclinhaprod g on
+                g.codlinha = p.codlinhaprod
                 left join
                 (select c1.codprodmaster, c1.qt, c1.metodo from kokar.pccomposicao c1 
                 inner join kokar.pcprodut p1 on c1.codprod = p1.codprod and p1.codepto = 10001 and p1.codsec IN (10012, 10013))cp
                 on cp.codprodmaster = c.codprodmaster and cp.metodo = c.metodo
-                left join paralelo.agrupamentosa a on a.codcategoria = p.codcategoria
+                left join paralelo.agrupamentosa a on a.codcategoria = p.codlinhaprod
                 where  c.dtfecha = to_date(:dtFecha)
     
                   and c.posicao = 'F' 
@@ -193,7 +192,7 @@ class ProdDiaria{
                 array(":dtFecha"=>$data)
             );
         else:
-            $ret = $sql->select("SELECT M.CODLINHA cod, mc.linha TIPO, nvl(A.QT,0) qt, NVL(A.TOTAL,0)TOTAL, M.META meta1, MC.OPERADOR
+            $ret = $sql->select("SELECT M.CODLINHA cod, mc.linha TIPO, NVL(A.TOTAL,0)TOTAL, M.META meta1, MC.OPERADOR
             FROM(
                 SELECT COD, SUM(TOTAL) TOTAL FROM(
                 SELECT CASE WHEN TIPO = 'TINTAS' AND TOTAL < 2600
@@ -226,7 +225,7 @@ class ProdDiaria{
                 (select c1.codprodmaster, c1.qt, c1.metodo from kokar.pccomposicao c1 
                 inner join kokar.pcprodut p1 on c1.codprod = p1.codprod and p1.codepto = 10001 and p1.codsec IN (10012, 10013))cp
                 on cp.codprodmaster = c.codprodmaster and cp.metodo = c.metodo
-                left join paralelo.agrupamentosa a on a.codcategoria = p.codcategoria
+                left join paralelo.agrupamentosa a on a.codcategoria = p.codlinhaprod
                 where  c.dtfecha = to_date(:dtFecha)
     
                   and c.posicao = 'F' 
@@ -236,7 +235,6 @@ class ProdDiaria{
                   GROUP BY COD)A
                      right JOIN PARALELO.METASPRODI M ON A.COD = M.CODLINHA 
                      right JOIN PARALELO.METASPRODC MC ON M.CODLINHA = MC.COD
-    
                     where  
                     extract(month from to_date(competencia)) = extract(month from to_date(:dtfecha)) 
                     and extract(year from to_date(competencia)) = extract(year from to_date(:dtfecha))

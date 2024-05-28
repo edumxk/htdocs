@@ -51,13 +51,6 @@ require_once './control/controle.php';
                 <span class="tooltip">Página Inicial</span>
             </li>
             <li>
-                <a href="copiarPolitica.php">
-                    <i class='bx bx-message-rounded-edit'></i>
-                    <span class="link-nome">Copiar Política</span>
-                </a>
-                <span class="tooltip">Copiar Política</span>
-            </li>
-            <li>
                 <a href="historico.php">
                     <i class='bx bx-copy-alt'></i>
                     <span class="link-nome">Histórico</span>
@@ -177,9 +170,18 @@ require_once './control/controle.php';
 
 //definir variavel global codsetor
     var codsetor = <?=$_SESSION['codsetor']?>;
+    var coduser = <?=$_SESSION['coduser']?>;
 
     function ver(codcli, numregiao){
         var modal = $('#modalPoliticas')
+        $('#btn_salvar').removeAttr('onclick');
+        $('#btn_salvar2').removeAttr('onclick');
+        $('#btn_desativar').removeAttr('onclick');
+        $('#btn_ativar').removeAttr('onclick');
+        $('#btn_criar').removeAttr('onclick');
+        $('#dadosmodal').empty();
+        $('#modal-titulo').empty();
+        
         $.ajax({
                 type: 'POST',
                 url: "control/controle.php",
@@ -189,10 +191,8 @@ require_once './control/controle.php';
                     'numregiao': numregiao,
                 },
                 success: function(resposta) {
-                    console.log(resposta.length);
+                    console.log(resposta);
                     if(resposta.length>0){
-                    
-                  
                         arr = JSON.parse(resposta);
                     body = "";
                     status = arr[0][5];
@@ -204,15 +204,6 @@ require_once './control/controle.php';
                                 +    '<td class="politica__tabela"><input tabindex="-1" class="tabela" type="text" onfocusout="attValor(this, '+parseFloat(t[3])+')" value="'+getTabela(parseFloat(t[2]), parseFloat(t[3]))+'"></input></td>'
                                 +'</tr>'    
                             })
-                            
-
-                    $('#btn_salvar').removeAttr('onclick');
-                    $('#btn_salvar2').removeAttr('onclick');
-                    $('#btn_desativar').removeAttr('onclick');
-                    $('#btn_ativar').removeAttr('onclick');
-                    $('#btn_criar').removeAttr('onclick');
-                    $('#dadosmodal').empty();
-                    $('#modal-titulo').empty();
                     $('#modal-titulo').append(codcli+' : '+arr[0][4]);
                     $('#btn_salvar').attr('onClick', 'atualizaPolitica('+codcli+');');
                     $('#btn_salvar2').attr('onClick', 'atualizaPolitica('+codcli+');');
@@ -369,7 +360,7 @@ require_once './control/controle.php';
 
     function atualizaPolitica(codCli, obs){   
 
-        if(codsetor > 1 && codsetor != 101){
+        if(codsetor > 1 && codsetor != 101 && codsetor != 5){
             alert('Você não tem permissão para alterar políticas comerciais!');
             return;
         }
@@ -381,7 +372,6 @@ require_once './control/controle.php';
         let obsGeral = retira_acentos($('#modalObs').val());
         let codUser = <?= $_SESSION['coduser']?> ;
 
-        
         if(obsGeral != obsOriginal){
             linha.each(function( i, element ){
                 
@@ -406,6 +396,8 @@ require_once './control/controle.php';
         fechar()
         }else{
             alert('Altere a Observação para Salvar a Politica!!!')
+            $('#btn_salvar').attr('onclick', 'atualizaPolitica('+codCli+', "'+obsGeral+'");');
+            $('#btn_salvar2').attr('onclick', 'atualizaPolitica('+codCli+', "'+obsGeral+'");');
         }
         
     }

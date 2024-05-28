@@ -52,13 +52,6 @@ require_once './control/controle.php';
                 <span class="tooltip">Página Inicial</span>
             </li>
             <li>
-                <a href="copiarPolitica.php">
-                    <i class='bx bx-message-rounded-edit'></i>
-                    <span class="link-nome">Copiar Política</span>
-                </a>
-                <span class="tooltip">Copiar Política</span>
-            </li>
-            <li>
                 <a href="#">
                     <i class='bx bx-copy-alt'></i>
                     <span class="link-nome">Histórico</span>

@@ -40,7 +40,7 @@ require_once ($_SERVER["DOCUMENT_ROOT"] . '/model/sqlOracle.php');
             $arrRealizado = $sql->select("SELECT codcli, codgrupo, descricao, perdesc, sum(qt)cont, max(datasaida) datasaida, codusur
                     from (   
                         select c.codcli, cc.codgrupo, cc.descricao, i.perdesc perdesc, count(i.codprod) qt, max(c.data) datasaida, c.codusur
-                        from kokar.pcgruposcampanhac cc inner join kokar.pcgruposcampanhai ci on cc.codgrupo = ci.codgrupo
+                        from kokar.pcgruposcampanhac cc inner join kokar.pcgruposcampanhai ci on cc.codgrupo = ci.codgrupo and cc.tipo = 'GP'
                             inner join kokar.pcpedi i on ci.coditem = i.codprod
                             inner join kokar.pcpedc c on c.numped = i.numped
                             inner join kokar.pcplpag pag on pag.codplpag = c.codplpag

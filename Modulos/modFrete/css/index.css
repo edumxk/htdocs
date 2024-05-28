@@ -1,34 +1,32 @@
-html{
-  
-  width: fit-content;
-
-}
 header{
    background-color: blue; 
 }
 
-.caixa {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+a {
+  text-decoration: initial!important;
+  color: initial;
 }
+
 img{
     display: inline;
     height: 110px;
     width: auto;
 }
+
 nav{
     display: inline;
     margin: 0 0 0 15px;
     top: 0px;
     right: 0px;
 }
+
 nav li{
     display: inline;
     margin: 0 0 0 15px;
     top: 0px;
     right: 0px;
 }
+
 nav a{
     text-decoration: none;
     font-size: 22px;
@@ -36,10 +34,12 @@ nav a{
     color: #FFFFFF;
     text-transform: uppercase;
 }
+
 table {
     background:#ffffff ;
     margin: 0 auto;
     border: solid 1px black;
+    border-collapse: collapse;
    
   }
   .numeros {
@@ -71,3 +71,34 @@ table {
   #coluna div{
     background-color: gray;
   }
+@media screen and (max-width: 850px) {
+  img{
+    display: flex;
+    height: 60px;
+    width: auto;
+  }
+
+}
+@media screen and (max-width: 720px) {
+  
+  nav a{
+    font-size: 16px;
+  }
+}
+@media screen and (max-width: 612px) {
+  nav li{
+    display: block;
+    margin: 0 0 0 15px;
+    top: 0px;
+    right: 0px;
+  }
+  .pt-5{
+    padding: 0px!important;
+  }
+  html{
+    min-width: 355px!important;
+  }
+  ul{
+    padding: 0px!important;
+  }
+}

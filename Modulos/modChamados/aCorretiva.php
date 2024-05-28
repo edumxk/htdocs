@@ -737,7 +737,7 @@ $formulario = Formulario::getFormularioRat(Rat::getFormularioConsulta($_GET['num
 				url: 'Controle/corretivaControle.php',
 				data: { 'action': 'getCorretiva', 'query': numrat },
 				success: function (response) {
-					//console.log(response);
+					console.log(response);
 					var arr = JSON.parse(response)['acoes'];
 					var vltotal = JSON.parse(response);
 					//console.log(vltotal);
@@ -805,7 +805,6 @@ $formulario = Formulario::getFormularioRat(Rat::getFormularioConsulta($_GET['num
 		url: 'controle/ratProdControle.php',
 		data: { 'action': 'produtoJson', 'query': '' },
 		success: function (response) {
-			console.log(response)
 			var teste = JSON.parse(response);
 			var ret = [];
 			for (i = 0; i < teste.length; i++) {
@@ -821,25 +820,32 @@ $formulario = Formulario::getFormularioRat(Rat::getFormularioConsulta($_GET['num
 		function getProdTroca(elm) {
 			var cod = $(elm).val();
 			var cli = <?php echo $chamado->codCli?>;
-
+			let produtos;
 			
 			dataset = {'codprod':cod, 'codcli':cli};
 
 			if (cod != null) {
 				$.ajax({
 					type: 'POST',
-					url: 'Controle/corretivaControle.php',
-					data: { 'action': 'getProduto', 'query': cod },
+					url: 'Controle/ratProdControle.php',
+					data: { 'action': 'produtoJson' },
 					success: function (response) {
-						//console.log(response);
-						if (response == 0) {
-							$("#trocaJson").val('');
-						} else {
-							//console.log(response);
-							var ret = JSON.parse(response);
-							$(elm).parent().parent().find("#trocaJson").val(ret['produto'])
-
+						result = JSON.parse(response);
+						
+						//search cod and return DESCRICAO
+						for (i = 0; i < result.length; i++) {
+							if (result[i]['CODPROD'] === cod) {
+								prod = result[i]['DESCRICAO'];
+							}
 						}
+						if (prod != null) {
+							$(elm).parent().parent().find("#trocaJson").val((prod));
+						}else{
+							$(elm).parent().parent().find("#trocaJson").val("");
+						}
+						prod = null;
+					},error: function (response) {
+						console.log(response);
 					}
 				});
 			}

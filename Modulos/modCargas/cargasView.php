@@ -1,8 +1,13 @@
 <?php
+	
+	
+	header('Location: /cargasControl.php');
 
 	require_once ($_SERVER["DOCUMENT_ROOT"] . '/modulos/modCargas/Controle/cargasControle.php');
 	session_start();
 	header('Content-Type: text/html; charset=UTF-8');
+
+	//redirecionar para cargasControl.php
 
 	if(isset($_GET['rca'])){
 		$buscaRca = $_GET['rca'];

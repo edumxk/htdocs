@@ -234,6 +234,15 @@ $produtosList = Controle::getProdutosLista();
 									<select id="Linha"></select>
 								</div>
 							</div>
+                            <div class="form-previsao" id="dvabertura">
+								<div id="labertura">
+									<label for="dataa">Abertura</label>
+								</div>
+								<div id="iabertura">
+									<input type="date" id="dataa" value="">
+									<input type="time" id="horaa" value="">
+								</div>
+							</div>
 							<div class="form-previsao">
 								<div>
 									<label for="datap">Previsão</label>
@@ -243,7 +252,7 @@ $produtosList = Controle::getProdutosLista();
 									<input type="time" id="horap" value="08:00">
 								</div>
 							</div>
-							<div class="form-previsao">
+							<div class="form-previsao" id="dvfechamento" hidden>
 								<div id="lapontamento">
 									<label for="dataf">Fechamento</label>
 								</div>
@@ -463,8 +472,10 @@ $produtosList = Controle::getProdutosLista();
 		$("div.form-status select").val('S').change();
 		$('#codproducao').val(0);
 		$("div.editar select").val(valor).change();
-		$('#horap').val("08:00")
+		$('#horap').val("17:00")
 		$('#datap').val("<?= $data ?>")
+		$('#horaa').val("08:00:00")
+		$('#dataa').val("<?= $data ?>")
 
 		for (i = 1; i < 4; i++) {
 			$('#cod' + i).val('')
@@ -585,6 +596,8 @@ $produtosList = Controle::getProdutosLista();
 		let codproducao = $('#codproducao').val();
 		let dtfecha = $('#dataf').val();
 		let hrfecha = $('#horaf').val();
+		let dtabertura = $('#dataa').val();
+		let hrabertura = $('#horaa').val();
 		let lote = $("#lote").val();
 		let produtos = {};
 		let dataini = '<?= Formatador::formatador2($data); ?>';
@@ -602,6 +615,8 @@ $produtosList = Controle::getProdutosLista();
 			"codtanque": codtanque,
 			"dtprevisao": dtprevisao,
 			"hrprevisao": hrprevisao,
+			"dtabertura": dtabertura,
+			"hrabertura": hrabertura,
 			"codfun": codfun,
 			"produtos": 
 				produtos
@@ -677,13 +692,15 @@ $produtosList = Controle::getProdutosLista();
 			
 			success: function(response) {
 				head = jQuery.parseJSON(response)[0][0]
-				dt = head['dtproducao'].split('/')
-				head['dtproducao'] = dt[2] + '-' + dt[1] + '-' + dt[0];
+				
+				head['dtproducao'] = dataForm(head['dtproducao']);
 				if (head['dtfecha'] != null) {
-					dt2 = head['dtfecha'].split('/')
-					head['dtfecha'] = dt2[2] + '-' + dt2[1] + '-' + dt2[0];
+					
+					head['dtfecha'] = dataForm(head['dtfecha']);
 				}
+				head['dtabertura'] = dataForm(head['dtabertura']);
 				produtos = jQuery.parseJSON(response)[1]
+				console.log(head)
 
 				$("div.form-status select").val(head['statusp']).change();
 				$("div.editar select").val(head['codtanque']).change();;
@@ -691,15 +708,19 @@ $produtosList = Controle::getProdutosLista();
 				$('#datap').val(head['dtproducao'])
 				$('#lote').val(head['lote'])
 				if (head['status'] != "FINALIZADO") {
-					$('#lapontamento').hide();
-					$('#iapontamento').hide();
+                    $('#dvfechamento').attr('hidden', true)
+                    $('#dvabertura').removeAttr('hidden');
 					$('#horaf').val('')
 					$('#dataf').val('')
+					$('#horaa').val(head['hrabertura'])
+					$('#dataa').val(head['dtabertura'])
+					console.log("nao finalizado");
 				} else {
 					$('#horaf').val(head['hrfecha'])
 					$('#dataf').val(head['dtfecha'])
-					$('#lapontamento').show(1);
-					$('#iapontamento').show(1);
+					$('#dvfechamento').removeAttr('hidden');
+                    $('#dvabertura').attr('hidden', true)
+					console.log("finalizado");
 				}
 				
 				
@@ -873,6 +894,11 @@ $produtosList = Controle::getProdutosLista();
 		});
 	})
 	/* #FIM FUNÇÕES DE MODAL CADASTRO */
+
+	function dataForm(data) {
+		data = data.split('/');
+		return data[2] + '-' + data[1] + '-' + data[0];
+	}
 </script>
 
 </HTML>

@@ -1,7 +1,8 @@
 <?php 
     require_once ($_SERVER["DOCUMENT_ROOT"] . '/modulos/modFaltas/dao/daoFalta.php');
     require_once ($_SERVER["DOCUMENT_ROOT"] . '/modulos/modFaltas/model/produto.php');
-    //require_once ($_SERVER["DOCUMENT_ROOT"] . '/modulos/modFaltas/novaFalta.php');
+    require_once ($_SERVER["DOCUMENT_ROOT"] . '/Controle/formatador.php');
+
 
     if(isset($_POST['action'])){
         if($_POST['action']=='delProd'){
@@ -21,11 +22,11 @@
         }
         if($_POST['action']=='incluirProd'){
             $dados = $_POST['query'];
-             daoFalta::incluirProd($dados['numfalta'],$dados['codprod'],$dados['qt'],$dados['posicao'],$dados['motivo'],$dados['codcli'],$dados['numnota'],$dados['tipocusto'],$dados['dataf'],$dados['obs']);
+             daoFalta::incluirProd($dados['numfalta'],$dados['codprod'],$dados['qt'],$dados['posicao'],$dados['motivo'],$dados['codcli'],$dados['numnota'],$dados['tipocusto'],$dados['dataf'],Formatador::br_encode($dados['obs']));
         }
         if($_POST['action']=='incluirFaltaC'){
             $dados = $_POST['query'];
-            echo daoFalta::incluirFaltaC($dados['codcli'], $dados['numnota'], $dados['numnotacusto'], $dados['motorista'], $dados['obs']);
+            echo daoFalta::incluirFaltaC($dados['codcli'], $dados['numnota'], $dados['numnotacusto'], $dados['motorista'], Formatador::br_encode($dados['obs']));
         }
         
     }

@@ -38,6 +38,7 @@ class Carga{
                         inner join kokar.pcpedi ki on kc.numped = ki.numped
                         inner join kokar.pcprodut kp on ki.codprod = kp.codprod
             where ci.numcarga = :numcar
+            and kc.condvenda not in (7)
             and kc.posicao not in ('C', 'F')",array("numcar"=>$this->numcarga)
         );
 
@@ -121,7 +122,7 @@ class Carga{
         $sql = new SqlOra();
 
         $ret = $sql->select("SELECT * from (SELECT codprod, descricao, qt,  qtdisp, TO_CHAR(peso-(qtdisp*pesobruto), '999999990.999')peso,
-        numcarga, nome, dtsaida
+        numcarga, nome, dtsaida, is_linha
                from (
                select ki.codprod, 
                        kp.descricao,
@@ -129,7 +130,8 @@ class Carga{
                        sum(ki.qt) qt,
                        sum (ki.qt*kp.pesobruto) peso,
                        ke.qtestger-ke.qtbloqueada-ke.qtreserv as qtdisp,
-                       i.numcarga, c.nome, c.dtsaida
+                       i.numcarga, c.nome, c.dtsaida,
+                       kp.obs2 is_linha
                from paralelo.cargai i 
                inner join kokar.pcpedi ki on i.numped = ki.numped
                inner join kokar.pcprodut kp on ki.codprod = kp.codprod
@@ -137,7 +139,7 @@ class Carga{
                inner join paralelo.cargac c on c.numcarga = i.numcarga
                where ki.posicao in ('P','B')-- and qt>ke.qtestger-ke.qtbloqueada-ke.qtreserv
                and i.numcarga = :numcarga
-               group by ki.codprod, kp.pesobruto, kp.descricao, ke.qtestger-ke.qtbloqueada-ke.qtreserv, i.numcarga, c.nome, c.dtsaida
+               group by ki.codprod, kp.pesobruto, kp.descricao, kp.obs2, ke.qtestger-ke.qtbloqueada-ke.qtreserv, i.numcarga, c.nome, c.dtsaida
                ) where qtdisp < qt 
                order by descricao)t1
                left join(
@@ -359,9 +361,9 @@ class Carga{
         }
 
         $ret = $sql->select(
-            "SELECT distinct t1.*,t5.*, d.codprod promo from (SELECT codprod, descricao, pesobruto, qt, qtest, TO_CHAR(pesopendente-(qtest*pesobruto), '999999990.999')pesopendente
+            "SELECT distinct t1.*,t5.*, d.codprod promo from (SELECT codprod, descricao, pesobruto, qt, qtest, TO_CHAR(pesopendente-(qtest*pesobruto), '999999990.999')pesopendente, is_linha
             from (
-            SELECT i.codprod, p.descricao,p.pesobruto, sum(i.qt) qt, e.qtestger-e.qtreserv-e.qtbloqueada as qtest,
+            SELECT i.codprod, p.descricao,p.pesobruto, sum(i.qt) qt, e.qtestger-e.qtreserv-e.qtbloqueada as qtest, p.obs2 is_linha,
             sum(i.qt*p.pesobruto) as pesopendente
             
             from paralelo.cargac cc inner join paralelo.cargai ci on cc.numcarga = ci.numcarga
@@ -369,9 +371,9 @@ class Carga{
                 inner join kokar.pcprodut p on p.codprod = i.codprod
                 inner join kokar.pcpedc c on c.numped = i.numped
                 inner join kokar.pcest e on e.codprod = i.codprod
-            where cc.numcarga in($varCargas)
+            where cc.numcarga in ($varCargas)
               and c.posicao in ('P')
-            group by i.codprod, p.descricao, p.pesobruto, e.qtestger-e.qtreserv-e.qtbloqueada)
+            group by i.codprod, p.descricao, p.pesobruto, p.obs2, e.qtestger-e.qtreserv-e.qtbloqueada)
             where qt > qtest    
             )t1
     left join(
@@ -517,7 +519,8 @@ class Carga{
         FROM paralelo.cargai i
         right join kokar.pcpedc c on c.numped = i.numped
          WHERE posicao in ('L', 'M', 'P', 'C', 'B')
-        and c.dtlibera is not null)t2 on t2.numped2 = T1.NUMPEDORIG",[]);
+        --and c.dtlibera is not null
+        )t2 on t2.numped2 = T1.NUMPEDORIG",[]);
 
         if(sizeof($numped)> 0){
             foreach($numped as $n){

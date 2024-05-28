@@ -115,11 +115,11 @@ $lista = [];
         document.getElementById("numlote").focus();
     };
 
-    function revalidar2(numlote){
+    function revalidar2(numlote, codprod){
         $('#numlote').val(numlote);
-        revalidar();
+        revalidar(codprod);
     }
-    function revalidar() {
+    function revalidar(codprod) {
         
         numlote = document.getElementById('numlote').value;
         temp = document.getElementById("vprod").innerHTML;
@@ -133,6 +133,7 @@ $lista = [];
         usuario = '<?php echo $_SESSION['nome'] ?>';
         dataset = {
             "numlote": numlote,
+            "codprod": codprod,
             "tempo": tempo,
             "usuario": usuario
         };
@@ -190,7 +191,7 @@ $lista = [];
                                 <tr>
                                     <td> ${response[i].numlote}</td>
 
-                                    <td > ${response[i].descricao}</td>
+                                    <td > ${response[i].codprod + ' | '+ response[i].descricao}</td>
 
                                     <td> ${response[i].val}</td>
                               
@@ -209,7 +210,7 @@ $lista = [];
                                         </select>
                                     </td>
                                     <td>
-                                        <button class="form-control btn btn-sm btn-success" style="margin: 5px" onclick="revalidar2('${response[i].numlote}')">Revalidar</button>
+                                        <button class="form-control btn btn-sm btn-success" style="margin: 5px" onclick="revalidar2('${response[i].numlote}', ${response[i].codprod})">Revalidar</button>
                                     </td>
                                 </tr>
                             </tbody>

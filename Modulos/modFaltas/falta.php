@@ -176,7 +176,7 @@ session_start();
 			var obs =  $("#obs").val();
 			var dados = {'codcli':codcli, 'numnota':numnota, 'numnotacusto':numnotacusto, 'motorista':motorista, 'obs':obs};
 			//console.log(dados);
-			if(codcli=='' || numnota=='' || motorista==''){
+			if(codcli=='' || numnota=='' || motorista=='' || codcli == null || codcli == 0 || numnota == null || numnota == 0){
 				alert("Dados não preenchidos corretamente, verifique!")
 			}else{
 			$.ajax({
